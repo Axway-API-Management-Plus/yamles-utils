@@ -1,4 +1,4 @@
-= YAML EnityStore Utilities
+= YAML Entity Store Utilities
 :Author: Martin Look
 :Email: mlook@axway.com
 :toc:
@@ -17,6 +17,21 @@ endif::[]
 == Introduction
 
 Some utilities to make live easier with YAML EnityStore.
+
+.Features
+* Merge configuration values from multiple files into a result `values.yaml`
+* Merge certificates from multiple sources into the API Gateway project.
+* Lint API Gateway project with rules
+* Retrieve secrets from external sources
+** Environment variables
+** System properties
+** YAML file (not encrypted)
+** Hashicorp Vault (beta)
+
+Checkout commands in `examples` folder.
+
+The `examples/apim` folder contains a YAML entity store of an API Manager.
+
 
 == Contributing
 Please read https://github.com/Axway-API-Management-Plus/Common/blob/master/Contributing.md[Contributing] for details on our code of conduct, and the process for submitting pull requests to us.

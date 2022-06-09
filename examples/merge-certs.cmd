@@ -23,7 +23,7 @@ set PASSPHRASE=changeme
 
 
 
-java -jar %JAR% merge certs --project=apim --config=%CERTS_DIR%\certificates.yaml
+java -jar %JAR% merge certs --project=apim --config=%CERTS_DIR%\certificates.yaml --secrets-insecure=%CERTS_DIR%\insecure-secrets.yaml
 
 :EXIT
 
