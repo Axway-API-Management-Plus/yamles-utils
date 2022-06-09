@@ -1,0 +1,14 @@
+---
+name: HSTSProfileGroup
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  HSTSProfile: '*'
+keyFields:
+- name
+loadorder: 900000

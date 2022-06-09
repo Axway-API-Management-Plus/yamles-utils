@@ -1,0 +1,10 @@
+---
+name: URLRewriteFilter
+version: 0
+class: com.vordel.circuit.net.URLRewriteFilter
+fields:
+  url:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

@@ -1,0 +1,131 @@
+---
+type: KPSType
+fields:
+  name: PortalAPI
+children:
+- type: KPSTypeProperty
+  fields:
+    name: hasOriginalDefinition
+    type: java.lang.Boolean
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: models
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: resourcePath
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: name
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: produces
+    type: java.util.List
+    key: ""
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: description
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: basePath
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: importUrl
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: createdBy
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: consumes
+    type: java.util.List
+    key: ""
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: properties
+    type: java.util.Map
+    key: java.lang.String
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: organizationId
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: version
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: integral
+    type: java.lang.Boolean
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: id
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: createdOn
+    type: java.lang.Long
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: blob
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: summary
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: serviceType
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: type
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: hash
+    type: java.lang.String
+    key: ""
+    value: ""

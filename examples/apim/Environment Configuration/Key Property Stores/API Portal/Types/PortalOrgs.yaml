@@ -1,0 +1,72 @@
+---
+type: KPSType
+fields:
+  name: PortalOrgs
+  description: Organization registered for API Access
+children:
+- type: KPSTypeProperty
+  fields:
+    name: trialDuration
+    type: java.lang.Integer
+- type: KPSTypeProperty
+  fields:
+    name: organizationDn
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: endTrialDate
+    type: java.lang.Long
+- type: KPSTypeProperty
+  fields:
+    name: phone
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: tags
+    type: java.util.Map
+    key: java.lang.String
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: email
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: id
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: image
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: isTrial
+    type: java.lang.Boolean
+- type: KPSTypeProperty
+  fields:
+    name: startTrialDate
+    type: java.lang.Long
+- type: KPSTypeProperty
+  fields:
+    name: restricted
+    type: java.lang.Boolean
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: virtualHost
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: enabled
+    type: java.lang.Boolean
+- type: KPSTypeProperty
+  fields:
+    name: development
+    type: java.lang.Boolean
+    key: ""
+    value: ""

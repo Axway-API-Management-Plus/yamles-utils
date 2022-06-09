@@ -1,0 +1,5 @@
+---
+name: TivoliActionGroupGroup
+version: 0
+components:
+  TivoliActionGroup: '*'

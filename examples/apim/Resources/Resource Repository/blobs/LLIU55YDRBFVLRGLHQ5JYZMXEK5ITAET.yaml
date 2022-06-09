@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: LLIU55YDRBFVLRGLHQ5JYZMXEK5ITAET
+  type: schema
+  content: '{{file "LLIU55YDRBFVLRGLHQ5JYZMXEK5ITAET.xsd" "binary"}}'

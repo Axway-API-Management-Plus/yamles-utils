@@ -1,0 +1,30 @@
+---
+name: XmlComplexityFilter
+version: 0
+class: com.vordel.circuit.contentfiltering.XmlComplexityFilter
+fields:
+  maxNumNodes:
+    type: integer
+    defaultValues:
+    - data: 1000
+    cardinality: '?'
+  maxNumChildren:
+    type: integer
+    defaultValues:
+    - data: 100
+    cardinality: '?'
+  maxDepthDescendantNodes:
+    type: integer
+    defaultValues:
+    - data: 20
+    cardinality: '?'
+  maxNumAttributes:
+    type: integer
+    defaultValues:
+    - data: 10
+    cardinality: '?'
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)content-filtering
+    cardinality: 1

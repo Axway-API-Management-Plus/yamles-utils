@@ -1,0 +1,5 @@
+---
+name: XercesFeatureGroup
+version: 0
+components:
+  XercesFeature: '*'

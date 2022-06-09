@@ -1,0 +1,8 @@
+---
+name: ExtractMTOMContentFilter
+version: 1
+class: com.vordel.circuit.mtom.ExtractMTOMContentFilter
+fields:
+  encodedContent:
+    type: '@XPath'
+    cardinality: 1

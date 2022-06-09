@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: 7SACANVBMLMUZLONNHVRRFAH6BBDNZNV
+  type: schema
+  content: '{{file "7SACANVBMLMUZLONNHVRRFAH6BBDNZNV.xsd" "binary"}}'

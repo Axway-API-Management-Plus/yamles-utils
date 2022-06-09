@@ -1,0 +1,53 @@
+---
+name: KerberosConfiguration
+version: 0
+class: com.vordel.circuit.gss.KerberosConfiguration
+fields:
+  name:
+    type: string
+    defaultValues:
+    - data: Kerberos Settings
+    cardinality: 1
+  configFile:
+    type: string
+    defaultValues:
+    - data: "  [libdefaults]\n # default_tkt_enctypes is used to specify the encryption types\n # to use for the session key in the ticket-granting-ticket.\n # It is used by the client to restrict the encryption types\n # of session keys that will be used to communicate with the KDC.\n # For example:-\n # default_tkt_enctypes=des-cbc-md5, des-cbc-crc, rc4-hmac, des3-cbc-sha1, aes128-cts, aes256-cts\n \n # default_tgs_enctypes is used to specify the encryption types to\n # use for the session key in service tickets. It is used by\n # the client to restrict the encryption types of session keys\n # that are shared by the client and server.\n # For example:-\n # default_tgs_enctypes=des-cbc-md5, des-cbc-crc, rc4-hmac, des3-cbc-sha1, aes128-cts, aes256-cts\n # For WSE 3.0 and WCF integration set default_tgs_enctypes = rc4-hmac\n \n # permitted_enctypes is used to specify the encryption types\n # permitted to be used by a service. It is used by the server\n # to restrict the encryption types of session keys that it\n # will accept.\n # For example:-\n # permitted_enctypes=des-cbc-md5, des-cbc-crc, rc4-hmac, des3-cbc-sha1, aes128-cts, aes256-cts\n \n # Specify the default realm.\n # For example:-\n # default_realm = MYREALM.COM\n \n [realms]\n \n # MYREALM.COM = {\n #     kdc = kdchost.myrealm.com\n # }\n "
+    cardinality: '?'
+  krb5Debug:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  sun.security.spnego.debug:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  sun.security.krb5.debug:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  sun.security.jgss.native:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  sun.security.jgss.lib:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  sun.security.nativegss.debug:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  javax.security.auth.useSubjectCredsOnly:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+keyFields:
+- name
+loadorder: 400

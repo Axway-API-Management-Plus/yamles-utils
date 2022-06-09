@@ -1,0 +1,4 @@
+---
+name: AWSRESTRequestSecurityDevice
+version: 2
+class: com.vordel.apiportal.runtime.AWSRESTSecurityDevice

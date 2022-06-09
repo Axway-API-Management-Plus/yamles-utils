@@ -1,0 +1,10 @@
+---
+name: ChangeMessageFilter
+version: 0
+class: com.vordel.circuit.conversion.ChangeMessageFilter
+fields:
+  body:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1

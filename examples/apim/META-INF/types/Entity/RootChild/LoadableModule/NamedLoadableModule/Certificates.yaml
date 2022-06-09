@@ -1,0 +1,7 @@
+---
+name: Certificates
+version: 1
+class: com.vordel.store.cert.CertStore
+components:
+  Certificate: '*'
+loadorder: 150

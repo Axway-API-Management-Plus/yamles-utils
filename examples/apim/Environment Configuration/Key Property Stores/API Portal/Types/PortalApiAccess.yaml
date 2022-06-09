@@ -1,0 +1,34 @@
+---
+type: KPSType
+fields:
+  name: PortalApiAccess
+  description: Applications and organizations access to API
+children:
+- type: KPSTypeProperty
+  fields:
+    name: id
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: entityId
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: enabled
+    type: java.lang.Boolean
+- type: KPSTypeProperty
+  fields:
+    name: apiId
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: createdOn
+    type: java.lang.Long
+- type: KPSTypeProperty
+  fields:
+    name: organizationId
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: createdBy
+    type: java.lang.String

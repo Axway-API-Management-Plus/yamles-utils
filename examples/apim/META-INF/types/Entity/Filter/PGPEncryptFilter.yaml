@@ -1,0 +1,86 @@
+---
+name: PGPEncryptFilter
+version: 3
+class: com.vordel.circuit.pgp.EncryptFilter
+fields:
+  publicKeyLocation:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  keyPair:
+    type: '@PGPKeyPair'
+    cardinality: '?'
+  keyPairAliasAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  publicKeyAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  armor:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  withIntegrityCheck:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  encrypt:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  sign:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  signKeyLocation:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  signKeyPair:
+    type: '@PGPKeyPair'
+    cardinality: '?'
+  signKeyAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  signKeyPairAliasAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  signMethod:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  signMethodTwoPass:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  symmetricKeyAlgo:
+    type: string
+    defaultValues:
+    - data: CAST5
+    cardinality: 1
+  hashAlgo:
+    type: string
+    defaultValues:
+    - data: SHA1
+    cardinality: 1
+  zipAlgo:
+    type: string
+    defaultValues:
+    - data: ZIP
+    cardinality: 1

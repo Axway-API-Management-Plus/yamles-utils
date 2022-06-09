@@ -1,0 +1,7 @@
+---
+name: TFXSLTMappingGroup
+version: 0
+class: com.vordel.circuit.mapper.TFXSLTMappingGroup
+components:
+  TFXSLTMapping: '*'
+loadorder: 100

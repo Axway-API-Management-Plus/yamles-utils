@@ -1,0 +1,36 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Read Application
+  name: Disable Application API Access
+  description: An Application’s access to an API is disabled
+  category: /System/Policy Categories/management
+children:
+- type: PortalApplicationReadFilter
+  fields:
+    idSelector: ${alert.application.id}
+    targetAttribute: alert.application
+    name: Read Application
+  routing:
+    success: ../Set Attribute Filter
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: alert.message
+    attributeValue: Access to API ${alert.apiaccess.apiId} for application ${alert.application.name} has been disabled.
+    name: Set Attribute Filter
+  routing:
+    success: ../Call 'Send Alert'
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: CircuitDelegateFilter
+  fields:
+    circuitPK: /Policies/Sample Policies/API Management Alerts/Send Alert
+    name: Call 'Send Alert'
+  routing:
+    success: /null
+  logging:
+    fatal: 'Error in calling policy shortcut circuit. Error: ${circuit.exception}'
+    failure: Failed in calling policy shortcut
+    success: Success in calling policy shortcut

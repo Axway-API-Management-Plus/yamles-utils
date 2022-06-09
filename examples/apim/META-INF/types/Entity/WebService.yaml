@@ -1,0 +1,38 @@
+---
+name: WebService
+version: 4
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  resourceSetID:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  version:
+    type: string
+    defaultValues:
+    - data: 1.0
+    cardinality: 1
+  endpointPolicyID:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  inputPolicyID:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  outputPolicyID:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  OperationList: 1
+keyFields:
+- name

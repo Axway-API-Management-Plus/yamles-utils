@@ -1,0 +1,28 @@
+---
+name: SNSAlert
+version: 1
+class: com.vordel.alert.aws.sns.AlertAWSSNS
+fields:
+  clientConfiguration:
+    type: '@AWSClientConfiguration'
+    defaultValues:
+    - ref: /External Connections/(AWSSettings)Amazon Web Services Settings/(AWSClientConfiguration)Default AWS Client Configuration
+    cardinality: 1
+  awsCredential:
+    type: '@ApiKeyProfile'
+    cardinality: '?'
+  region:
+    type: string
+    defaultValues:
+    - data: us-west-1
+    cardinality: 1
+  topicArn:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  subject:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

@@ -1,0 +1,5 @@
+---
+name: ApiKeyGroup
+version: 0
+components:
+  ApiKeyProviderProfile: '*'

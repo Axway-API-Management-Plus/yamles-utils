@@ -1,0 +1,26 @@
+---
+name: KeyPair
+version: 0
+fields:
+  alias:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  algorithm:
+    type: string
+    defaultValues:
+    - data: RSA
+    cardinality: '?'
+  publicKey:
+    type: binary
+    defaultValues:
+    - {}
+    cardinality: '?'
+  privateKey:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: '?'
+keyFields:
+- alias

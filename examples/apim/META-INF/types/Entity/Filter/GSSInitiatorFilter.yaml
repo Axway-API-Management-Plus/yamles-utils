@@ -1,0 +1,34 @@
+---
+name: GSSInitiatorFilter
+version: 3
+class: com.vordel.circuit.gss.GssInitiatorFilter
+fields:
+  gssInitiator:
+    type: '@GSSInitiator'
+    cardinality: 1
+  servicePrincipal:
+    type: '@GSSPrincipal'
+    cardinality: 1
+  gssStandard:
+    type: string
+    defaultValues:
+    - data: KerberosTokenProfile
+    cardinality: 1
+  actor:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  insertTokenLocationXPath:
+    type: '@XPath'
+    cardinality: '?'
+  tokenLocationType:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  valueType:
+    type: string
+    defaultValues:
+    - data: http://docs.oasis-open.org/wss/oasis-wss-kerberos-token-profile-1.1#GSS_Kerberosv5_AP_REQ
+    cardinality: 1

@@ -1,0 +1,5 @@
+---
+name: OPDbViewer
+version: 0
+class: com.vordel.dwe.http.OPDbViewer
+loadorder: 2000000

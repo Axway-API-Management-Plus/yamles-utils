@@ -1,0 +1,4 @@
+---
+name: CompoundFilter
+version: 0
+class: com.vordel.circuit.conversion.CompoundFilter

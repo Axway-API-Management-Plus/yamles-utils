@@ -1,0 +1,5 @@
+---
+name: GSSPrincipals
+version: 2
+components:
+  GSSPrincipal: '?'

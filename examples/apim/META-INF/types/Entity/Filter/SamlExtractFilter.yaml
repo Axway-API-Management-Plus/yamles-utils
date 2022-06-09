@@ -1,0 +1,43 @@
+---
+name: SamlExtractFilter
+version: 6
+fields:
+  actor:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  driftTime:
+    type: long
+    defaultValues:
+    - data: 300
+    cardinality: 1
+  assertionLocation:
+    type: '@XPath'
+    cardinality: '?'
+  trustedIssuers:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  requiredSamlVersion:
+    type: string
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  majorVersion:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  minorVersion:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  removeWsSecurity:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+abstract: true

@@ -1,0 +1,28 @@
+---
+name: SLARequirement
+version: 0
+fields:
+  percentage:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+  thresholdType:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  breachAlertMessage:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  clearAlertMessage:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- percentage
+- thresholdType
+abstract: true

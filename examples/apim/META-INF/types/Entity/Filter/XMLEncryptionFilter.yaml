@@ -1,0 +1,4 @@
+---
+name: XMLEncryptionFilter
+version: 0
+class: com.vordel.circuit.crypt.XMLEncryptionFilter

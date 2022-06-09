@@ -1,0 +1,49 @@
+---
+type: KPSType
+fields:
+  name: PortalOAuth
+  description: OAuth Credentials for Applications
+children:
+- type: KPSTypeProperty
+  fields:
+    name: corsOrigins
+    type: java.util.List
+    key: ""
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: cert
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: createdBy
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: createdOn
+    type: java.lang.Long
+- type: KPSTypeProperty
+  fields:
+    name: id
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: enabled
+    type: java.lang.Boolean
+- type: KPSTypeProperty
+  fields:
+    name: redirectUrls
+    type: java.util.List
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: applicationId
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: secret
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: type
+    type: java.lang.String

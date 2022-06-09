@@ -1,0 +1,15 @@
+---
+name: SyslogAlertSystem
+version: 0
+class: com.vordel.alert.syslog.AlertSyslog
+fields:
+  host:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  facility:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

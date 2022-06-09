@@ -1,0 +1,5 @@
+---
+name: XPathDecryptionGroup
+version: 2
+components:
+  XPath: '*'

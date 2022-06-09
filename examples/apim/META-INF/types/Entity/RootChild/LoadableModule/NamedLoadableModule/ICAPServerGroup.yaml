@@ -1,0 +1,7 @@
+---
+name: ICAPServerGroup
+version: 0
+class: com.vordel.circuit.icap.ICAPServerGroup
+components:
+  ICAPServer: '*'
+loadorder: 500

@@ -1,0 +1,36 @@
+---
+name: OAuthProviderProfile
+version: 6
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  class:
+    type: string
+    defaultValues:
+    - data: com.vordel.oauth.client.providers.BaseOAuth2Provider
+    cardinality: 1
+  authzUrl:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  tokenUrl:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  tokenStore:
+    type: '@ClientAccessTokenPersist'
+    cardinality: 1
+  cacheToUse:
+    type: '@Cache'
+    defaultValues:
+    - ref: /Libraries/(CacheManager)Cache Manager/(Cache)OAuth Client State Cache
+    cardinality: 1
+components:
+  OAuthAppProfile: '*'
+keyFields:
+- name

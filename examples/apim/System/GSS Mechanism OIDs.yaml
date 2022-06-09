@@ -1,0 +1,13 @@
+---
+type: GSSMechanismOidGroup
+fields:
+  name: GSS Mechanism OIDs
+children:
+- type: GSSMechanismOid
+  fields:
+    name: SPNEGO_MECHANISM
+    oid: 1.3.6.1.5.5.2
+- type: GSSMechanismOid
+  fields:
+    name: KERBEROS_V5_MECHANISM
+    oid: 1.2.840.113554.1.2.2

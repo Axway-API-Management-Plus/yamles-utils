@@ -1,0 +1,17 @@
+---
+name: IpNetMask
+version: 1
+fields:
+  address:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  netmask:
+    type: string
+    defaultValues:
+    - data: 255.255.255.255
+    cardinality: 1
+keyFields:
+- address
+- netmask

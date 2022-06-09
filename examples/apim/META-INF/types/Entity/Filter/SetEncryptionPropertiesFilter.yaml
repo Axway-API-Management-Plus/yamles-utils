@@ -1,0 +1,113 @@
+---
+name: SetEncryptionPropertiesFilter
+version: 15
+class: com.vordel.circuit.crypt.SetEncryptionPropertiesFilter
+fields:
+  failIfNoNodes:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  encryptKeyWhenNoNodesToEncrypt:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  nodesToEncrypt:
+    type: '@XPath'
+    cardinality: '*'
+  nodesToEncryptElementSpecifier:
+    type: '@ElementSpecifier'
+    cardinality: '*'
+  extractNodesFromMessageAttribute:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  extractNodeListAttributeName:
+    type: string
+    defaultValues:
+    - data: ${node.list}
+    cardinality: 1
+  encryptionAlgorithm:
+    type: string
+    defaultValues:
+    - data: http://www.w3.org/2001/04/xmlenc#aes256-cbc
+    cardinality: 1
+  insertTimestamp:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  insertReferenceList:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  referenceListActor:
+    type: string
+    defaultValues:
+    - data: '##current##'
+    cardinality: '?'
+  recipient:
+    type: '@EncryptionRecipient'
+    defaultValues:
+    - ref: /System/(EncryptionRecipients)Encryption Recipients/(EncryptionRecipient)Default Recipient
+    cardinality: +
+  readableFormat:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  keyWrapAlgorithm:
+    type: string
+    defaultValues:
+    - data: http://www.w3.org/2001/04/xmlenc#rsa-1_5
+    cardinality: 1
+  symmetricEncryptionKeyType:
+    type: string
+    defaultValues:
+    - data: generated
+    cardinality: 1
+  generatedSymmetricKeyAttribute:
+    type: string
+    defaultValues:
+    - data: symmetric.key
+    cardinality: '?'
+  symmetricKeyAttribute:
+    type: string
+    defaultValues:
+    - data: ${symmetric.key}
+    cardinality: '?'
+  includeSymmetricKeyInMessage:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  symmetricKeyEmbedMethod:
+    type: string
+    defaultValues:
+    - data: 6
+    cardinality: 1
+  useDerivedKey:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  layoutType:
+    type: string
+    defaultValues:
+    - data: Lax
+    cardinality: 1
+  insertCarriedKeyName:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  updateEncKeyReferenceList:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+components:
+  KeyInfoFormat: 1

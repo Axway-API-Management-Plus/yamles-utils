@@ -1,0 +1,36 @@
+---
+name: KPSPackage
+version: 3
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  description:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  alias:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  dataSource:
+    type: '@KPSDataSource'
+    cardinality: 1
+  internal:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  cache:
+    type: '@Cache'
+    cardinality: 1
+components:
+  KPSTypeGroup: '*'
+  KPSStoreGroup: '*'
+  KPSDataSourceGroup: '*'
+keyFields:
+- name

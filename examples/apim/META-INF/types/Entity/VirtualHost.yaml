@@ -1,0 +1,24 @@
+---
+name: VirtualHost
+version: 1
+class: com.vordel.dwe.http.VirtualHost
+fields:
+  name:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  host:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: '*'
+  enabled:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+components:
+  URIHandler: '?'
+keyFields:
+- name

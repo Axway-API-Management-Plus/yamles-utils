@@ -1,0 +1,103 @@
+---
+name: TimeFilter
+version: 4
+class: com.vordel.circuit.time.TimeFilter
+fields:
+  timeOfDaySelected:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  timeOption:
+    type: string
+    defaultValues:
+    - data: USER_TIME
+    cardinality: 1
+  startTimeHour:
+    type: integer
+    defaultValues:
+    - data: 09
+    cardinality: 1
+  startTimeMinute:
+    type: integer
+    defaultValues:
+    - data: 00
+    cardinality: 1
+  startTimeSecond:
+    type: integer
+    defaultValues:
+    - data: 00
+    cardinality: 1
+  endTimeHour:
+    type: integer
+    defaultValues:
+    - data: 17
+    cardinality: 1
+  endTimeMinute:
+    type: integer
+    defaultValues:
+    - data: 00
+    cardinality: 1
+  endTimeSecond:
+    type: integer
+    defaultValues:
+    - data: 00
+    cardinality: 1
+  monday:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  tuesday:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  wednesday:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  thursday:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  friday:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  saturday:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  sunday:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  startName:
+    type: string
+    defaultValues:
+    - data: 09:00:00
+    cardinality: 1
+  endName:
+    type: string
+    defaultValues:
+    - data: 17:00:00
+    cardinality: 1
+  formatName:
+    type: string
+    defaultValues:
+    - data: HH:mm:ss
+    cardinality: 1
+  cronExpressionRef:
+    type: '@CronExpression'
+    cardinality: 1
+  allowMessage:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1

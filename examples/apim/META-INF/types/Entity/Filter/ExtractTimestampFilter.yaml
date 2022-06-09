@@ -1,0 +1,15 @@
+---
+name: ExtractTimestampFilter
+version: 1
+class: com.vordel.circuit.attribute.ExtractTimestampFilter
+fields:
+  timestampMessageProperty:
+    type: string
+    defaultValues:
+    - data: wss.timestamp
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)attribute
+    cardinality: 1

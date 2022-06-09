@@ -1,0 +1,11 @@
+---
+type: LdapDirectory
+fields:
+  name: API Management Sample LDAP Connection
+  url: ldap://127.0.0.1:10389
+  authType: SIMPLE
+  userName: uid=admin,ou=system
+  password: ""
+  authRealm: ""
+  sslEnabled: false
+  sslCertificate: /null

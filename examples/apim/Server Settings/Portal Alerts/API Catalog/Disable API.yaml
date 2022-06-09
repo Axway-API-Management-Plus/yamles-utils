@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Disable API
+  id: alert.apicatalog.disable
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/API Catalog/Disable API

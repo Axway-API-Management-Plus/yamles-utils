@@ -1,0 +1,4 @@
+---
+type: KPSDataSourceGroup
+fields:
+  name: DataSources

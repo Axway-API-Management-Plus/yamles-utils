@@ -1,0 +1,15 @@
+---
+name: OracleAccessManagerFilter
+version: 2
+fields:
+  ssoTokenAttrName:
+    type: string
+    defaultValues:
+    - data: oracle.sso.token
+    cardinality: 1
+  compatibilityMode:
+    type: string
+    defaultValues:
+    - data: OAM_11G
+    cardinality: 1
+abstract: true

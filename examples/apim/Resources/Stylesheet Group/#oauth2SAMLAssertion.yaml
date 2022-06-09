@@ -1,0 +1,5 @@
+---
+type: Stylesheet
+fields:
+  URL: '#oauth2SAMLAssertion'
+  contents: '{{file "#oauth2SAMLAssertion.xsl" "binary"}}'

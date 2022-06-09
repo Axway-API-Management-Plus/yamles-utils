@@ -1,0 +1,10 @@
+---
+name: AWSFilter
+version: 0
+fields:
+  clientConfiguration:
+    type: '@AWSClientConfiguration'
+    defaultValues:
+    - ref: /External Connections/(AWSSettings)Amazon Web Services Settings/(AWSClientConfiguration)Default AWS Client Configuration
+    cardinality: 1
+abstract: true

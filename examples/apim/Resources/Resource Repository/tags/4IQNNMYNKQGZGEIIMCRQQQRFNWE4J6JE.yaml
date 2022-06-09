@@ -1,0 +1,9 @@
+---
+type: ResourceTag
+fields:
+  ID: 4IQNNMYNKQGZGEIIMCRQQQRFNWE4J6JE
+  resourceID: 5CNKNYI37VRDGW4GUZFN3KP6SVX5REZV
+  comment: Schema defined in the SOAP Version 1.2 Part 1 specification
+  creator: catalog
+  timestamp: 1380037356566
+  version: 1

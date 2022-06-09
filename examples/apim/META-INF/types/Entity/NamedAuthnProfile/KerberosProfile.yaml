@@ -1,0 +1,25 @@
+---
+name: KerberosProfile
+version: 0
+fields:
+  gssInitiator:
+    type: '@GSSInitiator'
+    cardinality: 1
+  servicePrincipal:
+    type: '@GSSPrincipal'
+    cardinality: 1
+  pushTokenWithoutPrompt:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  negotiatePassOnServiceOK:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  sendBodyAfterEstablishContext:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1

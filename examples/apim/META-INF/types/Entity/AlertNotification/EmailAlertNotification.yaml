@@ -1,0 +1,12 @@
+---
+name: EmailAlertNotification
+version: 1
+fields:
+  mimeType:
+    type: '@MimeType'
+    cardinality: 1
+  messageTemplateFile:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1

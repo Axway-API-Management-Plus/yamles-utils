@@ -1,0 +1,14 @@
+---
+type: PortalConfiguration
+fields:
+  smtpServer: /External Connections/SMTP Servers/Portal SMTP
+  quotaCaching: CASSANDRA
+  vapiPollerPeriodMs: 200
+  usrprovAuthNCircuit: /Policies/Sample Policies/API Management Identity Provider/LDAP/Authenticate LDAP Account
+  usrprovGetUserInfoCircuit: /Policies/Sample Policies/API Management Identity Provider/LDAP/Retrieve LDAP Account Information
+  usrprovAccountCreateSuccessCircuit: /Policies/Sample Policies/API Management Identity Provider/Account Creation Success
+  usrprovAccountCreateFailureCircuit: /Policies/Sample Policies/API Management Identity Provider/Account Creation Failure
+  apiregFaultHandlerPolicies: /Policies/Generated Policies/REST API's/Templates/Default Fault Handler
+  apiregOAuthTokenStores: /Libraries/OAuth2 Stores/Access Token Stores/OAuth Access Token Store
+  name: Portal Config
+  adminPassword: Y2hhbmdlbWU=

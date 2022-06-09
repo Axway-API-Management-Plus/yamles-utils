@@ -1,0 +1,25 @@
+---
+name: NonceCacheConfiguration
+version: 1
+class: com.vordel.security.auth.NonceUtility
+fields:
+  httpNonceMaxCacheSize:
+    type: integer
+    defaultValues:
+    - data: 500
+    cardinality: 1
+  wsNonceMaxCacheSize:
+    type: integer
+    defaultValues:
+    - data: 100
+    cardinality: 1
+  wsNonceTimestampMaxCacheSize:
+    type: integer
+    defaultValues:
+    - data: 1000
+    cardinality: 1
+  clearCacheIfFull:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1

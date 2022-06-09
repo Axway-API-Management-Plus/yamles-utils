@@ -1,0 +1,15 @@
+---
+name: RefreshTokenFilter
+version: 3
+class: com.vordel.circuit.oauth.client.RefreshTokenFilter
+fields:
+  profile:
+    type: '@OAuthAppProfile'
+    cardinality: '?'
+  tokenKey:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.id}
+    cardinality: '?'
+components:
+  ConnectionFilter: 1

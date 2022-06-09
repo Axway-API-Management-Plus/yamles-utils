@@ -1,0 +1,17 @@
+---
+name: IpFilter
+version: 1
+class: com.vordel.circuit.ip.IpFilter
+fields:
+  allow:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authentication
+    cardinality: 1
+components:
+  IpNetMask: +

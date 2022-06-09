@@ -1,0 +1,15 @@
+---
+name: CheckSessionFilter
+version: 0
+class: com.vordel.circuit.authn.CheckSessionFilter
+fields:
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authentication
+    cardinality: 1
+  cookie:
+    type: string
+    defaultValues:
+    - data: VIDUSR
+    cardinality: 1

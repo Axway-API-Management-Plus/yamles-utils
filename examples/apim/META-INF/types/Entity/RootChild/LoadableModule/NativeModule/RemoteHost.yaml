@@ -1,0 +1,121 @@
+---
+name: RemoteHost
+version: 20
+fields:
+  alias:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  port:
+    type: string
+    defaultValues:
+    - data: 80
+    cardinality: 1
+  allowHTTP11:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  maxConnections:
+    type: integer
+    defaultValues:
+    - data: -1
+    cardinality: 1
+  connectTimeout:
+    type: integer
+    defaultValues:
+    - data: 30000
+    cardinality: 1
+  activetimeout:
+    type: integer
+    defaultValues:
+    - data: 30000
+    cardinality: 1
+  maxTransTimeout:
+    type: integer
+    defaultValues:
+    - data: 240000
+    cardinality: 1
+  maxInputLen:
+    type: long
+    defaultValues:
+    - data: 20971520
+    cardinality: 1
+  maxOutputLen:
+    type: long
+    defaultValues:
+    - data: 20971520
+    cardinality: 1
+  idletimeout:
+    type: integer
+    defaultValues:
+    - data: 15000
+    cardinality: 1
+  inputBufSize:
+    type: integer
+    defaultValues:
+    - data: 8192
+    cardinality: 1
+  outputBufSize:
+    type: integer
+    defaultValues:
+    - data: 8192
+    cardinality: 1
+  includeContentLengthRequest:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  includeContentLengthResponse:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  addressCacheTime:
+    type: integer
+    defaultValues:
+    - data: 300000
+    cardinality: 1
+  sessionCacheSize:
+    type: integer
+    defaultValues:
+    - data: 32
+    cardinality: 1
+  verifyServerHostname:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  offerTlsServerName:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  inputEncodings:
+    type: string
+    defaultValues:
+    - data: .inherit
+    cardinality: '*'
+  outputEncodings:
+    type: string
+    defaultValues:
+    - data: .inherit
+    cardinality: '*'
+  exportCorrelationId:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+components:
+  Watchdog: 1
+  LoadBalanceConfig: 1
+  AddressRank: '*'
+keyFields:
+- alias
+loadorder: 500000

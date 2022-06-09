@@ -1,0 +1,13 @@
+---
+name: MetricTypes
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+components:
+  MetricType: '*'
+keyFields:
+- name

@@ -1,0 +1,75 @@
+---
+type: MetricGroupTypes
+fields:
+  name: System Metric Group Types
+children:
+- type: MetricGroupType
+  fields:
+    name: SystemOverview
+    maxNumMetricGroups: 1
+    metric:
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/successes
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/failures
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/exceptions
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/numAlerts
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/numSLABreaches
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/active
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/cpuUsed
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/memoryUsed
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/systemMemoryTotal
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/systemMemoryUsed
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/systemCpu
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/diskUsedPercent
+    description: System overview
+- type: MetricGroupType
+  fields:
+    name: Services
+    maxNumMetricGroups: 1
+    metric: /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/numMessages
+- type: MetricGroupType
+  fields:
+    name: Service
+    maxNumMetricGroups: 10000
+    metric:
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/exceptions
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/failures
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/successes
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/numMessages
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/processingTime
+  children:
+  - type: MetricGroupType
+    fields:
+      name: Method
+      maxNumMetricGroups: 100000
+      metric:
+      - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/exceptions
+      - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/failures
+      - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/successes
+      - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/numMessages
+      - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/processingTime
+- type: MetricGroupType
+  fields:
+    name: Client
+    maxNumMetricGroups: 10000
+    metric:
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/numMessages
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/exceptions
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/failures
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/successes
+- type: MetricGroupType
+  fields:
+    name: TargetServer
+    maxNumMetricGroups: 10000
+    metric:
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/numTransactions
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/volumeBytesOut
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/volumeBytesIn
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/respStatRange
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/respTimeRange
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/numReportedUps
+    - /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/numReportedDowns
+- type: MetricGroupType
+  fields:
+    name: Clients
+    maxNumMetricGroups: 1
+    metric: /Server Settings/Monitoring Configuration/Metrics Metadata/System Metric Types/numMessages

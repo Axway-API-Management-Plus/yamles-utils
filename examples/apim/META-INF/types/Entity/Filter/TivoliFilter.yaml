@@ -1,0 +1,25 @@
+---
+name: TivoliFilter
+version: 2
+class: com.vordel.circuit.tivoli.TivoliFilter
+fields:
+  objectSpace:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  tivoliAction:
+    type: '@TivoliAction'
+    cardinality: '*'
+  includeAttributes:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authorization
+    cardinality: 1
+components:
+  LookupAttribute: '*'

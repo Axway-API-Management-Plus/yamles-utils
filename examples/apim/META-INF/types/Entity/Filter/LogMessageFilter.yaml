@@ -1,0 +1,10 @@
+---
+name: LogMessageFilter
+version: 0
+fields:
+  logMask:
+    type: integer
+    defaultValues:
+    - data: 24
+    cardinality: 1
+abstract: true

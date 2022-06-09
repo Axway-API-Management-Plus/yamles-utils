@@ -1,0 +1,54 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Client Registry Login Authn
+  name: Client Registry AuthN-AuthZ
+  description: ""
+children:
+- type: AttributeAuthnFilter
+  fields:
+    credentialFormat: Username
+    repository: /External Connections/Authentication Repositories/Local Repositories/Local User Store
+    name: Client Registry Login Authn
+  routing:
+    success: ../Retrieve from user store
+  logging:
+    fatal: 'Error during authentication using username-password attributes. Error: ${circuit.exception}'
+    failure: Failed to authenticate using username-password attributes.
+    success: Authenticated via username-password attributes sucessfully.
+- type: VordelAttributeExtractFilter
+  fields:
+    name: Retrieve from user store
+  routing:
+    success: ../Set User's Role
+  logging:
+    fatal: 'Error occurred during when looking up of local user attributes. Error: ${circuit.exception}'
+    failure: Failed to look up local user attributes
+    success: Successfully looked up local user attributes for the user ${authentication.subject.id}
+  children:
+  - type: LookupAttribute
+    fields:
+      name: email
+  - type: LookupAttribute
+    fields:
+      name: role
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: authentication.subject.role
+    attributeValue: ${user.role}
+    name: Set User's Role
+  routing:
+    success: ../Set User's Email
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: user.email
+    attributeValue: ${user.email}
+    name: Set User's Email
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value

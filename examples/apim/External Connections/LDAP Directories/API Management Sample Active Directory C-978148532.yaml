@@ -1,0 +1,11 @@
+---
+type: LdapDirectory
+fields:
+  name: API Management Sample Active Directory Connection
+  url: ldap://127.0.0.1:389
+  authType: SIMPLE
+  userName: CN=Joe Bloggs,OU=DUBL,OU=IE,OU=Employees,DC=company,DC=com
+  password: ""
+  authRealm: ""
+  sslEnabled: false
+  sslCertificate: /null

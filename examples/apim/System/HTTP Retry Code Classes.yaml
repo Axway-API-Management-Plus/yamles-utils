@@ -1,0 +1,15 @@
+---
+type: HTTPRetryStatusClassGroup
+fields:
+  name: HTTP Retry Code Classes
+children:
+- type: HTTPStatusClass
+  fields:
+    name: Forbidden (403)
+    startStatus: 403
+    endStatus: 403
+- type: HTTPStatusClass
+  fields:
+    name: Server Error (500-599)
+    startStatus: 500
+    endStatus: 599

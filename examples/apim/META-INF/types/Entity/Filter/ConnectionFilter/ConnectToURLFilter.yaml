@@ -1,0 +1,25 @@
+---
+name: ConnectToURLFilter
+version: 4
+class: com.vordel.circuit.net.ConnectToURLFilter
+fields:
+  url:
+    type: string
+    defaultValues:
+    - data: ${http.request.uri}
+    cardinality: 1
+  method:
+    type: string
+    defaultValues:
+    - data: ${http.request.verb}
+    cardinality: 1
+  body:
+    type: string
+    defaultValues:
+    - data: ${content.body}
+    cardinality: 1
+  protoHeaders:
+    type: string
+    defaultValues:
+    - data: ${http.headers}
+    cardinality: 1

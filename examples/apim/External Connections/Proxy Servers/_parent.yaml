@@ -1,0 +1,4 @@
+---
+type: ProxyServerGroup
+fields:
+  name: Proxy Servers

@@ -1,0 +1,36 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Send API Manager Alert
+  name: Send Alert
+  description: A common policy for transmitting API Management alerts
+  category: /System/Policy Categories/management
+children:
+- type: AlertFilter
+  fields:
+    alertMessage: 'API Manager: ${alert.message}'
+    alertType: 3
+    numberMessages: 0
+    timePeriodMillis: 0
+    trackPerClient: false
+    name: Send API Manager Alert
+  routing:
+    success: ../REST Call Success
+    failure: ../REST Call Success
+  logging:
+    fatal: 'Alert generation aborted: ${circuit.exception}'
+    failure: Alert generation failed
+    success: Alert generation success
+  children:
+  - type: EmailAlertNotification
+    fields:
+      mimeType: /Server Settings/Mime Types/text/plain
+      alertSystem: /Libraries/Default Alert Configuration/API Manager Email Alerts
+      customMessage: ${alert.message}
+- type: TrueFilter
+  fields:
+    name: REST Call Success
+  logging:
+    fatal: 'True filter error. Error: ${circuit.exception}'
+    failure: ""
+    success: True filter passed

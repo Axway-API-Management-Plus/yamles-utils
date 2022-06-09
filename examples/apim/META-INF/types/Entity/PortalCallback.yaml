@@ -1,0 +1,29 @@
+---
+name: PortalCallback
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  id:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  type:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  enabled:
+    type: boolean
+    defaultValues:
+    - {}
+    cardinality: 1
+  filterCircuit:
+    type: '@FilterCircuit'
+    cardinality: '?'
+keyFields:
+- name

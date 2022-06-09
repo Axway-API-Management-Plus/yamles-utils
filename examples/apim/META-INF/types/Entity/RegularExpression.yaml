@@ -1,0 +1,16 @@
+---
+name: RegularExpression
+version: 4
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  expression:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- name

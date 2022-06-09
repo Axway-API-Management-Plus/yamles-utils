@@ -1,0 +1,18 @@
+---
+type: KPSType
+fields:
+  name: PortalConfig
+  description: ""
+children:
+- type: KPSTypeProperty
+  fields:
+    name: name
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: properties
+    type: java.util.Map
+    key: java.lang.String
+    value: java.lang.String

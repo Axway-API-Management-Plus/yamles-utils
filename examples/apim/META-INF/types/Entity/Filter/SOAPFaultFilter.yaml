@@ -1,0 +1,45 @@
+---
+name: SOAPFaultFilter
+version: 2
+class: com.vordel.circuit.soap.SOAPFaultFilter
+fields:
+  showStack:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  showPath:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  showAttributes:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  doIndent:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  showDetailedReason:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  soapVersion:
+    type: string
+    defaultValues:
+    - data: 1.2
+    cardinality: 1
+  faultNamespace:
+    type: string
+    defaultValues:
+    - data: http://tempuri.org/soapfaults
+    cardinality: 1
+  faultString:
+    type: string
+    defaultValues:
+    - data: ${circuit.failure.reason}
+    cardinality: 1

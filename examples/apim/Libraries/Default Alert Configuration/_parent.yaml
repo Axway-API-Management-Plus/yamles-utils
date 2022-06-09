@@ -1,0 +1,4 @@
+---
+type: AlertManager
+fields:
+  name: Default Alert Configuration

@@ -1,0 +1,13 @@
+---
+name: ResourceSetGroup
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  ResourceSet: '*'
+keyFields:
+- name

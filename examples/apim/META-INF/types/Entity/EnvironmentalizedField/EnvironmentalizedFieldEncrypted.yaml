@@ -1,0 +1,10 @@
+---
+name: EnvironmentalizedFieldEncrypted
+version: 0
+class: com.vordel.api.deployment.model.EnvironmentalizedFieldEncrypted
+fields:
+  value:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: '?'

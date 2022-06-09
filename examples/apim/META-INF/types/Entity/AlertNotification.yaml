@@ -1,0 +1,14 @@
+---
+name: AlertNotification
+version: 1
+fields:
+  alertSystem:
+    type: '@AlertSystem'
+    cardinality: 1
+  customMessage:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+keyFields:
+- alertSystem

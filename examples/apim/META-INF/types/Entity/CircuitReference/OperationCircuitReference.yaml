@@ -1,0 +1,24 @@
+---
+name: OperationCircuitReference
+version: 3
+fields:
+  operationNamespace:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  operationName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  soapAction:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  soapVersion:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

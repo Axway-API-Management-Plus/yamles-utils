@@ -1,0 +1,5 @@
+---
+name: AUTHHandler
+version: 0
+class: com.vordel.dwe.smtp.AUTHPlugin
+loadorder: 2000000

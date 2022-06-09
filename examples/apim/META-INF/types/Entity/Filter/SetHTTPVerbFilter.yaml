@@ -1,0 +1,10 @@
+---
+name: SetHTTPVerbFilter
+version: 0
+class: com.vordel.circuit.conversion.SetHTTPVerbFilter
+fields:
+  httpVerb:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

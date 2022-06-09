@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Application Default Quota Changed
+  id: alert.quota.default.changed
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Quota/Application Default Quota Changed

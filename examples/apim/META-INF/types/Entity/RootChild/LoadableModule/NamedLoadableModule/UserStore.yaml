@@ -1,0 +1,7 @@
+---
+name: UserStore
+version: 3
+class: com.vordel.store.user.UserStore
+components:
+  Identity: '*'
+loadorder: 150

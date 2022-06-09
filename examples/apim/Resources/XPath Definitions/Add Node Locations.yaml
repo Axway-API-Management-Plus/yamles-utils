@@ -1,0 +1,98 @@
+---
+type: XPathAddNodeLocationGroup
+fields:
+  name: Add Node Locations
+children:
+- type: XPath
+  fields:
+    name: The First Encryption ReferenceList
+    xpath: //enc:ReferenceList[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: enc
+      URI: http://www.w3.org/2001/04/xmlenc#
+- type: XPath
+  fields:
+    name: SOAP Method Element
+    xpath: /soap:Envelope[1]/soap:Body[1]/*[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: SOAP Body Element
+    xpath: /soap:Envelope[1]/soap:Body[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: SOAP Header "mustUnderstand" Attribute
+    xpath: /soap:Envelope[1]/soap:Header[1]/@soap:mustUnderstand[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: All WSSE Security elements
+    xpath: //wsse:Security
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: wsse
+      URI: http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+- type: XPath
+  fields:
+    name: The First Signature
+    xpath: //dsig:Signature[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: dsig
+      URI: http://www.w3.org/2000/09/xmldsig#
+- type: XPath
+  fields:
+    name: The First Attribute named "AttributeNamespace"
+    xpath: //*[@AttributeNamespace][1]/@AttributeNamespace
+- type: XPath
+  fields:
+    name: The First WSSE Security element
+    xpath: //wsse:Security[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: wsse
+      URI: http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+- type: XPath
+  fields:
+    name: All Attributes named "AttributeNamespace"
+    xpath: //@AttributeNamespace
+- type: XPath
+  fields:
+    name: SOAP Header Element
+    xpath: /soap:Envelope[1]/soap:Header[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: WSSE Security element with soap:actor "user1"
+    xpath: //wsse:Security[@soap:actor='user1']
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: wsse
+      URI: http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/

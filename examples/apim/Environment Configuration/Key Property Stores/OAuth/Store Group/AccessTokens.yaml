@@ -1,0 +1,19 @@
+---
+type: KPSReadWriteStore
+fields:
+  key: accessToken
+  readKey: ""
+  indexes:
+  - applicationId
+  - authzCode
+  - clientId
+  - refreshToken
+  - userName
+  encrypted:
+  - authRequest
+  - oauth2AccessToken
+  name: AccessTokens
+  description: AccessTokens
+  type: /Environment Configuration/Key Property Stores/OAuth/Type Group/AccessTokens
+  dataSource: /null
+  aliases: AccessTokens

@@ -1,0 +1,10 @@
+---
+name: EnvironmentalizedFieldInteger
+version: 0
+class: com.vordel.api.deployment.model.EnvironmentalizedFieldInteger
+fields:
+  value:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: '?'

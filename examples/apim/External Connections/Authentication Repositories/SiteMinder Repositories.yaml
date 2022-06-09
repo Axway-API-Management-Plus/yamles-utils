@@ -1,0 +1,9 @@
+---
+type: AuthnRepositorySiteMinderGroup
+fields:
+  allowedFilter:
+  - HttpBasicFilter
+  - WsBasicFilter
+  - AttributeAuthnFilter
+  - FormAuthnFilter
+  name: SiteMinder Repositories

@@ -1,0 +1,9 @@
+---
+name: OutputPropertyDefinition
+version: 1
+fields:
+  selector:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

@@ -1,0 +1,33 @@
+---
+type: KPSType
+fields:
+  name: PortalApiQuotaDetails
+  description: API quota properties
+children:
+- type: KPSTypeProperty
+  fields:
+    name: description
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: ID
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: type
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: methodQuotaIDs
+    type: java.util.List
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: system
+    type: java.lang.Boolean
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: name
+    type: java.lang.String

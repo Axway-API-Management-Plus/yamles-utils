@@ -1,0 +1,6 @@
+---
+name: AuthnRepositoryOracleAccessManagerGroup
+version: 3
+class: com.vordel.security.auth.repository.OracleAccessManagerRepository
+components:
+  AuthnRepositoryOracleAccessManager: '*'

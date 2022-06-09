@@ -1,0 +1,28 @@
+---
+type: XMLFirewall
+fields:
+  filterCircuit: /Policies/API Manager Policies/API Manager Static Content Protection Policy
+  uriprefix: /validation-success
+  httpMethod: GET
+  corsProfile: /null
+children:
+- type: SoftCircuitReference
+  fields:
+    circuitPK: system.policy.response
+    name: GLOBAL_POLICY_RSP
+    priority: 4
+- type: PortableCircuitReference
+  fields:
+    circuitPK: /null
+    name: CUSTOM_POLICY_RSP
+    priority: 3
+- type: SoftCircuitReference
+  fields:
+    circuitPK: system.policy.request
+    name: GLOBAL_POLICY_REQ
+    priority: 0
+- type: PortableCircuitReference
+  fields:
+    circuitPK: /null
+    name: CUSTOM_POLICY_REQ
+    priority: 1

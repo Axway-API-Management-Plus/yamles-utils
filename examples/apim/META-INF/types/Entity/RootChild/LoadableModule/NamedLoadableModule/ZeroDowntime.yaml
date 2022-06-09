@@ -1,0 +1,31 @@
+---
+name: ZeroDowntime
+version: 0
+class: com.vordel.system.ZeroDowntime
+fields:
+  zeroDowntimeDeploymentEnabled:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  delayBeforeDeployment:
+    type: integer
+    defaultValues:
+    - data: 10
+    cardinality: 1
+  delayAfterDeployment:
+    type: integer
+    defaultValues:
+    - data: 10
+    cardinality: 1
+  zeroDowntimeShutdownEnabled:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  delayBeforeShutdown:
+    type: integer
+    defaultValues:
+    - data: 10
+    cardinality: 1
+loadorder: 95

@@ -1,0 +1,5 @@
+---
+name: RegistryIdentificationSchemeGroup
+version: 1
+components:
+  RegistryIdentificationScheme: '*'

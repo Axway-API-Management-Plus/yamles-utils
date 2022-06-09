@@ -1,0 +1,9 @@
+---
+type: ResourceSetTag
+fields:
+  ID: 5I4PBCUNN2CS3QSEJPLTQ6PKQGE6UZ33
+  resourceID: IDGIMFHFJXPETTJP7O6QZY5UBMAIH7HX
+  comment: Schema for Exclusive Canonicalization
+  creator: catalog
+  timestamp: 1380037396984
+  version: 1

@@ -1,0 +1,4 @@
+---
+name: DeleteOAuthTokenFilter
+version: 0
+class: com.vordel.circuit.oauth.client.DeleteOAuthTokenFilter

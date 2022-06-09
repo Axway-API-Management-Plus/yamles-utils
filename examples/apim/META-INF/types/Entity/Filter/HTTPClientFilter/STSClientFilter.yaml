@@ -1,0 +1,195 @@
+---
+name: STSClientFilter
+version: 8
+class: com.vordel.circuit.wstrust.STSClientFilter
+fields:
+  soapNamespace:
+    type: string
+    defaultValues:
+    - data: http://schemas.xmlsoap.org/soap/envelope/
+    cardinality: 1
+  wsTrustNamespace:
+    type: string
+    defaultValues:
+    - data: http://docs.oasis-open.org/ws-sx/ws-trust/200512
+    cardinality: 1
+  wsAddressingNamespace:
+    type: string
+    defaultValues:
+    - data: http://www.w3.org/2005/08/addressing
+    cardinality: '?'
+  wsPolicyNamespace:
+    type: string
+    defaultValues:
+    - data: http://schemas.xmlsoap.org/ws/2004/09/policy
+    cardinality: '?'
+  requestActor:
+    type: string
+    defaultValues:
+    - data: '##current##'
+    cardinality: '?'
+  contentType:
+    type: string
+    defaultValues:
+    - data: text/xml
+    cardinality: 1
+  requestType:
+    type: string
+    defaultValues:
+    - data: Issue
+    cardinality: 1
+  tokenType:
+    type: string
+    defaultValues:
+    - data: http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV1.1
+    cardinality: '?'
+  keyType:
+    type: string
+    defaultValues:
+    - data: SymmetricKey
+    cardinality: '?'
+  computedKeyAlgorithm:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  entropyType:
+    type: string
+    defaultValues:
+    - data: BinarySecret
+    cardinality: 1
+  binarySecretType:
+    type: string
+    defaultValues:
+    - data: Nonce
+    cardinality: '?'
+  binarySecretMessageAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  keySize:
+    type: integer
+    defaultValues:
+    - data: 256
+    cardinality: '?'
+  canonicalizationAlgorithm:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  encryptionAlgorithm:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  encryptWith:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  signWith:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  onBehalfOfContentType:
+    type: string
+    defaultValues:
+    - data: None
+    cardinality: 1
+  onBehalfOfMessageAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  onBehalfOfEndpointAddress:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  onBehalfOfIdentityType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  onBehalfOfIdentityValue:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  onBehalfOfIdentityKeyInfoMessageAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  useKeyMessageAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  useKeyFormat:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  endpointAddress:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  identityType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  identityValue:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  identityKeyInfoMessageAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  lifetime:
+    type: long
+    defaultValues:
+    - {}
+    cardinality: '?'
+  lifetimeFormat:
+    type: string
+    defaultValues:
+    - data: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+    cardinality: '?'
+  validateTargetType:
+    type: string
+    defaultValues:
+    - data: Token
+    cardinality: 1
+  tokenToValidateMessageAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  verifyReturnedTokenType:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  extractTokenLifetime:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  tokenMessageAttribute:
+    type: string
+    defaultValues:
+    - data: sts.security.token
+    cardinality: '?'
+  insertActor:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'

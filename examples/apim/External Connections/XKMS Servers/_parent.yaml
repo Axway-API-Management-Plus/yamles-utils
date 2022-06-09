@@ -1,0 +1,4 @@
+---
+type: XkmsConfigGroup
+fields:
+  name: XKMS Servers

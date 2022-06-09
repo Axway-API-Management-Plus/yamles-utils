@@ -1,0 +1,4 @@
+---
+name: TraceLogger
+version: 0
+class: com.vordel.log.trace.TraceLogger

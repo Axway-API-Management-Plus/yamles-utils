@@ -1,0 +1,23 @@
+---
+name: XPath
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  xpath:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  encryptNodeType:
+    type: string
+    defaultValues:
+    - data: element
+    cardinality: 1
+components:
+  XPathNamespace: '?'
+keyFields:
+- name

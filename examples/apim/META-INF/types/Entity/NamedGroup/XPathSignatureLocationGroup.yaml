@@ -1,0 +1,5 @@
+---
+name: XPathSignatureLocationGroup
+version: 0
+components:
+  XPath: '*'

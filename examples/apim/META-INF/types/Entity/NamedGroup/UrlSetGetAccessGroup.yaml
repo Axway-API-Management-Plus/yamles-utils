@@ -1,0 +1,5 @@
+---
+name: UrlSetGetAccessGroup
+version: 0
+components:
+  UrlSet: '*'

@@ -1,0 +1,123 @@
+---
+name: ConsumeWsTrustFilter
+version: 7
+class: com.vordel.circuit.wstrust.ConsumeWsTrustFilter
+fields:
+  sessionContextKeyCache:
+    type: '@Cache'
+    cardinality: '?'
+  requestSecurityTokenAllowed:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  requestSecurityTokenResponseAllowed:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  requestSecurityTokenResponseCollectionAllowed:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  wsTrustNamespace:
+    type: string
+    defaultValues:
+    - data: http://schemas.xmlsoap.org/ws/2005/02/trust
+    cardinality: 1
+  extractBinaryExchange:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  binaryExchangeValueType:
+    type: string
+    defaultValues:
+    - data: http://schemas.xmlsoap.org/ws/2005/02/trust/spnego
+    cardinality: '?'
+  extractEntropy:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  useConsumedKeySize:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  defaultKeySize:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: '?'
+  extractToken:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  tokenType:
+    type: string
+    defaultValues:
+    - data: http://schemas.xmlsoap.org/ws/2005/02/sc/sct
+    cardinality: '?'
+  extractRequestedProofToken:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  requestedProofTokenType:
+    type: string
+    defaultValues:
+    - data: encryptedKey
+    cardinality: '?'
+  extractCancelTarget:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  extractRequestedTokenCancelled:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  matchContext:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  extractLifetime:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  addLifetimeToKey:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  timeFormat:
+    type: string
+    defaultValues:
+    - data: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+    cardinality: '?'
+  timezone:
+    type: string
+    defaultValues:
+    - data: GMT
+    cardinality: '?'
+  driftTime:
+    type: long
+    defaultValues:
+    - data: 5
+    cardinality: '?'
+  extractAuthenticator:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  authenticatorDigestContents:
+    type: integer
+    defaultValues:
+    - data: 27
+    cardinality: 1

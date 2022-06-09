@@ -1,0 +1,7 @@
+---
+type: XMLFirewall
+fields:
+  filterCircuit: /Policies/Client App Registry Policies/Client App Registry Static Content Protection Policy
+  uriprefix: /login-failed
+  httpMethod: GET
+  corsProfile: /null

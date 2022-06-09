@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: A43MVQBJJDRJWNYLSAO4CHA7FGG7KL64
+  type: schema
+  content: '{{file "A43MVQBJJDRJWNYLSAO4CHA7FGG7KL64.xsd" "binary"}}'

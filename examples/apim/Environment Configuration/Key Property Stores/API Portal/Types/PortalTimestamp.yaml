@@ -1,0 +1,35 @@
+---
+type: KPSType
+fields:
+  name: PortalTimestamp
+children:
+- type: KPSTypeProperty
+  fields:
+    name: entityId
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: time
+    type: java.lang.Long
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: eventType
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: id
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: entityType
+    type: java.lang.String
+    key: ""
+    value: ""

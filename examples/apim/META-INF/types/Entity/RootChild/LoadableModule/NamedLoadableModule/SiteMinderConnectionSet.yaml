@@ -1,0 +1,7 @@
+---
+name: SiteMinderConnectionSet
+version: 1
+class: com.vordel.circuit.siteminder.CACacheManager
+components:
+  SiteMinderConnection: '?'
+loadorder: 100

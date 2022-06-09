@@ -1,0 +1,25 @@
+---
+name: WsSecurityPolicyLayoutFilter
+version: 0
+class: com.vordel.circuit.contentfiltering.WsSecurityPolicyLayoutFilter
+fields:
+  actor:
+    type: string
+    defaultValues:
+    - data: '##current##'
+    cardinality: 1
+  layoutType:
+    type: string
+    defaultValues:
+    - data: Strict
+    cardinality: 1
+  wsVersion:
+    type: string
+    defaultValues:
+    - data: 1.0
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)content-filtering
+    cardinality: 1

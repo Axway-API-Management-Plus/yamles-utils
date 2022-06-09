@@ -1,0 +1,128 @@
+---
+name: FormAuthnFilter
+version: 5
+class: com.vordel.circuit.authn.FormAuthnFilter
+fields:
+  username:
+    type: string
+    defaultValues:
+    - data: username
+    cardinality: 1
+  password:
+    type: string
+    defaultValues:
+    - data: password
+    cardinality: 1
+  credentialFormat:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  repository:
+    type: '@AuthnRepositoryBase'
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authentication
+    cardinality: 1
+  createSession:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  sessionExpiry:
+    type: long
+    defaultValues:
+    - data: 600000
+    cardinality: 1
+  uriprefix:
+    type: string
+    defaultValues:
+    - data: /
+    cardinality: 1
+  domain:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  onlySendOverSSL:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  httpOnly:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  sameSite:
+    type: string
+    defaultValues:
+    - data: Strict
+    cardinality: 1
+  cookie:
+    type: string
+    defaultValues:
+    - data: VIDUSR
+    cardinality: 1
+  lock:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  lockKey:
+    type: string
+    defaultValues:
+    - data: ${http.request.clientaddr}
+    cardinality: 1
+  invalidAttempts:
+    type: integer
+    defaultValues:
+    - data: 5
+    cardinality: 1
+  timePeriod:
+    type: string
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  timePeriodUnit:
+    type: string
+    defaultValues:
+    - data: minute
+    cardinality: 1
+  lockUser:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  userInvalidAttempts:
+    type: integer
+    defaultValues:
+    - data: 6
+    cardinality: 1
+  userTimePeriod:
+    type: string
+    defaultValues:
+    - data: 5
+    cardinality: 1
+  userTimePeriodUnit:
+    type: string
+    defaultValues:
+    - data: minute
+    cardinality: 1
+  lockTimePeriod:
+    type: string
+    defaultValues:
+    - data: 30
+    cardinality: 1
+  lockTimePeriodUnit:
+    type: string
+    defaultValues:
+    - data: minute
+    cardinality: 1
+  cacheToUse:
+    type: '@Cache'
+    defaultValues:
+    - ref: /Libraries/(CacheManager)Cache Manager/(Cache)Invalid Login Attempts
+    cardinality: 1

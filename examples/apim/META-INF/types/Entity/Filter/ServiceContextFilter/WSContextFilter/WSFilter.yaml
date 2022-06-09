@@ -1,0 +1,53 @@
+---
+name: WSFilter
+version: 2
+class: com.vordel.circuit.ws.WSFilter
+fields:
+  advertiseWSDL:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  routingMode:
+    type: string
+    defaultValues:
+    - data: direct
+    cardinality: 1
+  findURL:
+    type: string
+    defaultValues:
+    - data: fromWSDL
+    cardinality: 1
+  specifiedURL:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  routingCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+  reqChainIntermediary:
+    type: '@FilterCircuit'
+    cardinality: 1
+  rspChainIntermediary:
+    type: '@FilterCircuit'
+    cardinality: 1
+  beforeWSDLResponse:
+    type: '@FilterCircuit'
+    cardinality: 1
+  validationMethod:
+    type: string
+    defaultValues:
+    - data: wsdlSchema
+    cardinality: 1
+  validationCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+  validateBeforeReqFE:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+components:
+  ConnectionFilter: 1
+  CircuitChainFilter: 4

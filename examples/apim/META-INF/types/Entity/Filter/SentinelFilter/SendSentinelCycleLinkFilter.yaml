@@ -1,0 +1,33 @@
+---
+name: SendSentinelCycleLinkFilter
+version: 2
+class: com.vordel.circuit.axway.sentinel.SendSentinelCycleLinkFilter
+fields:
+  parentCycleId:
+    type: string
+    defaultValues:
+    - data: ${http.headers["X-TRACKING-CYCLEID"]}
+    cardinality: 1
+  whereToGetTrackedObjectChild:
+    type: string
+    defaultValues:
+    - data: Configuration
+    cardinality: 1
+  trackedObjectChild:
+    type: '@TrackedObject'
+    cardinality: '?'
+  trackedObjectIdentityInMessageChild:
+    type: string
+    defaultValues:
+    - data: ${http.headers["X-TRACKEDOBJECT-IDENTITY"]}
+    cardinality: 1
+  trackedObjectNameInMessageChild:
+    type: string
+    defaultValues:
+    - data: ${http.headers["X-TRACKEDOBJECT-NAME"]}
+    cardinality: 1
+  childCycleId:
+    type: string
+    defaultValues:
+    - data: ${id}
+    cardinality: 1

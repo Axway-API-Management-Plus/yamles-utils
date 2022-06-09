@@ -1,0 +1,43 @@
+---
+name: ValidateRESTFilter
+version: 4
+class: com.vordel.circuit.contentfiltering.ValidateRESTFilter
+fields:
+  httpMethod:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  uriTemplate:
+    type: string
+    defaultValues:
+    - data: /type URI Template here
+    cardinality: 1
+  saveInvalidParamName:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  performExtraction:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  blockUnspecifiedParams:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  useDecodedPath:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)content-filtering
+    cardinality: 1
+components:
+  FacetRestriction: '*'
+  PathFacetRestriction: '*'

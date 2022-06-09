@@ -1,0 +1,17 @@
+---
+name: CreateRESTRequestFilter
+version: 1
+class: com.vordel.circuit.conversion.CreateRESTRequestFilter
+fields:
+  httpMethod:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  useAttributeLookupList:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+components:
+  Property: '*'

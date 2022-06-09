@@ -1,0 +1,7 @@
+---
+name: SMTPServerGroup
+version: 1
+class: com.vordel.circuit.smtp.SMTPServerGroup
+components:
+  SMTPServer: '*'
+loadorder: 500

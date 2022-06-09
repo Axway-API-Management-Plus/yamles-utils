@@ -1,0 +1,9 @@
+---
+type: AuthnRepositorySunAccessManagerGroup
+fields:
+  allowedFilter:
+  - HttpBasicFilter
+  - WsBasicFilter
+  - AttributeAuthnFilter
+  - FormAuthnFilter
+  name: Sun Access Manager Repositories

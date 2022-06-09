@@ -1,0 +1,4 @@
+---
+name: QaReflector
+version: 0
+class: com.vordel.circuit.net.QaReflectFilter

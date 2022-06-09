@@ -1,0 +1,4 @@
+---
+name: SSLInterface
+version: 3
+class: com.vordel.dwe.SSLInterface

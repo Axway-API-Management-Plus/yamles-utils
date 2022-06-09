@@ -1,0 +1,22 @@
+---
+name: ConnectionSetMember
+version: 0
+fields:
+  server:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  port:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+  connType:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- server
+- port

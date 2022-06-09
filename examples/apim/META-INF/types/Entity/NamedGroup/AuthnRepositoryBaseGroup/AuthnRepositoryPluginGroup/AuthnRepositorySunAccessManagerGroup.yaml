@@ -1,0 +1,6 @@
+---
+name: AuthnRepositorySunAccessManagerGroup
+version: 2
+class: com.vordel.security.auth.repository.SunAccessManagerRepository
+components:
+  AuthnRepositorySunAccessManager: '*'

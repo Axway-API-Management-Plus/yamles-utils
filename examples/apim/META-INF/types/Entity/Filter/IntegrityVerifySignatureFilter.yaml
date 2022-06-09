@@ -1,0 +1,90 @@
+---
+name: IntegrityVerifySignatureFilter
+version: 9
+class: com.vordel.circuit.sig.IntegrityVerifySignatureFilter
+fields:
+  actor:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  sigPosition:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: '?'
+  sigLocation:
+    type: '@XPath'
+    cardinality: '?'
+  signedContent:
+    type: '@XPath'
+    cardinality: '*'
+  signedContentElementSpecifier:
+    type: '@ElementSpecifier'
+    cardinality: '*'
+  extractNodesFromMessageAttribute:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  extractNodeListAttributeName:
+    type: string
+    defaultValues:
+    - data: ${node.list}
+    cardinality: 1
+  allAttachmentsSigned:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  keyLocation:
+    type: '@LdapDirectory'
+    cardinality: '?'
+  verifyingCert:
+    type: '@Certificate'
+    cardinality: '?'
+  certAttribute:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  defaultDerivedKeyLabel:
+    type: string
+    defaultValues:
+    - data: WS-SecureConversationWS-SecureConversation
+    cardinality: 1
+  signatureConfirmationType:
+    type: string
+    defaultValues:
+    - data: none
+    cardinality: 1
+  verifyForAuthentication:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  algorithmSuite:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  failIfNoSignatures:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  sourceAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  removeWsSecurity:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)content-filtering
+    cardinality: 1

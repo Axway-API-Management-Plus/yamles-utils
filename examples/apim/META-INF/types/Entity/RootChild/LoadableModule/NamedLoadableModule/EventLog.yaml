@@ -1,0 +1,33 @@
+---
+name: EventLog
+version: 0
+class: com.vordel.metrics.eventlog.logger.EventLogConfig
+fields:
+  enabled:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  eventLogDir:
+    type: string
+    defaultValues:
+    - data: ${environment.VDISTDIR}/events
+    cardinality: 1
+  writeSystemEventFreqSecs:
+    type: integer
+    defaultValues:
+    - data: 60
+    cardinality: 1
+  dirSizePollFrequencySecs:
+    type: integer
+    defaultValues:
+    - data: 600
+    cardinality: 1
+  dirSizeMb:
+    type: integer
+    defaultValues:
+    - data: 1024
+    cardinality: 1
+components:
+  CustomMessageAttribute: '*'
+loadorder: 94

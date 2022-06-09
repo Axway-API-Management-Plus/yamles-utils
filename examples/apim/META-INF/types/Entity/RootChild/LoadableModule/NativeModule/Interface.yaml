@@ -1,0 +1,13 @@
+---
+name: Interface
+version: 2
+class: com.vordel.dwe.Interface
+fields:
+  tracelevel:
+    type: string
+    defaultValues:
+    - data: INHERIT
+    cardinality: 1
+components:
+  InterfaceInvariant: '*'
+abstract: true

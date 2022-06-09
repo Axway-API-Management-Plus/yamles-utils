@@ -1,0 +1,18 @@
+---
+name: ResourceRepository
+version: 0
+class: com.vordel.rr.ResourceRepository
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  ResourceBlobGroup: 1
+  ResourceMapGroup: 1
+  ResourceTagGroup: 1
+  ResourceSetGroup: 1
+keyFields:
+- name
+loadorder: 0

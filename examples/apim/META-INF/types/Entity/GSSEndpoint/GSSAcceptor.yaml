@@ -1,0 +1,9 @@
+---
+name: GSSAcceptor
+version: 1
+fields:
+  extractDelegatedCredentials:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1

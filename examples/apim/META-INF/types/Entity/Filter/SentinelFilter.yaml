@@ -1,0 +1,26 @@
+---
+name: SentinelFilter
+version: 1
+fields:
+  sentinelClient:
+    type: '@SentinelServer'
+    cardinality: '?'
+  whereToGetTrackedObject:
+    type: string
+    defaultValues:
+    - data: Configuration
+    cardinality: 1
+  trackedObject:
+    type: '@TrackedObject'
+    cardinality: '?'
+  trackedObjectIdentityInMessage:
+    type: string
+    defaultValues:
+    - data: ${http.headers["X-TRACKEDOBJECT-IDENTITY"]}
+    cardinality: 1
+  trackedObjectNameInMessage:
+    type: string
+    defaultValues:
+    - data: ${http.headers["X-TRACKEDOBJECT-NAME"]}
+    cardinality: 1
+abstract: true

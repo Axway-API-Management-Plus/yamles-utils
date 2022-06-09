@@ -1,0 +1,54 @@
+---
+type: KPSType
+fields:
+  name: PortalRegistrationToken
+  description: Registration tokens which can be used to register to a direct organization
+children:
+- type: KPSTypeProperty
+  fields:
+    name: enabled
+    type: java.lang.Boolean
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: maxUsers
+    type: java.lang.Integer
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: createdBy
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: organizationId
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: userQuota
+    type: java.lang.Integer
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: token
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: createdOn
+    type: java.lang.Long
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: expiry
+    type: java.lang.Long
+    key: ""
+    value: ""

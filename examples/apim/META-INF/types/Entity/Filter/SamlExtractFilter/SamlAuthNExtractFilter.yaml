@@ -1,0 +1,10 @@
+---
+name: SamlAuthNExtractFilter
+version: 0
+class: com.vordel.circuit.saml.SamlAuthNExtractFilter
+fields:
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authentication
+    cardinality: 1

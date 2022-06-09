@@ -1,0 +1,43 @@
+---
+name: SetDecryptionPropertiesFilter
+version: 3
+class: com.vordel.circuit.crypt.SetDecryptionPropertiesFilter
+fields:
+  decryptAll:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  nodesToDecrypt:
+    type: '@XPath'
+    cardinality: '?'
+  failIfNoEncryptedData:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  removeEncryptedKey:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  decryptionKeyType:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  decryptionKeyAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  defaultDerivedKeyLabel:
+    type: string
+    defaultValues:
+    - data: WS-SecureConversationWS-SecureConversation
+    cardinality: 1
+  algorithmSuite:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

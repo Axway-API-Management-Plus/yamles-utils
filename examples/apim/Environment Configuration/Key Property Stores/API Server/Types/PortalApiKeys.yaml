@@ -1,0 +1,40 @@
+---
+type: KPSType
+fields:
+  name: PortalApiKeys
+  description: Individual API Keys & secrets bound to individual users
+children:
+- type: KPSTypeProperty
+  fields:
+    name: createdOn
+    type: java.lang.Long
+- type: KPSTypeProperty
+  fields:
+    name: applicationId
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: id
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: corsOrigins
+    type: java.util.List
+    key: ""
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: deletedOn
+    type: java.lang.Long
+- type: KPSTypeProperty
+  fields:
+    name: createdBy
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: enabled
+    type: java.lang.Boolean
+- type: KPSTypeProperty
+  fields:
+    name: secret
+    type: java.lang.String

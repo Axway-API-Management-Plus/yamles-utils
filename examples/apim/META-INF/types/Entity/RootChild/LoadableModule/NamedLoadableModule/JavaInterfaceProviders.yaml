@@ -1,0 +1,6 @@
+---
+name: JavaInterfaceProviders
+version: 1
+class: com.vordel.dwe.JavaInterfaceProviders
+components:
+  JavaClass: '?'

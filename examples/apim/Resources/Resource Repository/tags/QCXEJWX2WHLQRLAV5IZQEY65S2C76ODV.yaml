@@ -1,0 +1,9 @@
+---
+type: ResourceTag
+fields:
+  ID: QCXEJWX2WHLQRLAV5IZQEY65S2C76ODV
+  resourceID: 2YSEIO6BZB7HWYKMLJPB4DYRQI3Y65NQ
+  comment: Schema for the SOAP/1.1 envelope
+  creator: catalog
+  timestamp: 1380037355247
+  version: 1

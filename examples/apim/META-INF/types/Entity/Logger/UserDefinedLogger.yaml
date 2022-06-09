@@ -1,0 +1,10 @@
+---
+name: UserDefinedLogger
+version: 0
+fields:
+  format:
+    type: string
+    defaultValues:
+    - data: ${level} ${timestamp} ${id} ${text} ${filterType} ${filterName}
+    cardinality: 1
+abstract: true

@@ -1,0 +1,8 @@
+---
+name: CertValidationCrlFilter
+version: 2
+class: com.vordel.circuit.cert.CertValidationCrlFilter
+fields:
+  crlCheck:
+    type: '@LdapDirectory'
+    cardinality: +

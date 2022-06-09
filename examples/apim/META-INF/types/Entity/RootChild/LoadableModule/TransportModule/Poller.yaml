@@ -1,0 +1,10 @@
+---
+name: Poller
+version: 2
+fields:
+  pollRateMs:
+    type: integer
+    defaultValues:
+    - data: 10000
+    cardinality: 1
+abstract: true

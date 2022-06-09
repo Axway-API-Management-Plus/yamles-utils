@@ -1,0 +1,30 @@
+---
+name: JSONAddNodeFilter
+version: 0
+class: com.vordel.circuit.json.JSONAddNodeFilter
+fields:
+  expression:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  expressionType:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  insertLocationType:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  objectFieldName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  content:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

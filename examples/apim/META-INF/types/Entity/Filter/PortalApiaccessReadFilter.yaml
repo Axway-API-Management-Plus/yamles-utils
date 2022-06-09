@@ -1,0 +1,25 @@
+---
+name: PortalApiaccessReadFilter
+version: 0
+class: com.vordel.circuit.apiportal.ReadApiaccessFilter
+fields:
+  entityType:
+    type: string
+    defaultValues:
+    - data: Application
+    cardinality: 1
+  apiIdSelector:
+    type: string
+    defaultValues:
+    - data: ${apimgmt.apiproxy.id}
+    cardinality: 1
+  entityIdSelector:
+    type: string
+    defaultValues:
+    - data: ${apimgmt.entity.id}
+    cardinality: 1
+  targetAttribute:
+    type: string
+    defaultValues:
+    - data: apimgmt.apiaccess
+    cardinality: 1

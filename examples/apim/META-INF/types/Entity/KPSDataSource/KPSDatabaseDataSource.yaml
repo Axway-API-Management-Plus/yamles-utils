@@ -1,0 +1,7 @@
+---
+name: KPSDatabaseDataSource
+version: 2
+fields:
+  dbConnecton:
+    type: '@DbConnection'
+    cardinality: 1

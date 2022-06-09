@@ -1,0 +1,5 @@
+---
+name: XPathSignatureInsertionLocationGroup
+version: 1
+components:
+  XPath: '*'

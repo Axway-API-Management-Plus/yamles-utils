@@ -1,0 +1,7 @@
+---
+type: ResourceMap
+fields:
+  ID: NXY3FAFKFHM533KI7OQK2QVVNUTVJEWN
+  uri: jar:http://docs.oasis-open.org/security/saml/v2.0/saml-2.0-os.zip!/saml-schema-assertion-2.0.xsd
+  blobID: IO7TGOBHT4B7WPQHDIFAIBWL2A4AG7VP
+  locked: true

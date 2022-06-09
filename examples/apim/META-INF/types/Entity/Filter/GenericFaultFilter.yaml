@@ -1,0 +1,66 @@
+---
+name: GenericFaultFilter
+version: 3
+class: com.vordel.circuit.faulthandlers.GenericFaultFilter
+fields:
+  showStack:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  showPath:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  showAttributes:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  showDetailedReason:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  faultString:
+    type: string
+    defaultValues:
+    - data: ${circuit.failure.reason}
+    cardinality: 1
+  httpResponseStatus:
+    type: integer
+    defaultValues:
+    - data: 500
+    cardinality: 1
+  styleResponse:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  userStylesheet:
+    type: '@Stylesheet'
+    cardinality: '?'
+  applyResponseRules:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  filterCircuit:
+    type: '@FilterCircuit'
+    cardinality: '?'
+  responseHandling:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  fault_body:
+    type: string
+    defaultValues:
+    - data: ${content.body}
+    cardinality: 1
+  fault_headers:
+    type: string
+    defaultValues:
+    - data: ${http.headers}
+    cardinality: 1

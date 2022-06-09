@@ -1,0 +1,21 @@
+---
+name: CassandraServer
+version: 3
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  host:
+    type: string
+    defaultValues:
+    - data: localhost
+    cardinality: 1
+  port:
+    type: integer
+    defaultValues:
+    - data: 9042
+    cardinality: 1
+keyFields:
+- name

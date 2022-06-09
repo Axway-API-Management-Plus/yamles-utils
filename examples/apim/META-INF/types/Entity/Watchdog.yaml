@@ -1,0 +1,15 @@
+---
+name: Watchdog
+version: 0
+fields:
+  pollTimeout:
+    type: integer
+    defaultValues:
+    - data: 60000
+    cardinality: 1
+  pollIfOk:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+abstract: true

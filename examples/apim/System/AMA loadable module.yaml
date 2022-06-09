@@ -1,0 +1,4 @@
+---
+type: AmaModule
+fields:
+  name: AMA loadable module

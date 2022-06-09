@@ -1,0 +1,25 @@
+---
+name: ServiceContextFilter
+version: 5
+class: com.vordel.circuit.ws.ServiceContextFilter
+fields:
+  serviceName:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  metricsMask:
+    type: integer
+    defaultValues:
+    - data: 3
+    cardinality: 1
+  clientAttributeName:
+    type: string
+    defaultValues:
+    - data: authentication.subject.id
+    cardinality: 1
+  compositeContext:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1

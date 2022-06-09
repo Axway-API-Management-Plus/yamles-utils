@@ -1,0 +1,16 @@
+---
+name: XercesFeature
+version: 1
+fields:
+  feature:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  value:
+    type: boolean
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- feature

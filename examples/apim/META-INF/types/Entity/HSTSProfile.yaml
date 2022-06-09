@@ -1,0 +1,26 @@
+---
+name: HSTSProfile
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - data: HTTP Strict Transport Security
+    cardinality: 1
+  enabled:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  maxAge:
+    type: long
+    defaultValues:
+    - data: 31536000
+    cardinality: 1
+  includeSubDomains:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+keyFields:
+- name

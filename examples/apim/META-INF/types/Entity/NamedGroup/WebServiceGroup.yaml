@@ -1,0 +1,6 @@
+---
+name: WebServiceGroup
+version: 0
+components:
+  WebService: '*'
+  WebServiceGroup: '*'

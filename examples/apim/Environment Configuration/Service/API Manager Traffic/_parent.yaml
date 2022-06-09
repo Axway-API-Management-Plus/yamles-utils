@@ -1,0 +1,5 @@
+---
+type: HTTP
+fields:
+  name: API Manager Traffic
+  corsProfile: /null

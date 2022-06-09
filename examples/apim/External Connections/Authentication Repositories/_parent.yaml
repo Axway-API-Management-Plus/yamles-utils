@@ -1,0 +1,4 @@
+---
+type: AuthnRepositoryGroup
+fields:
+  name: Authentication Repositories

@@ -1,0 +1,33 @@
+---
+name: AttributeExtractXPathFilter
+version: 2
+class: com.vordel.circuit.attribute.AttributeExtractXPathFilter
+fields:
+  attributeLocation:
+    type: '@XPath'
+    cardinality: 1
+  attributeName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  xpathInterpretation:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)attribute
+    cardinality: 1
+  attributeInContentBody:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  contentType:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1

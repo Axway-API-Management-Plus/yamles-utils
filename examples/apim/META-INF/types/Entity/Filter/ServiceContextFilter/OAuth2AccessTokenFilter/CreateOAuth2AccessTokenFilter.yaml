@@ -1,0 +1,60 @@
+---
+name: CreateOAuth2AccessTokenFilter
+version: 6
+fields:
+  scopesMustMatch:
+    type: string
+    defaultValues:
+    - data: Any
+    cardinality: 1
+  accessTokenType:
+    type: string
+    defaultValues:
+    - data: Bearer
+    cardinality: 1
+  accessTokenlength:
+    type: integer
+    defaultValues:
+    - data: 54
+    cardinality: 1
+  accessTokenExpiresInSecs:
+    type: long
+    defaultValues:
+    - data: 3600
+    cardinality: 1
+  refreshChoice:
+    type: string
+    defaultValues:
+    - data: NewRefresh
+    cardinality: 1
+  refreshTokenlength:
+    type: integer
+    defaultValues:
+    - data: 46
+    cardinality: 1
+  refreshTokenExpiresInSecs:
+    type: long
+    defaultValues:
+    - data: 43200
+    cardinality: 1
+  recordOutboundTxns:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  scopeChoice:
+    type: string
+    defaultValues:
+    - data: Application
+    cardinality: 1
+  scopeCircuitPK:
+    type: '@FilterCircuit'
+    cardinality: '?'
+  scopesForToken:
+    type: string
+    defaultValues:
+    - data: ${scopes.for.token}
+    cardinality: '?'
+components:
+  Property: '?'
+abstract: true

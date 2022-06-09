@@ -1,0 +1,4 @@
+---
+type: RadiusClients
+fields:
+  name: RADIUS Client Settings

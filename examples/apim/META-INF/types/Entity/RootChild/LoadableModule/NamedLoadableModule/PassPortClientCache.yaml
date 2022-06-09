@@ -1,0 +1,5 @@
+---
+name: PassPortClientCache
+version: 1
+class: com.vordel.circuit.passport.PassPortClientCache
+loadorder: 510000

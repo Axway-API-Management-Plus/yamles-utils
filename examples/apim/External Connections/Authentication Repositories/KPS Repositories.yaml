@@ -1,0 +1,10 @@
+---
+type: AuthnRepositoryKPSGroup
+fields:
+  allowedFilter:
+  - HttpBasicFilter
+  - WsBasicFilter
+  - WsUsernameFilter
+  - AttributeAuthnFilter
+  - FormAuthnFilter
+  name: KPS Repositories

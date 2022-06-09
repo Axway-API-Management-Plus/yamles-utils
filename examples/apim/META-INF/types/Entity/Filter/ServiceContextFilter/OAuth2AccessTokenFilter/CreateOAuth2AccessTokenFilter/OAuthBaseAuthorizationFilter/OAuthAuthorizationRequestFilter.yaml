@@ -1,0 +1,45 @@
+---
+name: OAuthAuthorizationRequestFilter
+version: 8
+class: com.vordel.circuit.oauth.provider.authorize.OAuthAuthorizationRequestFilter
+fields:
+  authNWith:
+    type: string
+    defaultValues:
+    - data: INTERNAL_AUTHN_FLOW
+    cardinality: 1
+  circuitPK:
+    type: '@FilterCircuit'
+    cardinality: '?'
+  subjectAttr:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.id}
+    cardinality: 1
+  recordOutboundTxns:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  skipAuthorization:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  loginTemplateLocation:
+    type: string
+    defaultValues:
+    - data: ${environment.VDISTDIR}/samples/oauth/templates/login.html
+    cardinality: 1
+  grantAccessTemplateLocation:
+    type: string
+    defaultValues:
+    - data: ${environment.VDISTDIR}/samples/oauth/templates/requestAccess.html
+    cardinality: 1
+  resourceOwnerCookieName:
+    type: string
+    defaultValues:
+    - data: VIDUSR
+    cardinality: 1
+components:
+  Cookie: 1

@@ -1,0 +1,12 @@
+---
+type: AuthnRepositoryRadiusGroup
+fields:
+  allowedFilter:
+  - HttpBasicFilter
+  - HttpDigestFilter
+  - WsBasicFilter
+  - WsDigestFilter
+  - WsUsernameFilter
+  - AttributeAuthnFilter
+  - FormAuthnFilter
+  name: RADIUS Client

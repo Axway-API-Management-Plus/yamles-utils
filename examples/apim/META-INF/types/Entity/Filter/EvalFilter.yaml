@@ -1,0 +1,30 @@
+---
+name: EvalFilter
+version: 0
+class: com.vordel.circuit.basic.SelectorEvalFilter
+fields:
+  dotype:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  doeval:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  type:
+    type: string
+    defaultValues:
+    - data: java.lang.String
+    cardinality: 1
+  expression:
+    type: string
+    defaultValues:
+    - data: ${http.client.getCgiArgument('expr')}
+    cardinality: 1
+  pause:
+    type: integer
+    defaultValues:
+    - data: 10000
+    cardinality: 1

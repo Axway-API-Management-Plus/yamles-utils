@@ -1,0 +1,4 @@
+---
+type: OpenTrafficEventLog
+fields:
+  name: Open Traffic Event Log Configuration

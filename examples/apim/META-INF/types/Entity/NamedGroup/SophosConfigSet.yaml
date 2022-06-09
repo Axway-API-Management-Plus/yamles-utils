@@ -1,0 +1,5 @@
+---
+name: SophosConfigSet
+version: 1
+components:
+  SophosNameValue: '*'

@@ -1,0 +1,200 @@
+---
+name: GenerateSignatureFilter
+version: 21
+class: com.vordel.circuit.sig.GenerateSignatureFilter
+fields:
+  actor:
+    type: string
+    defaultValues:
+    - data: '##current##'
+    cardinality: 1
+  appendToRootOrSoapHeader:
+    type: string
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  sigLocationXPath:
+    type: '@XPath'
+    cardinality: '?'
+  sigLocationType:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  failIfNoNodes:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  xpathPredicateWhatSign:
+    type: '@XPath'
+    cardinality: '*'
+  nodesToSignIdAttrName:
+    type: string
+    defaultValues:
+    - data: wsu:Id
+    cardinality: 1
+  useSamlId:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  strForSaml:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  wsuIdHow:
+    type: string
+    defaultValues:
+    - data: xpath
+    cardinality: '?'
+  wsuIdElementSpecification:
+    type: '@ElementSpecifier'
+    cardinality: '*'
+  wsuIdXPath:
+    type: '@XPath'
+    cardinality: '*'
+  extractNodesFromMessageAttribute:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  extractNodeListAttributeName:
+    type: string
+    defaultValues:
+    - data: ${node.list}
+    cardinality: 1
+  keyType:
+    type: string
+    defaultValues:
+    - data: asymmetric
+    cardinality: 1
+  signingKeyType:
+    type: string
+    defaultValues:
+    - data: certificateInStore
+    cardinality: 1
+  signingCert:
+    type: '@Certificate'
+    cardinality: '?'
+  signingCertAttribute:
+    type: string
+    defaultValues:
+    - data: ${certificate}
+    cardinality: '?'
+  symmetricSigningKeyType:
+    type: string
+    defaultValues:
+    - data: generated
+    cardinality: 1
+  generatedSymmetricKeyAttribute:
+    type: string
+    defaultValues:
+    - data: symmetric.key
+    cardinality: '?'
+  symmetricKeyAttribute:
+    type: string
+    defaultValues:
+    - data: ${symmetric.key}
+    cardinality: '?'
+  includeSymmetricKeyInMessage:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  symmetricKeyEncryptionKeyType:
+    type: string
+    defaultValues:
+    - data: certificateInStore
+    cardinality: 1
+  symmetricKeyEncryptionCert:
+    type: '@Certificate'
+    cardinality: '?'
+  symmetricKeyEncryptionCertAttribute:
+    type: string
+    defaultValues:
+    - data: ${certificate}
+    cardinality: '?'
+  useDerivedKey:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  hmacSymmetricKeyLen:
+    type: integer
+    defaultValues:
+    - data: 256
+    cardinality: 1
+  signatureMethod:
+    type: string
+    defaultValues:
+    - data: http://www.w3.org/2000/09/xmldsig#rsa-sha1
+    cardinality: 1
+  digestAlgorithm:
+    type: string
+    defaultValues:
+    - data: http://www.w3.org/2000/09/xmldsig#sha1
+    cardinality: 1
+  keyWrapAlgorithm:
+    type: string
+    defaultValues:
+    - data: http://www.w3.org/2001/04/xmlenc#rsa-1_5
+    cardinality: 1
+  signatureConfirmationType:
+    type: string
+    defaultValues:
+    - data: none
+    cardinality: 1
+  specifyInclusiveNamespaces:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  readableFormat:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  attachmentTransform:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  envelopedSignature:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  timestampType:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  timestampLifeTimeSecs:
+    type: long
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  additionalItemsToSign:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  layoutType:
+    type: string
+    defaultValues:
+    - data: Lax
+    cardinality: 1
+  insertCarriedKeyName:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  includeTransforms:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+components:
+  KeyInfoFormat: 1

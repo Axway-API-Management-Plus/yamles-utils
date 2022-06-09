@@ -1,0 +1,11 @@
+---
+name: JavaClass
+version: 0
+fields:
+  class:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- class

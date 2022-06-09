@@ -1,0 +1,35 @@
+---
+type: KPSType
+fields:
+  name: Authorizations
+children:
+- type: KPSTypeProperty
+  fields:
+    name: scopes
+    type: java.util.List
+    key: ""
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: applicationID
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: subject
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: id
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: created
+    type: java.lang.Long
+    key: ""
+    value: ""

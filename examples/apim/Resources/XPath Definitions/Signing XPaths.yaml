@@ -1,0 +1,149 @@
+---
+type: XPathSignGroup
+fields:
+  name: Signing XPaths
+children:
+- type: XPath
+  fields:
+    name: 'What Must Be Signed : The First SAML 1.1 Assertion and all its contents excluding the embedded Signature'
+    xpath: (//saml:Assertion)[1]/descendant-or-self::node()[not(ancestor-or-self::dsig:Signature)]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: dsig
+      URI: http://www.w3.org/2000/09/xmldsig#
+  - type: XPathNamespace
+    fields:
+      prefix: saml
+      URI: urn:oasis:names:tc:SAML:1.0:assertion
+- type: XPath
+  fields:
+    name: The SOAP11 method
+    xpath: /soap:Envelope/soap:Body/*
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: The SOAP12 Body
+    xpath: /soap:Envelope/soap:Body
+    encryptNodeType: content
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://www.w3.org/2003/05/soap-envelope
+- type: XPath
+  fields:
+    name: 'What Must Be Signed : The SOAP11 Method and all its contents'
+    xpath: /soap:Envelope/soap:Body//node()
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: The First SAML 1.0 assertion
+    xpath: (//saml:Assertion)[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: saml
+      URI: urn:oasis:names:tc:SAML:1.0:assertion
+- type: XPath
+  fields:
+    name: 'What Must Be Signed : The SAMLP 1.1 Response and all its contents excluding the embedded Signature'
+    xpath: (//samlp:Response)[1]/descendant-or-self::node()[not(ancestor-or-self::dsig:Signature)]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: samlp
+      URI: urn:oasis:names:tc:SAML:1.0:protocol
+  - type: XPathNamespace
+    fields:
+      prefix: dsig
+      URI: http://www.w3.org/2000/09/xmldsig#
+- type: XPath
+  fields:
+    name: The SOAP11 or SOAP12 Body
+    xpath: /soap11:Envelope/soap11:Body | /soap12:Envelope/soap12:Body
+    encryptNodeType: content
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap12
+      URI: http://www.w3.org/2003/05/soap-envelope
+  - type: XPathNamespace
+    fields:
+      prefix: soap11
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: 'What Must Be Signed : The SAMLP 2.0 Response and all its contents excluding the embedded Signature'
+    xpath: (//samlp:Response)[1]/descendant-or-self::node()[not(ancestor-or-self::dsig:Signature)]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: dsig
+      URI: http://www.w3.org/2000/09/xmldsig#
+  - type: XPathNamespace
+    fields:
+      prefix: samlp
+      URI: urn:oasis:names:tc:SAML:2.0:protocol
+- type: XPath
+  fields:
+    name: The First SAML 2.0 assertion
+    xpath: (//saml:Assertion)[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: saml
+      URI: urn:oasis:names:tc:SAML:2.0:assertion
+- type: XPath
+  fields:
+    name: 'What Must Be Signed : The First SAML 2.0 Assertion and all its contents excluding the embedded Signature'
+    xpath: (//saml:Assertion)[1]/descendant-or-self::node()[not(ancestor-or-self::dsig:Signature)]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: dsig
+      URI: http://www.w3.org/2000/09/xmldsig#
+  - type: XPathNamespace
+    fields:
+      prefix: saml
+      URI: urn:oasis:names:tc:SAML:2.0:assertion
+- type: XPath
+  fields:
+    name: The SOAP11 Body
+    xpath: /soap:Envelope/soap:Body
+    encryptNodeType: content
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: 'What Must be Signed : The SOAP11 Body and all its contents'
+    xpath: /soap:Envelope/soap:Body/descendant-or-self::node()
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: The Entire Document
+    xpath: /*
+- type: XPath
+  fields:
+    name: The SOAP12 method
+    xpath: /soap:Envelope/soap:Body/*
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://www.w3.org/2003/05/soap-envelope

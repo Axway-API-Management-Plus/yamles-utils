@@ -1,0 +1,21 @@
+---
+name: EncryptionRecipient
+version: 3
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  actor:
+    type: string
+    defaultValues:
+    - data: '##current##'
+    cardinality: '?'
+  certificateAttribute:
+    type: string
+    defaultValues:
+    - data: ${certificate}
+    cardinality: '?'
+keyFields:
+- name

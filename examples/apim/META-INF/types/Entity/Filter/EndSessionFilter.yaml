@@ -1,0 +1,35 @@
+---
+name: EndSessionFilter
+version: 1
+class: com.vordel.circuit.authn.EndSessionFilter
+fields:
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authentication
+    cardinality: 1
+  removeCookie:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  uriprefix:
+    type: string
+    defaultValues:
+    - data: /
+    cardinality: 1
+  domain:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  sameSite:
+    type: string
+    defaultValues:
+    - data: Strict
+    cardinality: 1
+  cookie:
+    type: string
+    defaultValues:
+    - data: VIDUSR
+    cardinality: 1

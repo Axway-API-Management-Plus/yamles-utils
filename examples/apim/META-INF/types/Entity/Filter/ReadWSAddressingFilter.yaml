@@ -1,0 +1,13 @@
+---
+name: ReadWSAddressingFilter
+version: 2
+class: com.vordel.circuit.addressing.ReadWSAddressingFilter
+fields:
+  addressLocation:
+    type: '@XPath'
+    cardinality: 1
+  removeWSAddressingElement:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1

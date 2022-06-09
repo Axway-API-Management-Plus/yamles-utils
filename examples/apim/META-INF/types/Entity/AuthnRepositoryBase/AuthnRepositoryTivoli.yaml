@@ -1,0 +1,4 @@
+---
+name: AuthnRepositoryTivoli
+version: 0
+class: com.vordel.security.auth.repository.TivoliRepository

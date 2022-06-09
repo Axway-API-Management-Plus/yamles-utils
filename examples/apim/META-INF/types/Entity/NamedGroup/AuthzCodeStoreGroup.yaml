@@ -1,0 +1,5 @@
+---
+name: AuthzCodeStoreGroup
+version: 0
+components:
+  AuthzCodePersist: '*'

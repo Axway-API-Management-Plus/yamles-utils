@@ -1,0 +1,49 @@
+---
+name: CopyAttribute
+version: 0
+fields:
+  fromAttributeName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  fromAttributeNamespace:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  toAttributeName:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  toAttributeNamespace:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  attributeValue:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  fromAttributeLocation:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  toAttributeLocation:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  toListAttribute:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+keyFields:
+- fromAttributeName
+- fromAttributeNamespace
+- toAttributeName
+- toAttributeNamespace

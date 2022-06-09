@@ -1,0 +1,6 @@
+---
+name: AuthnRepositoryDbGroup
+version: 2
+class: com.vordel.security.auth.repository.DatabaseRepository
+components:
+  AuthnRepositoryDb: '*'

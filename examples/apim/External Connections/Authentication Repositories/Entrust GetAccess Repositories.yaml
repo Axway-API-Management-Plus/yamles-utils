@@ -1,0 +1,9 @@
+---
+type: AuthnRepositoryGetAccessGroup
+fields:
+  allowedFilter:
+  - HttpBasicFilter
+  - WsBasicFilter
+  - AttributeAuthnFilter
+  - FormAuthnFilter
+  name: Entrust GetAccess Repositories

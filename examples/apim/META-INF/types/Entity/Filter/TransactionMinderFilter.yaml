@@ -1,0 +1,28 @@
+---
+name: TransactionMinderFilter
+version: 2
+fields:
+  connectionDetails:
+    type: '@SiteMinderConnection'
+    cardinality: 1
+  resource:
+    type: string
+    defaultValues:
+    - data: ${http.request.uri}
+    cardinality: 1
+  action:
+    type: string
+    defaultValues:
+    - data: ${http.request.verb}
+    cardinality: 1
+  protocol:
+    type: string
+    defaultValues:
+    - data: http
+    cardinality: 1
+  headers:
+    type: string
+    defaultValues:
+    - data: http.headers
+    cardinality: 1
+abstract: true

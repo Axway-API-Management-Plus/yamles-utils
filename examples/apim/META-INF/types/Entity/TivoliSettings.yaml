@@ -1,0 +1,46 @@
+---
+name: TivoliSettings
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  configSpecificationMethod:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  configFile:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  sslKeyFile:
+    type: binary
+    defaultValues:
+    - {}
+    cardinality: '?'
+  sslStashFile:
+    type: binary
+    defaultValues:
+    - {}
+    cardinality: '?'
+  configDatabaseFile:
+    type: binary
+    defaultValues:
+    - {}
+    cardinality: '?'
+  configFileLocation:
+    type: string
+    defaultValues:
+    - data: ${VINSTDIR}/conf/plugin/tivoli/${process.name}/config.conf
+    cardinality: '?'
+  enabled:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+keyFields:
+- name

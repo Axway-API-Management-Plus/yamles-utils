@@ -1,0 +1,6 @@
+---
+name: AuthnRepositorySiteMinderGroup
+version: 2
+class: com.vordel.security.auth.repository.SiteMinderRepository
+components:
+  AuthnRepositorySiteMinder: '*'

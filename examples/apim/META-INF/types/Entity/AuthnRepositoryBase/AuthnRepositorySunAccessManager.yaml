@@ -1,0 +1,30 @@
+---
+name: AuthnRepositorySunAccessManager
+version: 1
+class: com.vordel.security.auth.repository.SunAccessManagerRepository
+fields:
+  moduleName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  orgName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  createSSOToken:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  ssoTokenAttrName:
+    type: string
+    defaultValues:
+    - data: sun.sso.token
+    cardinality: 1
+  addSSOTokenToUserAttrs:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1

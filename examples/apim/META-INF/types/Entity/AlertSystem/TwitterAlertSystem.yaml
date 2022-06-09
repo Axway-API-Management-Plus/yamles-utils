@@ -1,0 +1,25 @@
+---
+name: TwitterAlertSystem
+version: 0
+class: com.vordel.alert.twitter.AlertTwitter
+fields:
+  consumerKey:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1
+  consumerSecret:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1
+  accessToken:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1
+  accessTokenSecret:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1

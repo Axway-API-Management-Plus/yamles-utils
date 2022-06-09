@@ -1,0 +1,10 @@
+---
+name: ConversionFilter
+version: 0
+fields:
+  outputContentType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+abstract: true

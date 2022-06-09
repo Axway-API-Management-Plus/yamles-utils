@@ -1,0 +1,4 @@
+---
+name: WSDLResponder
+version: 0
+class: com.vordel.circuit.ws.WSDLResponderFilter

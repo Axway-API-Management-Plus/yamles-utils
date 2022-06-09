@@ -1,0 +1,4 @@
+---
+name: RefreshingAccessTokenFilter
+version: 0
+class: com.vordel.circuit.oauth.provider.grants.RefreshingAccessTokenFilter

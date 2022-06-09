@@ -1,0 +1,4 @@
+---
+type: OESSecurityRuntimeLoadableModule
+fields:
+  name: OES SSM Settings

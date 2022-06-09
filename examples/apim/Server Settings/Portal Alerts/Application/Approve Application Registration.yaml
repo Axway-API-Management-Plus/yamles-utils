@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Approve Application Registration
+  id: alert.application.register
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Application/Approve Application Registration

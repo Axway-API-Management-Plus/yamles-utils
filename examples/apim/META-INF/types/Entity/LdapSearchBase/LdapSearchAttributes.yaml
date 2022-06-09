@@ -1,0 +1,9 @@
+---
+name: LdapSearchAttributes
+version: 2
+fields:
+  uniqueFlag:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1

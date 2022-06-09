@@ -1,0 +1,23 @@
+---
+type: XPathAttributeLocationGroup
+fields:
+  name: Attribute Locations
+children:
+- type: XPath
+  fields:
+    name: The Soap Operation Name
+    xpath: local-name(/soap12:Envelope/soap12:Body/*)
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: The WS-Addressing MessageID
+    xpath: //wsa:MessageID
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: wsa
+      URI: http://schemas.xmlsoap.org/ws/2004/08/addressing

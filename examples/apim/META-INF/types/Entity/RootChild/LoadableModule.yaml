@@ -1,0 +1,9 @@
+---
+name: LoadableModule
+version: 2
+fields:
+  classloader:
+    type: '@ClassLoader'
+    cardinality: '?'
+abstract: true
+loadorder: 1000000

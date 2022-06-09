@@ -1,0 +1,5 @@
+---
+name: KerberosGroup
+version: 0
+components:
+  KerberosProfile: '*'

@@ -1,0 +1,37 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Make the "Unauthorized" Message
+  name: 'Return HTTP Error 401: Unauthorized'
+children:
+- type: ChangeMessageFilter
+  fields:
+    outputContentType: text/html
+    name: Make the "Unauthorized" Message
+    body: '{{file "Return HTTP Error 401(colon) Unauthorize-1433015977-Files/Make the (quote)Unauthorized(quote) Message.html"}}'
+  routing:
+    success: ../Pass the "Unauthorized" message back
+  logging:
+    fatal: 'Error in setting the message. Error: ${circuit.exception}'
+    failure: Failed in setting the message
+    success: Success in setting the message
+- type: Reflector
+  fields:
+    httpResponseStatus: 401
+    name: Pass the "Unauthorized" message back
+  routing:
+    success: ../Flag as blocked message
+  logging:
+    maskType: FILTER
+    mask: 6
+    fatal: 'Error occurred while echoing the message. Error: ${circuit.exception}'
+    failure: Failed to echo back the message
+    success: Successfully echoed back the message to IP Address ${http.request.clientaddr}
+- type: SetResponseStatusFilter
+  fields:
+    responseStatus: 3
+    name: Flag as blocked message
+  logging:
+    fatal: 'SetResponseStatusFilter error. Error: ${circuit.exception}'
+    failure: Failed to set the response status
+    success: Successfully set the response status

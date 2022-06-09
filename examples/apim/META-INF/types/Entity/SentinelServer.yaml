@@ -1,0 +1,61 @@
+---
+name: SentinelServer
+version: 2
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  host:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  port:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  encoding:
+    type: string
+    defaultValues:
+    - data: utf-8
+    cardinality: 1
+  useOverflowFile:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  overflowFile:
+    type: string
+    defaultValues:
+    - data: text
+    cardinality: 1
+  overflowFileSizeMB:
+    type: long
+    defaultValues:
+    - data: 1024
+    cardinality: 1
+  useProductName:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  productName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  useLocalAddr:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  localAddr:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- name

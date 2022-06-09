@@ -1,0 +1,30 @@
+---
+name: ValidateTimeStampFilter
+version: 2
+class: com.vordel.circuit.replay.ValidateTimeStampFilter
+fields:
+  timestampAttributeName:
+    type: string
+    defaultValues:
+    - data: ${timestamp}
+    cardinality: 1
+  timeFormat:
+    type: string
+    defaultValues:
+    - data: yyyy-MM-dd'T'HH:mm:ss'Z'
+    cardinality: 1
+  timezone:
+    type: string
+    defaultValues:
+    - data: GMT
+    cardinality: 1
+  driftTime:
+    type: long
+    defaultValues:
+    - data: 5000
+    cardinality: 1
+  timestampCheckType:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1

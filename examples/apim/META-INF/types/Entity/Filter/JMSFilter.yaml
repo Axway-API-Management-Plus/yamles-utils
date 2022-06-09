@@ -1,0 +1,88 @@
+---
+name: JMSFilter
+version: 11
+class: com.vordel.circuit.jms.JMSFilter
+fields:
+  connection:
+    type: '@JMSService'
+    cardinality: 1
+  requestDestinationType:
+    type: string
+    defaultValues:
+    - data: QUEUE
+    cardinality: 1
+  requestDestination:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  replyTo:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  responseTimeoutMs:
+    type: integer
+    defaultValues:
+    - data: 10000
+    cardinality: 1
+  blockForResponse:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  responseType:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  deliveryMode:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  responseMessageSelector:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  priorityLevel:
+    type: integer
+    defaultValues:
+    - data: 4
+    cardinality: 1
+  timeToLiveMs:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  messageType:
+    type: integer
+    defaultValues:
+    - data: 5
+    cardinality: 1
+  attributeName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  msgId:
+    type: string
+    defaultValues:
+    - data: ${id}
+    cardinality: 1
+  correlationId:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  singleSession:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  postMessageCreationCircuit:
+    type: '@FilterCircuit'
+    cardinality: '?'
+components:
+  Property: '?'

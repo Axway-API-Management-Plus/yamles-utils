@@ -1,0 +1,26 @@
+---
+name: UrlSetMember
+version: 1
+fields:
+  URL:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  failTime:
+    type: integer
+    defaultValues:
+    - data: 60
+    cardinality: 1
+  proxyHost:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  proxyPort:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: '?'
+keyFields:
+- URL

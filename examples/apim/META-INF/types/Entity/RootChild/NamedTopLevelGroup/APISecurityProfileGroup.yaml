@@ -1,0 +1,5 @@
+---
+name: APISecurityProfileGroup
+version: 1
+components:
+  APISecurityProfile: '*'

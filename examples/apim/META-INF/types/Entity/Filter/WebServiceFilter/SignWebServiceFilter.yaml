@@ -1,0 +1,8 @@
+---
+name: SignWebServiceFilter
+version: 1
+class: com.vordel.circuit.websvc.SignWebServiceFilter
+fields:
+  signingCert:
+    type: '@Certificate'
+    cardinality: '?'

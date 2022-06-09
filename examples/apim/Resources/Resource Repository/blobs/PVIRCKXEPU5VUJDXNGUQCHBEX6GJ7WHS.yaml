@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: PVIRCKXEPU5VUJDXNGUQCHBEX6GJ7WHS
+  type: schema
+  content: '{{file "PVIRCKXEPU5VUJDXNGUQCHBEX6GJ7WHS.xsd" "binary"}}'

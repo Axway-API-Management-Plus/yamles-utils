@@ -1,0 +1,79 @@
+---
+type: XPathSignatureLocationGroup
+fields:
+  name: Signature Locations
+children:
+- type: XPath
+  fields:
+    name: First Signature in First SAML Assertion (SAML 2.0)
+    xpath: //saml:Assertion[1]/dsig:Signature[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: dsig
+      URI: http://www.w3.org/2000/09/xmldsig#
+  - type: XPathNamespace
+    fields:
+      prefix: saml
+      URI: urn:oasis:names:tc:SAML:2.0:assertion
+- type: XPath
+  fields:
+    name: First signature in SOAP Header
+    xpath: /soap:Envelope/soap:Header/dsig:Signature[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+  - type: XPathNamespace
+    fields:
+      prefix: dsig
+      URI: http://www.w3.org/2000/09/xmldsig#
+- type: XPath
+  fields:
+    name: First Signature in SAMLP Response (SAML 1.1)
+    xpath: //samlp:Response/dsig:Signature[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: samlp
+      URI: urn:oasis:names:tc:SAML:1.0:protocol
+  - type: XPathNamespace
+    fields:
+      prefix: dsig
+      URI: http://www.w3.org/2000/09/xmldsig#
+- type: XPath
+  fields:
+    name: First Signature in SAMLP Response (SAML 2.0)
+    xpath: //samlp:Response/dsig:Signature[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: dsig
+      URI: http://www.w3.org/2000/09/xmldsig#
+  - type: XPathNamespace
+    fields:
+      prefix: samlp
+      URI: urn:oasis:names:tc:SAML:2.0:protocol
+- type: XPath
+  fields:
+    name: All signatures
+    xpath: //dsig:Signature
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: dsig
+      URI: http://www.w3.org/2000/09/xmldsig#
+- type: XPath
+  fields:
+    name: First Signature in First SAML Assertion (SAML 1.1)
+    xpath: //saml:Assertion[1]/dsig:Signature[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: dsig
+      URI: http://www.w3.org/2000/09/xmldsig#
+  - type: XPathNamespace
+    fields:
+      prefix: saml
+      URI: urn:oasis:names:tc:SAML:1.0:assertion

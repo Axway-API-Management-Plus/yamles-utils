@@ -1,0 +1,15 @@
+---
+name: MethodNameResolver
+version: 0
+class: com.vordel.circuit.resolve.MethodNameFilter
+fields:
+  methodName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  methodNamespace:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'

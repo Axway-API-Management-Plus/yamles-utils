@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: NZQ3J63CWKJASC3ZNML3EXUCCW6KRYMH
+  type: schema
+  content: '{{file "NZQ3J63CWKJASC3ZNML3EXUCCW6KRYMH.xsd" "binary"}}'

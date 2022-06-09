@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Delete Application Developer
+  id: alert.appdev.delete
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Application Developer/Delete Application Developer

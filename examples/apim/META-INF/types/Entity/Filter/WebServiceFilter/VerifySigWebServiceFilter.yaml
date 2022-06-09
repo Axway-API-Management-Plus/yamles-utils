@@ -1,0 +1,16 @@
+---
+name: VerifySigWebServiceFilter
+version: 2
+class: com.vordel.circuit.websvc.VerifySigWebServiceFilter
+fields:
+  keyLocation:
+    type: '@LdapDirectory'
+    cardinality: '?'
+  verifyingCert:
+    type: '@Certificate'
+    cardinality: '?'
+  certAttribute:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1

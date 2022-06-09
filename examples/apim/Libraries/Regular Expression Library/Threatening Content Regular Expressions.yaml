@@ -1,0 +1,69 @@
+---
+type: ThreatContentRegularExpressionGroup
+fields:
+  name: Threatening Content Regular Expressions
+children:
+- type: RegularExpression
+  fields:
+    name: Server Side Include Insertion Attack
+    expression: (?i)<!--\s*#(include|exec|echo|config|printenv)\s+.*-->
+- type: RegularExpression
+  fields:
+    name: XPath (Abbreviated Syntax) Insertion Attack
+    expression: (/(@?[\w-_:\*]+(\[[^]]+\])*)?)+
+- type: RegularExpression
+  fields:
+    name: XPath (Expanded Syntax) Insertion Attack
+    expression: (?x)/?(ancestor(-or-self)?|descendant(-or-self)?|following(-sibling)?|preceding(-sibling)?|attribute|child|namespace|parent|self)::([\w-_:\*]+|comment\(\)|text\(\)|processing-instruction\(\)|node\(\))(\[[^]]+\])*(/(ancestor(-or-self)?|descendant(-or-self)?|following(-sibling)?|preceding(-sibling)?|attribute|child|namespace|parent|self)::([\w-_:\*]+|comment\(\)|text\(\)|processing-instruction\(\)|node\(\))(\[[^]]+\])*)*
+- type: RegularExpression
+  fields:
+    name: Content Longer Than 1024 Chars
+    expression: .{1024}
+- type: RegularExpression
+  fields:
+    name: SQL Delete Attack
+    expression: (?i)'[\s]*;[\s]*delete
+- type: RegularExpression
+  fields:
+    name: OR Attack
+    expression: (?i)'[\s]*or
+- type: RegularExpression
+  fields:
+    name: SQL Server Shutdown Attack
+    expression: (?i)'[\s]*;[\s]*shutdown[\s]*with[\s]*nowait
+- type: RegularExpression
+  fields:
+    name: Java Exception Information Leakage
+    expression: '^Exception in thread "[^"]*" [\w_](?:\.[\w_])*:'
+- type: RegularExpression
+  fields:
+    name: DOCTYPE DTD Reference
+    expression: (?i)<!DOCTYPE
+- type: RegularExpression
+  fields:
+    name: SQL Drop Table Attack
+    expression: (?i)'[\s]*;[\s]*drop[\s]*table
+- type: RegularExpression
+  fields:
+    name: ASCII Control Characters Except Line Feed and Carriage Return
+    expression: '[\x00-\x1F\x7F&&[^\x0A]&&[^\x0D]]'
+- type: RegularExpression
+  fields:
+    name: ASCII Control Character
+    expression: '[\x00-\x1F\x7f]'
+- type: RegularExpression
+  fields:
+    name: SQL Update Attack
+    expression: (?i)'[\s]*;[\s]*update
+- type: RegularExpression
+  fields:
+    name: JavaScript Insertion Attack
+    expression: (?i)<\s*script\b[^>]*>[^<]+<\s*/\s*script\s*>
+- type: RegularExpression
+  fields:
+    name: SQL Insert Attack
+    expression: (?i)'[\s]*;[\s]*insert
+- type: RegularExpression
+  fields:
+    name: XML Processing Instruction
+    expression: <\?(xml-stylesheet|nameprocessor)

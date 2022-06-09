@@ -1,0 +1,4 @@
+---
+type: RealtimeMonitoring
+fields:
+  name: Monitoring Configuration

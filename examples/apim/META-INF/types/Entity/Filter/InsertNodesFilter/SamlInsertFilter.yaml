@@ -1,0 +1,113 @@
+---
+name: SamlInsertFilter
+version: 13
+fields:
+  wsVersion:
+    type: string
+    defaultValues:
+    - data: 1.1
+    cardinality: 1
+  lifeTime:
+    type: long
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  driftTime:
+    type: long
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  samlVersion:
+    type: integer
+    defaultValues:
+    - data: 11
+    cardinality: 1
+  issuerName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  securityTokenType:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  subjectConfirmationMethod:
+    type: string
+    defaultValues:
+    - data: Sender Vouches
+    cardinality: 1
+  readableFormat:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  addAttributeStatement:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  layoutType:
+    type: string
+    defaultValues:
+    - data: Lax
+    cardinality: 1
+  keyType:
+    type: string
+    defaultValues:
+    - data: none
+    cardinality: 1
+  subjectConfirmationKeyType:
+    type: string
+    defaultValues:
+    - data: certificateInStore
+    cardinality: 1
+  subjectConfirmationCert:
+    type: '@Certificate'
+    cardinality: '?'
+  subjectConfirmationCertAttribute:
+    type: string
+    defaultValues:
+    - data: ${certificate}
+    cardinality: '?'
+  symmetricSigningKeyType:
+    type: string
+    defaultValues:
+    - data: generated
+    cardinality: 1
+  generatedSymmetricKeyAttribute:
+    type: string
+    defaultValues:
+    - data: symmetric.key
+    cardinality: '?'
+  symmetricKeyAttribute:
+    type: string
+    defaultValues:
+    - data: ${symmetric.key}
+    cardinality: '?'
+  symmetricKeyEncryptionKeyType:
+    type: string
+    defaultValues:
+    - data: certificateInStore
+    cardinality: 1
+  symmetricKeyEncryptionCert:
+    type: '@Certificate'
+    cardinality: '?'
+  symmetricKeyEncryptionCertAttribute:
+    type: string
+    defaultValues:
+    - data: ${certificate}
+    cardinality: '?'
+  hmacSymmetricKeyLen:
+    type: integer
+    defaultValues:
+    - data: 256
+    cardinality: 1
+  keyWrapAlgorithm:
+    type: string
+    defaultValues:
+    - data: http://www.w3.org/2001/04/xmlenc#rsa-1_5
+    cardinality: 1
+components:
+  KeyInfoFormat: 1
+abstract: true

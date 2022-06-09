@@ -1,0 +1,10 @@
+---
+type: AuthnRepositoryPassPortGroup
+fields:
+  allowedFilter:
+  - HttpBasicFilter
+  - WsBasicFilter
+  - WsUsernameFilter
+  - AttributeAuthnFilter
+  - FormAuthnFilter
+  name: Axway PassPort Repositories

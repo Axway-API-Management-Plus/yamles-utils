@@ -1,0 +1,28 @@
+---
+name: ClearTrustAuthZFilter
+version: 1
+class: com.vordel.circuit.cleartrust.ClearTrustAuthZFilter
+fields:
+  connSet:
+    type: '@ConnectionSet'
+    cardinality: 1
+  serverType:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  serverResource:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  resourcePath:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authorization
+    cardinality: 1

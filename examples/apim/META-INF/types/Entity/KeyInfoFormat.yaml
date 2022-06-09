@@ -1,0 +1,61 @@
+---
+name: KeyInfoFormat
+version: 3
+fields:
+  id:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  certLocation:
+    type: integer
+    defaultValues:
+    - data: 2
+    cardinality: 1
+  publicKeyInfoMask:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: '?'
+  keyNameValue:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  keyNameType:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: '?'
+  certAttachmentId:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  valueType:
+    type: string
+    defaultValues:
+    - data: http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3
+    cardinality: '?'
+  strType:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  sctType:
+    type: string
+    defaultValues:
+    - data: attached
+    cardinality: '?'
+  includeTokenType:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  includeCertificateInBST:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+keyFields:
+- id

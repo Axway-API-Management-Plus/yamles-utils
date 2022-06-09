@@ -1,0 +1,8 @@
+---
+name: DatabaseLogger
+version: 1
+class: com.vordel.log.database.DatabaseLogger
+fields:
+  connection:
+    type: '@DbConnection'
+    cardinality: 1

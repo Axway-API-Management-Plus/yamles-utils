@@ -1,0 +1,7 @@
+---
+type: KPSCassandraDataSource
+fields:
+  name: Cassandra Storage
+  description: Cassandra Storage
+  readConsistencyLevel: '{{Environment_Configuration.Key_Property_Stores.API_Portal.Data_Sources.Cassandra_Storage.readConsistencyLevel}}'
+  writeConsistencyLevel: '{{Environment_Configuration.Key_Property_Stores.API_Portal.Data_Sources.Cassandra_Storage.writeConsistencyLevel}}'

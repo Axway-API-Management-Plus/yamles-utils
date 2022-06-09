@@ -1,0 +1,8 @@
+---
+operator:
+  name: "Olivia"
+backends:
+  - name: "be1"
+    url: "https://be1.acme.com"
+  - name: "be2"
+    url: "https://be1.acme.com"

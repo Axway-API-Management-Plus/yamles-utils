@@ -1,0 +1,5 @@
+---
+name: UrlSetXkmsGroup
+version: 0
+components:
+  UrlSet: '*'

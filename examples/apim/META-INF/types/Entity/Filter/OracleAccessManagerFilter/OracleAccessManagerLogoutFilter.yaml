@@ -1,0 +1,10 @@
+---
+name: OracleAccessManagerLogoutFilter
+version: 2
+class: com.vordel.circuit.oracle.AccessManagerLogoutFilter
+fields:
+  installDir:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'

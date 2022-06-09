@@ -1,0 +1,7 @@
+---
+name: WebServiceRepository
+version: 1
+class: com.vordel.ws.WebServiceRepository
+components:
+  WebServiceGroup: '*'
+loadorder: 1

@@ -1,0 +1,124 @@
+---
+name: DirectoryScanner
+version: 7
+class: com.vordel.dwe.dirscan.DirectoryScanner
+constants:
+  descriptorClass:
+    type: string
+    value: com.vordel.client.manager.filter.dirscan.DirScannerTransportDescriptor
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  pollRateMs:
+    type: integer
+    defaultValues:
+    - data: 60000
+    cardinality: 1
+  inDir:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  inMatchType:
+    type: string
+    defaultValues:
+    - data: EXTENSION
+    cardinality: 1
+  inPattern:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  inPatternName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  inPatternExtension:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  sortFiles:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  sortType:
+    type: string
+    defaultValues:
+    - data: NAME
+    cardinality: 1
+  sortDirection:
+    type: string
+    defaultValues:
+    - data: ASCENDING
+    cardinality: 1
+  processFiles:
+    type: string
+    defaultValues:
+    - data: PARALLEL
+    cardinality: 1
+  inMaxSimultaneousFileProcessings:
+    type: integer
+    defaultValues:
+    - data: 10
+    cardinality: 1
+  inRestrictMaxFilesToProcess:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  inMaxFilesToProcess:
+    type: integer
+    defaultValues:
+    - data: 1000
+    cardinality: 1
+  workDir:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  outDir:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  inFileType:
+    type: string
+    defaultValues:
+    - data: RAWFILE
+    cardinality: 1
+  inFileContentType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  filterCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+  completionType:
+    type: string
+    defaultValues:
+    - data: NOTHING
+    cardinality: 1
+  completeDir:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  outPrefix:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  outSuffix:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- name

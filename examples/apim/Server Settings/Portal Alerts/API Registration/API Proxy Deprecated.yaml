@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: API Proxy Deprecated
+  id: alert.apiproxy.deprecate
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/API Registration/API Proxy Deprecated

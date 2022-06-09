@@ -1,0 +1,11 @@
+---
+type: AuthzCodeStoreGroup
+fields:
+  name: Authorization Code Stores
+children:
+- type: AuthzCodePersist
+  fields:
+    name: Authz Code Store
+    type: 3
+    cache: /null
+    database: /null

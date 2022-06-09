@@ -1,0 +1,7 @@
+---
+name: PortableCircuitReference
+version: 0
+fields:
+  circuitPK:
+    type: '@FilterCircuit'
+    cardinality: '?'

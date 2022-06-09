@@ -1,0 +1,7 @@
+---
+name: GSSInitiators
+version: 2
+class: com.vordel.circuit.gss.GssInitiators
+components:
+  GSSInitiator: '?'
+loadorder: 500

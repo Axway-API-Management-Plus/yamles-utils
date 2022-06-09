@@ -1,0 +1,49 @@
+---
+name: Websocket
+version: 2
+class: com.vordel.dwe.http.WebsocketPlugin
+fields:
+  contentType:
+    type: string
+    defaultValues:
+    - data: application/json
+    cardinality: 1
+  expirationTime:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  incomingPolicy:
+    type: '@FilterCircuit'
+    cardinality: '?'
+  evaluate_incoming:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  outgoingPolicy:
+    type: '@FilterCircuit'
+    cardinality: '?'
+  evaluate_outgoing:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  on_upgrade_policy:
+    type: '@FilterCircuit'
+    cardinality: 1
+  evaluate_on_upgrade:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  on_close_policy:
+    type: '@FilterCircuit'
+    cardinality: '?'
+  evaluate_on_close:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+keyFields:
+- on_upgrade_policy

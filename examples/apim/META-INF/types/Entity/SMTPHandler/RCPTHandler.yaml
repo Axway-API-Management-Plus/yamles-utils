@@ -1,0 +1,11 @@
+---
+name: RCPTHandler
+version: 1
+class: com.vordel.dwe.smtp.RCPTPlugin
+fields:
+  toAddress:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+loadorder: 2000000

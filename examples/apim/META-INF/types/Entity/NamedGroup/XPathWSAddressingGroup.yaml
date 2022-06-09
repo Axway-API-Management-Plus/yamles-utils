@@ -1,0 +1,5 @@
+---
+name: XPathWSAddressingGroup
+version: 1
+components:
+  XPath: '*'

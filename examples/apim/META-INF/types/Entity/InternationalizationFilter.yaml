@@ -1,0 +1,26 @@
+---
+name: InternationalizationFilter
+version: 1
+fields:
+  type:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  logFatal:
+    type: string
+    defaultValues:
+    - data: Aborted filter
+    cardinality: 1
+  logFailure:
+    type: string
+    defaultValues:
+    - data: Failed filter
+    cardinality: 1
+  logSuccess:
+    type: string
+    defaultValues:
+    - data: Passed filter
+    cardinality: 1
+keyFields:
+- type

@@ -1,0 +1,5 @@
+---
+name: ApiKeySignerGroup
+version: 0
+components:
+  ApiKeySigner: '*'

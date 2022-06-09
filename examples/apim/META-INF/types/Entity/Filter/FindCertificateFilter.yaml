@@ -1,0 +1,23 @@
+---
+name: FindCertificateFilter
+version: 4
+class: com.vordel.circuit.cert.FindCertificateFilter
+fields:
+  certLocation:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  certDetails:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  certFromStore:
+    type: '@Certificate'
+    cardinality: '?'
+  attributeName:
+    type: string
+    defaultValues:
+    - data: certificate
+    cardinality: 1

@@ -1,0 +1,37 @@
+---
+name: VersionInfo
+version: 0
+fields:
+  ID:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  resourceID:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  comment:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  creator:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  timestamp:
+    type: long
+    defaultValues:
+    - {}
+    cardinality: 1
+  version:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- ID
+abstract: true

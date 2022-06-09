@@ -1,0 +1,26 @@
+---
+name: SiteMinderConnection
+version: 1
+fields:
+  agentName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  agentConfigObject:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  connectionInfo:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  type:
+    type: string
+    defaultValues:
+    - data: siteminder
+    cardinality: 1
+keyFields:
+- agentName

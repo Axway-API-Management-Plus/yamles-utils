@@ -1,0 +1,15 @@
+---
+name: AuthZUserFilter
+version: 3
+class: com.vordel.circuit.user.AuthZUserFilter
+fields:
+  user:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.id}
+    cardinality: 1
+  groupName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

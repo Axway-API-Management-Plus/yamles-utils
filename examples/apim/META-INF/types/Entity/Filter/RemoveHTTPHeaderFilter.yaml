@@ -1,0 +1,15 @@
+---
+name: RemoveHTTPHeaderFilter
+version: 0
+class: com.vordel.circuit.conversion.RemoveHTTPHeaderFilter
+fields:
+  headerName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  errorNoHeader:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1

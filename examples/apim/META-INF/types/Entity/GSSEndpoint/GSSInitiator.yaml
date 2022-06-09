@@ -1,0 +1,80 @@
+---
+name: GSSInitiator
+version: 3
+fields:
+  tgtLocation:
+    type: string
+    defaultValues:
+    - data: useJaas
+    cardinality: 1
+  jaasTgtLocation:
+    type: string
+    defaultValues:
+    - data: ticketFromKDC
+    cardinality: 1
+  loadViaKinit:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  tgtCache:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  requestAnonymity:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  requestConf:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  requestCredDeleg:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  requestInteg:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  requestMutualAuth:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  requestReplayDet:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  requestSequenceDet:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  replaySynchronization:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  replaySynchronizationPauseMillis:
+    type: integer
+    defaultValues:
+    - data: 15
+    cardinality: '?'
+  credentialDriftSecs:
+    type: integer
+    defaultValues:
+    - data: 300
+    cardinality: 1
+  impersonatedPrincipal:
+    type: '@GSSPrincipal'
+    cardinality: '?'
+  impersonatedSubjectCache:
+    type: '@Cache'
+    cardinality: '?'

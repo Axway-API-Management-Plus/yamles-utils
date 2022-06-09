@@ -1,0 +1,5 @@
+---
+name: ApiConnectorGroup
+version: 0
+components:
+  ApiConnector: '*'

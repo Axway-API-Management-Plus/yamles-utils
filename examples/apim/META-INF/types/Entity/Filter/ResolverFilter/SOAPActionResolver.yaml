@@ -1,0 +1,10 @@
+---
+name: SOAPActionResolver
+version: 0
+class: com.vordel.circuit.resolve.SOAPActionResolver
+fields:
+  action:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

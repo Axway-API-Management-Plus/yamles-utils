@@ -1,0 +1,10 @@
+---
+name: RbacFilter
+version: 0
+class: com.vordel.circuit.rbac.RbacFilter
+fields:
+  roleMessageAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

@@ -1,0 +1,4 @@
+---
+name: SystemConsoleLogger
+version: 0
+class: com.vordel.log.console.ConsoleLogger

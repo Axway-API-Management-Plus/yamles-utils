@@ -1,0 +1,4 @@
+---
+type: RegistryConnectionGroup
+fields:
+  name: Registry Connections

@@ -1,0 +1,26 @@
+---
+name: CircuitReference
+version: 2
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  priority:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+  circuitPK:
+    type: '@FilterCircuit'
+    cardinality: '?'
+  evaluate:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+components:
+  Property: '*'
+keyFields:
+- name

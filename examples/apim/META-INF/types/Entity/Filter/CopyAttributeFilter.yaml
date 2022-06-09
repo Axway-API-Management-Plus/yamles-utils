@@ -1,0 +1,6 @@
+---
+name: CopyAttributeFilter
+version: 1
+class: com.vordel.circuit.attribute.CopyAttributeFilter
+components:
+  CopyAttribute: +

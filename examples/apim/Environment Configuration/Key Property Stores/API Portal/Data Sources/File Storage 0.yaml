@@ -1,0 +1,6 @@
+---
+type: KPSFileDataSource
+fields:
+  directory: ${VDISTDIR}\samples\oauth\appregistry
+  name: File Storage 0
+  description: File Storage 0

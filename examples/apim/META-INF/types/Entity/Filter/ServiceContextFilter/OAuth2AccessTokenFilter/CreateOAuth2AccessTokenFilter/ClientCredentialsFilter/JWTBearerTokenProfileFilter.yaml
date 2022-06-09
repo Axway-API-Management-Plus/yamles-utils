@@ -1,0 +1,15 @@
+---
+name: JWTBearerTokenProfileFilter
+version: 4
+class: com.vordel.circuit.oauth.provider.grants.JWTBearerTokenProfileFilter
+fields:
+  requiredAudience:
+    type: string
+    defaultValues:
+    - data: http://apiserver/api/oauth/token
+    cardinality: 1
+  clockSkewInSeconds:
+    type: long
+    defaultValues:
+    - data: 0
+    cardinality: 1

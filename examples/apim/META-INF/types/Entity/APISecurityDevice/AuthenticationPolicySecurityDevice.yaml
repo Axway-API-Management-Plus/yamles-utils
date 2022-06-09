@@ -1,0 +1,4 @@
+---
+name: AuthenticationPolicySecurityDevice
+version: 1
+class: com.vordel.apiportal.runtime.AuthenticationPolicySecurityDevice

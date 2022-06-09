@@ -1,0 +1,30 @@
+---
+name: TraceFilter
+version: 3
+class: com.vordel.circuit.basic.TraceFilter
+fields:
+  traceMsg:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  traceLevel:
+    type: integer
+    defaultValues:
+    - data: 5
+    cardinality: 1
+  traceAttributes:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  traceBody:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  doIndent:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1

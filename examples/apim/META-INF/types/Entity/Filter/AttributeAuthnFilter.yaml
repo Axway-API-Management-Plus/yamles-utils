@@ -1,0 +1,28 @@
+---
+name: AttributeAuthnFilter
+version: 2
+class: com.vordel.circuit.authn.AttributeAuthnFilter
+fields:
+  username:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.id}
+    cardinality: 1
+  password:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.password}
+    cardinality: 1
+  credentialFormat:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  repository:
+    type: '@AuthnRepositoryBase'
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authentication
+    cardinality: 1

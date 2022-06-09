@@ -1,0 +1,10 @@
+---
+name: SetResponseStatusFilter
+version: 0
+class: com.vordel.circuit.basic.SetResponseStatusFilter
+fields:
+  responseStatus:
+    type: integer
+    defaultValues:
+    - data: 2
+    cardinality: 1

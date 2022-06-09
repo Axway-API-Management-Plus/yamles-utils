@@ -1,0 +1,43 @@
+---
+type: User
+fields:
+  password: Y2hhbmdlbWU=
+  certificate: /null
+  name: regadmin
+children:
+- type: IdentityAttribute
+  fields:
+    name: gender
+    value: male
+- type: IdentityAttribute
+  fields:
+    name: role
+    value: admin
+- type: IdentityAttribute
+  fields:
+    name: given_name
+    value: Reg
+- type: IdentityAttribute
+  fields:
+    name: family_name
+    value: Admin
+- type: IdentityAttribute
+  fields:
+    name: email_verified
+    value: "true"
+- type: IdentityAttribute
+  fields:
+    name: picture
+    value: /xlib/images/regadmin.png
+- type: IdentityAttribute
+  fields:
+    name: locale
+    value: en
+- type: IdentityAttribute
+  fields:
+    name: hd
+    value: apigateway.sample
+- type: IdentityAttribute
+  fields:
+    name: email
+    value: regadmin@apigateway.sample

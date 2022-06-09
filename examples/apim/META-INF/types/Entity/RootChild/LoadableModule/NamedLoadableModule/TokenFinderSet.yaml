@@ -1,0 +1,6 @@
+---
+name: TokenFinderSet
+version: 3
+class: com.vordel.security.finder.TokenFinderFactory
+components:
+  TokenFinder: '*'

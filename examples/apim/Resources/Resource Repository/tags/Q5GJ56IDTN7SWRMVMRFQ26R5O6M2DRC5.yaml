@@ -1,0 +1,9 @@
+---
+type: ResourceTag
+fields:
+  ID: Q5GJ56IDTN7SWRMVMRFQ26R5O6M2DRC5
+  resourceID: FREXFNXU5IJHAOOXAD5SWL5GG2GHSD6W
+  comment: WS-I BP 1.1 compliant schema for the SOAP/1.1 envelope
+  creator: catalog
+  timestamp: 1391440896249
+  version: 1

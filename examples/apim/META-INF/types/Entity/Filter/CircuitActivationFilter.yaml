@@ -1,0 +1,32 @@
+---
+name: CircuitActivationFilter
+version: 6
+class: com.vordel.circuit.CircuitActivationFilter
+fields:
+  circuitPK:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  solutionpack:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  recordOutboundTxns:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordCircuitPath:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  tracelevel:
+    type: string
+    defaultValues:
+    - data: INFO
+    cardinality: 1
+components:
+  InputPropertyDefinition: '*'

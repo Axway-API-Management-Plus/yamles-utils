@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Approve Application Developer Registration
+  id: alert.appdev.register
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Application Developer/Approve Application Developer Registration

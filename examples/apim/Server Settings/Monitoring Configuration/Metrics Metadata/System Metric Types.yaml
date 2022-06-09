@@ -1,0 +1,196 @@
+---
+type: MetricTypes
+fields:
+  name: System Metric Types
+children:
+- type: MetricTypeValue
+  fields:
+    name: systemMemoryTotal
+    resetOnNewTimeWindow: false
+- type: MetricTypeValue
+  fields:
+    name: numReportedUps
+- type: MetricTypeValue
+  fields:
+    name: failures
+- type: MetricTypeRangeCount
+  fields:
+    name: respTimeRange
+    minName: respTimeMin
+    maxName: respTimeMax
+    averageName: respTimeAvg
+    trackCurrentValue: false
+  children:
+  - type: MetricRange
+    fields:
+      name: respTimeRange7
+      order: 8
+      value: 30000
+      operator: <
+  - type: MetricRange
+    fields:
+      name: respTimeRange4
+      order: 5
+      value: 3000
+      operator: <
+  - type: MetricRange
+    fields:
+      name: respTimeRange9
+      order: 10
+      value: 60000
+      operator: '>='
+  - type: MetricRange
+    fields:
+      name: respTimeRange10
+      order: 3
+      value: 500
+      operator: <
+  - type: MetricRange
+    fields:
+      name: respTimeRange1
+      order: 1
+      value: 10
+      operator: <
+  - type: MetricRange
+    fields:
+      name: respTimeRange5
+      order: 6
+      value: 6000
+      operator: <
+  - type: MetricRange
+    fields:
+      name: respTimeRange3
+      order: 4
+      value: 1000
+      operator: <
+  - type: MetricRange
+    fields:
+      name: respTimeRange8
+      order: 9
+      value: 60000
+      operator: <
+  - type: MetricRange
+    fields:
+      name: respTimeRange6
+      order: 7
+      value: 10000
+      operator: <
+  - type: MetricRange
+    fields:
+      name: respTimeRange2
+      order: 2
+      value: 100
+      operator: <
+- type: MetricTypeValue
+  fields:
+    name: numTimeouts
+- type: MetricTypeRangeCount
+  fields:
+    name: respStatRange
+    trackCurrentValue: false
+  children:
+  - type: MetricRange
+    fields:
+      name: respStatRange3
+      order: 3
+      value: 400
+      operator: <
+  - type: MetricRange
+    fields:
+      name: respStatRange5
+      order: 5
+      value: 600
+      operator: <
+  - type: MetricRange
+    fields:
+      name: respStatRange2
+      order: 2
+      value: 300
+      operator: <
+  - type: MetricRange
+    fields:
+      name: respStatRange1
+      order: 1
+      value: 200
+      operator: <
+  - type: MetricRange
+    fields:
+      name: respStatRange4
+      order: 4
+      value: 500
+      operator: <
+- type: MetricTypeValue
+  fields:
+    name: numMessages
+- type: MetricTypeValue
+  fields:
+    name: processingTime
+    minName: processingTimeMin
+    maxName: processingTimeMax
+    averageName: processingTimeAvg
+    trackCurrentValue: false
+- type: MetricTypeValue
+  fields:
+    name: systemCpu
+    minName: systemCpuMin
+    maxName: systemCpuMax
+    averageName: systemCpuAvg
+    trackCurrentValue: false
+    resetOnNewTimeWindow: false
+- type: MetricTypeValue
+  fields:
+    name: successes
+- type: MetricTypeValue
+  fields:
+    name: exceptions
+- type: MetricTypeValue
+  fields:
+    name: numReportedDowns
+- type: MetricTypeValue
+  fields:
+    name: memoryUsed
+    minName: memoryUsedMin
+    maxName: memoryUsedMax
+    averageName: memoryUsedAvg
+    trackCurrentValue: false
+    resetOnNewTimeWindow: false
+- type: MetricTypeValue
+  fields:
+    name: volumeBytesOut
+- type: MetricTypeValue
+  fields:
+    name: diskUsedPercent
+    resetOnNewTimeWindow: false
+- type: MetricTypeValue
+  fields:
+    name: numSLABreaches
+- type: MetricTypeValue
+  fields:
+    name: responseTime
+    minName: reponseTimeMin
+    maxName: reponseTimeMax
+    averageName: reponseTimeAvg
+    trackCurrentValue: false
+- type: MetricTypeValue
+  fields:
+    name: systemMemoryUsed
+    resetOnNewTimeWindow: false
+- type: MetricTypeValue
+  fields:
+    name: numTransactions
+- type: MetricTypeValue
+  fields:
+    name: volumeBytesIn
+- type: MetricTypeValue
+  fields:
+    name: numAlerts
+- type: MetricTypeValue
+  fields:
+    name: active
+- type: MetricTypeValue
+  fields:
+    name: cpuUsed
+    minName: cpuUsedMin
+    maxName: cpuUsedMax
+    averageName: cpuUsedAvg
+    resetOnNewTimeWindow: false

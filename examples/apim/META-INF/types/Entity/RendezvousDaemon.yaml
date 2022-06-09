@@ -1,0 +1,26 @@
+---
+name: RendezvousDaemon
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  service:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  network:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  daemon:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+keyFields:
+- name

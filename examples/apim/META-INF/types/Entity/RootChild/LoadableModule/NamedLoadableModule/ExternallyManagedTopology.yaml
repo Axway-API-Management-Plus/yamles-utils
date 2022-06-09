@@ -1,0 +1,11 @@
+---
+name: ExternallyManagedTopology
+version: 0
+class: com.vordel.emt.ExternallyManagedTopology
+fields:
+  mgmtPort:
+    type: string
+    defaultValues:
+    - data: ${env.PORT.MANAGEMENT}
+    cardinality: 1
+loadorder: 1000000

@@ -1,0 +1,30 @@
+---
+name: AttributeExtractHTTPHeaderFilter
+version: 0
+class: com.vordel.circuit.attribute.AttributeExtractHTTPHeaderFilter
+fields:
+  headerName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  attributeName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  base64Decode:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  useQueryParameter:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)attribute
+    cardinality: 1

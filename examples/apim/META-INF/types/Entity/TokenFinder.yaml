@@ -1,0 +1,16 @@
+---
+name: TokenFinder
+version: 2
+fields:
+  valueType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  finderClass:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: +
+keyFields:
+- valueType

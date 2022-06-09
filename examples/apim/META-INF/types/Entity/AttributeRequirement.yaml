@@ -1,0 +1,13 @@
+---
+name: AttributeRequirement
+version: 0
+fields:
+  requirement:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  AttributeNamespace: '*'
+keyFields:
+- requirement

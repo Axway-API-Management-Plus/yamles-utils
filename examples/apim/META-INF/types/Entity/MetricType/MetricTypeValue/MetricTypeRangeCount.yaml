@@ -1,0 +1,5 @@
+---
+name: MetricTypeRangeCount
+version: 1
+components:
+  MetricRange: +

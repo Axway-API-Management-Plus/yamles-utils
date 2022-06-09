@@ -1,0 +1,36 @@
+---
+name: SendToS3BucketFilter
+version: 2
+class: com.vordel.circuit.aws.s3.SendToS3BucketFilter
+fields:
+  createBucket:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  s3Bucket:
+    type: string
+    defaultValues:
+    - data: gateway-bucket
+    cardinality: 1
+  s3Key:
+    type: string
+    defaultValues:
+    - data: ${id}
+    cardinality: 1
+  awsCredential:
+    type: '@ApiKeyProfile'
+    cardinality: 1
+  region:
+    type: string
+    defaultValues:
+    - data: us-west-1
+    cardinality: 1
+  encryptionKey:
+    type: '@Certificate'
+    cardinality: '*'
+  storageClass:
+    type: string
+    defaultValues:
+    - data: STANDARD
+    cardinality: 1

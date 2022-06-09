@@ -1,0 +1,33 @@
+---
+name: SMIMEEncryptFilter
+version: 4
+class: com.vordel.circuit.smime.EncryptionFilter
+fields:
+  cipher:
+    type: string
+    defaultValues:
+    - data: DES-EDE3-CBC
+    cardinality: 1
+  certLocation:
+    type: string
+    defaultValues:
+    - data: userSelected
+    cardinality: 1
+  recipients:
+    type: '@Certificate'
+    cardinality: '*'
+  certAttribute:
+    type: string
+    defaultValues:
+    - data: ${certificate}
+    cardinality: 1
+  contentType:
+    type: string
+    defaultValues:
+    - data: application/pkcs7-mime
+    cardinality: 1
+  transferEncoding:
+    type: string
+    defaultValues:
+    - data: raw
+    cardinality: 1

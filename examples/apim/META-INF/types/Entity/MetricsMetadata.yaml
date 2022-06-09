@@ -1,0 +1,14 @@
+---
+name: MetricsMetadata
+version: 3
+fields:
+  name:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+components:
+  MetricGroupTypes: '*'
+  MetricTypes: '*'
+keyFields:
+- name

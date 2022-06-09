@@ -1,0 +1,27 @@
+---
+name: XACMLAttribute
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  value:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: +
+  type:
+    type: string
+    defaultValues:
+    - data: http://www.w3.org/2001/XMLSchema#string
+    cardinality: 1
+  issuer:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+keyFields:
+- name
+abstract: true

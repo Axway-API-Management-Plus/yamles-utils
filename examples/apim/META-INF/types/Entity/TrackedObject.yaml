@@ -1,0 +1,17 @@
+---
+name: TrackedObject
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - data: XFBTRANSFER
+    cardinality: 1
+  version:
+    type: string
+    defaultValues:
+    - data: 3.3
+    cardinality: 1
+keyFields:
+- name
+- version

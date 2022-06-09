@@ -1,0 +1,14 @@
+---
+name: ParserFeatureGroup
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  XercesFeatureGroup: 1
+  LibxmlFeatureGroup: '?'
+keyFields:
+- name

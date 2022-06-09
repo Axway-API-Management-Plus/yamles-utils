@@ -1,0 +1,7 @@
+---
+name: CacheManager
+version: 2
+class: com.vordel.circuit.cache.CacheContainer
+components:
+  Cache: '*'
+loadorder: 1

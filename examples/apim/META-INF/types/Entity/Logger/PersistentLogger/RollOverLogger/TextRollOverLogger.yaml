@@ -1,0 +1,30 @@
+---
+name: TextRollOverLogger
+version: 3
+class: com.vordel.log.rolloverfile.TextRollOverLogger
+fields:
+  logFileNameExtension:
+    type: string
+    defaultValues:
+    - data: .log
+    cardinality: 1
+  format:
+    type: string
+    defaultValues:
+    - data: ${level} ${timestamp} ${id} '${text}' ${filterType} ${filterName}
+    cardinality: 1
+  rollOverDaily:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  maxFiles:
+    type: integer
+    defaultValues:
+    - data: 20
+    cardinality: 1
+  directoryName:
+    type: string
+    defaultValues:
+    - data: logs/transaction
+    cardinality: 1

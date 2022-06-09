@@ -1,0 +1,65 @@
+---
+type: KPSType
+fields:
+  name: AppDetails
+  description: ApplicationDetails
+children:
+- type: KPSTypeProperty
+  fields:
+    name: clientType
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: scopes
+    type: java.util.List
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: contactEmail
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: clientSecret
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: redirectURLs
+    type: java.util.List
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: description
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: base64EncodedCert
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: name
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: enabled
+    type: java.lang.Boolean
+- type: KPSTypeProperty
+  fields:
+    name: contactPhone
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: apiKeyIDs
+    type: java.util.List
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: website
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: logo
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: clientID
+    type: java.lang.String

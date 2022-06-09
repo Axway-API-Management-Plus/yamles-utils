@@ -1,0 +1,18 @@
+---
+name: HTTP
+version: 6
+class: com.vordel.dwe.http.HTTP
+fields:
+  name:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  corsProfile:
+    type: '@CORS'
+    cardinality: '?'
+components:
+  URIHandler: '?'
+  VirtualHost: '?'
+keyFields:
+- name

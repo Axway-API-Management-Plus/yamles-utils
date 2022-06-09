@@ -1,0 +1,17 @@
+---
+type: JavaInterfaceProviders
+fields:
+  name: Preferred Java Interface Providers
+children:
+- type: JavaClass
+  fields:
+    class: com.vordel.mime.Multipart
+- type: JavaClass
+  fields:
+    class: com.vordel.mime.XMLBody
+- type: JavaClass
+  fields:
+    class: com.vordel.common.regex.JDKRegularExpr
+- type: JavaClass
+  fields:
+    class: com.vordel.mime.RawBody

@@ -1,0 +1,41 @@
+---
+name: CORS
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - data: Cross Origin Resource Sharing
+    cardinality: 1
+  enabled:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  origins:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  allowedHeaders:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  exposedHeaders:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  supportCredentials:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  maxAge:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+keyFields:
+- name

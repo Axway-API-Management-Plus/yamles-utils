@@ -1,0 +1,15 @@
+---
+name: StdAPISecurityDevice
+version: 1
+class: com.vordel.apiportal.runtime.StdAPISecurityDevice
+fields:
+  credentialLocation:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  credentialType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

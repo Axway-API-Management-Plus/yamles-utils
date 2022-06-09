@@ -1,0 +1,25 @@
+---
+name: OAuthBaseAuthorizationFilter
+version: 3
+fields:
+  authzCodeLength:
+    type: integer
+    defaultValues:
+    - data: 30
+    cardinality: 1
+  authzCodeExpiresInSecs:
+    type: long
+    defaultValues:
+    - data: 600
+    cardinality: 1
+  authzCodeCache:
+    type: '@AuthzCodePersist'
+    cardinality: 1
+  accessCodeTemplateLocation:
+    type: string
+    defaultValues:
+    - data: ${environment.VDISTDIR}/samples/oauth/templates/showAccessCode.html
+    cardinality: 1
+components:
+  AdditionalCodeInfo: '*'
+abstract: true

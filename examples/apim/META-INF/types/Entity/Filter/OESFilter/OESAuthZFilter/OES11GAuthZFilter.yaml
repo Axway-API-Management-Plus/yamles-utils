@@ -1,0 +1,4 @@
+---
+name: OES11GAuthZFilter
+version: 0
+class: com.vordel.circuit.oracle.oeseleveng.OES11GAuthZFilter

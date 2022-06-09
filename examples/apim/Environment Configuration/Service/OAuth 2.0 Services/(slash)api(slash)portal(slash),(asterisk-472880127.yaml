@@ -1,0 +1,47 @@
+---
+type: ServletApplication
+fields:
+  uriprefix: /api/portal/
+children:
+- type: Servlet
+  fields:
+    uri: v1.2
+    class: org.glassfish.jersey.servlet.ServletContainer
+    name: API Server
+  children:
+  - type: Property
+    fields:
+      name: jersey.config.server.provider.classnames
+      value: org.glassfish.jersey.media.multipart.MultiPartFeature,com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider,com.vordel.common.apiserver.filter.CsrfBindingFeature,com.vordel.common.apiserver.filter.CacheControlBindingFeature,com.vordel.common.apiserver.filter.SecureHeadersBindingFeature
+  - type: Property
+    fields:
+      name: jersey.config.server.provider.packages
+      value: com.vordel.common.apiserver.rest
+- type: Servlet
+  fields:
+    uri: v1.3
+    class: org.glassfish.jersey.servlet.ServletContainer
+    name: API Server
+  children:
+  - type: Property
+    fields:
+      name: jersey.config.server.provider.packages
+      value: com.vordel.common.apiserver.rest
+  - type: Property
+    fields:
+      name: jersey.config.server.provider.classnames
+      value: org.glassfish.jersey.media.multipart.MultiPartFeature,com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider,com.vordel.common.apiserver.filter.CsrfBindingFeature,com.vordel.common.apiserver.filter.CacheControlBindingFeature,com.vordel.common.apiserver.filter.SecureHeadersBindingFeature
+- type: Servlet
+  fields:
+    uri: v1.4
+    class: org.glassfish.jersey.servlet.ServletContainer
+    name: API Server
+  children:
+  - type: Property
+    fields:
+      name: jersey.config.server.provider.classnames
+      value: org.glassfish.jersey.media.multipart.MultiPartFeature,com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider,com.vordel.common.apiserver.filter.CsrfBindingFeature,com.vordel.common.apiserver.filter.CacheControlBindingFeature,com.vordel.common.apiserver.filter.SecureHeadersBindingFeature
+  - type: Property
+    fields:
+      name: jersey.config.server.provider.packages
+      value: com.vordel.common.apiserver.rest

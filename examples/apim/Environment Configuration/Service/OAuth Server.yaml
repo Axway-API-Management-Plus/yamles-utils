@@ -1,0 +1,18 @@
+---
+type: RemoteHost
+fields:
+  alias: OAuth Server
+  name: ${env.OAUTH.SERVER}
+  port: ${env.PORT.OAUTH2.SERVICES}
+  allowHTTP11: true
+  includeContentLengthRequest: true
+  verifyServerHostname: false
+  offerTlsServerName: false
+children:
+- type: RoundRobinLbCfg
+  fields:
+    name: 4be6ffae-b902-4f7a-b16a-ea976f45b447
+- type: AddressRank
+  fields:
+    rank: 0
+    addresses: localhost:${env.PORT.OAUTH2.SERVICES}

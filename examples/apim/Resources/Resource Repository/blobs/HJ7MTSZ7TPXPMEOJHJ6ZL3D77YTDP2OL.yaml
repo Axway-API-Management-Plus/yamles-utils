@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: HJ7MTSZ7TPXPMEOJHJ6ZL3D77YTDP2OL
+  type: schema
+  content: '{{file "HJ7MTSZ7TPXPMEOJHJ6ZL3D77YTDP2OL.xsd" "binary"}}'

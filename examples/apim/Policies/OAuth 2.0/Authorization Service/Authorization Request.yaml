@@ -1,0 +1,46 @@
+---
+type: FilterCircuit
+fields:
+  start: ./OAuthAuthZ
+  name: Authorization Request
+  description: ""
+children:
+- type: OAuthAuthorizationRequestFilter
+  fields:
+    circuitPK: /null
+    resourceOwnerCookieName: RESOURCEOWNERCOOKIE
+    authzCodeExpiresInSecs: 20
+    authzCodeCache: /Libraries/OAuth2 Stores/Authorization Code Stores/Authz Code Store
+    scopeCircuitPK: /null
+    tokenStore: /Libraries/OAuth2 Stores/Access Token Stores/OAuth Access Token Store
+    metricsMask: 1
+    clientAttributeName: authentication.application.id
+    name: OAuthAuthZ
+  routing:
+    success: ../Create an Open ID Connect ID Token
+  logging:
+    maskType: FILTER
+    mask: 7
+  children:
+  - type: Cookie
+    fields:
+      cookieName: VIDTXN
+      cookiePath: /
+      cookieMaxAge: 600
+      cookieSecure: true
+      cookieHttpOnly: true
+- type: CreateIDTokenFilter
+  fields:
+    jwtSigner: /Environment Configuration/Certificate Store/CN=Change this for production
+    name: Create an Open ID Connect ID Token
+  routing:
+    success: ../Remove Cookie Header
+    failure: ../Remove Cookie Header
+- type: RemoveHTTPHeaderFilter
+  fields:
+    headerName: Cookie
+    name: Remove Cookie Header
+  logging:
+    fatal: 'Error in removing the HTTP header from the message. Error: ${circuit.exception}'
+    failure: Failed in removing the HTTP header from the message
+    success: Success in removing the HTTP header from the message

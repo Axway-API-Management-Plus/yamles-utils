@@ -1,0 +1,12 @@
+---
+name: OpsecAlertSystem
+version: 1
+class: com.vordel.alert.opsec.AlertOPSEC
+fields:
+  connectionInfo:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  UpLoadFile: '*'

@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Application Approved
+  id: alert.application.approve
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Application/Application Approved

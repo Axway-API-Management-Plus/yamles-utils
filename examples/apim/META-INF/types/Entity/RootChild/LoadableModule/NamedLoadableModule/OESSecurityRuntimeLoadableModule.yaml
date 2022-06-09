@@ -1,0 +1,33 @@
+---
+name: OESSecurityRuntimeLoadableModule
+version: 5
+class: com.vordel.circuit.oracle.oes.SecurityRuntimeLoadableModule
+fields:
+  enabled:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  appConfigName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  configId:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  domainName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  nameAuthorityDefinition:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  Property: '*'
+loadorder: 400

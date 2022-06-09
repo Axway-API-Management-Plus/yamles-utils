@@ -1,0 +1,28 @@
+= YAML EnityStore Utilities
+:Author: Martin Look
+:Email: mlook@axway.com
+:toc:
+ifndef::env-github[:icons: font]
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+:project-ver: 0.0.1
+
+== Introduction
+
+Some utilities to make live easier with YAML EnityStore.
+
+== Contributing
+Please read https://github.com/Axway-API-Management-Plus/Common/blob/master/Contributing.md[Contributing] for details on our code of conduct, and the process for submitting pull requests to us.
+
+== Team
+image:https://raw.githubusercontent.com/Axway-API-Management-Plus/Common/master/img/AxwayLogoSmall.png[Axway Logo] Axway Team
+
+== License
+link:./LICENSE[Apache License 2.0]

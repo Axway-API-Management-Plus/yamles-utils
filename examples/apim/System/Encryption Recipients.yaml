@@ -1,0 +1,8 @@
+---
+type: EncryptionRecipients
+fields:
+  name: Encryption Recipients
+children:
+- type: EncryptionRecipient
+  fields:
+    name: Default Recipient

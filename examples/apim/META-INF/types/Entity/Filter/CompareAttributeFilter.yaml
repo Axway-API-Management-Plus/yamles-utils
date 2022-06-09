@@ -1,0 +1,17 @@
+---
+name: CompareAttributeFilter
+version: 1
+class: com.vordel.circuit.attribute.CompareAttributeFilter
+fields:
+  matchingRule:
+    type: string
+    defaultValues:
+    - data: MATCH_ALL
+    cardinality: 1
+  negateOpOnNull:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+components:
+  AttributeCompare: '?'

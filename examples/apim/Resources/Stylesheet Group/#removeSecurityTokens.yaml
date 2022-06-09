@@ -1,0 +1,5 @@
+---
+type: Stylesheet
+fields:
+  URL: '#removeSecurityTokens'
+  contents: '{{file "#removeSecurityTokens.xsl" "binary"}}'

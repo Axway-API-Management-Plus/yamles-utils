@@ -1,0 +1,26 @@
+---
+name: MetricRange
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  order:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+  value:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+  operator:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- name

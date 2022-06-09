@@ -1,0 +1,4 @@
+---
+type: CacheManager
+fields:
+  name: Cache Manager

@@ -1,0 +1,13 @@
+---
+name: MetricGroupTypes
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+components:
+  MetricGroupType: '*'
+keyFields:
+- name

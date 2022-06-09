@@ -1,0 +1,8 @@
+---
+name: SyslogLogger
+version: 1
+class: com.vordel.log.syslog.SyslogLogger
+fields:
+  syslogServer:
+    type: '@SyslogServer'
+    cardinality: '?'

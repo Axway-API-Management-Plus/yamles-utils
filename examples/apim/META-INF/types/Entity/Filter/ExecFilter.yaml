@@ -1,0 +1,37 @@
+---
+name: ExecFilter
+version: 2
+class: com.vordel.circuit.exec.ExecFilter
+fields:
+  cmdLine:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  workingDirectory:
+    type: string
+    defaultValues:
+    - data: ${environment.VINSTDIR}
+    cardinality: 1
+  arguments:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  exitValue:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  timeout:
+    type: integer
+    defaultValues:
+    - data: 60000
+    cardinality: 1
+  block:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+components:
+  Property: '*'

@@ -1,0 +1,6 @@
+---
+name: ProtocolDelegateFilter
+version: 1
+class: com.vordel.circuit.net.ProtocolDelegateFilter
+components:
+  TransferAttribute: '*'

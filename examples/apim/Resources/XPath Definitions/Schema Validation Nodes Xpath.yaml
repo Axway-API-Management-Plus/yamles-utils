@@ -1,0 +1,27 @@
+---
+type: XPathSchemaValidationGroup
+fields:
+  name: Schema Validation Nodes Xpath
+children:
+- type: XPath
+  fields:
+    name: All Elements inside SOAP Body (SOAP 1.1 or SOAP 1.2)
+    xpath: /soap1.1:Envelope/soap1.1:Body/* | /soap1.2:Envelope/soap1.2:Body/*
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap1.2
+      URI: http://www.w3.org/2003/05/soap-envelope
+  - type: XPathNamespace
+    fields:
+      prefix: soap1.1
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: All Elements inside SOAP Body (SOAP 1.1)
+    xpath: /soap:Envelope/soap:Body/*
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/

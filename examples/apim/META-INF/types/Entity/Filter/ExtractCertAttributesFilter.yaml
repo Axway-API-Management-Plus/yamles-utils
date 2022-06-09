@@ -1,0 +1,15 @@
+---
+name: ExtractCertAttributesFilter
+version: 3
+class: com.vordel.circuit.cert.ExtractCertAttributesFilter
+fields:
+  certAttribute:
+    type: string
+    defaultValues:
+    - data: ${certificate}
+    cardinality: 1
+  extractDistributionPoints:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1

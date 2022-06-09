@@ -1,0 +1,16 @@
+---
+name: UpLoadFile
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  contents:
+    type: binary
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- name

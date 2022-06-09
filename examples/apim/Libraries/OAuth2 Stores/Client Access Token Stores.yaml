@@ -1,0 +1,4 @@
+---
+type: ClientAccessTokenStoreGroup
+fields:
+  name: Client Access Token Stores

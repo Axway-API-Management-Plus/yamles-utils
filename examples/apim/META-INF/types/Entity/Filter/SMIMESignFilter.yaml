@@ -1,0 +1,13 @@
+---
+name: SMIMESignFilter
+version: 1
+class: com.vordel.circuit.smime.SignFilter
+fields:
+  signatory:
+    type: '@Certificate'
+    cardinality: 1
+  detached:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1

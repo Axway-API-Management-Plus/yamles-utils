@@ -1,0 +1,16 @@
+---
+name: APIMethodErrorResponse
+version: 0
+fields:
+  responsecode:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+  reason:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- responsecode

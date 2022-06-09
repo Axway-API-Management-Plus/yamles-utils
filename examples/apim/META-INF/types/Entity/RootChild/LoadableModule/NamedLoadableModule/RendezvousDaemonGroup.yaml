@@ -1,0 +1,7 @@
+---
+name: RendezvousDaemonGroup
+version: 1
+class: com.vordel.circuit.tibco.RendezvousDaemonGroup
+components:
+  RendezvousDaemon: '*'
+loadorder: 500

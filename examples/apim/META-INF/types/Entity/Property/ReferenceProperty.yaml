@@ -1,0 +1,7 @@
+---
+name: ReferenceProperty
+version: 0
+fields:
+  value:
+    type: '@Entity'
+    cardinality: 1

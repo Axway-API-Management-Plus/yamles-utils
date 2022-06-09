@@ -1,0 +1,4 @@
+---
+type: RendezvousDaemonGroup
+fields:
+  name: Rendezvous Daemon Connections

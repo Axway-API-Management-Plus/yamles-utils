@@ -1,0 +1,32 @@
+---
+name: AttributeExtractLdapFilter
+version: 4
+class: com.vordel.circuit.attribute.AttributeExtractLdapFilter
+fields:
+  ldapDir:
+    type: '@LdapDirectory'
+    cardinality: 1
+  userIdentityAttribName:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.id}
+    cardinality: '?'
+  enablyLegacyAttrNaming:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  messageAttrPrefix:
+    type: string
+    defaultValues:
+    - data: user
+    cardinality: '?'
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)attribute
+    cardinality: 1
+components:
+  LdapSearchUniqueIdentity: '?'
+  LdapSearchAttributes: 1
+  LookupAttribute: '*'

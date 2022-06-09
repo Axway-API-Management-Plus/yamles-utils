@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Delete Application
+  id: alert.application.delete
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Application/Delete Application

@@ -1,0 +1,107 @@
+---
+type: XPathDecryptionGroup
+fields:
+  name: Decryption Xpath
+children:
+- type: XPath
+  fields:
+    name: All EncryptedData referred to in Reference List with actor "http://example.org/"
+    xpath: //enc:ReferenceList[parent::wsse-1:Security[@soap:actor='http://example.org/']] | //enc:ReferenceList[parent::wsse-2:Security[@soap:actor='http://example.org/']] | //enc:ReferenceList[parent::wsse-3:Security[@soap:actor='http://example.org/']] | //enc:ReferenceList[parent::wsse-4:Security[@soap:actor='http://example.org/']]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: wsse-1
+      URI: http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+  - type: XPathNamespace
+    fields:
+      prefix: enc
+      URI: http://www.w3.org/2001/04/xmlenc#
+  - type: XPathNamespace
+    fields:
+      prefix: wsse-3
+      URI: http://schemas.xmlsoap.org/ws/2002/12/secext
+  - type: XPathNamespace
+    fields:
+      prefix: wsse-4
+      URI: http://schemas.xmlsoap.org/ws/2002/07/secext
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+  - type: XPathNamespace
+    fields:
+      prefix: wsse-2
+      URI: http://schemas.xmlsoap.org/ws/2003/06/secext
+- type: XPath
+  fields:
+    name: All EncryptedData referred to in 1st Reference List
+    xpath: //soap:Header/*/enc:ReferenceList[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: enc
+      URI: http://www.w3.org/2001/04/xmlenc#
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: All EncryptedData referred to Reference List with no actor
+    xpath: //enc:ReferenceList[parent::wsse-1:Security[@soap:actor=false()]]  | //enc:ReferenceList[parent::wsse-2:Security[@soap:actor=false()]]  | //enc:ReferenceList[parent::wsse-3:Security[@soap:actor=false()]]  | //enc:ReferenceList[parent::wsse-4:Security[@soap:actor=false()]]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: wsse-4
+      URI: http://schemas.xmlsoap.org/ws/2002/07/secext
+  - type: XPathNamespace
+    fields:
+      prefix: wsse-1
+      URI: http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+  - type: XPathNamespace
+    fields:
+      prefix: enc
+      URI: http://www.w3.org/2001/04/xmlenc#
+  - type: XPathNamespace
+    fields:
+      prefix: wsse-2
+      URI: http://schemas.xmlsoap.org/ws/2003/06/secext
+  - type: XPathNamespace
+    fields:
+      prefix: wsse-3
+      URI: http://schemas.xmlsoap.org/ws/2002/12/secext
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: The 1st EncryptedKey
+    xpath: //enc:EncryptedKey[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: enc
+      URI: http://www.w3.org/2001/04/xmlenc#
+- type: XPath
+  fields:
+    name: The 1st EncryptedData
+    xpath: //enc:EncryptedData[1]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: enc
+      URI: http://www.w3.org/2001/04/xmlenc#
+- type: XPath
+  fields:
+    name: All EncryptedData inside SOAP body
+    xpath: /soap:Envelope/soap:Body/enc:EncryptedData
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+  - type: XPathNamespace
+    fields:
+      prefix: enc
+      URI: http://www.w3.org/2001/04/xmlenc#

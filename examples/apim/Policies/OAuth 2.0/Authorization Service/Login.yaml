@@ -1,0 +1,43 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Login via HTML Form
+  name: Login
+children:
+- type: RedirectFilter
+  fields:
+    url: ${http.client.getCgiArgument("continue")}
+    outputContentType: text/html
+    content: redirect
+    name: Redirect to OAuth Service
+- type: FormAuthnFilter
+  fields:
+    username: UserName
+    password: Passwd
+    credentialFormat: Username
+    repository: /External Connections/Authentication Repositories/Local Repositories/Local User Store
+    uriprefix: /api
+    domain: ""
+    onlySendOverSSL: true
+    httpOnly: true
+    cookie: RESOURCEOWNERCOOKIE
+    name: Login via HTML Form
+  routing:
+    success: ../Remove HTTP Header
+    failure: ../Login Failed
+- type: RedirectFilter
+  fields:
+    url: ${http.client.getCgiArgument("continue")}#error=loginfailed
+    outputContentType: text/html
+    content: redirect
+    name: Login Failed
+- type: RemoveHTTPHeaderFilter
+  fields:
+    headerName: Cookie
+    name: Remove HTTP Header
+  routing:
+    success: ../Redirect to OAuth Service
+  logging:
+    fatal: 'Error in removing the HTTP header from the message. Error: ${circuit.exception}'
+    failure: Failed in removing the HTTP header from the message
+    success: Success in removing the HTTP header from the message

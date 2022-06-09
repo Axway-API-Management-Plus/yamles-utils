@@ -1,0 +1,15 @@
+---
+name: WAFProfileGroup
+version: 0
+class: com.vordel.dwe.mod_security.WAFProfileGroup
+fields:
+  name:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+components:
+  WAFProfile: '*'
+keyFields:
+- name
+loadorder: 900000

@@ -1,0 +1,44 @@
+---
+name: TransportModule
+version: 4
+constants:
+  descriptorClass:
+    type: string
+    value: com.vordel.client.circuit.model.UndefinedTransportDescriptor
+fields:
+  opsSettingsUsage:
+    type: string
+    defaultValues:
+    - data: SYSTEM
+    cardinality: 1
+  recordInboundTxns:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordOutboundTxns:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordCircuitPath:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordTrace:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordSent:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordReceived:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+abstract: true

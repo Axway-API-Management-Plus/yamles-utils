@@ -1,0 +1,14 @@
+---
+name: JSONSchemaContainer
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  JSONSchema: '*'
+  JSONSchemaContainer: '*'
+keyFields:
+- name

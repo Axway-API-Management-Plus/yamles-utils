@@ -1,0 +1,42 @@
+---
+name: MetricType
+version: 3
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  description:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  minName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  maxName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  averageName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  trackCurrentValue:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  resetOnNewTimeWindow:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+keyFields:
+- name
+abstract: true

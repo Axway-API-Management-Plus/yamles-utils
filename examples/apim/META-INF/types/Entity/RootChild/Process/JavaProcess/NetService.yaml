@@ -1,0 +1,10 @@
+---
+name: NetService
+version: 5
+constants:
+  executableImage:
+    type: string
+    value: vshell
+components:
+  LoadableModule: '?'
+  ClassLoader: '?'

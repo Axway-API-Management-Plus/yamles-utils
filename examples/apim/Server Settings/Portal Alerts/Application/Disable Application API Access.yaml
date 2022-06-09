@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Disable Application API Access
+  id: alert.application.disableapi
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Application/Disable Application API Access

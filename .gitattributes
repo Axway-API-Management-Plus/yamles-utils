@@ -1,0 +1,2 @@
+examples/apim/** text eol=lf
+examples/*.cmd   text eol=crlf

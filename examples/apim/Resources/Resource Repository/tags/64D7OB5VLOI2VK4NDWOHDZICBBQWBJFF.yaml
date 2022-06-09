@@ -1,0 +1,9 @@
+---
+type: ResourceSetTag
+fields:
+  ID: 64D7OB5VLOI2VK4NDWOHDZICBBQWBJFF
+  resourceID: 6VSZCBAA3UWEZTSAYTFQC5MIZACDIIOG
+  comment: Schema for XML Signatures
+  creator: catalog
+  timestamp: 1380037389657
+  version: 1

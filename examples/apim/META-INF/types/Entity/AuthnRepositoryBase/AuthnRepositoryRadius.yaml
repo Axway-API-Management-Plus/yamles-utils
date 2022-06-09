@@ -1,0 +1,10 @@
+---
+name: AuthnRepositoryRadius
+version: 1
+class: com.vordel.security.auth.repository.RadiusRepository
+fields:
+  radiusClient:
+    type: '@RadiusClient'
+    cardinality: 1
+components:
+  Property: '*'

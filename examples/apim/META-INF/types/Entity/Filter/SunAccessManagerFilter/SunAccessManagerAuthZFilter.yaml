@@ -1,0 +1,20 @@
+---
+name: SunAccessManagerAuthZFilter
+version: 3
+class: com.vordel.circuit.sun.AccessManagerAuthZFilter
+fields:
+  serviceName:
+    type: string
+    defaultValues:
+    - data: iPlanetAMWebAgentService
+    cardinality: 1
+  resource:
+    type: string
+    defaultValues:
+    - data: http://www.yourserverhostnamehere.com${http.request.uri}
+    cardinality: 1
+  verb:
+    type: string
+    defaultValues:
+    - data: ${http.request.verb}
+    cardinality: 1

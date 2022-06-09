@@ -1,0 +1,35 @@
+---
+name: SaveToFileFilter
+version: 2
+class: com.vordel.circuit.file.SaveToFileFilter
+fields:
+  fileName:
+    type: string
+    defaultValues:
+    - data: ${id}.out
+    cardinality: 1
+  directory:
+    type: string
+    defaultValues:
+    - data: ${environment.VINSTDIR}/message-archive
+    cardinality: 1
+  maxFileSize:
+    type: integer
+    defaultValues:
+    - data: 1000
+    cardinality: 1
+  maxNumberFiles:
+    type: integer
+    defaultValues:
+    - data: 500
+    cardinality: 1
+  includeHeaders:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  includeRequestLine:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1

@@ -1,0 +1,31 @@
+---
+name: LocateNodeFilter
+version: 2
+class: com.vordel.circuit.xml.LocateNodeFilter
+fields:
+  elementSpecifier:
+    type: '@ElementSpecifier'
+    cardinality: '*'
+  xpath:
+    type: '@XPath'
+    cardinality: '*'
+  nodeListAttributeName:
+    type: string
+    defaultValues:
+    - data: node.list
+    cardinality: 1
+  nodeListInsertionType:
+    type: string
+    defaultValues:
+    - data: append
+    cardinality: 1
+  extractNodesFromMessageAttribute:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  extractNodeListAttributeName:
+    type: string
+    defaultValues:
+    - data: ${node.list}
+    cardinality: 1

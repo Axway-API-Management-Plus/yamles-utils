@@ -1,0 +1,14 @@
+---
+name: SwitchCircuitReference
+version: 1
+fields:
+  comparatorType:
+    type: string
+    defaultValues:
+    - data: contains
+    cardinality: 1
+  compareWith:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1

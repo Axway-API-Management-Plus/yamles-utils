@@ -1,0 +1,4 @@
+---
+type: SentinelServerGroup
+fields:
+  name: Sentinel Servers

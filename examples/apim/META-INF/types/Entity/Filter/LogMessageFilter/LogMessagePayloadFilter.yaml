@@ -1,0 +1,10 @@
+---
+name: LogMessagePayloadFilter
+version: 1
+class: com.vordel.circuit.log.LogMessagePayloadFilter
+fields:
+  format:
+    type: string
+    defaultValues:
+    - data: ${timestamp} ${id} ${filterName} ${payload}
+    cardinality: 1

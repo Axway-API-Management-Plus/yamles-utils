@@ -1,0 +1,15 @@
+---
+name: GenerateKeyFilter
+version: 0
+class: com.vordel.circuit.crypt.GenerateKeyFilter
+fields:
+  keyType:
+    type: string
+    defaultValues:
+    - data: RSAKeyPair
+    cardinality: 1
+  keySize:
+    type: integer
+    defaultValues:
+    - data: 2048
+    cardinality: 1

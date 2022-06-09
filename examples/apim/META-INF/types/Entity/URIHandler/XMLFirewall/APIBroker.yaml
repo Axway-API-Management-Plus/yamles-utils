@@ -1,0 +1,56 @@
+---
+name: APIBroker
+version: 9
+class: com.vordel.apiportal.runtime.Broker
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  id:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  description:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  markdownFile:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  descriptionLocation:
+    type: string
+    defaultValues:
+    - data: INTERNAL
+    cardinality: 1
+  summary:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  apiVersion:
+    type: string
+    defaultValues:
+    - data: 1.0
+    cardinality: 1
+  destination:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  securityProfile:
+    type: '@APISecurityProfile'
+    cardinality: '?'
+  routingType:
+    type: string
+    defaultValues:
+    - data: HTTP
+    cardinality: 1
+components:
+  APIMethod: '*'
+  MVProperty: '*'

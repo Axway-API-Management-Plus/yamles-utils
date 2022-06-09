@@ -1,0 +1,5 @@
+---
+name: HTTPRetryStatusClassGroup
+version: 1
+components:
+  HTTPStatusClass: '*'

@@ -1,0 +1,4 @@
+---
+name: VApiServiceContextFilter
+version: 0
+class: com.vordel.circuit.vapi.VApiServiceContextFilter

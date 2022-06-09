@@ -1,0 +1,120 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Retrieve User Email
+  name: Retrieve Active Directory Account Information
+  description: ""
+children:
+- type: AttributeExtractLdapFilter
+  fields:
+    ldapDir: /External Connections/LDAP Directories/API Management Sample Active Directory Connection
+    userIdentityAttribName: ${authN.loginname}
+    name: Retrieve User Email
+  routing:
+    success: ../Set extidentity.organization
+  logging:
+    fatal: 'Error occurred while extracting attributes from LDAP. Error: ${circuit.exception}'
+    failure: Failed to extract attributes from LDAP
+    success: Extracted attributes from LDAP
+  children:
+  - type: LookupAttribute
+    fields:
+      name: mail
+  - type: LookupAttribute
+    fields:
+      name: cn
+  - type: LookupAttribute
+    fields:
+      name: description
+  - type: LookupAttribute
+    fields:
+      name: telephoneNumber
+  - type: LdapSearchAttributes
+    fields:
+      name: Retrieve User Email
+      base: OU=Employees,DC=axway,DC=int
+      filter: (&(userPrincipalName=${authN.loginname})(objectClass=user))
+      scope: 3
+- type: PortalOrganizationReadFilter
+  fields:
+    idSelector: Community
+    selects: Name
+    targetAttribute: extidentity.organization
+    name: Set extidentity.organization
+  routing:
+    success: ../Set extidentity.role
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: extidentity.role
+    attributeValue: user
+    name: Set extidentity.role
+  routing:
+    success: ../Set extidentity.enabled
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: extidentity.enabled
+    attributeValue: 1
+    name: Set extidentity.enabled
+  routing:
+    success: ../Set extidentity.name
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: extidentity.name
+    attributeValue: ${user[0].cn[0]}
+    name: Set extidentity.name
+  routing:
+    success: ../Set extidentity.loginName
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: extidentity.loginName
+    attributeValue: ${authN.loginname}
+    name: Set extidentity.loginName
+  routing:
+    success: ../Set extidentity.description
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: extidentity.description
+    attributeValue: ${user[0].description[0]}
+    name: Set extidentity.description
+  routing:
+    success: ../Set extidentity.email
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: extidentity.email
+    attributeValue: ${user[0].mail[0]}
+    name: Set extidentity.email
+  routing:
+    success: ../Set extidentity.phone
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: extidentity.phone
+    attributeValue: ${user[0].telephoneNumber[0]}
+    name: Set extidentity.phone
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value

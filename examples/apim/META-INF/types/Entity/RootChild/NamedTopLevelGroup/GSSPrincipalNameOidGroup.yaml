@@ -1,0 +1,5 @@
+---
+name: GSSPrincipalNameOidGroup
+version: 0
+components:
+  GSSPrincipalNameOid: '*'

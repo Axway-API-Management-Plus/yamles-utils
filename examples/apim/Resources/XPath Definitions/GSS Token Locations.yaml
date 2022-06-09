@@ -1,0 +1,35 @@
+---
+type: XPathGSSTokenLocationGroup
+fields:
+  name: GSS Token Locations
+children:
+- type: XPath
+  fields:
+    name: WS-Trust BinaryExchange in RequestSecurityToken
+    xpath: //wst:RequestSecurityToken/wst:BinaryExchange[@ValueType="http://schemas.xmlsoap.org/ws/2005/02/trust/spnego"]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: wst
+      URI: http://schemas.xmlsoap.org/ws/2005/02/trust
+- type: XPath
+  fields:
+    name: GSS_Kerberosv5_AP_REQ BinarySecurityToken
+    xpath: //wsse1:BinarySecurityToken[@ValueType="http://docs.oasis-open.org/wss/oasis-wss-kerberos-token-profile-1.1#GSS_Kerberosv5_AP_REQ"] | //wsse2:BinarySecurityToken[@ValueType="http://docs.oasis-open.org/wss/oasis-wss-kerberos-token-profile-1.1#GSS_Kerberosv5_AP_REQ"] | //wsse3:BinarySecurityToken[@ValueType="http://docs.oasis-open.org/wss/oasis-wss-kerberos-token-profile-1.1#GSS_Kerberosv5_AP_REQ"] | //wsse4:BinarySecurityToken[@ValueType="http://docs.oasis-open.org/wss/oasis-wss-kerberos-token-profile-1.1#GSS_Kerberosv5_AP_REQ"]
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: wsse3
+      URI: http://schemas.xmlsoap.org/ws/2003/06/secext
+  - type: XPathNamespace
+    fields:
+      prefix: wsse1
+      URI: http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+  - type: XPathNamespace
+    fields:
+      prefix: wsse4
+      URI: http://schemas.xmlsoap.org/ws/2002/07/secext
+  - type: XPathNamespace
+    fields:
+      prefix: wsse2
+      URI: http://schemas.xmlsoap.org/ws/2002/12/secext

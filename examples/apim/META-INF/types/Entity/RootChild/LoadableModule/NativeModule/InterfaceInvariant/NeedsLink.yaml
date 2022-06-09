@@ -1,0 +1,11 @@
+---
+name: NeedsLink
+version: 0
+fields:
+  interface:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- interface

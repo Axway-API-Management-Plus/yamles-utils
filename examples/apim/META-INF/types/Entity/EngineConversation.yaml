@@ -1,0 +1,18 @@
+---
+name: EngineConversation
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  maxChallenges:
+    type: integer
+    defaultValues:
+    - data: 6
+    cardinality: 1
+components:
+  RegexChallengeResponse: '?'
+keyFields:
+- name

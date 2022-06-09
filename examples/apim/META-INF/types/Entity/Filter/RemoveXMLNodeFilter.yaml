@@ -1,0 +1,18 @@
+---
+name: RemoveXMLNodeFilter
+version: 1
+class: com.vordel.circuit.conversion.RemoveXMLNodeFilter
+fields:
+  nodeLocation:
+    type: '@XPath'
+    cardinality: 1
+  failIfNoNodesFound:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  savedDeletedNodes:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1

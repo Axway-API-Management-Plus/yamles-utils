@@ -1,0 +1,10 @@
+---
+name: SMTPHandler
+version: 0
+fields:
+  filterCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+keyFields:
+- filterCircuit
+abstract: true

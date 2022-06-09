@@ -1,0 +1,26 @@
+---
+name: FileTransferCommand
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  type:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  description:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  enabled:
+    type: boolean
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- name

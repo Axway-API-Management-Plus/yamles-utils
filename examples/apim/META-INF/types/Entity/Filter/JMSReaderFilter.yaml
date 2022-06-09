@@ -1,0 +1,53 @@
+---
+name: JMSReaderFilter
+version: 2
+class: com.vordel.circuit.jms.JMSReaderFilter
+fields:
+  connection:
+    type: '@JMSService'
+    cardinality: 1
+  extractMethod:
+    type: integer
+    defaultValues:
+    - data: 3
+    cardinality: 1
+  destinationType:
+    type: string
+    defaultValues:
+    - data: QUEUE
+    cardinality: 1
+  destination:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  selector:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  sendReply:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  readTimeoutMs:
+    type: integer
+    defaultValues:
+    - data: 1000
+    cardinality: 1
+  attributeName:
+    type: string
+    defaultValues:
+    - data: jms.message
+    cardinality: 1
+  isDurableSubscriber:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  subscriberName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'

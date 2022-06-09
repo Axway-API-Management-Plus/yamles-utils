@@ -1,0 +1,46 @@
+---
+name: AuthnRepositoryPassPort
+version: 1
+class: com.vordel.security.auth.repository.PassPortRepository
+fields:
+  hostname:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  securePort:
+    type: integer
+    defaultValues:
+    - data: 6453
+    cardinality: 1
+  mutualAuthenticationPort:
+    type: integer
+    defaultValues:
+    - data: 6666
+    cardinality: 1
+  domain:
+    type: string
+    defaultValues:
+    - data: Synchrony
+    cardinality: 1
+  sharedSecret:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1
+  csd:
+    type: string
+    defaultValues:
+    - data: csd.xml
+    cardinality: 1
+  sslCertificate:
+    type: '@Certificate'
+    cardinality: 1
+  mutualAuthenticationCertificate:
+    type: '@Certificate'
+    cardinality: 1
+  componentInstance:
+    type: string
+    defaultValues:
+    - data: default
+    cardinality: 1

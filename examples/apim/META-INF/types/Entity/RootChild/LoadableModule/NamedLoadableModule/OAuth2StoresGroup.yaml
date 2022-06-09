@@ -1,0 +1,9 @@
+---
+name: OAuth2StoresGroup
+version: 0
+class: com.vordel.circuit.oauth.persistence.OauthLoadableCache
+components:
+  AuthzCodeStoreGroup: '*'
+  AccessTokenStoreGroup: '*'
+  ClientAccessTokenStoreGroup: '*'
+loadorder: 319

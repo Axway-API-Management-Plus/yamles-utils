@@ -1,0 +1,26 @@
+---
+name: KPSTypeProperty
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  type:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  key:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  value:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- name

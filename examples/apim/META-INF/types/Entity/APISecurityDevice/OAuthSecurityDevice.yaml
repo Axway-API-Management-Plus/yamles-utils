@@ -1,0 +1,6 @@
+---
+name: OAuthSecurityDevice
+version: 1
+class: com.vordel.apiportal.runtime.OAuthSecurityDevice
+components:
+  ValidateOAuth2AccessTokenFilter: 1

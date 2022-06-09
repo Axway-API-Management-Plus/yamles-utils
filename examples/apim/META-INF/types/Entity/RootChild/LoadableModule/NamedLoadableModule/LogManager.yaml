@@ -1,0 +1,7 @@
+---
+name: LogManager
+version: 3
+class: com.vordel.log.LogManager
+components:
+  Logger: '*'
+loadorder: 301

@@ -1,0 +1,6 @@
+---
+name: CreateCookieFilter
+version: 1
+class: com.vordel.circuit.cookie.CreateCookieFilter
+components:
+  Cookie: 1

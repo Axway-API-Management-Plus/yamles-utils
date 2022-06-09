@@ -1,0 +1,6 @@
+---
+name: AuthnRepositoryKPSGroup
+version: 0
+class: com.vordel.security.auth.repository.KPSRepository
+components:
+  AuthnRepositoryKPS: '*'

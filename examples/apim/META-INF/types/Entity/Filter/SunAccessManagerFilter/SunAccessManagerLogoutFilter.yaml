@@ -1,0 +1,4 @@
+---
+name: SunAccessManagerLogoutFilter
+version: 0
+class: com.vordel.circuit.sun.AccessManagerLogoutFilter

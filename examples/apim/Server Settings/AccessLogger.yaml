@@ -1,0 +1,9 @@
+---
+type: AccessLogger
+fields:
+  name: AccessLogger
+children:
+- type: AccessLoggerFile
+  fields:
+    directoryName: logs/access
+    name: AccessLoggerFileDetails

@@ -1,0 +1,16 @@
+---
+name: TivoliSettingsReference
+version: 1
+class: com.vordel.circuit.tivoli.TivoliSettings
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  settings:
+    type: '@TivoliSettings'
+    cardinality: 1
+keyFields:
+- name
+loadorder: 400

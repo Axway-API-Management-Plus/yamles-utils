@@ -1,0 +1,49 @@
+---
+name: ApiConnector
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  resourcePrefix:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  description:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  maxApisPerImport:
+    type: integer
+    defaultValues:
+    - data: 100
+    cardinality: 1
+  mergeAPIsOnImport:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  url:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  class:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  customConfig:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  clientCredentials:
+    type: '@NamedAuthnProfile'
+    cardinality: '?'
+keyFields:
+- name

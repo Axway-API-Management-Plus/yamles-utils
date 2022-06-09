@@ -1,0 +1,1090 @@
+---
+type: Internationalization
+fields:
+  language: default
+  country: default
+  name: Internationalization Default
+children:
+- type: InternationalizationFilter
+  fields:
+    type: InsertXMLNodeFilter
+  logging:
+    fatal: 'Error inserting XML mode into the message. Error: ${circuit.exception}'
+    failure: Failed to insert XML node into the message
+    success: Successfully inserted XML node into message
+- type: InternationalizationFilter
+  fields:
+    type: AuthzTransactionMinderFilter
+  logging:
+    fatal: 'Error occurred during authorization to SOA Security Manager. Error: ${circuit.exception}'
+    failure: Authorization to SOA Security Manager filter failed
+    success: Authorization to SOA Security Manager filter passed
+- type: InternationalizationFilter
+  fields:
+    type: SLAFilter
+  logging:
+    fatal: 'Set SLA aborted: ${circuit.exception}'
+    failure: Set SLA failed
+    success: Set SLA success
+- type: InternationalizationFilter
+  fields:
+    type: RbacFilter
+  logging:
+    fatal: 'Error occurred during RBAC. Error: ${circuit.exception}'
+    failure: RBAC failed for user '${authentication.subject.id}'
+    success: RBAC passed for user '${authentication.subject.id}'
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/content-filtering
+    displayName: Content Filtering
+- type: InternationalizationFilter
+  fields:
+    type: Reflector
+  logging:
+    fatal: 'Error occurred while echoing the message. Error: ${circuit.exception}'
+    failure: Failed to echo back the message
+    success: Successfully echoed back the message
+- type: InternationalizationFilter
+  fields:
+    type: CertValidityCheckFilter
+  logging:
+    fatal: 'Certificate validation error. Error: ${circuit.exception}'
+    failure: Certificate validation failed
+    success: Certificate validation passed
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/security
+    displayName: Security
+- type: InternationalizationFilter
+  fields:
+    type: FindCertificateFilter
+  logging:
+    fatal: 'Error occurred while finding certificate in message. Error: ${circuit.exception}'
+    failure: Failed to find certificate in message
+    success: Found a certificate in the message
+- type: InternationalizationFilter
+  fields:
+    type: PauseFilter
+  logging:
+    fatal: 'Pause filter error. Error: ${circuit.exception}'
+    failure: Pause filter failed
+    success: Pause filter passed
+- type: InternationalizationFilter
+  fields:
+    type: ClamAvVirusCheck
+  logging:
+    fatal: 'Error occurred during ClamAV antivirus filtering. Error: ${circuit.exception}'
+    failure: 'ClamAV antivirus: Found a virus in message'
+    success: 'ClamAV antivirus: No virus in message found'
+- type: InternationalizationFilter
+  fields:
+    type: ExtractCertAttributesFilter
+  logging:
+    fatal: 'Error occurred while extracting attributes from certificate. Error: ${circuit.exception}'
+    failure: Failed to extract attributes from certificate
+    success: Extracted attributes from certificate
+- type: InternationalizationFilter
+  fields:
+    type: IpFilter
+  logging:
+    fatal: 'Error occurred during IP-address filtering. Error: ${circuit.exception}'
+    failure: IP-address filtering failed for ${http.request.clientaddr}
+    success: IP-address filtering passed for ${http.request.clientaddr}
+- type: InternationalizationFilter
+  fields:
+    type: SamlAttribExtractFilter
+  logging:
+    fatal: 'Error occurred while extracting attributes from SAML attribute assertion. Error: ${circuit.exception}'
+    failure: Failed to extract attributes from SAML attribute assertion
+    success: Extracted attributes from SAML attribute assertion for ${attribute.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: SchemaValidationFilter
+  logging:
+    fatal: 'Error during schema validation. Error: ${circuit.exception}'
+    failure: Schema validation failed
+    success: Schema validation passed
+- type: InternationalizationFilter
+  fields:
+    type: MonitorConnectionFilter
+  logging:
+    fatal: 'Error occured while turning Monitor connection. Error: ${circuit.exception}'
+    failure: Failed to turn Monitor connection
+    success: Successfully turned Monitor connection
+- type: InternationalizationFilter
+  fields:
+    type: EncryptWebServiceFilter
+  logging:
+    fatal: 'Error occurred during Encryption Web Service processing. Error: ${circuit.exception}'
+    failure: Encryption Web Service failed to process message
+    success: Encryption Web Service processed message successfully
+- type: InternationalizationFilter
+  fields:
+    type: TivoliFilter
+  logging:
+    fatal: 'Error occurred during IBM Tivoli authorization. Error: ${circuit.exception}'
+    failure: IBM Tivoli authorization failed
+    success: IBM Tivoli authorization passed for ${authentication.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: SetEncryptionPropertiesFilter
+  logging:
+    fatal: 'Error occurred while setting the XML encryption. Error: ${circuit.exception}'
+    failure: Setting XML encryption properties failed
+    success: Setting XML encryption properties passed
+- type: InternationalizationFilter
+  fields:
+    type: CertValidationCrlFilter
+  logging:
+    fatal: 'Certificate CRL validation error. Error: ${circuit.exception}'
+    failure: Certificate failed CRL validation
+    success: Certificate passed CRL validation
+- type: InternationalizationFilter
+  fields:
+    type: AttributeAuthnFilter
+  logging:
+    fatal: 'Error during authentication using username-password attributes. Error: ${circuit.exception}'
+    failure: Failed to authenticate using username-password attributes.
+    success: Authenticated via username-password attributes sucessfully.
+- type: InternationalizationFilter
+  fields:
+    type: ThreateningContentFilter
+  logging:
+    fatal: 'Error occurred while scanning the message for threatening content. Error: ${circuit.exception}'
+    failure: Message contains known attacks
+    success: Message is clean and contains no know threats
+- type: InternationalizationFilter
+  fields:
+    type: CircuitDelegateFilter
+  logging:
+    fatal: 'Error in calling policy shortcut circuit. Error: ${circuit.exception}'
+    failure: Failed in calling policy shortcut
+    success: Success in calling policy shortcut
+- type: InternationalizationFilter
+  fields:
+    type: RemoveCachedAttributeFilter
+  logging:
+    fatal: 'Error while removing attribute from cache. Error: ${circuit.exception}'
+    failure: Failed to remove message attribute from cache.
+    success: Removed the message attribute form the cache.
+- type: InternationalizationFilter
+  fields:
+    type: OracleAccessManagerLogoutFilter
+  logging:
+    fatal: 'Error while logging out the session in Oracle Access Manager. Error: ${circuit.exception}'
+    failure: Failed to log out the  session in Oracle Access Manager.
+    success: Logged out the session to Oracle Access Manager.
+- type: InternationalizationFilter
+  fields:
+    type: AttributeExtractLdapFilter
+  logging:
+    fatal: 'Error occurred while extracting attributes from LDAP. Error: ${circuit.exception}'
+    failure: Failed to extract attributes from LDAP
+    success: Extracted attributes from LDAP
+- type: InternationalizationFilter
+  fields:
+    type: TivoliAttributeExtractFilter
+  logging:
+    fatal: 'Error occurred during when looking up Tivoli user attributes. Error: ${circuit.exception}'
+    failure: Failed to look up Tivoli user attributes
+    success: Successfully looked up Tivoli user attributes for the user ${authentication.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: RemoveAttributeFilter
+  logging:
+    fatal: 'Error while removing the attribute. Error: ${circuit.exception}'
+    failure: Failed to remove the attribute
+    success: Removed the attribute
+- type: InternationalizationFilter
+  fields:
+    type: SunAccessManagerX509AuthNFilter
+  logging:
+    fatal: 'Error while authenticating X.509 certificate to Sun Access Manager. Error: ${circuit.exception}'
+    failure: Failed to authenticate X.509 certificate to Sun Access Manager.
+    success: Authenticated X.509 certificate to Sun Access Manager.
+- type: InternationalizationFilter
+  fields:
+    type: ExtractTimestampFilter
+  logging:
+    fatal: 'Fatal error while extracting the Timestamp. Error: ${circuit.exception}'
+    failure: Failed to extract the Timestamp
+    success: Successfully extracted the Timestamp
+- type: InternationalizationFilter
+  fields:
+    type: CircuitDelegatePerBodyFilter
+  logging:
+    fatal: 'Error in calling policy shortcut circuit. Error: ${circuit.exception}'
+    failure: Failed in calling policy shortcut
+    success: Success in calling policy shortcut
+- type: InternationalizationFilter
+  fields:
+    type: TraceFilter
+  logging:
+    fatal: 'Error while tracing the message properties. Error: ${circuit.exception}'
+    failure: Failed to trace the message properties
+    success: Traced the message properties
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/generated
+    displayName: Generated
+- type: InternationalizationFilter
+  fields:
+    type: QuoteOftheDayFilter
+  logging:
+    fatal: 'Error in quote of the day filter. Error: ${circuit.exception}'
+    failure: Quote of the day service failed
+    success: Success in quote of the day service
+- type: InternationalizationFilter
+  fields:
+    type: SiteMinderSessionFilter
+  logging:
+    fatal: 'Error occurred during validation of SiteMinder session. Error: ${circuit.exception}'
+    failure: Validation of SiteMinder session failed
+    success: Validation of SiteMinder session passed
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/authorization
+    displayName: Authorization
+- type: InternationalizationFilter
+  fields:
+    type: CreateMessageKeyFilter
+  logging:
+    fatal: 'Error during message creation of message key from attribute. Error: ${circuit.exception}'
+    failure: Failure during creationo of message key from attribute.
+    success: Message key created from attribute.
+- type: InternationalizationFilter
+  fields:
+    type: ExtractWssUsernameTokenFilter
+  logging:
+    fatal: 'Fatal error while extracting the WSS Username Token. Error: ${circuit.exception}'
+    failure: Failed to extract the WSS Username Token
+    success: Successfully extracted the WSS Username Token
+- type: InternationalizationFilter
+  fields:
+    type: InsertWSAddressingFilter
+  logging:
+    fatal: 'Error during WS Addressing information insertion. Error: ${circuit.exception}'
+    failure: Failed to insert WS Addressing information
+    success: Inserted WS Addressing information
+- type: InternationalizationFilter
+  fields:
+    type: ConnectToURLFilter
+  logging:
+    fatal: 'Error occurred while routing request to endpoint. Error: ${circuit.exception}'
+    failure: Failed to route request to endpoint.
+    success: Successfully routed request to endpoint
+- type: InternationalizationFilter
+  fields:
+    type: XMLDecryptionFilter
+  logging:
+    fatal: 'Error occurred during XML decryption. Error: ${circuit.exception}'
+    failure: XML decryption failed
+    success: XML decryption passed
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/trust
+    displayName: Trust
+- type: InternationalizationFilter
+  fields:
+    type: ConnectionFilter
+  logging:
+    fatal: 'Error occurred while sending request to endpoint. Error: ${circuit.exception}'
+    failure: Failed to send request to endpoint ${http.destination.protocol}://${http.destination.host}:${http.destination.port}${http.request.uri}
+    success: Successfully sent request to endpoint ${http.destination.protocol}://${http.destination.host}:${http.destination.port}${http.request.uri}
+- type: InternationalizationFilter
+  fields:
+    type: GetAccessAuthZFilter
+  logging:
+    fatal: 'Error occurred during GetAccess authorization. Error: ${circuit.exception}'
+    failure: GetAccess authorization failed
+    success: GetAccess authorization passed for ${authentication.subject.id}
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/integration
+    displayName: Integration
+- type: InternationalizationFilter
+  fields:
+    type: AttributeExtractDbFilter
+  logging:
+    fatal: 'Error occurred while extracting attributes from database/entity store. Error: ${circuit.exception}'
+    failure: Failed to extract attributes from database/entity store
+    success: Extracted attributes from database/entity store for ${attribute.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: WsUsernameInsertFilter
+  logging:
+    fatal: 'Error occurred while inserting WS Username token. Error: ${circuit.exception}'
+    failure: Failed to insert WS Username token
+    success: Inserted WS Username token for ${ws.username.token.name}
+- type: InternationalizationFilter
+  fields:
+    type: SunAccessManagerLogoutFilter
+  logging:
+    fatal: 'Error while logging out the session in Sun Access Manager. Error: ${circuit.exception}'
+    failure: Failed to log out the  session in Sun Access Manager.
+    success: Logged out the session to Sun Access Manager.
+- type: InternationalizationFilter
+  fields:
+    type: StaticRouterFilter
+  logging:
+    fatal: 'Error occurred when setting the host and port. Error: ${circuit.exception}'
+    failure: Failed to set the host and post
+    success: Set the host '${http.destination.host}' and port '${http.destination.port}'
+- type: InternationalizationFilter
+  fields:
+    type: ChangeMessageFilter
+  logging:
+    fatal: 'Error in setting the message. Error: ${circuit.exception}'
+    failure: Failed in setting the message
+    success: Success in setting the message
+- type: InternationalizationFilter
+  fields:
+    type: XmlComplexityFilter
+  logging:
+    fatal: 'Error during XML message complexity filtering. Error: ${circuit.exception}'
+    failure: Failed XML message complexity filtering
+    success: Passed XML message complexity filtering
+- type: InternationalizationFilter
+  fields:
+    type: CertChainCheckFilter
+  logging:
+    fatal: 'Certificate chain check error. Error: ${circuit.exception}'
+    failure: Certificate failed chain check
+    success: Certificate passed chain check
+- type: InternationalizationFilter
+  fields:
+    type: HttpHeaderAttrContentFilter
+  logging:
+    fatal: 'Error occurred while content checking HTTP header attributes. Error: ${circuit.exception}'
+    failure: HTTP header attribute content check failed
+    success: HTTP header attribute content check passed
+- type: InternationalizationFilter
+  fields:
+    type: FTPUploadFilter
+  logging:
+    fatal: 'Error occurred while uploading request via FTP. Error: ${circuit.exception}'
+    failure: Failed to upload request via FTP.
+    success: Successfully uploaded request via FTP.
+- type: InternationalizationFilter
+  fields:
+    type: RelativePathResolver
+  logging:
+    fatal: 'Error while attempt to resolve via relative path. Error: ${circuit.exception}'
+    failure: Failed to resolve message via relative path
+    success: Resolved message via relative path
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/miscellaneous
+    displayName: Miscellaneous
+- type: InternationalizationFilter
+  fields:
+    type: VordelAttributeExtractFilter
+  logging:
+    fatal: 'Error occurred during when looking up of local user attributes. Error: ${circuit.exception}'
+    failure: Failed to look up local user attributes
+    success: Successfully looked up local user attributes for the user ${authentication.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: AddHTTPHeaderFilter
+  logging:
+    fatal: 'Error in adding the HTTP header to the message. Error: ${circuit.exception}'
+    failure: Failed in adding the HTTP header to the message
+    success: Success in adding the HTTP header to the message
+- type: InternationalizationFilter
+  fields:
+    type: CertValidationXkmsFilter
+  logging:
+    fatal: 'Certificate XKMS validation error. Error: ${circuit.exception}'
+    failure: Certificate failed XKMS validation
+    success: Certificate passed XKMS validation
+- type: InternationalizationFilter
+  fields:
+    type: SunAccessManagerRetrieveAttributesFilter
+  logging:
+    fatal: 'Error while retrieving attributes from Sun Access Manager. Error: ${circuit.exception}'
+    failure: Failed retrieve attributes from Sun Access Manager.
+    success: Retrieved attributes from Sun Access Manager.
+- type: InternationalizationFilter
+  fields:
+    type: CRLResponderFilter
+  logging:
+    fatal: 'CRL responder error. Error: ${circuit.exception}'
+    failure: CRL responder failed
+    success: CRL responder passed
+- type: InternationalizationFilter
+  fields:
+    type: QueryStringAttrContentFilter
+  logging:
+    fatal: 'Error occurred while content checking query string attributes. Error: ${circuit.exception}'
+    failure: Query string attribute content check failed
+    success: Query string attribute content check passed
+- type: InternationalizationFilter
+  fields:
+    type: HttpBasicFilter
+  logging:
+    fatal: 'Error occurred while authenticating via HTTP Basic. Error: ${circuit.exception}'
+    failure: HTTP basic authentication failed
+    success: HTTP basic authentication success for ${authentication.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: OracleAccessManagerAuthZFilter
+  logging:
+    fatal: 'Error while authorizing to Oracle Access Manager. Error: ${circuit.exception}'
+    failure: Failed to authorize to Oracle Access Manager.
+    success: Authorized to Oracle Access Manager.
+- type: InternationalizationFilter
+  fields:
+    type: FalseFilter
+  logging:
+    fatal: 'False filter error. Error: ${circuit.exception}'
+    failure: Filter failed
+    success: ""
+- type: InternationalizationFilter
+  fields:
+    type: HttpHeaderFilter
+  logging:
+    fatal: 'Error while attempt to extract the HTTP headers. Error: ${circuit.exception}'
+    failure: Failed to extract the HTTP header token
+    success: Successfully extracted the HTTP header token
+- type: InternationalizationFilter
+  fields:
+    type: CircuitChainFilter
+  logging:
+    fatal: 'Error processing policy shortcuts. Error: ${circuit.exception}'
+    failure: Failure during calls in policy shortcut chain
+    success: Success in calling all policy shortcuts
+- type: InternationalizationFilter
+  fields:
+    type: SunAccessManagerSSOTokenValidationFilter
+  logging:
+    fatal: 'Error while validating SSO Token to Sun Access Manager. Error: ${circuit.exception}'
+    failure: Failed to validate the SSO Token to Sun Access Manager.
+    success: Validated the SSO Token to Sun Access Manager.
+- type: InternationalizationFilter
+  fields:
+    type: AttributeAuthZFilter
+  logging:
+    fatal: 'Attribute based authorization aborted: ${circuit.exception}'
+    failure: Attribute based authorization failed
+    success: Attribute based authorization success for ${attribute.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: SophosVirusCheck
+  logging:
+    fatal: 'Error occurred during Sophos antivirus filtering. Error: ${circuit.exception}'
+    failure: Sophos antivirus filtering failed
+    success: Sophos antivirus filtering passed
+- type: InternationalizationFilter
+  fields:
+    type: LogMessagePayloadFilter
+  logging:
+    fatal: 'Error occurred while logging the message payload. Error: ${circuit.exception}'
+    failure: Failed to log the message payload
+    success: Successfully logged the message payload
+- type: InternationalizationFilter
+  fields:
+    type: GenerateWsTrustFilter
+  logging:
+    fatal: 'Error occurred while generating a WS-Trust message. Error: ${circuit.exception}'
+    failure: Failed to generate a WS-Trust message
+    success: Successfully generated a WS-Trust message
+- type: InternationalizationFilter
+  fields:
+    type: MimeTypeFilter
+  logging:
+    fatal: 'Error during attachment filtering. Error: ${circuit.exception}'
+    failure: Request failed attachment filtering
+    success: Request passed attachment filtering
+- type: InternationalizationFilter
+  fields:
+    type: SamlAuthNInsertFilter
+  logging:
+    fatal: 'Error during SAML authentication assertion insertion. Error: ${circuit.exception}'
+    failure: Failed to insert SAML authentication assertion
+    success: Inserted SAML authentication assertion
+- type: InternationalizationFilter
+  fields:
+    type: JavaScriptFilter
+  logging:
+    fatal: 'Error while attempt to run script filter. Error: ${circuit.exception}'
+    failure: Failed script filter
+    success: Passed script filter
+- type: InternationalizationFilter
+  fields:
+    type: RemoveAttachmentFilter
+  logging:
+    fatal: 'Error removing attachments. Error: ${circuit.exception}'
+    failure: Failed to remove attachments
+    success: Success in removing attachments
+- type: InternationalizationFilter
+  fields:
+    type: MethodNameResolver
+  logging:
+    fatal: 'Error while attempt to resolve via method name. Error: ${circuit.exception}'
+    failure: Failed to resolve message via method name
+    success: Resolved message via method name
+- type: InternationalizationFilter
+  fields:
+    type: WSFilter
+  logging:
+    fatal: 'Error executing web service filter. Error: ${circuit.exception}'
+    failure: Web service filter failed
+    success: Web service filter succeeded
+- type: InternationalizationFilter
+  fields:
+    type: OracleAccessManagerSSOTokenValidationFilter
+  logging:
+    fatal: 'Error while validating SSO Token to Oracle Access Manager. Error: ${circuit.exception}'
+    failure: Failed to validate the SSO Token to Oracle Access Manager.
+    success: Validated the SSO Token to Oracle Access Manager.
+- type: InternationalizationFilter
+  fields:
+    type: X509AttrFilter
+  logging:
+    fatal: 'Error occurred during X509 authorization. Error: ${circuit.exception}'
+    failure: X.509 Authorization failed
+    success: X.509 Authorization passed for '${authentication.issuer.id}'
+- type: InternationalizationFilter
+  fields:
+    type: StylesheetFilter
+  logging:
+    fatal: 'Error in converting the message. Error: ${circuit.exception}'
+    failure: Failed in converting the message
+    success: Success in converting the message
+- type: InternationalizationFilter
+  fields:
+    type: SmtpFilter
+  logging:
+    fatal: 'Error while sending message via SMTP. Error: ${circuit.exception}'
+    failure: Failure while sending message via SMTP.
+    success: Sent message via SMTP.
+- type: InternationalizationFilter
+  fields:
+    type: XMLEncryptionFilter
+  logging:
+    fatal: 'Error occurred during XML encryption. Error: ${circuit.exception}'
+    failure: XML encryption failed
+    success: XML encryption passed
+- type: InternationalizationFilter
+  fields:
+    type: IntegrityVerifySignatureFilter
+  logging:
+    fatal: 'Integrity: Signature verification error. Error: ${circuit.exception}'
+    failure: 'Integrity: Signature verification failed'
+    success: 'Integrity: Signature verification passed'
+- type: InternationalizationFilter
+  fields:
+    type: SetResponseStatusFilter
+  logging:
+    fatal: 'SetResponseStatusFilter error. Error: ${circuit.exception}'
+    failure: Failed to set the response status
+    success: Successfully set the response status
+- type: InternationalizationFilter
+  fields:
+    type: GSSInitiatorFilter
+  logging:
+    fatal: 'Error occurred while initiating Kerberos connection. Error: ${circuit.exception}'
+    failure: Failed to initiate Kerberos connection
+    success: Successfully initiated Kerberos connection
+- type: InternationalizationFilter
+  fields:
+    type: McAfeeVirusCheck
+  logging:
+    fatal: 'Error occurred during McAfee antivirus filtering. Error: ${circuit.exception}'
+    failure: 'McAfee antivirus: Virus found in message'
+    success: 'McAfee antivirus: No virus found in message'
+- type: InternationalizationFilter
+  fields:
+    type: LocateNodeFilter
+  logging:
+    fatal: 'Error during node location. Error: ${circuit.exception}'
+    failure: Failed to locate nodes
+    success: Located nodes successfully
+- type: InternationalizationFilter
+  fields:
+    type: ProtocolDelegateFilter
+  logging:
+    fatal: 'Error in calling protocol. Error: ${circuit.exception}'
+    failure: Failed in calling protocol
+    success: Success in calling protocol
+- type: InternationalizationFilter
+  fields:
+    type: ExtractWssHeaderBlockFilter
+  logging:
+    fatal: 'Fatal error while extracting the WSS Header Block. Error: ${circuit.exception}'
+    failure: Failed to extract the WSS Header Block
+    success: Successfully extracted the WSS Header Block
+- type: InternationalizationFilter
+  fields:
+    type: AttributeExtractHTTPHeaderFilter
+  logging:
+    fatal: 'Error occurred while extracting attributes from HTTP header. Error: ${circuit.exception}'
+    failure: Failed to extract attribute HTTP header
+    success: Extracted attribute from HTTP header
+- type: InternationalizationFilter
+  fields:
+    type: SiteMinderLogoutFilter
+  logging:
+    fatal: 'Error occurred during logout of SiteMinder session. Error: ${circuit.exception}'
+    failure: Logout of SiteMinder session failed
+    success: Logout of SiteMinder session passed
+- type: InternationalizationFilter
+  fields:
+    type: IsCachedAttributeFilter
+  logging:
+    fatal: 'Error while looking for key in the  message attribiute cache. Error: ${circuit.exception}'
+    failure: Failure while looking for key in the message attribute cache.
+    success: Found the key in the message attribute cache.
+- type: InternationalizationFilter
+  fields:
+    type: SunAccessManagerAuthZFilter
+  logging:
+    fatal: 'Error while authorizing to Sun Access Manager. Error: ${circuit.exception}'
+    failure: Failed to authorize to Sun Access Manager.
+    success: Authorized to Sun Access Manager.
+- type: InternationalizationFilter
+  fields:
+    type: OESGetRolesFilter
+  logging:
+    fatal: 'Error while get roles from Oracle Entitlements Server. Error: ${circuit.exception}'
+    failure: Failed to get roles from Oracle Entitlements Server.
+    success: Got roles from Oracle Entitlements Server.
+- type: InternationalizationFilter
+  fields:
+    type: HTTPBodyParserFilter
+  logging:
+    fatal: 'Error occurred while parsing the HTTP message. Error: ${circuit.exception}'
+    failure: Failed to parse the HTTP message
+    success: Successfully parsed the HTTP message
+- type: InternationalizationFilter
+  fields:
+    type: VerifySigWebServiceFilter
+  logging:
+    fatal: 'Error occurred during Digital Signature Service verification. Error: ${circuit.exception}'
+    failure: Digital Signature Service failed to verify message
+    success: Digital Signature Service verified message successfully
+- type: InternationalizationFilter
+  fields:
+    type: SetHTTPStatusCode
+  logging:
+    fatal: 'Error occurred while setting the HTTP status code. Error: ${circuit.exception}'
+    failure: Failed to set the HTTP status code
+    success: Successfully set the HTTP status code
+- type: InternationalizationFilter
+  fields:
+    type: SetHTTPVerbFilter
+  logging:
+    fatal: 'Error in setting the HTTP verb for the message. Error: ${circuit.exception}'
+    failure: Failed in setting the HTTP verb for the message
+    success: Success in setting the HTTP verb for the message
+- type: InternationalizationFilter
+  fields:
+    type: XPathContentFilter
+  logging:
+    fatal: 'Error occurred during XPath filtering. Error: ${circuit.exception}'
+    failure: Message failed XPath filtering
+    success: Message passed XPath filtering
+- type: InternationalizationFilter
+  fields:
+    type: OESAuthZFilter
+  logging:
+    fatal: 'Error while authorizing to Oracle Entitlements Server. Error: ${circuit.exception}'
+    failure: Failed to authorize to Oracle Entitlements Server.
+    success: Authorized to Oracle Entitlements Server.
+- type: InternationalizationFilter
+  fields:
+    type: PassPortAuthZFilter
+  logging:
+    fatal: 'PassPort based authorization aborted for ${authentication.subject.id}. Error: ${circuit.exception}'
+    failure: PassPort based authorization failed for ${authentication.subject.id}
+    success: PassPort based authorization success for ${authentication.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: ConsumeWsTrustFilter
+  logging:
+    fatal: 'Error occurred while processing a WS-Trust message. Error: ${circuit.exception}'
+    failure: Failed to process a WS-Trust message
+    success: Successfully processed a WS-Trust message
+- type: InternationalizationFilter
+  fields:
+    type: CRLValidationFilter
+  logging:
+    fatal: 'CRL validation error. Error: ${circuit.exception}'
+    failure: CRL validation failed
+    success: CRL validation passed
+- type: InternationalizationFilter
+  fields:
+    type: RendezvousForwardFilter
+  logging:
+    fatal: Error in calling RendezvousForwardFilter
+    failure: Failed RendezvousForwardFilter
+    success: RendezvousForwardFilter passed successfully
+- type: InternationalizationFilter
+  fields:
+    type: SetDecryptionPropertiesFilter
+  logging:
+    fatal: 'Error occurred while setting the XML decryption. Error: ${circuit.exception}'
+    failure: Setting XML decryption properties failed
+    success: Setting XML decryption properties passed
+- type: InternationalizationFilter
+  fields:
+    type: SslFilter
+  logging:
+    fatal: 'Error occurred during SSL authentication. Error: ${circuit.exception}'
+    failure: SSL authentication failed
+    success: SSL authentication passed for ${authentication.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: SiteMinderCertFilter
+  logging:
+    fatal: 'Error occurred during authentication of certificate to SiteMinder. Error: ${circuit.exception}'
+    failure: Failed to authentication certificate to SiteMinder
+    success: Success in authenticating certificate to SiteMinder
+- type: InternationalizationFilter
+  fields:
+    type: FormAuthnFilter
+  logging:
+    fatal: 'Error during authentication using form based authentication. Error: ${circuit.exception}'
+    failure: Failed to authenticate using username-password in HTML form post.
+    success: Authenticated via username-password HTML form post sucessfully.
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/custom
+    displayName: Custom
+- type: InternationalizationFilter
+  fields:
+    type: RemoveHTTPHeaderFilter
+  logging:
+    fatal: 'Error in removing the HTTP header from the message. Error: ${circuit.exception}'
+    failure: Failed in removing the HTTP header from the message
+    success: Success in removing the HTTP header from the message
+- type: InternationalizationFilter
+  fields:
+    type: SamlAuthNPdpFilter
+  logging:
+    fatal: 'Error while requesting SAML authentication assertion from SAML PDP. Error: ${circuit.exception}'
+    failure: Failed to request SAML authentication assertion from SAML PDP
+    success: Requested SAML authentication assertion from SAML PDP for ${samlpdp.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: StsWebServiceFilter
+  logging:
+    fatal: 'Error occurred during Security Token Service processing. Error: ${circuit.exception}'
+    failure: Security Token Service failed to process message
+    success: Security Token Service processed message successfully
+- type: InternationalizationFilter
+  fields:
+    type: MessageSizeFilter
+  logging:
+    fatal: 'Error during message size filtering. Error: ${circuit.exception}'
+    failure: Failed message size filtering
+    success: Passed message size filtering
+- type: InternationalizationFilter
+  fields:
+    type: DecryptWebServiceFilter
+  logging:
+    fatal: 'Error occurred during Decryption Web Service processing. Error: ${circuit.exception}'
+    failure: Decryption Web Service failed to process message
+    success: Decryption Web Service processed message successfully
+- type: InternationalizationFilter
+  fields:
+    type: GenerateSignatureFilter
+  logging:
+    fatal: 'Error during message signing. Error: ${circuit.exception}'
+    failure: Failed to sign message
+    success: Signed message successfully
+- type: InternationalizationFilter
+  fields:
+    type: SOAPActionResolver
+  logging:
+    fatal: 'Error while attempt to resolve via SOAP Action. Error: ${circuit.exception}'
+    failure: Failed to resolve message via SOAP Action
+    success: Resolved message via relative SOAP Action
+- type: InternationalizationFilter
+  fields:
+    type: WsUsernameTokenFilter
+  logging:
+    fatal: 'Error occurred while authenticating using the WS Username token. Error: ${circuit.exception}'
+    failure: Failed to authenticate using the WS Username token
+    success: Authenticated using the WS Username token
+- type: InternationalizationFilter
+  fields:
+    type: JMSFilter
+  logging:
+    fatal: 'Error while forwarding the message to  messaging system. Error: ${circuit.exception}'
+    failure: Failed to send the message to the messaging system
+    success: Successfully sent the message to the messaging system
+- type: InternationalizationFilter
+  fields:
+    type: WsSecurityPolicyLayoutFilter
+  logging:
+    fatal: 'Error when check WS-SecurityPolicy Layout. Error: ${circuit.exception}'
+    failure: WS-SecurityPolicy Layout check failed
+    success: WS-SecurityPolicy Layout check passed
+- type: InternationalizationFilter
+  fields:
+    type: ClearTrustAuthZFilter
+  logging:
+    fatal: 'Error occurred during RSA Access Manager authorization. Error: ${circuit.exception}'
+    failure: RSA Access Manager authorization failed
+    success: RSA Access Manager authorization passed for ${authentication.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: SamlAttributeInsertFilter
+  logging:
+    fatal: 'Error during SAML attribute assertion insertion. Error: ${circuit.exception}'
+    failure: Failed to insert SAML attribute assertion
+    success: Inserted SAML attribute assertion
+- type: InternationalizationFilter
+  fields:
+    type: ExceptionFilter
+  logging:
+    fatal: 'Error in calling exception filter. Error: ${circuit.exception}'
+    failure: Failure in exception filter
+    success: Success in exception filter
+- type: InternationalizationFilter
+  fields:
+    type: SOAPFaultFilter
+  logging:
+    fatal: 'Error while generating SOAP Fault. Error: ${circuit.exception}'
+    failure: Failed to create a SOAP Fault
+    success: Created a SOAP Fault
+- type: InternationalizationFilter
+  fields:
+    type: SignWebServiceFilter
+  logging:
+    fatal: 'Error occurred during Digital Signature Service signing. Error: ${circuit.exception}'
+    failure: Digital Signature Service failed to sign message
+    success: Digital Signature Service signed message successfully
+- type: InternationalizationFilter
+  fields:
+    type: SamlAuthZInsertFilter
+  logging:
+    fatal: 'Error during SAML authorization assertion insertion. Error: ${circuit.exception}'
+    failure: Failed to insert SAML authorization assertion
+    success: Inserted SAML authorization assertion
+- type: InternationalizationFilter
+  fields:
+    type: AlertFilter
+  logging:
+    fatal: 'Alert generation aborted: ${circuit.exception}'
+    failure: Alert generation failed
+    success: Alert generation success
+- type: InternationalizationFilter
+  fields:
+    type: MessageAttrContentFilter
+  logging:
+    fatal: 'Error occurred while content checking message attributes. Error: ${circuit.exception}'
+    failure: Message attribute content check failed
+    success: Message attribute content check passed
+- type: InternationalizationFilter
+  fields:
+    type: ReadWSAddressingFilter
+  logging:
+    fatal: 'Error reading WS-Addressing information from. Error: ${circuit.exception}'
+    failure: Reading WS-Addressing information failed
+    success: Reading WS-Addressing information passed
+- type: InternationalizationFilter
+  fields:
+    type: MaximumNumberMsgsFilter
+  logging:
+    fatal: 'Throttle filter aborted: ${circuit.exception}'
+    failure: Maximum number of messages filter was triggered
+    success: Maximum number of messages filter was not triggered
+- type: InternationalizationFilter
+  fields:
+    type: Filter
+  logging:
+    fatal: Filter aborted due to exception
+    failure: Filter failed
+    success: Filter passed
+- type: InternationalizationFilter
+  fields:
+    type: AuthZUserFilter
+  logging:
+    fatal: 'Error occurred while authorizing user ${authentication.subject.id}. Error: ${circuit.exception}'
+    failure: Failed to authorize user ${authentication.subject.id}
+    success: Successfully authorized user ${authentication.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: SamlAuthNExtractFilter
+  logging:
+    fatal: 'Error during locating SAML authentication assertion. Error: ${circuit.exception}'
+    failure: Failed to location a SAML authentication assertion
+    success: Located SAML authentication assertion for ${attribute.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: StoreContentBodyToAttributeFilter
+  logging:
+    fatal: 'Error in storing the message. Error: ${circuit.exception}'
+    failure: Failed to store the message in attribute
+    success: 'Success in storing the message to attribute '
+- type: InternationalizationFilter
+  fields:
+    type: QaReflector
+  logging:
+    fatal: 'Error occurred while echoing the message and current attributes. Error: ${circuit.exception}'
+    failure: Failed to echo back the message and current attributes
+    success: Successfully echoed back the message and current attributes
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/management
+    displayName: Management
+- type: InternationalizationFilter
+  fields:
+    type: AuthnTransactionMinderFilter
+  logging:
+    fatal: 'Error occurred during authentication to SOA Security Manager. Error: ${circuit.exception}'
+    failure: Authentication to SOA Security Manager filter failed
+    success: Authentication to SOA Security Manager filter passed
+- type: InternationalizationFilter
+  fields:
+    type: CertValidationCrlFileFilter
+  logging:
+    fatal: 'Certificate CRL validation error. Error: ${circuit.exception}'
+    failure: Certificate failed CRL validation
+    success: Certificate passed CRL validation
+- type: InternationalizationFilter
+  fields:
+    type: SetAttributeFilter
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: InternationalizationFilter
+  fields:
+    type: RestoreContentBodyFromAttributeFilter
+  logging:
+    fatal: 'Error in restoring the message. Error: ${circuit.exception}'
+    failure: Failed to restore the message
+    success: Success in restoring the message
+- type: InternationalizationFilter
+  fields:
+    type: RemoveXMLNodeFilter
+  logging:
+    fatal: 'Error removing XML mode from the message. Error: ${circuit.exception}'
+    failure: Failed to remove XML node from the message
+    success: Successfully removed XML node from message
+- type: InternationalizationFilter
+  fields:
+    type: AttributeExtractXPathFilter
+  logging:
+    fatal: 'Error occurred while extracting attributes via XPath. Error: ${circuit.exception}'
+    failure: Failed to extract attributes via XPath
+    success: Extracted attribute from message via XPath
+- type: InternationalizationFilter
+  fields:
+    type: HttpDigestFilter
+  logging:
+    fatal: 'Error occurred while authenticating via HTTP digest. Error: ${circuit.exception}'
+    failure: HTTP digest authentication failed
+    success: HTTP digest authentication success for ${authentication.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: URLRewriteFilter
+  logging:
+    fatal: 'Error when rewriting the URL. Error: ${circuit.exception}'
+    failure: Failed to rewrite the URL
+    success: Successfully rewrote the URL
+- type: InternationalizationFilter
+  fields:
+    type: DynamicRouterFilter
+  logging:
+    fatal: 'Error in calling parsing the destination URL. Error: ${circuit.exception}'
+    failure: Failed to parse the destination URL
+    success: Destination URL parsed successfully
+- type: InternationalizationFilter
+  fields:
+    type: InsertTimestampFilter
+  logging:
+    fatal: 'Error during inserting timestamp. Error: ${circuit.exception}'
+    failure: Failed to insert timestamp
+    success: Inserted timestamp successfully
+- type: InternationalizationFilter
+  fields:
+    type: InsertMTOMAttachmentInMessageFilter
+  logging:
+    fatal: 'Error inserting MTOM attachment into the message. Error: ${circuit.exception}'
+    failure: Failed to insert MTOM attachment into the message
+    success: Successfully inserted MTOM attachment into the message
+- type: InternationalizationFilter
+  fields:
+    type: SamlAuthZPdpFilter
+  logging:
+    fatal: 'Error while requesting SAML authorization assertion from SAML PDP. Error: ${circuit.exception}'
+    failure: Failed to request SAML authorization assertion from SAML PDP
+    success: Requested SAML authorization assertion from SAML PDP for ${samlpdp.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: DigestCertificateFilter
+  logging:
+    fatal: 'Error while creating certificate digest. Error: ${circuit.exception}'
+    failure: Failed to create certificate digest
+    success: Created certificate digest
+- type: InternationalizationFilter
+  fields:
+    type: TrueFilter
+  logging:
+    fatal: 'True filter error. Error: ${circuit.exception}'
+    failure: ""
+    success: True filter passed
+- type: InternationalizationFilter
+  fields:
+    type: CopyAttributeFilter
+  logging:
+    fatal: 'Error occurred while copying attributes. Error: ${circuit.exception}'
+    failure: Failed to copy attributes
+    success: Copied attributes successfully
+- type: InternationalizationFilter
+  fields:
+    type: ExtractMTOMContentFilter
+  logging:
+    fatal: 'Error extracting MTOM content from the message. Error: ${circuit.exception}'
+    failure: Failed to extract MTOM content from the message
+    success: Successfully extracted MTOM content from message
+- type: InternationalizationFilter
+  fields:
+    type: GSSAcceptorFilter
+  logging:
+    fatal: 'Error occurred while accepting Kerberos connection. Error: ${circuit.exception}'
+    failure: Failed to accept Kerberos connection
+    success: Successfully accepting Kerberos connection
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/monitoring
+    displayName: Monitoring
+- type: InternationalizationFilter
+  fields:
+    type: SamlAttributePdpFilter
+  logging:
+    fatal: 'Error while requesting SAML attribute assertion from SAML PDP. Error: ${circuit.exception}'
+    failure: Failed to request SAML attribute assertion from SAML PDP
+    success: Requested SAML attribute assertion from SAML PDP for ${samlpdp.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: CacheAttributeFilter
+  logging:
+    fatal: 'Error while caching the message attribute. Error: ${circuit.exception}'
+    failure: Failed to cache the message attribute.
+    success: Cached the message attribute.
+- type: InternationalizationFilter
+  fields:
+    type: ValidateTimeStampFilter
+  logging:
+    fatal: 'Error during validation of timestamp. Error: ${circuit.exception}'
+    failure: Invalid timestamp found in message
+    success: Timestamp is valid
+- type: InternationalizationFilter
+  fields:
+    type: SamlAuthZExtractFilter
+  logging:
+    fatal: 'Error during locating SAML authorization assertion. Error: ${circuit.exception}'
+    failure: Failed to location a SAML authorization assertion
+    success: Located SAML authorization assertion for ${attribute.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: AuthzSiteMinderFilter
+  logging:
+    fatal: 'Error occurred during authorization to SiteMinder. Error: ${circuit.exception}'
+    failure: Authorization to SiteMinder filter failed
+    success: Authorization to SiteMinder filter passed

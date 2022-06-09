@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Approve Application API Access Request
+  id: alert.application.requestapi
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Application/Approve Application API Access Request

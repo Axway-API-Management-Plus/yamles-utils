@@ -1,0 +1,8 @@
+---
+type: DbConnection
+fields:
+  name: Default Database Connection
+  username: '{{External_Connections.Database_Connections.Default_Database_Connection.username}}'
+  password: '{{External_Connections.Database_Connections.Default_Database_Connection.password}}'
+  url: '{{External_Connections.Database_Connections.Default_Database_Connection.url}}'
+  wildcardPassword: ""

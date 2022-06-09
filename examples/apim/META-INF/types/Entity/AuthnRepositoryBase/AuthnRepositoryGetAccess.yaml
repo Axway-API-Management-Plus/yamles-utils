@@ -1,0 +1,28 @@
+---
+name: AuthnRepositoryGetAccess
+version: 2
+class: com.vordel.security.auth.repository.GetAccessRepository
+fields:
+  urlSet:
+    type: '@UrlSet'
+    cardinality: 1
+  insertActor:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  authnDriftTime:
+    type: long
+    defaultValues:
+    - {}
+    cardinality: '?'
+  wsTrustIdAttributeName:
+    type: string
+    defaultValues:
+    - data: Id
+    cardinality: '?'
+  wsseNamespace:
+    type: '@WSSENamespace'
+    defaultValues:
+    - ref: /System/(NamespacesConfiguration)Namespace Configuration/(WSSENamespace)http://schemas.xmlsoap.org/ws/2002/12/secext
+    cardinality: 1

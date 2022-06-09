@@ -1,0 +1,5 @@
+---
+type: Stylesheet
+fields:
+  URL: '#removeSecurityTokensInCurrentActor'
+  contents: '{{file "#removeSecurityTokensInCurrentActor.xsl" "binary"}}'

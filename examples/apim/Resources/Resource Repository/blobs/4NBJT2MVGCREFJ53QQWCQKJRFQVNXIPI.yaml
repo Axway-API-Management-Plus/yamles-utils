@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: 4NBJT2MVGCREFJ53QQWCQKJRFQVNXIPI
+  type: schema
+  content: '{{file "4NBJT2MVGCREFJ53QQWCQKJRFQVNXIPI.xsd" "binary"}}'

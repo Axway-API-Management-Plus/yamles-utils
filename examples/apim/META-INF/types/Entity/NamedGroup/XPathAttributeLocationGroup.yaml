@@ -1,0 +1,5 @@
+---
+name: XPathAttributeLocationGroup
+version: 0
+components:
+  XPath: '*'

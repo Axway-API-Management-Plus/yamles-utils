@@ -1,0 +1,20 @@
+---
+name: ExtractWssHeaderBlockFilter
+version: 2
+class: com.vordel.circuit.attribute.ExtractWssHeaderBlockFilter
+fields:
+  actor:
+    type: string
+    defaultValues:
+    - data: '##current##'
+    cardinality: 1
+  removeWsSecurity:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)attribute
+    cardinality: 1

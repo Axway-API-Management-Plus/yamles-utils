@@ -1,0 +1,10 @@
+---
+name: StoreContentBodyToAttributeFilter
+version: 0
+class: com.vordel.circuit.body.StoreContentBodyToAttributeFilter
+fields:
+  attributeToUse:
+    type: string
+    defaultValues:
+    - data: store.content.body
+    cardinality: 1

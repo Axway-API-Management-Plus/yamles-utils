@@ -1,0 +1,11 @@
+---
+name: MAILHandler
+version: 1
+class: com.vordel.dwe.smtp.MAILPlugin
+fields:
+  fromAddress:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+loadorder: 2000000

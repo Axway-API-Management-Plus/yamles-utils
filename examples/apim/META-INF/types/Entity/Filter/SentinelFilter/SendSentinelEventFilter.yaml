@@ -1,0 +1,77 @@
+---
+name: SendSentinelEventFilter
+version: 1
+class: com.vordel.circuit.axway.sentinel.SendSentinelEventFilter
+fields:
+  includeCycleID:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  includeCycleIDName:
+    type: string
+    defaultValues:
+    - data: CycleId
+    cardinality: 1
+  includeCycleIDValue:
+    type: string
+    defaultValues:
+    - data: ${id}
+    cardinality: 1
+  includePolicyName:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  attributeNameForPolicy:
+    type: string
+    defaultValues:
+    - data: PolicyName
+    cardinality: 1
+  includeFilterName:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  attributeNameForFilter:
+    type: string
+    defaultValues:
+    - data: FilterName
+    cardinality: 1
+  sendAsUpdate:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  includeCycleIDHeader:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  includeCycleIDHeaderName:
+    type: string
+    defaultValues:
+    - data: X-TRACKING-CYCLEID
+    cardinality: 1
+  includeTrackedObjectIdentity:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  includeTrackedObjectIdentityHeaderName:
+    type: string
+    defaultValues:
+    - data: X-TRACKEDOBJECT-IDENTITY
+    cardinality: 1
+  includeTrackedObjectName:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  includeTrackedObjectNameHeaderName:
+    type: string
+    defaultValues:
+    - data: X-TRACKEDOBJECT-NAME
+    cardinality: 1
+components:
+  EventProperty: '*'

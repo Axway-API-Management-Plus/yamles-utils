@@ -1,0 +1,48 @@
+---
+name: OAuthPersist
+version: 4
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  type:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  cache:
+    type: '@Cache'
+    cardinality: '?'
+  database:
+    type: '@DbConnection'
+    cardinality: '?'
+  purge:
+    type: long
+    defaultValues:
+    - data: 60
+    cardinality: 1
+  purgeBatchSize:
+    type: integer
+    defaultValues:
+    - data: 1000
+    cardinality: 1
+  readConsistencyLevel:
+    type: string
+    defaultValues:
+    - data: ONE
+    cardinality: 1
+  writeConsistencyLevel:
+    type: string
+    defaultValues:
+    - data: ONE
+    cardinality: 1
+  digestAlgorithm:
+    type: string
+    defaultValues:
+    - data: SHA-256
+    cardinality: 1
+keyFields:
+- name
+abstract: true

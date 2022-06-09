@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Enable API
+  id: alert.apicatalog.enable
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/API Catalog/Enable API

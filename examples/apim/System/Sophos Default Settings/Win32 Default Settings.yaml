@@ -1,0 +1,590 @@
+---
+type: SophosConfigSet
+fields:
+  name: Win32 Default Settings
+children:
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: CleanMpeg
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Fsg
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: AllowPartialVirusData
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: WordB
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: StorageDetOnly
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: ExecFileDisinfection
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: VbaOnly
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: PalmPilotHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: UueDecompression
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: CleanBmp
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: SfxArchives
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: OF95DecryptHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 9
+    name: GrpMisc
+    value: 2
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: ISCabinetFull
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: OleRawHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Mime
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: TnefEmbedHandling
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: MSCabinet
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: TnefAttachmentHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: ITSS
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Pdf
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 10
+    name: IdeDir
+    value: .
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: ExcelFormulaHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: CleanGif
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: ISCabinet
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: FullMacroSweep
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: TarDecompression
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: MimeEmbedded
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Elf
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 2
+    name: MaxIntRecDepth
+    value: 25
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Rtf
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: RemoveFromSystemRestore
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: SrpStreamHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: PeEmulator
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: FullPdf
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Html
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: VBA3Handling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: ConcatenatedArchives
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: CleanMp3
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Vba5Dir
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: CleanRiff
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Office2001Handling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: OutlookExpress
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Rpm
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 9
+    name: GrpExecutable
+    value: 2
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: AppleSingle
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 10
+    name: VirusDataName
+    value: vdl
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: MachO
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: ZipDecompression
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Stuffit
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 2
+    name: MaxRecursionDepth
+    value: 16
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: NamespaceSupport
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: ZipUseChd
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Skip
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Base64
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: OpenMacRf
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: OLE2Handling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: VbFiltering
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 9
+    name: GrpArchiveUnpack
+    value: 2
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Vbe
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 9
+    name: GrpMSOffice
+    value: 2
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: DecompressVBA5
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Msi
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 9
+    name: GrpInternet
+    value: 2
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: LoopBackEnabled
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: MbinDecompression
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: StorageReport
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: PEHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: ScrapObjectHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: ActiveMimeHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: PECompact
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 9
+    name: GrpClean
+    value: 2
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: FullSweep
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: ArjDecompression
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Saveset
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: VisioFileHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: DynamicDecompression
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: StorageReportAll
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: DelVBA5Project
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Ole2FileDisinfection
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: OleScriptHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: RarDecompression
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: CmzDecompression
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 2
+    name: MimeEmbedLimit
+    value: 25
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Emulation
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Vba5p
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Bzip2
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Java
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: GZipDecompression
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: VBA5Handling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 2
+    name: MimeEmbedLines
+    value: 500
+- type: SophosNameValue
+  fields:
+    type: 9
+    name: GrpSuper
+    value: 2
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: ProjectHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: EnableAutoStop
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Xml
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: OleDataMsoHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 9
+    name: GrpDisinfect
+    value: 2
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Upx
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: IgnoreTemplateBit
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: CleanTiff
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: HelpHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 10
+    name: VirusDataDir
+    value: C:\Program Files\Sophos\Sophos Anti-Virus
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: CleanPng
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Access
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: CleanJpeg
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 9
+    name: GrpSelfExtract
+    value: 2
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: ASPack
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: DeleteAllMacros
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: PowerPointMacroHandling
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: Lha
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: UnixArchive
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: MSCompress
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: UTF16
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: VisioEmbedHandling
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: VbaTable
+    value: 0
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: HqxDecompression
+    value: 1
+- type: SophosNameValue
+  fields:
+    type: 3
+    name: PowerPointEmbeddedHandling
+    value: 1

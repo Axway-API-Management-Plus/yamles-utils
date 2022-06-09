@@ -1,0 +1,10 @@
+---
+name: LocalSyslogAlertSystem
+version: 0
+class: com.vordel.alert.syslog.AlertLocalUnixSyslog
+fields:
+  facility:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

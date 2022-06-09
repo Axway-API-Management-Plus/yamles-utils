@@ -1,0 +1,33 @@
+---
+name: SmtpFilter
+version: 3
+class: com.vordel.circuit.smtp.SMTPFilter
+fields:
+  smtpServer:
+    type: '@SMTPServer'
+    cardinality: 1
+  to:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  from:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  subject:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  bodyLocation:
+    type: string
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  attachmentName:
+    type: string
+    defaultValues:
+    - data: ${id}.bin
+    cardinality: 1

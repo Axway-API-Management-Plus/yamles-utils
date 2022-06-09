@@ -1,0 +1,25 @@
+---
+name: MessageSizeFilter
+version: 1
+class: com.vordel.circuit.contentfiltering.MessageSizeFilter
+fields:
+  atLeastSize:
+    type: string
+    defaultValues:
+    - data: -1
+    cardinality: 1
+  atMostSize:
+    type: string
+    defaultValues:
+    - data: -1
+    cardinality: 1
+  useInCalculation:
+    type: integer
+    defaultValues:
+    - data: 2
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)content-filtering
+    cardinality: 1

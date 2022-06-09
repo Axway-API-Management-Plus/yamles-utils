@@ -1,0 +1,4 @@
+---
+type: SystemConsoleLogger
+fields:
+  name: System Console Logger

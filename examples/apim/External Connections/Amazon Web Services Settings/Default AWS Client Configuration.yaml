@@ -1,0 +1,4 @@
+---
+type: AWSClientConfiguration
+fields:
+  name: Default AWS Client Configuration

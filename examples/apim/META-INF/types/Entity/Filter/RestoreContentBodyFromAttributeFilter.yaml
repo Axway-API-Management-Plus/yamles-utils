@@ -1,0 +1,10 @@
+---
+name: RestoreContentBodyFromAttributeFilter
+version: 1
+class: com.vordel.circuit.body.RestoreContentBodyFromAttributeFilter
+fields:
+  attributeToUse:
+    type: string
+    defaultValues:
+    - data: ${store.content.body}
+    cardinality: 1

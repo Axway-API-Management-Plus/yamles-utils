@@ -1,0 +1,79 @@
+---
+name: OCSPFilter
+version: 4
+class: com.vordel.circuit.cert.ocsp.OCSPFilter
+fields:
+  certMessageAttribute:
+    type: string
+    defaultValues:
+    - data: ${certificate}
+    cardinality: 1
+  signingKey:
+    type: '@Certificate'
+    cardinality: '?'
+  validateResponse:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  validateResponseCertificate:
+    type: '@Certificate'
+    cardinality: '?'
+  useNonce:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  cacheToUse:
+    type: '@Cache'
+    cardinality: '?'
+  recordOutboundTxns:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  validateWithResponse:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  validateWithCert:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  validateWithReqCert:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  clockSkew:
+    type: long
+    defaultValues:
+    - data: 3000
+    cardinality: 1
+  validUntilExpiration:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  validUntil:
+    type: long
+    defaultValues:
+    - {}
+    cardinality: '?'
+  validUntilUnits:
+    type: string
+    defaultValues:
+    - data: days
+    cardinality: '?'
+  validFor:
+    type: long
+    defaultValues:
+    - data: 6
+    cardinality: 1
+  validForUnits:
+    type: string
+    defaultValues:
+    - data: hours
+    cardinality: 1

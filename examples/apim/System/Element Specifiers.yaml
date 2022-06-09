@@ -1,0 +1,119 @@
+---
+type: ElementSpecifiers
+fields:
+  name: Element Specifiers
+children:
+- type: ElementSpecifier
+  fields:
+    namespace: http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+    name: BinarySecurityToken
+    encryptNodeType: content
+- type: ElementSpecifier
+  fields:
+    namespace: http://docs.oasis-open.org/wss/oasis-wss-wssecurity-secext-1.1.xsd
+    name: SignatureConfirmation
+    index: 2
+- type: ElementSpecifier
+  fields:
+    namespace: http://schemas.xmlsoap.org/ws/2004/08/addressing
+    name: RelatesTo
+- type: ElementSpecifier
+  fields:
+    namespace: http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+    name: Timestamp
+- type: ElementSpecifier
+  fields:
+    namespace: http://www.w3.org/2000/09/xmldsig#
+    name: Signature
+    index: 2
+- type: ElementSpecifier
+  fields:
+    namespace: http://schemas.xmlsoap.org/ws/2004/08/addressing
+    name: Action
+- type: ElementSpecifier
+  fields:
+    namespace: http://www.w3.org/2005/08/addressing
+    name: Action
+- type: ElementSpecifier
+  fields:
+    namespace: http://schemas.xmlsoap.org/ws/2004/08/addressing
+    name: MessageID
+- type: ElementSpecifier
+  fields:
+    namespace: http://www.w3.org/2005/08/addressing
+    name: ReplyTo
+- type: ElementSpecifier
+  fields:
+    namespace: http://schemas.xmlsoap.org/ws/2004/08/addressing
+    name: From
+- type: ElementSpecifier
+  fields:
+    namespace: http://schemas.xmlsoap.org/ws/2004/08/addressing
+    name: To
+- type: ElementSpecifier
+  fields:
+    namespace: http://www.w3.org/2005/08/addressing
+    name: RelatesTo
+- type: ElementSpecifier
+  fields:
+    namespace: urn:oasis:names:tc:SAML:1.0:assertion
+    name: Assertion
+- type: ElementSpecifier
+  fields:
+    namespace: http://www.w3.org/2005/08/addressing
+    name: MessageID
+- type: ElementSpecifier
+  fields:
+    namespace: http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+    name: UsernameToken
+- type: ElementSpecifier
+  fields:
+    namespace: http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
+    name: Security
+    encryptNodeType: content
+- type: ElementSpecifier
+  fields:
+    namespace: http://schemas.xmlsoap.org/ws/2004/08/addressing
+    name: FaultTo
+- type: ElementSpecifier
+  fields:
+    namespace: http://www.w3.org/2003/05/soap-envelope
+    name: Body
+    encryptNodeType: content
+- type: ElementSpecifier
+  fields:
+    namespace: http://www.w3.org/2005/08/addressing
+    name: From
+- type: ElementSpecifier
+  fields:
+    namespace: http://www.w3.org/2005/08/addressing
+    name: To
+- type: ElementSpecifier
+  fields:
+    namespace: http://schemas.xmlsoap.org/soap/envelope/
+    name: Body
+    encryptNodeType: content
+- type: ElementSpecifier
+  fields:
+    namespace: http://www.w3.org/2000/09/xmldsig#
+    name: KeyInfo
+- type: ElementSpecifier
+  fields:
+    namespace: http://schemas.xmlsoap.org/ws/2004/08/addressing
+    name: ReplyTo
+- type: ElementSpecifier
+  fields:
+    namespace: urn:oasis:names:tc:SAML:2.0:assertion
+    name: Assertion
+- type: ElementSpecifier
+  fields:
+    namespace: http://docs.oasis-open.org/wss/oasis-wss-wssecurity-secext-1.1.xsd
+    name: SignatureConfirmation
+- type: ElementSpecifier
+  fields:
+    namespace: http://www.w3.org/2000/09/xmldsig#
+    name: Signature
+- type: ElementSpecifier
+  fields:
+    namespace: http://www.w3.org/2005/08/addressing
+    name: FaultTo

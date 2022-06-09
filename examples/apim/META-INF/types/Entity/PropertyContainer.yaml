@@ -1,0 +1,6 @@
+---
+name: PropertyContainer
+version: 0
+components:
+  Property: '?'
+abstract: true

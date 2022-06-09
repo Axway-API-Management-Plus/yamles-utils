@@ -1,0 +1,25 @@
+---
+name: RedirectFilter
+version: 0
+class: com.vordel.circuit.net.RedirectFilter
+fields:
+  httpResponseStatus:
+    type: integer
+    defaultValues:
+    - data: 301
+    cardinality: 1
+  url:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  outputContentType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  content:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'

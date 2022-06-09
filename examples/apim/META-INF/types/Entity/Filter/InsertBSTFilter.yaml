@@ -1,0 +1,25 @@
+---
+name: InsertBSTFilter
+version: 0
+class: com.vordel.circuit.wsse.InsertBSTFilter
+fields:
+  actor:
+    type: string
+    defaultValues:
+    - data: '##current##'
+    cardinality: '?'
+  messageAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  valueType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  base64Encode:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1

@@ -1,0 +1,71 @@
+---
+name: PGPDecryptFilter
+version: 3
+class: com.vordel.circuit.pgp.DecryptFilter
+fields:
+  privateKeyLocation:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  keyPair:
+    type: '@PGPKeyPair'
+    cardinality: '?'
+  keyPairAliasAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  privateKeyAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  contentType:
+    type: string
+    defaultValues:
+    - data: application/octet-stream
+    cardinality: 1
+  decrypt:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  verify:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  signKeyLocation:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  signKeyPair:
+    type: '@PGPKeyPair'
+    cardinality: '?'
+  signKeyAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  signKeyPairAliasAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  signMethod:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  signMethodTwoPass:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  failDecryptNoSignature:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1

@@ -1,0 +1,4 @@
+---
+name: DynamicRouterFilter
+version: 0
+class: com.vordel.circuit.net.DynamicRouterFilter

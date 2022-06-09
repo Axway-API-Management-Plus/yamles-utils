@@ -1,0 +1,21 @@
+---
+name: StaticContent
+version: 3
+fields:
+  fileSystemPath:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  generateIndex:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  indexfile:
+    type: string
+    defaultValues:
+    - data: index.html
+    cardinality: 1
+components:
+  Property: '*'

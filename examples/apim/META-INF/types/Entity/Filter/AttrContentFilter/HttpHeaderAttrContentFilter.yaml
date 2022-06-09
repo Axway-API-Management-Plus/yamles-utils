@@ -1,0 +1,4 @@
+---
+name: HttpHeaderAttrContentFilter
+version: 0
+class: com.vordel.circuit.attribute.HttpHeaderAttrContentFilter

@@ -1,0 +1,32 @@
+---
+type: StaticContent
+fields:
+  fileSystemPath: $VDISTDIR/webapps/apiportal/vordel/apiportal/app-login/
+  uriprefix: /vordel/apiportal/app-login
+  httpMethod: GET
+  corsProfile: /null
+children:
+- type: Property
+  fields:
+    name: Content-Security-Policy
+    value: ${env.SERVICES.CONTENTSECURITYPOLICY}
+- type: Property
+  fields:
+    name: Expires
+    value: 0
+- type: Property
+  fields:
+    name: X-Frame-Options
+    value: DENY
+- type: Property
+  fields:
+    name: Cache-Control
+    value: no-cache, no-store, must-revalidate
+- type: Property
+  fields:
+    name: Pragma
+    value: no-cache
+- type: Property
+  fields:
+    name: X-XSS-Protection
+    value: 1; mode=block

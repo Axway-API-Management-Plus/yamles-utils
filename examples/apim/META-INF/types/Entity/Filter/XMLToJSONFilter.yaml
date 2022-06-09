@@ -1,0 +1,23 @@
+---
+name: XMLToJSONFilter
+version: 5
+class: com.vordel.circuit.json.XMLToJSONFilter
+fields:
+  autoArray:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  autoPrimitive:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  namespaces:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  xpathNode:
+    type: '@XPath'
+    cardinality: 1

@@ -1,0 +1,23 @@
+---
+name: RealtimeMonitoring
+version: 14
+class: com.vordel.reporting.rtm.RealtimeMonitoring
+fields:
+  enabled:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  maxNumMetricGroupsPerType:
+    type: integer
+    defaultValues:
+    - data: 100000
+    cardinality: 1
+  systemMonitorPollingIntervalSecs:
+    type: integer
+    defaultValues:
+    - data: 3
+    cardinality: 1
+components:
+  MetricsMetadata: '*'
+loadorder: 95

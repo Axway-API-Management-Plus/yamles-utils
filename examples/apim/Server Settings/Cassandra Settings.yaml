@@ -1,0 +1,23 @@
+---
+type: CassandraSettings
+fields:
+  name: Cassandra Settings
+  replication: '{{Server_Settings.Cassandra_Settings.replication}}'
+  replicationStrategy: '{{Server_Settings.Cassandra_Settings.replicationStrategy}}'
+  throttlingReplication: '{{Server_Settings.Cassandra_Settings.throttlingReplication}}'
+  throttlingReplicationStrategy: '{{Server_Settings.Cassandra_Settings.throttlingReplicationStrategy}}'
+  throttlingReadConsistencyLevel: '{{Server_Settings.Cassandra_Settings.throttlingReadConsistencyLevel}}'
+  throttlingWriteConsistencyLevel: '{{Server_Settings.Cassandra_Settings.throttlingWriteConsistencyLevel}}'
+children:
+- type: CassandraServer
+  fields:
+    name: Node 1
+    host: ${env.cassandra.node1}
+- type: CassandraServer
+  fields:
+    host: ${env.cassandra.node2}
+    name: Node 2
+- type: CassandraServer
+  fields:
+    host: ${env.cassandra.node3}
+    name: Node 3

@@ -1,0 +1,6 @@
+---
+name: SocketProtocol
+version: 1
+components:
+  Interface: '?'
+abstract: true

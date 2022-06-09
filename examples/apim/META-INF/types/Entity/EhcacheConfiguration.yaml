@@ -1,0 +1,46 @@
+---
+name: EhcacheConfiguration
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  peerProviderClass:
+    type: string
+    defaultValues:
+    - data: net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory
+    cardinality: 1
+  peerProviderPropertySeparator:
+    type: string
+    defaultValues:
+    - data: ','
+    cardinality: 1
+  peerProviderProperties:
+    type: string
+    defaultValues:
+    - data: peerDiscovery=automatic,multicastGroupAddress=230.0.0.1,multicastGroupPort=4446, timeToLive=1
+    cardinality: 1
+  peerListenerClass:
+    type: string
+    defaultValues:
+    - data: net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory
+    cardinality: 1
+  peerListenerPropertySeparator:
+    type: string
+    defaultValues:
+    - data: ','
+    cardinality: 1
+  peerListenerProperties:
+    type: string
+    defaultValues:
+    - data: hostName=127.0.0.1,port=40001,socketTimeoutMillis=120000
+    cardinality: 1
+  notifyCacheReplicators:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+keyFields:
+- name

@@ -1,0 +1,23 @@
+---
+type: XPathSignatureInsertionLocationGroup
+fields:
+  name: Signature Insertion Locations
+children:
+- type: XPath
+  fields:
+    name: SAML Subject (Before) (SAML 2.0)
+    xpath: //saml:Assertion/saml:Subject
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: saml
+      URI: urn:oasis:names:tc:SAML:2.0:assertion
+- type: XPath
+  fields:
+    name: SAML Assertion (Append) (SAML 1.1)
+    xpath: //saml:Assertion
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: saml
+      URI: urn:oasis:names:tc:SAML:1.0:assertion

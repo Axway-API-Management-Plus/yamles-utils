@@ -1,0 +1,14 @@
+---
+name: KPSCassandraDataSource
+version: 2
+fields:
+  readConsistencyLevel:
+    type: string
+    defaultValues:
+    - data: ONE
+    cardinality: 1
+  writeConsistencyLevel:
+    type: string
+    defaultValues:
+    - data: ONE
+    cardinality: 1

@@ -1,0 +1,7 @@
+---
+name: TrackedObjects
+version: 0
+class: com.vordel.circuit.axway.sentinel.TrackedObjects
+components:
+  TrackedObject: '*'
+loadorder: 300

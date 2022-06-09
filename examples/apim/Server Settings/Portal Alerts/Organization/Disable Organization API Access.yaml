@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Disable Organization API Access
+  id: alert.organization.disableapi
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Organization/Disable Organization API Access

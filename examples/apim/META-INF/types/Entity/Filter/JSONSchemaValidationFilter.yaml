@@ -1,0 +1,28 @@
+---
+name: JSONSchemaValidationFilter
+version: 3
+class: com.vordel.circuit.schema.JSONSchemaValidationFilter
+fields:
+  schemaTypeChosen:
+    type: string
+    defaultValues:
+    - data: USE_JSON_SCHEMA
+    cardinality: 1
+  jsonSchemaRef:
+    type: '@JSONSchema'
+    cardinality: '?'
+  objectToUse:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  storeInMsgAttr:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  schemaDraftVersion:
+    type: string
+    defaultValues:
+    - data: V4
+    cardinality: 1

@@ -1,0 +1,12 @@
+---
+name: TwoWaySSLSecurityDevice
+version: 2
+class: com.vordel.apiportal.runtime.TwoWaySSLSecurityDevice
+fields:
+  apiKeyFieldName:
+    type: string
+    defaultValues:
+    - data: ${certificate.subject.CN}
+    cardinality: 1
+components:
+  SslFilter: 1

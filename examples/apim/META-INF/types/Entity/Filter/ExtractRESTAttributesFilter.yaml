@@ -1,0 +1,30 @@
+---
+name: ExtractRESTAttributesFilter
+version: 2
+class: com.vordel.circuit.attribute.ExtractRESTAttributesFilter
+fields:
+  useHeaders:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  useQueryString:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  queryAttributePrefix:
+    type: string
+    defaultValues:
+    - data: params.query
+    cardinality: 1
+  decode:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)attribute
+    cardinality: 1

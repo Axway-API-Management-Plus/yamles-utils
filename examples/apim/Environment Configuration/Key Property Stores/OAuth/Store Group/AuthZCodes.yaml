@@ -1,0 +1,11 @@
+---
+type: KPSReadWriteStore
+fields:
+  key: code
+  readKey: ""
+  encrypted: auth
+  name: AuthZCodes
+  description: AuthZCodes
+  type: /Environment Configuration/Key Property Stores/OAuth/Type Group/AuthZCodes
+  dataSource: /null
+  aliases: AuthZCodes

@@ -1,0 +1,17 @@
+---
+type: KPSType
+fields:
+  name: AuthZCodes
+children:
+- type: KPSTypeProperty
+  fields:
+    name: code
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: auth
+    type: java.lang.String
+    key: ""
+    value: ""

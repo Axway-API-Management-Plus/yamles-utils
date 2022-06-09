@@ -1,0 +1,17 @@
+---
+name: MimeTypeFilter
+version: 1
+class: com.vordel.circuit.contentfiltering.MimeTypeFilter
+fields:
+  allowAttachments:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)content-filtering
+    cardinality: 1
+components:
+  MimeType: '*'

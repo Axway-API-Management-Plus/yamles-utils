@@ -1,0 +1,32 @@
+---
+name: VordelAttributeExtractFilter
+version: 5
+class: com.vordel.circuit.attribute.VordelAttributeExtractFilter
+fields:
+  userIdentityAttribName:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.id}
+    cardinality: '?'
+  enablyLegacyAttrNaming:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  failOnEmptyAttributeSet:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  messageAttrPrefix:
+    type: string
+    defaultValues:
+    - data: user
+    cardinality: '?'
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)attribute
+    cardinality: 1
+components:
+  LookupAttribute: '*'

@@ -1,0 +1,10 @@
+---
+name: CircuitChainFilter
+version: 1
+class: com.vordel.circuit.CircuitChainFilter
+fields:
+  start:
+    type: '@CircuitReference'
+    cardinality: 1
+components:
+  CircuitReference: '*'

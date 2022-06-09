@@ -1,0 +1,4 @@
+---
+name: SunAccessManagerSSOTokenValidationFilter
+version: 0
+class: com.vordel.circuit.sun.AccessManagerSSOTokenValidationFilter

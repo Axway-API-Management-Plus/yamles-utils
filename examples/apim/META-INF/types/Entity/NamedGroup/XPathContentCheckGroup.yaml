@@ -1,0 +1,5 @@
+---
+name: XPathContentCheckGroup
+version: 0
+components:
+  XPath: '*'

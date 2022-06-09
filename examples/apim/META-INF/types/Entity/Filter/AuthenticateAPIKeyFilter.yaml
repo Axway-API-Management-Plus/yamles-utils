@@ -1,0 +1,140 @@
+---
+name: AuthenticateAPIKeyFilter
+version: 4
+class: com.vordel.circuit.apikeys.AuthenticateAPIKeyFilter
+fields:
+  kpsAlias:
+    type: string
+    defaultValues:
+    - data: ApiKeyStore
+    cardinality: 1
+  secretKPSFieldName:
+    type: string
+    defaultValues:
+    - data: secret
+    cardinality: 1
+  whereToLookForAPIKey:
+    type: string
+    defaultValues:
+    - data: HTTP_VALUES
+    cardinality: 1
+  apiKeyHTTPLocation:
+    type: string
+    defaultValues:
+    - data: QUERYSTRING
+    cardinality: 1
+  apiKeyName:
+    type: string
+    defaultValues:
+    - data: apiKey
+    cardinality: 1
+  apiKeyAuthorizationFormatClass:
+    type: string
+    defaultValues:
+    - data: com.vordel.circuit.apikeys.AWSS3AuthZHeader
+    cardinality: 1
+  apiKeySelector:
+    type: string
+    defaultValues:
+    - data: ${http.client.getCgiArgument("apiKey")}
+    cardinality: 1
+  extractSecret:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  secretLocation:
+    type: string
+    defaultValues:
+    - data: HTTP_VALUES
+    cardinality: 1
+  secretHTTPLocation:
+    type: string
+    defaultValues:
+    - data: QUERYSTRING
+    cardinality: 1
+  secretLocationName:
+    type: string
+    defaultValues:
+    - data: apiSecret
+    cardinality: 1
+  secretAuthorizationFormatClass:
+    type: string
+    defaultValues:
+    - data: com.vordel.circuit.apikeys.HTTPBasicAuthZHeader
+    cardinality: 1
+  secretProcessorClass:
+    type: string
+    defaultValues:
+    - data: com.vordel.circuit.apikeys.AuthenticateS3RequestAuthZHeader
+    cardinality: 1
+  secretSelector:
+    type: string
+    defaultValues:
+    - data: ${http.client.getCgiArgument("apiSecret")}
+    cardinality: 1
+  performAuthentication:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  validateTimeStamp:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  timeStampLocation:
+    type: string
+    defaultValues:
+    - data: HEADER
+    cardinality: 1
+  timeStampLocationName:
+    type: string
+    defaultValues:
+    - data: Date
+    cardinality: 1
+  timeStampType:
+    type: string
+    defaultValues:
+    - data: DATE_FORMAT
+    cardinality: 1
+  timeStampFormat:
+    type: string
+    defaultValues:
+    - data: EEE, dd MMM yyyy HH:mm:ss zzz
+    cardinality: 1
+  timeStampWiggleRoom:
+    type: long
+    defaultValues:
+    - data: 60000
+    cardinality: 1
+  validateExpires:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  expiresLocation:
+    type: string
+    defaultValues:
+    - data: QUERYSTRING
+    cardinality: 1
+  expiresLocationName:
+    type: string
+    defaultValues:
+    - data: Expires
+    cardinality: 1
+  expiresType:
+    type: string
+    defaultValues:
+    - data: MILLISECONDS_SINCE_EPOC
+    cardinality: 1
+  expiresFormat:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  expiresWiggleRoom:
+    type: long
+    defaultValues:
+    - data: 60000
+    cardinality: 1

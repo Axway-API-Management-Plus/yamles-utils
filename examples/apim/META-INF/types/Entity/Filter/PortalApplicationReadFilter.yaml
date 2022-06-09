@@ -1,0 +1,15 @@
+---
+name: PortalApplicationReadFilter
+version: 1
+class: com.vordel.circuit.apiportal.ReadApplicationFilter
+fields:
+  idSelector:
+    type: string
+    defaultValues:
+    - data: ${authentication.application.id}
+    cardinality: 1
+  targetAttribute:
+    type: string
+    defaultValues:
+    - data: apimgmt.application
+    cardinality: 1

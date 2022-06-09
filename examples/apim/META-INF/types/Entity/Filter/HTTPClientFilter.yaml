@@ -1,0 +1,34 @@
+---
+name: HTTPClientFilter
+version: 3
+fields:
+  storeAndRestoreMessage:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  routingMode:
+    type: string
+    defaultValues:
+    - data: direct
+    cardinality: 1
+  specifiedURL:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  routingCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+  preMessageCreationCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+  postMessageCreationCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+  postRoutingCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+components:
+  ConnectionFilter: 1
+abstract: true

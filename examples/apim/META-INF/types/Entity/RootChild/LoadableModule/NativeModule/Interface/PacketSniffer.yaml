@@ -1,0 +1,46 @@
+---
+name: PacketSniffer
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  device:
+    type: string
+    defaultValues:
+    - data: any
+    cardinality: 1
+  program:
+    type: string
+    defaultValues:
+    - data: tcp and not port 8090
+    cardinality: 1
+  promiscuous:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  timeout:
+    type: integer
+    defaultValues:
+    - data: 5000
+    cardinality: 1
+  packetCount:
+    type: integer
+    defaultValues:
+    - data: 100
+    cardinality: 1
+  fragmentTimeout:
+    type: integer
+    defaultValues:
+    - data: 10000
+    cardinality: 1
+  sessionTimeout:
+    type: integer
+    defaultValues:
+    - data: 3600000
+    cardinality: 1
+keyFields:
+- name

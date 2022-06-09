@@ -1,0 +1,17 @@
+---
+name: XPathNamespace
+version: 0
+fields:
+  prefix:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  URI:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- prefix
+- URI

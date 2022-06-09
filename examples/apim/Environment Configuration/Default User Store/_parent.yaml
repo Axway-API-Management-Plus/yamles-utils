@@ -1,0 +1,4 @@
+---
+type: UserStore
+fields:
+  name: Default User Store

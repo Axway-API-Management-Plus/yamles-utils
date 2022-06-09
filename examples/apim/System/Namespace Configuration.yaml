@@ -1,0 +1,50 @@
+---
+type: NamespacesConfiguration
+fields:
+  name: Namespace Configuration
+children:
+- type: SignatureIDs
+  fields:
+    name: Id
+    priority: 3
+- type: SignatureIDs
+  fields:
+    name: AssertionID
+- type: SOAPNamespace
+  fields:
+    name: http://www.w3.org/2003/05/soap-envelope
+    priority: 2
+- type: WSSENamespace
+  fields:
+    wsuNamespace: http://schemas.xmlsoap.org/ws/2003/06/utility
+    name: http://schemas.xmlsoap.org/ws/2003/06/secext
+    priority: 3
+- type: SOAPNamespace
+  fields:
+    name: http://schemas.xmlsoap.org/soap/envelope/
+- type: SignatureIDs
+  fields:
+    name: ID
+    priority: 2
+- type: WSSENamespace
+  fields:
+    wsuNamespace: http://schemas.xmlsoap.org/ws/2002/07/utility
+    name: http://schemas.xmlsoap.org/ws/2002/07/secext
+    priority: 4
+- type: SignatureIDs
+  fields:
+    name: ResponseID
+    priority: 5
+- type: SignatureIDs
+  fields:
+    name: RequestID
+    priority: 4
+- type: WSSENamespace
+  fields:
+    wsuNamespace: http://schemas.xmlsoap.org/ws/2002/07/utility
+    name: http://schemas.xmlsoap.org/ws/2002/12/secext
+    priority: 2
+- type: WSSENamespace
+  fields:
+    wsuNamespace: http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd
+    name: http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd

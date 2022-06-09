@@ -1,0 +1,38 @@
+---
+name: CRLFilter
+version: 2
+fields:
+  crlLocation:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  updateType:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  updateBeforeDays:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  updateBeforeHours:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  updateBeforeMinutes:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  updateEveryDays:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  cronExpressionRef:
+    type: '@CronExpression'
+    cardinality: 1
+abstract: true

@@ -1,0 +1,5 @@
+---
+name: DATAHandler
+version: 0
+class: com.vordel.dwe.smtp.DATAPlugin
+loadorder: 2000000

@@ -1,0 +1,5 @@
+---
+name: CategoryGroup
+version: 0
+components:
+  Category: '*'

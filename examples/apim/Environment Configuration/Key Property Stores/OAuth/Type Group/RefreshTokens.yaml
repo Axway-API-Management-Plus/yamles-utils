@@ -1,0 +1,41 @@
+---
+type: KPSType
+fields:
+  name: RefreshTokens
+children:
+- type: KPSTypeProperty
+  fields:
+    name: authRequest
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: tokenId
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: oauth2RefreshToken
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: userName
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: applicationId
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: clientId
+    type: java.lang.String
+    key: ""
+    value: ""

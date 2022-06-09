@@ -1,0 +1,25 @@
+---
+name: OracleAccessManagerResourceFilter
+version: 0
+fields:
+  resType:
+    type: string
+    defaultValues:
+    - data: http
+    cardinality: 1
+  resName:
+    type: string
+    defaultValues:
+    - data: //hostname${http.request.uri}
+    cardinality: 1
+  operation:
+    type: string
+    defaultValues:
+    - data: ${http.request.verb}
+    cardinality: 1
+  includeQueryString:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+abstract: true

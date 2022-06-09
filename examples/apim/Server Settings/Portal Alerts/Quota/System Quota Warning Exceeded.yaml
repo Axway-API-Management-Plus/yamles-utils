@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: System Quota Warning Exceeded
+  id: alert.run.sysquota.warning
+  type: Run-time
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Quota/System Quota Warning Exceeded

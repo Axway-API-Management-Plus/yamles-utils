@@ -1,0 +1,4 @@
+---
+name: ExceptionFilter
+version: 0
+class: com.vordel.circuit.basic.ExceptionFilter
