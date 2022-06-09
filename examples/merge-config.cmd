@@ -11,7 +11,7 @@ if not defined JAR (
 )
 
 echo. 
-echo Merge values from various sources and print the resuöt to the console.
+echo Merge values from various sources and print the result to the console.
 echo.
 pause
 
