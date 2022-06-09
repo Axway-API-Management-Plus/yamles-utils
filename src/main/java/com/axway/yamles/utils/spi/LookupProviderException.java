@@ -1,6 +1,6 @@
 package com.axway.yamles.utils.spi;
 
-public class SecretsProviderException extends RuntimeException {
+public class LookupProviderException extends RuntimeException {
 	
 	/**
 	 * 
@@ -8,12 +8,12 @@ public class SecretsProviderException extends RuntimeException {
 	private static final long serialVersionUID = -9032681363655032251L;
 	private final String secretsProviderName;
 	
-	public SecretsProviderException(SecretsProvider sp, String msg) {
+	public LookupProviderException(LookupProvider sp, String msg) {
 		super(msg);
 		this.secretsProviderName = sp.getName();
 	}
 	
-	public SecretsProviderException(SecretsProvider sp, String msg, Throwable cause) {
+	public LookupProviderException(LookupProvider sp, String msg, Throwable cause) {
 		super(msg, cause);
 		this.secretsProviderName = sp.getName();
 	}

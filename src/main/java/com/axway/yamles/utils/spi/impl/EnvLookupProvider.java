@@ -4,8 +4,14 @@ import java.util.Optional;
 
 import picocli.CommandLine.Command;
 
+/**
+ * Lookup provider for environment variables.
+ * 
+ *  
+ * @author mlook
+ */
 @Command
-public class EnvSecretsProvider extends AbstractSecretsProvider {
+public class EnvLookupProvider extends AbstractLookupProvider {
 
 	@Override
 	public String getName() {
@@ -13,15 +19,15 @@ public class EnvSecretsProvider extends AbstractSecretsProvider {
 	}
 
 	@Override
-	public Optional<String> getSecret(String key) {
+	public Optional<String> lookup(String key) {
 		if (key == null || key.isEmpty()) {
 			return Optional.empty();
 		}
 
-		String secret = System.getenv(key);
-		if (secret == null) {
+		String value = System.getenv(key);
+		if (value == null) {
 			return Optional.empty();
 		}
-		return Optional.of(secret);
+		return Optional.of(value);
 	}
 }

@@ -10,7 +10,7 @@ certificates:
   example-root-ca:
     provider: simple
     config:
-      cert: "{{insecure '/root_ca_pem'}}"
+      cert: "{{yaml '/root_ca_pem'}}"
 
   example-sub-ca:
     provider: simple

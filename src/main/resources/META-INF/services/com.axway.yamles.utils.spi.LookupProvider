@@ -1,0 +1,4 @@
+com.axway.yamles.utils.spi.impl.YamlLookupProvider
+com.axway.yamles.utils.spi.impl.EnvLookupProvider
+com.axway.yamles.utils.spi.impl.SysLookupProvider
+com.axway.yamles.utils.spi.impl.VaultLookupProvider

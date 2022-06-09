@@ -3,8 +3,8 @@ package com.axway.yamles.utils.helper;
 import java.io.IOException;
 import java.util.Iterator;
 
-import com.axway.yamles.utils.spi.SecretsManager;
-import com.axway.yamles.utils.spi.SecretsProvider;
+import com.axway.yamles.utils.spi.LookupManager;
+import com.axway.yamles.utils.spi.LookupProvider;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 
@@ -29,11 +29,11 @@ public class Mustache {
 	private Mustache() {
 		this.hb = new Handlebars();
 		
-		this.hb.registerHelper("secret", SecretsManager.getInstance());
+		this.hb.registerHelper("secret", LookupManager.getInstance());
 
-		Iterator<SecretsProvider> iter = SecretsManager.getInstance().getProviders();
+		Iterator<LookupProvider> iter = LookupManager.getInstance().getProviders();
 		while(iter.hasNext()) {
-			SecretsProvider sp = iter.next();
+			LookupProvider sp = iter.next();
 			this.hb.registerHelper(sp.getName(), sp);
 		}
 	}

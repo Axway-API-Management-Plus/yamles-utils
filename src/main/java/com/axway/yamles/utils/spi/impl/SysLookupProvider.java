@@ -4,8 +4,13 @@ import java.util.Optional;
 
 import picocli.CommandLine.Command;
 
+/**
+ * Lookup provider for system properties.
+ * 
+ * @author mlook
+ */
 @Command
-public class SysSecretsProvider extends AbstractSecretsProvider {
+public class SysLookupProvider extends AbstractLookupProvider {
 
 	@Override
 	public String getName() {
@@ -13,15 +18,15 @@ public class SysSecretsProvider extends AbstractSecretsProvider {
 	}
 
 	@Override
-	public Optional<String> getSecret(String key) {
+	public Optional<String> lookup(String key) {
 		if (key == null || key.isEmpty()) {
 			return Optional.empty();
 		}
 
-		String secret = System.getProperty(key);
-		if (secret == null) {
+		String value = System.getProperty(key);
+		if (value == null) {
 			return Optional.empty();
 		}
-		return Optional.of(secret);
+		return Optional.of(value);
 	}
 }

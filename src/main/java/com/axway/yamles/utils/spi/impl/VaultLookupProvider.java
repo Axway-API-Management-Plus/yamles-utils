@@ -23,7 +23,7 @@ import org.apache.hc.core5.ssl.TrustStrategy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.axway.yamles.utils.spi.SecretsProviderException;
+import com.axway.yamles.utils.spi.LookupProviderException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -32,8 +32,8 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 @Command
-public class VaultSecretsProvider extends AbstractSecretsProvider {
-	private static final Logger log = LogManager.getLogger(VaultSecretsProvider.class);
+public class VaultLookupProvider extends AbstractLookupProvider {
+	private static final Logger log = LogManager.getLogger(VaultLookupProvider.class);
 
 	@ArgGroup(exclusive = false)
 	VaultConfig config;
@@ -55,7 +55,7 @@ public class VaultSecretsProvider extends AbstractSecretsProvider {
 	}
 
 	@Override
-	public Optional<String> getSecret(String key) {
+	public Optional<String> lookup(String key) {
 		if (this.config == null)
 			return Optional.empty();
 
@@ -81,7 +81,7 @@ public class VaultSecretsProvider extends AbstractSecretsProvider {
 					return Optional.empty();
 				}
 				if (response.getCode() != 200) {
-					throw new SecretsProviderException(this, "error on accessign vault");
+					throw new LookupProviderException(this, "error on accessign vault");
 				}
 				ObjectMapper om = new ObjectMapper();
 				JsonNode node = om.readTree(response.getEntity().getContent());

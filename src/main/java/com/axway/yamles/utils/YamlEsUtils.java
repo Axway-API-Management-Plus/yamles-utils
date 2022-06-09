@@ -4,8 +4,8 @@ import java.util.Iterator;
 
 import com.axway.yamles.utils.lint.LintCommand;
 import com.axway.yamles.utils.merge.MergeCommand;
-import com.axway.yamles.utils.spi.SecretsManager;
-import com.axway.yamles.utils.spi.SecretsProvider;
+import com.axway.yamles.utils.spi.LookupManager;
+import com.axway.yamles.utils.spi.LookupProvider;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
@@ -20,9 +20,9 @@ public class YamlEsUtils {
 		CommandLine configCL = mergeCL.getSubcommands().get("config");
 		CommandLine certCL = mergeCL.getSubcommands().get("certs");
 		
-		Iterator<SecretsProvider> sps = SecretsManager.getInstance().getProviders();
+		Iterator<LookupProvider> sps = LookupManager.getInstance().getProviders();
 		while(sps.hasNext()) {
-			SecretsProvider sp = sps.next();
+			LookupProvider sp = sps.next();
 			certCL.addMixin(sp.getName(), sp);
 			configCL.addMixin(sp.getName(), sp);
 		}
