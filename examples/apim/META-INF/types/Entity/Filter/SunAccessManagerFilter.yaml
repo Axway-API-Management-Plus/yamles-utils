@@ -1,0 +1,10 @@
+---
+name: SunAccessManagerFilter
+version: 1
+fields:
+  ssoTokenAttrName:
+    type: string
+    defaultValues:
+    - data: ${sun.sso.token}
+    cardinality: 1
+abstract: true

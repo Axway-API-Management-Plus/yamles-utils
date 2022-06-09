@@ -1,0 +1,5 @@
+---
+name: BasicAuthGroup
+version: 0
+components:
+  BasicProfile: '*'

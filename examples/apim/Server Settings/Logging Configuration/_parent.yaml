@@ -1,0 +1,4 @@
+---
+type: LogManager
+fields:
+  name: Logging Configuration

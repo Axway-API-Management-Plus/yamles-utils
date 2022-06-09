@@ -1,0 +1,6 @@
+---
+name: AlertManager
+version: 1
+class: com.vordel.alert.AlertManager
+components:
+  AlertSystem: '*'

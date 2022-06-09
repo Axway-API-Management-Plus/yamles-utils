@@ -1,0 +1,9 @@
+---
+developer:
+  name: John
+
+backends:
+  - name: "be1"
+    url: "https://dev.be1.acme.com"
+  - name: "be2"
+    url: "https://dev.be1.acme.com"

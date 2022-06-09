@@ -1,0 +1,74 @@
+---
+name: OPDbConfig
+version: 12
+class: com.vordel.dwe.OPSDb
+fields:
+  enabled:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  dataDirectory:
+    type: string
+    defaultValues:
+    - data: conf/opsdb.d
+    cardinality: 1
+  dbName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  viewerService:
+    type: '@HTTP'
+    cardinality: '*'
+  targetFileCount:
+    type: long
+    defaultValues:
+    - data: 128
+    cardinality: 1
+  targetFileSize:
+    type: long
+    defaultValues:
+    - data: 8388608
+    cardinality: 1
+  recordInboundTxns:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordOutboundTxns:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordCircuitPath:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordTrace:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordSent:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordReceived:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  useDailyFile:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  targetFileExpiration:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+loadorder: 900000

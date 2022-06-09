@@ -1,0 +1,35 @@
+---
+name: AlertFilter
+version: 4
+class: com.vordel.circuit.alert.AlertFilter
+fields:
+  alertMessage:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  alertType:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  numberMessages:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  timePeriodMillis:
+    type: integer
+    defaultValues:
+    - data: 60000
+    cardinality: 1
+  trackPerClient:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  alertPolicy:
+    type: '@FilterCircuit'
+    cardinality: 1
+components:
+  AlertNotification: +

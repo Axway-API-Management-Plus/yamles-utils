@@ -1,0 +1,5 @@
+---
+name: LdapDirectoryGroup
+version: 0
+components:
+  LdapDirectory: '*'

@@ -1,0 +1,45 @@
+---
+name: StringReplaceFilter
+version: 2
+class: com.vordel.circuit.string.StringReplaceFilter
+fields:
+  sourceAttribute:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  destAttribute:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  destAttributeOverride:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  replacementString:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  matchMode:
+    type: string
+    defaultValues:
+    - data: STRAIGHT_REPLACE
+    cardinality: 1
+  straightMatchString:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  regexMatchString:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  matchBehaviour:
+    type: string
+    defaultValues:
+    - data: MATCH_FIRST
+    cardinality: 1

@@ -1,0 +1,4 @@
+---
+type: ApiKeyGroup
+fields:
+  name: API Keys

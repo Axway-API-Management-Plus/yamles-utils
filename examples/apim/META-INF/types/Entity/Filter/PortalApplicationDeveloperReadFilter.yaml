@@ -1,0 +1,15 @@
+---
+name: PortalApplicationDeveloperReadFilter
+version: 0
+class: com.vordel.circuit.apiportal.ReadApplicationDeveloperFilter
+fields:
+  idSelector:
+    type: string
+    defaultValues:
+    - data: ${apimgmt.appdeveloper.id}
+    cardinality: 1
+  targetAttribute:
+    type: string
+    defaultValues:
+    - data: apimgmt.appdeveloper
+    cardinality: 1

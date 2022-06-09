@@ -1,0 +1,19 @@
+---
+name: CommsFailureRequirement
+version: 1
+fields:
+  thresholdType:
+    type: integer
+    defaultValues:
+    - data: 2
+    cardinality: 1
+  breachAlertMessage:
+    type: string
+    defaultValues:
+    - data: ' Raising a Comms Failure SLA Alert. Alert details are as follows:- SLA Name: ${sla.name}. Requirement: No more than ${sla.threshold}% of requests may result in a comms failure. Percentage: ${sla.value}%. Time: ${sla.time}.'
+    cardinality: 1
+  clearAlertMessage:
+    type: string
+    defaultValues:
+    - data: ' Clearing a Comms Failure SLA Alert. Alert details are as follows:- SLA Name: ${sla.name}. Requirement: No more than ${sla.threshold}% of requests may result in a comms failure. Current Percentage: ${sla.value}%. Clearance Time: ${sla.time}.'
+    cardinality: 1

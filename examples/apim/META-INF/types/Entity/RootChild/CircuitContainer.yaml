@@ -1,0 +1,15 @@
+---
+name: CircuitContainer
+version: 3
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  FilterCircuit: '*'
+  CircuitContainer: '*'
+  MVProperty: '*'
+keyFields:
+- name

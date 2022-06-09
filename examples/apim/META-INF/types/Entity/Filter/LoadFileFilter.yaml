@@ -1,0 +1,53 @@
+---
+name: LoadFileFilter
+version: 2
+class: com.vordel.circuit.file.LoadFileFilter
+fields:
+  fileIn:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  treatFileAs:
+    type: string
+    defaultValues:
+    - data: RAWFILE
+    cardinality: 1
+  inFileContentType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  filterCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+  workDir:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  outDir:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  onComplete:
+    type: string
+    defaultValues:
+    - data: NOTHING
+    cardinality: 1
+  completeDir:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  outPrefix:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  outSuffix:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

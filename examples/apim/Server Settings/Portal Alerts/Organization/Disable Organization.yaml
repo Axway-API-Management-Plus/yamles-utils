@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Disable Organization
+  id: alert.organization.disable
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Organization/Disable Organization

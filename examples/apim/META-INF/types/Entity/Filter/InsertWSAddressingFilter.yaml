@@ -1,0 +1,45 @@
+---
+name: InsertWSAddressingFilter
+version: 2
+class: com.vordel.circuit.addressing.InsertWSAddressingFilter
+fields:
+  messageID:
+    type: string
+    defaultValues:
+    - data: uuid:${id}
+    cardinality: 1
+  relatesTo:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  to:
+    type: string
+    defaultValues:
+    - data: ${http.destination.protocol}://${http.destination.host}:${http.destination.port}${http.request.uri}
+    cardinality: 1
+  action:
+    type: string
+    defaultValues:
+    - data: ${soap.request.action}
+    cardinality: 1
+  from:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  replyTo:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  faultTo:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  namespace:
+    type: string
+    defaultValues:
+    - data: http://www.w3.org/2005/08/addressing
+    cardinality: 1

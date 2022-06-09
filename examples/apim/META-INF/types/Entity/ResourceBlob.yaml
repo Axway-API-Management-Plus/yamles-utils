@@ -1,0 +1,26 @@
+---
+name: ResourceBlob
+version: 1
+fields:
+  ID:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  content:
+    type: binary
+    defaultValues:
+    - {}
+    cardinality: 1
+  type:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  encoding:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+keyFields:
+- ID

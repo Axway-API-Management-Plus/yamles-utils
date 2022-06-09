@@ -1,0 +1,30 @@
+---
+name: AddHTTPHeaderFilter
+version: 5
+class: com.vordel.circuit.conversion.AddHTTPHeaderFilter
+fields:
+  headerName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  headerValue:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  base64Encode:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  overwriteExistingHeader:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  addWhere:
+    type: string
+    defaultValues:
+    - data: httpheaders
+    cardinality: 1

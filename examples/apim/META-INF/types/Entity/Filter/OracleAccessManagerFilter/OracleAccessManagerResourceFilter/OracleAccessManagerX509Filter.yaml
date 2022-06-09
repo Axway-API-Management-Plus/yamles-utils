@@ -1,0 +1,32 @@
+---
+name: OracleAccessManagerX509Filter
+version: 4
+class: com.vordel.circuit.oracle.AccessManagerX509Filter
+fields:
+  certificateAttrName:
+    type: string
+    defaultValues:
+    - data: certificate
+    cardinality: 1
+  installDir:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  location:
+    type: string
+    defaultValues:
+    - data: ${http.request.clientaddr.getAddress().getHostAddress()}
+    cardinality: 1
+  createSSOToken:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  addSSOTokenToUserAttrs:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+components:
+  Property: '*'

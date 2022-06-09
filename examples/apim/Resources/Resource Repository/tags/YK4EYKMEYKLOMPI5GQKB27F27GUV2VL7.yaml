@@ -1,0 +1,9 @@
+---
+type: ResourceSetTag
+fields:
+  ID: YK4EYKMEYKLOMPI5GQKB27F27GUV2VL7
+  resourceID: K22OIEF7JI74ZNLCVPEQHCHFJXXRR7GD
+  comment: Schema for the SOAP/1.1 encoding
+  creator: catalog
+  timestamp: 1380037357046
+  version: 1

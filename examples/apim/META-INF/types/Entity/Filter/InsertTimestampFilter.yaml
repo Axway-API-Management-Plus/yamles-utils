@@ -1,0 +1,20 @@
+---
+name: InsertTimestampFilter
+version: 1
+class: com.vordel.circuit.timestamp.InsertTimestampFilter
+fields:
+  actor:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  timestampLifeTimeSecs:
+    type: long
+    defaultValues:
+    - data: 60
+    cardinality: 1
+  layoutType:
+    type: string
+    defaultValues:
+    - data: Lax
+    cardinality: 1

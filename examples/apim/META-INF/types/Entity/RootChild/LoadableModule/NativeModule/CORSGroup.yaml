@@ -1,0 +1,15 @@
+---
+name: CORSGroup
+version: 0
+class: com.vordel.dwe.http.CORSGroup
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  CORS: '*'
+keyFields:
+- name
+loadorder: 900000

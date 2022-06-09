@@ -1,0 +1,53 @@
+---
+name: SamlAuthZPdpFilter
+version: 3
+class: com.vordel.circuit.saml.SamlAuthZPdpFilter
+fields:
+  evidenceType:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  evidenceActor:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  evidenceDriftTime:
+    type: long
+    defaultValues:
+    - {}
+    cardinality: '?'
+  signEvidenceKeyType:
+    type: string
+    defaultValues:
+    - data: certificateInStore
+    cardinality: 1
+  signEvidenceCert:
+    type: '@Certificate'
+    cardinality: '?'
+  signEvidenceCertAttribute:
+    type: string
+    defaultValues:
+    - data: ${certificate}
+    cardinality: '?'
+  subjectMatchType:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  subjectMatch:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  resource:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authorization
+    cardinality: 1

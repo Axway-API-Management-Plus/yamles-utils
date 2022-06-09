@@ -1,0 +1,59 @@
+---
+name: ICAPServer
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  icapHost:
+    type: string
+    defaultValues:
+    - data: 127.0.0.1
+    cardinality: 1
+  icapPort:
+    type: long
+    defaultValues:
+    - data: 1344
+    cardinality: 1
+  icapVersion:
+    type: string
+    defaultValues:
+    - data: 1.0
+    cardinality: 1
+  icapRequestService:
+    type: string
+    defaultValues:
+    - data: /request
+    cardinality: 1
+  icapResponseService:
+    type: string
+    defaultValues:
+    - data: /response
+    cardinality: 1
+  icapOptionsService:
+    type: string
+    defaultValues:
+    - data: /options
+    cardinality: 1
+  icapMode:
+    type: string
+    defaultValues:
+    - data: REQMOD
+    cardinality: 1
+  caCerts:
+    type: '@Certificate'
+    cardinality: '*'
+  sslUsers:
+    type: '@Certificate'
+    cardinality: '*'
+  ciphers:
+    type: string
+    defaultValues:
+    - data: FIPS:!SSLv3:!aNULL
+    cardinality: 1
+components:
+  Property: '*'
+keyFields:
+- name

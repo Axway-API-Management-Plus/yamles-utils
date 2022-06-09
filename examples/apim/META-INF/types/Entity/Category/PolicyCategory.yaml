@@ -1,0 +1,9 @@
+---
+name: PolicyCategory
+version: 1
+fields:
+  hide:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1

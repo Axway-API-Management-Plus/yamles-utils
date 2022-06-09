@@ -1,0 +1,11 @@
+---
+name: ScopeList
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- name

@@ -1,0 +1,4 @@
+---
+name: EncryptWebServiceFilter
+version: 0
+class: com.vordel.circuit.websvc.EncryptWebServiceFilter

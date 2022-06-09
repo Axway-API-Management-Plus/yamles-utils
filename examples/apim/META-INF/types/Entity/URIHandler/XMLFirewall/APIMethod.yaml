@@ -1,0 +1,82 @@
+---
+name: APIMethod
+version: 16
+class: com.vordel.apiportal.runtime.Method
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  id:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  description:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  markdownFile:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  descriptionLocation:
+    type: string
+    defaultValues:
+    - data: INTERNAL
+    cardinality: 1
+  notes:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  destinationHttpVerb:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  destinationPath:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  copyQueryParams:
+    type: boolean
+    defaultValues:
+    - {}
+    cardinality: 1
+  blockUnspecifiedParams:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  checkSourceContentType:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  copyContentType:
+    type: string
+    defaultValues:
+    - data: INBOUND
+    cardinality: 1
+  destinationContentType:
+    type: string
+    defaultValues:
+    - data: application/x-www-form-urlencoded
+    cardinality: 1
+  responseSchema:
+    type: '@JSONSchema'
+    cardinality: 1
+  securityProfile:
+    type: '@APISecurityProfile'
+    cardinality: 1
+components:
+  APIMethodQueryStringParameter: '*'
+  APIMethodErrorResponse: '*'
+  APIMethodDestinationParameter: '*'
+  MimeTypeFilter: '?'
+  MVProperty: '*'

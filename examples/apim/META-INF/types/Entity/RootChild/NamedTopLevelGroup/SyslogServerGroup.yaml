@@ -1,0 +1,5 @@
+---
+name: SyslogServerGroup
+version: 0
+components:
+  SyslogServer: '*'

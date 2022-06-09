@@ -1,0 +1,8 @@
+---
+type: Certificate
+fields:
+  dname: CN=StartCom Class 2 Primary Intermediate Server CA,OU=Secure Digital Certificate Signing,O=StartCom Ltd.,C=IL
+  issuer: /null
+  engine: RAW
+  certificateRealm: ""
+  content: '{{file "CN=StartCom Class 2 Primary Intermediate-2060105405-cert.pem"}}'

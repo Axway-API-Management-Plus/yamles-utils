@@ -1,0 +1,48 @@
+---
+name: AuthnRepositoryLdap
+version: 4
+class: com.vordel.security.auth.repository.LDAPRepository
+fields:
+  ldapDir:
+    type: '@LdapDirectory'
+    cardinality: 1
+  searchBase:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  searchClass:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  searchAttrib:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  loginAttrib:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  authzAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  authZAttribFormat:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  useSearchAttrInBase:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  allowBlankPasswords:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1

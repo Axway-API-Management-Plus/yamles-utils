@@ -1,0 +1,13 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Refresh Access token
+  name: Refresh
+  description: ""
+children:
+- type: RefreshingAccessTokenFilter
+  fields:
+    locationOfClientDetails: QueryString
+    tokenStore: /Libraries/OAuth2 Stores/Access Token Stores/OAuth Access Token Store
+    clientAttributeName: authentication.application.id
+    name: Refresh Access token

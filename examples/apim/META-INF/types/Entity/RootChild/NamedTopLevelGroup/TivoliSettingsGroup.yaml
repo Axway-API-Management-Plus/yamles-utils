@@ -1,0 +1,5 @@
+---
+name: TivoliSettingsGroup
+version: 0
+components:
+  TivoliSettings: '*'

@@ -1,0 +1,10 @@
+---
+name: SaveOAuthTokenFilter
+version: 0
+class: com.vordel.circuit.oauth.client.SaveOAuthTokenFilter
+fields:
+  tokenKey:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.id}
+    cardinality: 1

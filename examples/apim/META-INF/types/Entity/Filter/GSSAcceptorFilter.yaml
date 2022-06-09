@@ -1,0 +1,60 @@
+---
+name: GSSAcceptorFilter
+version: 7
+class: com.vordel.circuit.gss.GssAcceptorFilter
+fields:
+  sessionContextKeyCache:
+    type: '@Cache'
+    cardinality: '?'
+  cookieCache:
+    type: '@Cache'
+    cardinality: '?'
+  contextCache:
+    type: '@Cache'
+    cardinality: '?'
+  gssAcceptor:
+    type: '@GSSAcceptor'
+    cardinality: 1
+  cookieName:
+    type: string
+    defaultValues:
+    - data: JSESSIONID
+    cardinality: 1
+  allowClientRetry:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  clientSendBodyAfterEstablishContext:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  gssStandard:
+    type: string
+    defaultValues:
+    - data: KerberosTokenProfile
+    cardinality: 1
+  tokenLocation:
+    type: string
+    defaultValues:
+    - data: messageBody
+    cardinality: 1
+  xpathToken:
+    type: '@XPath'
+    cardinality: '?'
+  tokenMessageAttribute:
+    type: string
+    defaultValues:
+    - data: ${ws.trust.spnego.token}
+    cardinality: '?'
+  extractSessionKeys:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  sessionContextKeyLength:
+    type: string
+    defaultValues:
+    - data: 256
+    cardinality: 1

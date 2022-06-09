@@ -1,0 +1,20 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Attribute Authentication
+  name: Authenticate LDAP Account
+  description: ""
+children:
+- type: AttributeAuthnFilter
+  fields:
+    username: ${authN.loginname}
+    password: ${authN.password}
+    credentialFormat: Username
+    repository: /External Connections/Authentication Repositories/LDAP Repositories/API Management Sample LDAP Repository
+    name: Attribute Authentication
+  routing:
+    success: /null
+  logging:
+    fatal: 'Error during authentication using username-password attributes. Error: ${circuit.exception}'
+    failure: Failed to authenticate using username-password attributes.
+    success: Authenticated via username-password attributes sucessfully.

@@ -1,0 +1,93 @@
+---
+type: ParserFeatureGroup
+fields:
+  name: Parser Features Group
+children:
+- type: XercesFeatureGroup
+  fields:
+    name: Xerces Features
+  children:
+  - type: XercesFeature
+    fields:
+      feature: http://xml.org/sax/features/validation
+      value: true
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/schema/ignore-annotations
+      value: false
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/validation/schema-full-checking
+      value: false
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/validation/dynamic
+      value: false
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/calculate-src-ofs
+      value: false
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/validation/identity-constraint-checking
+      value: true
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/validation/use-cachedGrammarInParse
+      value: true
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/generate-synthetic-annotations
+      value: false
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/validating/load-schema
+      value: false
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/validation/schema/skip-dtd-validation
+      value: false
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/validation/ignoreCachedDTD
+      value: false
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/validate-annotations
+      value: false
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/continue-after-fatal-error
+      value: false
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/validation/cache-grammarFromParse
+      value: true
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/standard-uri-conformant
+      value: false
+  - type: XercesFeature
+    fields:
+      feature: http://xml.org/sax/features/namespaces
+      value: true
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/nonvalidating/load-external-dtd
+      value: true
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/validation-error-as-fatal
+      value: true
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/disable-default-entity-resolution
+      value: false
+  - type: XercesFeature
+    fields:
+      feature: http://xml.org/sax/features/namespace-prefixes
+      value: true
+  - type: XercesFeature
+    fields:
+      feature: http://apache.org/xml/features/validation/schema
+      value: true

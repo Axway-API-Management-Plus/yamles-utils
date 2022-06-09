@@ -1,0 +1,12 @@
+---
+name: AuthnRepositoryPassPortGroup
+version: 1
+class: com.vordel.security.auth.repository.PassPortRepository
+fields:
+  keystorePassword:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  AuthnRepositoryPassPort: '*'

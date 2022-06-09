@@ -1,0 +1,14 @@
+---
+name: ClientAccessTokenPersist
+version: 1
+fields:
+  clientAccessTokenExpiresInSecs:
+    type: long
+    defaultValues:
+    - data: 3600
+    cardinality: 1
+  refreshTokenExpiresInSecs:
+    type: long
+    defaultValues:
+    - data: 2592000
+    cardinality: 1

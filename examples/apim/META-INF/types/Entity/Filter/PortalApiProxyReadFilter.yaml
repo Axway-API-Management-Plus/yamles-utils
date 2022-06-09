@@ -1,0 +1,15 @@
+---
+name: PortalApiProxyReadFilter
+version: 0
+class: com.vordel.circuit.apiportal.ReadApiProxyFilter
+fields:
+  idSelector:
+    type: string
+    defaultValues:
+    - data: ${apimgmt.apiproxy.id}
+    cardinality: 1
+  targetAttribute:
+    type: string
+    defaultValues:
+    - data: apimgmt.apiproxy
+    cardinality: 1

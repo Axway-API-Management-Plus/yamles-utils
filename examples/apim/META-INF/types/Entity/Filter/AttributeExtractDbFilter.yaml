@@ -1,0 +1,55 @@
+---
+name: AttributeExtractDbFilter
+version: 6
+class: com.vordel.circuit.attribute.AttributeExtractDbFilter
+fields:
+  dbConn:
+    type: '@DbConnection'
+    cardinality: 1
+  userIdentityAttribName:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.id}
+    cardinality: '?'
+  placeDbResultsIntoUserAttributeList:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  messageAttrPrefix:
+    type: string
+    defaultValues:
+    - data: user
+    cardinality: '?'
+  enablyLegacyAttrNaming:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  attributeNameCase:
+    type: string
+    defaultValues:
+    - data: lower
+    cardinality: 1
+  outParamName:
+    type: string
+    defaultValues:
+    - data: out.param.value.
+    cardinality: 1
+  failOnEmptyAttributeSet:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  resultCountAttributeName:
+    type: string
+    defaultValues:
+    - data: db.result.count
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)attribute
+    cardinality: 1
+components:
+  Query: +

@@ -1,0 +1,20 @@
+---
+name: PortalOrganizationReadFilter
+version: 1
+class: com.vordel.circuit.apiportal.ReadOrganizationFilter
+fields:
+  idSelector:
+    type: string
+    defaultValues:
+    - data: ${apimgmt.organization.id}
+    cardinality: 1
+  selects:
+    type: string
+    defaultValues:
+    - data: ID
+    cardinality: 1
+  targetAttribute:
+    type: string
+    defaultValues:
+    - data: apimgmt.organization
+    cardinality: 1

@@ -1,0 +1,10 @@
+---
+name: EnvironmentalizedFieldBoolean
+version: 0
+class: com.vordel.api.deployment.model.EnvironmentalizedFieldBoolean
+fields:
+  value:
+    type: boolean
+    defaultValues:
+    - {}
+    cardinality: '?'

@@ -1,0 +1,27 @@
+---
+name: RegistryScheme
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  description:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  uuid:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  uddiV3Key:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- name
+abstract: true

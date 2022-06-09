@@ -1,0 +1,4 @@
+---
+type: WAFProfileGroup
+fields:
+  name: Threat Protection Profiles

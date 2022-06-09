@@ -1,0 +1,45 @@
+---
+name: GSSEndpoint
+version: 4
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  enabled:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  principal:
+    type: '@GSSPrincipal'
+    cardinality: '?'
+  secretKeyType:
+    type: string
+    defaultValues:
+    - data: password
+    cardinality: 1
+  password:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: '?'
+  wildcardPassword:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  keytabContents:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: '?'
+  mechanismOid:
+    type: '@GSSMechanismOid'
+    defaultValues:
+    - ref: /System/(GSSMechanismOidGroup)GSS Mechanism OIDs/(GSSMechanismOid)SPNEGO_MECHANISM
+    cardinality: 1
+keyFields:
+- name
+abstract: true

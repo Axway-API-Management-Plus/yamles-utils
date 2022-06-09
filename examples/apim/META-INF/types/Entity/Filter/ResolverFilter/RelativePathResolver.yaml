@@ -1,0 +1,10 @@
+---
+name: RelativePathResolver
+version: 0
+class: com.vordel.circuit.resolve.RelativePathFilter
+fields:
+  relativePath:
+    type: string
+    defaultValues:
+    - data: /
+    cardinality: 1

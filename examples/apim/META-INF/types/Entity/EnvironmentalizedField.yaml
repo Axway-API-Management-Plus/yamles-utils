@@ -1,0 +1,23 @@
+---
+name: EnvironmentalizedField
+version: 1
+fields:
+  entityFieldName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  index:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  displayName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- entityFieldName
+- index
+abstract: true

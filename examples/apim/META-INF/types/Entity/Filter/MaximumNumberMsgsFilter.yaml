@@ -1,0 +1,75 @@
+---
+name: MaximumNumberMsgsFilter
+version: 8
+class: com.vordel.circuit.throttling.MaximumNumberMsgsFilter
+fields:
+  insertRateLimitingHeaders:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  xRateLimitResponseHeaderStem:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  algorithm:
+    type: string
+    defaultValues:
+    - data: FTW
+    cardinality: 1
+  numberMessages:
+    type: string
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  timePeriod:
+    type: string
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  timePeriodUnit:
+    type: string
+    defaultValues:
+    - data: second
+    cardinality: 1
+  trackPerKey:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  key:
+    type: string
+    defaultValues:
+    - data: ${http.request.clientaddr.getAddress()}
+    cardinality: '?'
+  cacheToUse:
+    type: '@Cache'
+    defaultValues:
+    - ref: /Libraries/(CacheManager)Cache Manager/(Cache)Local maximum messages
+    cardinality: 1
+  timePeriodStartHour:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  timePeriodStartDay:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  numberMessagesPerSecond:
+    type: string
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  strategy:
+    type: string
+    defaultValues:
+    - data: EVENLY
+    cardinality: 1
+  burstSize:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1

@@ -1,0 +1,35 @@
+---
+type: KPSType
+fields:
+  name: PortalOrganizationStoreLDAP
+children:
+- type: KPSTypeProperty
+  fields:
+    name: description
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: id
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: createTimestamp
+    type: java.lang.Long
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: o
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: organizationDn
+    type: java.lang.String
+    key: ""
+    value: ""

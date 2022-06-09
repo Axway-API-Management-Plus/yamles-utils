@@ -1,0 +1,83 @@
+---
+name: JWTEncryptFilter
+version: 1
+class: com.vordel.circuit.jwt.JWTEncryptFilter
+fields:
+  payload:
+    type: string
+    defaultValues:
+    - data: ${payload}
+    cardinality: 1
+  typeOfEncryption:
+    type: string
+    defaultValues:
+    - data: 0
+    cardinality: '?'
+  publicKeyAttribute:
+    type: string
+    defaultValues:
+    - data: 0
+    cardinality: '?'
+  publicKeyAttributeAlias:
+    type: '@Certificate'
+    cardinality: 1
+  encryptMsgAttribute:
+    type: string
+    defaultValues:
+    - data: ${certificate}
+    cardinality: 1
+  asymmetricEncryptAlgorithm:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  symmetricEncryptAlgorithm:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  sharedKeySelection:
+    type: string
+    defaultValues:
+    - data: 0
+    cardinality: '?'
+  secretKey:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1
+  sharedKeyInMsgAttr:
+    type: string
+    defaultValues:
+    - data: ${symmetric.key}
+    cardinality: 1
+  asymmetricEncryptMethod:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  symmetricEncryptMethod:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  jwkFromExtSource:
+    type: string
+    defaultValues:
+    - data: ${jwk}
+    cardinality: 1
+  jwkAlgSelection:
+    type: string
+    defaultValues:
+    - data: 0
+    cardinality: '?'
+  jwkEncryptAlg:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  jwkEncryptMethod:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1

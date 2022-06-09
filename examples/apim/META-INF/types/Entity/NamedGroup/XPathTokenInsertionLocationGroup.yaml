@@ -1,0 +1,5 @@
+---
+name: XPathTokenInsertionLocationGroup
+version: 0
+components:
+  XPath: '*'

@@ -1,0 +1,10 @@
+---
+name: RemoveAttributeFilter
+version: 0
+class: com.vordel.circuit.attribute.RemoveAttributeFilter
+fields:
+  messageAttribute:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1

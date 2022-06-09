@@ -1,0 +1,28 @@
+---
+name: SiteMinderCertFilter
+version: 1
+class: com.vordel.circuit.siteminder.SiteMinderCertFilter
+fields:
+  connectionDetails:
+    type: '@SiteMinderConnection'
+    cardinality: 1
+  resource:
+    type: string
+    defaultValues:
+    - data: ${http.request.uri}
+    cardinality: 1
+  action:
+    type: string
+    defaultValues:
+    - data: ${http.request.verb}
+    cardinality: 1
+  extractSession:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  sessionAttributeName:
+    type: string
+    defaultValues:
+    - data: siteminder.session
+    cardinality: 1

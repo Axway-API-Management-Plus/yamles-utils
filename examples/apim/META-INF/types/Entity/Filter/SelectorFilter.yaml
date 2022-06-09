@@ -1,0 +1,10 @@
+---
+name: SelectorFilter
+version: 1
+class: com.vordel.circuit.basic.SelectorFilter
+fields:
+  expression:
+    type: string
+    defaultValues:
+    - data: ${1 + 1 == 2}
+    cardinality: 1

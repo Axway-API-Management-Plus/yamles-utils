@@ -1,0 +1,25 @@
+---
+type: FilterCircuit
+fields:
+  start: ./XML Signature Verification
+  name: Verify SAML Signature
+  description: ""
+children:
+- type: IntegrityVerifySignatureFilter
+  fields:
+    actor: ""
+    sigPosition: 1
+    sigLocation: /Resources/XPath Definitions/Signature Locations/First Signature in First SAML Assertion (SAML 2.0)
+    signedContent: /Resources/XPath Definitions/Signing XPaths/The First SAML 2.0 assertion
+    signedContentElementSpecifier: /null
+    keyLocation: /null
+    verifyingCert: /null
+    certAttribute: ${oauth.client.details.getX509Cert()}
+    verifyForAuthentication: true
+    algorithmSuite: ""
+    sourceAttribute: ${oauth.saml.doc}
+    name: XML Signature Verification
+  logging:
+    fatal: 'Integrity: Signature verification error. Error: ${circuit.exception}'
+    failure: 'Integrity: Signature verification failed'
+    success: 'Integrity: Signature verification passed'

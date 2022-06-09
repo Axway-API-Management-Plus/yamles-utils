@@ -1,0 +1,17 @@
+---
+name: XkmsConfig
+version: 3
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  URLSet:
+    type: '@UrlSet'
+    cardinality: 1
+  signingCert:
+    type: '@Certificate'
+    cardinality: '?'
+keyFields:
+- name

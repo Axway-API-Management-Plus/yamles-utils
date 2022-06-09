@@ -1,0 +1,10 @@
+---
+name: NTAlertSystem
+version: 0
+class: com.vordel.alert.nt.AlertNT
+fields:
+  serverUncName:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: '?'

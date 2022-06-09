@@ -1,0 +1,23 @@
+---
+name: SMIMEVerifyFilter
+version: 3
+class: com.vordel.circuit.smime.VerifyFilter
+fields:
+  debride:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  certLocation:
+    type: string
+    defaultValues:
+    - data: userSelected
+    cardinality: 1
+  recipients:
+    type: '@Certificate'
+    cardinality: '*'
+  certAttribute:
+    type: string
+    defaultValues:
+    - data: ${certificate}
+    cardinality: 1

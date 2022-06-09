@@ -1,0 +1,34 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Read Application
+  name: Remove Application API Access
+  description: Application has been revoked access to an API
+  category: /System/Policy Categories/management
+children:
+- type: PortalApplicationReadFilter
+  fields:
+    idSelector: ${alert.application.id}
+    targetAttribute: alert.application
+    name: Read Application
+  routing:
+    success: ../Set Attribute Filter
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: alert.message
+    attributeValue: Application ${alert.application.name} has been revoked access to API ${alert.apiaccess.apiId}.
+    name: Set Attribute Filter
+  routing:
+    success: ../Call 'Send Alert'
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: CircuitDelegateFilter
+  fields:
+    circuitPK: /Policies/Sample Policies/API Management Alerts/Send Alert
+    name: Call 'Send Alert'
+  logging:
+    fatal: 'Error in calling policy shortcut circuit. Error: ${circuit.exception}'
+    failure: Failed in calling policy shortcut
+    success: Success in calling policy shortcut

@@ -1,0 +1,9 @@
+---
+type: ResourceSetTag
+fields:
+  ID: J2EBLEJSRMR37NNQPSRF27DVTQIR2FVA
+  resourceID: 6OBFDLKY5OPJCGZCZBFON4BPZMM6SDD3
+  comment: 'SAML 1.1 '
+  creator: catalog
+  timestamp: 1380038345632
+  version: 1

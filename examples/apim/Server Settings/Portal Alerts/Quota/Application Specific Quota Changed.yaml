@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Application Specific Quota Changed
+  id: alert.quota.override.changed
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Quota/Application Specific Quota Changed

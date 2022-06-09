@@ -1,0 +1,30 @@
+---
+name: JavaScriptFilter
+version: 3
+class: com.vordel.circuit.script.ScriptFilter
+fields:
+  script:
+    type: string
+    defaultValues:
+    - data: function invoke(msg)         {            return true;         }
+    cardinality: 1
+  engineName:
+    type: string
+    defaultValues:
+    - data: nashorn
+    cardinality: 1
+  requiredProperties:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  generatedProperties:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  consumedProperties:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'

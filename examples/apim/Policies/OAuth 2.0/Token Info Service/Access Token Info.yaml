@@ -1,0 +1,13 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Access Token Information
+  name: Access Token Info
+  description: ""
+children:
+- type: AccessTokenInfoFilter
+  fields:
+    accessTokenLocation: SELECTOR
+    tokenStore: /Libraries/OAuth2 Stores/Access Token Stores/OAuth Access Token Store
+    clientAttributeName: authentication.application.id
+    name: Access Token Information

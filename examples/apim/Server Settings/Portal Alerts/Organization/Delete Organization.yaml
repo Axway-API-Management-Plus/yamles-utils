@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Delete Organization
+  id: alert.organization.delete
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Organization/Delete Organization

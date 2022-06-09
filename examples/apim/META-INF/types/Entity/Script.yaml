@@ -1,0 +1,27 @@
+---
+name: Script
+version: 3
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  description:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  script:
+    type: string
+    defaultValues:
+    - data: function invoke(msg)         {            return true;         }
+    cardinality: 1
+  engineName:
+    type: string
+    defaultValues:
+    - data: js
+    cardinality: 1
+keyFields:
+- name
+- engineName

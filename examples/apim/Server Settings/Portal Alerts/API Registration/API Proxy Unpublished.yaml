@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: API Proxy Unpublished
+  id: alert.apiproxy.unpublish
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/API Registration/API Proxy Unpublished

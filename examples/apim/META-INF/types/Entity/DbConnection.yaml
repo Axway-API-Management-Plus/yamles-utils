@@ -1,0 +1,86 @@
+---
+name: DbConnection
+version: 2
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  username:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  passwordType:
+    type: string
+    defaultValues:
+    - data: entered
+    cardinality: 1
+  password:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: '?'
+  wildcardPassword:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  url:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  initialSize:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  maxActive:
+    type: integer
+    defaultValues:
+    - data: 8
+    cardinality: 1
+  maxIdle:
+    type: integer
+    defaultValues:
+    - data: 8
+    cardinality: 1
+  minIdle:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  maxWait:
+    type: long
+    defaultValues:
+    - data: 10000
+    cardinality: 1
+  timeBetweenEvictionRunsMillis:
+    type: integer
+    defaultValues:
+    - data: -1
+    cardinality: 1
+  numTestsPerEvictionRun:
+    type: integer
+    defaultValues:
+    - data: 3
+    cardinality: 1
+  minEvictableIdleTimeMillis:
+    type: integer
+    defaultValues:
+    - data: 1000
+    cardinality: 1
+  timezoneAware:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  setPoolPreparedStatements:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+keyFields:
+- name

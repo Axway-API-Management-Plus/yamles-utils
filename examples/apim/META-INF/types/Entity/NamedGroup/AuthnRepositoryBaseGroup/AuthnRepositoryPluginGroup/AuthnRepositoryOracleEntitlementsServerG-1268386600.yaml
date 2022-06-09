@@ -1,0 +1,6 @@
+---
+name: AuthnRepositoryOracleEntitlementsServerGroup
+version: 3
+class: com.vordel.circuit.oracle.oes.OESAuthNRepository
+components:
+  AuthnRepositoryOracleEntitlementsServer: '*'

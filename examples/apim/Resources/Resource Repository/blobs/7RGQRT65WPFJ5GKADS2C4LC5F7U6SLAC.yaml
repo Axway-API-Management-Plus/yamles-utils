@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: 7RGQRT65WPFJ5GKADS2C4LC5F7U6SLAC
+  type: schema
+  content: '{{file "7RGQRT65WPFJ5GKADS2C4LC5F7U6SLAC.xsd" "binary"}}'

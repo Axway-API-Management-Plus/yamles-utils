@@ -1,0 +1,13 @@
+---
+name: ConnectionSet
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  ConnectionSetMember: '*'
+keyFields:
+- name

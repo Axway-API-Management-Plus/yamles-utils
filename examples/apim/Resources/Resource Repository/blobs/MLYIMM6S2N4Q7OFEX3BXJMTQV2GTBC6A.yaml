@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: MLYIMM6S2N4Q7OFEX3BXJMTQV2GTBC6A
+  type: schema
+  content: '{{file "MLYIMM6S2N4Q7OFEX3BXJMTQV2GTBC6A.xsd" "binary"}}'

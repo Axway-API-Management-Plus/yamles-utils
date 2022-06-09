@@ -1,0 +1,40 @@
+---
+name: CheckIfCertsWillExpireFilter
+version: 0
+class: com.vordel.circuit.cert.CheckIfCertsWillExpireFilter
+fields:
+  days:
+    type: integer
+    defaultValues:
+    - data: 7
+    cardinality: 1
+  checkGatewayCertStore:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  checkGatewayKeyStore:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  gatewayKeyStorePassword:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1
+  checkCustomKeyStore:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  customKeyStoreLocation:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  customKeyStorePassword:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1

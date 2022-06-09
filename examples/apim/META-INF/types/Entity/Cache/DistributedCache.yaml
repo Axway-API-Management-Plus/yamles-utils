@@ -1,0 +1,34 @@
+---
+name: DistributedCache
+version: 0
+fields:
+  eventListenerClass:
+    type: string
+    defaultValues:
+    - data: net.sf.ehcache.distribution.RMICacheReplicatorFactory
+    cardinality: 1
+  eventListenerPropertySeparator:
+    type: string
+    defaultValues:
+    - data: ','
+    cardinality: 1
+  eventListenerProperties:
+    type: string
+    defaultValues:
+    - data: replicateAsynchronously=false, replicatePuts=true, replicateUpdates=true, replicateUpdatesViaCopy=true, replicateRemovals=true
+    cardinality: 1
+  bootstrapClass:
+    type: string
+    defaultValues:
+    - data: net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory
+    cardinality: 1
+  boootstrapPropertySeparator:
+    type: string
+    defaultValues:
+    - data: ','
+    cardinality: 1
+  bootstrapProperties:
+    type: string
+    defaultValues:
+    - data: bootstrapAsynchronously=true, maximumChunkSizeBytes=5000000
+    cardinality: 1

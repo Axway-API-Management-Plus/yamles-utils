@@ -1,0 +1,4 @@
+---
+name: SiteMinderLogoutFilter
+version: 0
+class: com.vordel.circuit.siteminder.SiteMinderLogoutFilter

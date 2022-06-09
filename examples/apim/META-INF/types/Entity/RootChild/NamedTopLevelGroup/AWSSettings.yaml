@@ -1,0 +1,5 @@
+---
+name: AWSSettings
+version: 0
+components:
+  AWSClientConfiguration: '*'

@@ -1,0 +1,81 @@
+---
+name: FacetRestriction
+version: 3
+fields:
+  desc:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  attribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  type:
+    type: string
+    defaultValues:
+    - data: string
+    cardinality: 1
+  required:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  maxExclusiveSwitch:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  maxValue:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  minExclusiveSwitch:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  minValue:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  minLength:
+    type: integer
+    defaultValues:
+    - data: -1
+    cardinality: 1
+  maxLength:
+    type: integer
+    defaultValues:
+    - data: -1
+    cardinality: 1
+  fractionDigits:
+    type: integer
+    defaultValues:
+    - data: -1
+    cardinality: 1
+  totalDigits:
+    type: integer
+    defaultValues:
+    - data: -1
+    cardinality: 1
+  whitespace:
+    type: string
+    defaultValues:
+    - data: Preserve
+    cardinality: 1
+  pattern:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  enumeration:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+keyFields:
+- attribute

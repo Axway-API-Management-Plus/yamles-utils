@@ -1,0 +1,13 @@
+---
+name: RemoveCachedAttributeFilter
+version: 2
+class: com.vordel.circuit.cache.RemoveCachedAttributeFilter
+fields:
+  cacheToUse:
+    type: '@Cache'
+    cardinality: 1
+  keyAttributeName:
+    type: string
+    defaultValues:
+    - data: message.key
+    cardinality: 1

@@ -1,0 +1,58 @@
+---
+name: InsertXMLNodeFilter
+version: 2
+class: com.vordel.circuit.conversion.InsertXMLNodeFilter
+fields:
+  nodeType:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  nodeName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  nodeNamespacePrefix:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  nodeNamespace:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  nodeContent:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  nodeLocation:
+    type: '@XPath'
+    cardinality: '?'
+  nodeLocationType:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  newNodeSource:
+    type: string
+    defaultValues:
+    - data: newCreation
+    cardinality: 1
+  newNodeMessageAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  actor:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  insertType:
+    type: string
+    defaultValues:
+    - data: xpath
+    cardinality: 1

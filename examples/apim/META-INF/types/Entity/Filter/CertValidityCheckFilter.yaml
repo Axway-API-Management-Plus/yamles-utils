@@ -1,0 +1,10 @@
+---
+name: CertValidityCheckFilter
+version: 2
+class: com.vordel.circuit.cert.CertValidityCheckFilter
+fields:
+  certMessageAttribute:
+    type: string
+    defaultValues:
+    - data: ${certificate}
+    cardinality: 1

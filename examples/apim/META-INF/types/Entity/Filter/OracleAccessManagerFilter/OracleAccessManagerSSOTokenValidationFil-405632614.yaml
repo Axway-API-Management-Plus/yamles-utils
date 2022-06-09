@@ -1,0 +1,10 @@
+---
+name: OracleAccessManagerSSOTokenValidationFilter
+version: 2
+class: com.vordel.circuit.oracle.AccessManagerSSOTokenValidationFilter
+fields:
+  installDir:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'

@@ -1,0 +1,27 @@
+---
+name: Operation
+version: 0
+fields:
+  bindingName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  bindingOperation:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  bindingInput:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  bindingOutput:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- bindingName
+- bindingOperation

@@ -1,0 +1,21 @@
+---
+type: FilterCircuit
+fields:
+  start: ./End Session
+  name: logout
+  description: ""
+children:
+- type: EndSessionFilter
+  fields:
+    removeCookie: true
+    domain: ""
+    name: End Session
+  routing:
+    success: ../HTTP Redirect
+- type: RedirectFilter
+  fields:
+    httpResponseStatus: 307
+    url: /home
+    outputContentType: text/html
+    content: Rdirect
+    name: HTTP Redirect

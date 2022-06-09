@@ -1,0 +1,22 @@
+---
+name: MimeType
+version: 5
+class: com.vordel.system.MimeType
+fields:
+  mimeType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  extension:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  bodyFactory:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+keyFields:
+- mimeType

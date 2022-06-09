@@ -1,0 +1,20 @@
+---
+name: SamlAuthZInsertFilter
+version: 0
+class: com.vordel.circuit.saml.SamlAuthZInsertFilter
+fields:
+  resourceId:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  actions:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authorization
+    cardinality: 1

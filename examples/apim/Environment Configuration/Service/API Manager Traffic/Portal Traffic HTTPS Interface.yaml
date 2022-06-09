@@ -1,0 +1,13 @@
+---
+type: SSLInterface
+fields:
+  serverCert: /Environment Configuration/Certificate Store/CN=Change this for production
+  caCert: []
+  ssloptions:
+  - notlsv1_1
+  - noSslRenegotiation
+  - nosslv3
+  - notlsv1
+  resolveSubjectCNtoNetAddr: false
+  name: Portal Traffic HTTPS Interface
+  port: ${env.PORT.PORTAL.TRAFFIC}

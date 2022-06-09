@@ -1,0 +1,4 @@
+---
+type: UrlSetGetAccessGroup
+fields:
+  name: Entrust GetAccess URL Sets

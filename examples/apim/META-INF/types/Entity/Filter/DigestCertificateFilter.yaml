@@ -1,0 +1,10 @@
+---
+name: DigestCertificateFilter
+version: 0
+class: com.vordel.circuit.irs.DigestCertificateFilter
+fields:
+  digestAlgorithm:
+    type: string
+    defaultValues:
+    - data: SHA-1
+    cardinality: 1

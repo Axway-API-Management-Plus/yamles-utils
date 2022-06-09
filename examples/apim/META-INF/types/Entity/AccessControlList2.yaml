@@ -1,0 +1,17 @@
+---
+name: AccessControlList2
+version: 0
+fields:
+  ipAddress:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  mask:
+    type: string
+    defaultValues:
+    - data: 255.255.255.255
+    cardinality: 1
+keyFields:
+- ipAddress
+- mask

@@ -1,0 +1,61 @@
+---
+name: Cache
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  maxElementsInMemory:
+    type: integer
+    defaultValues:
+    - data: 1000
+    cardinality: 1
+  maxElementsOnDisk:
+    type: integer
+    defaultValues:
+    - data: 1000
+    cardinality: 1
+  eternal:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  overflowToDisk:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  timeToIdleSeconds:
+    type: long
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  timeToLiveSeconds:
+    type: long
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  diskPersistent:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  diskExpiryThreadIntervalSeconds:
+    type: long
+    defaultValues:
+    - data: 120
+    cardinality: 1
+  diskSpoolBufferSizeMB:
+    type: integer
+    defaultValues:
+    - data: 30
+    cardinality: 1
+  memoryStoreEvictionPolicy:
+    type: string
+    defaultValues:
+    - data: LRU
+    cardinality: 1
+keyFields:
+- name

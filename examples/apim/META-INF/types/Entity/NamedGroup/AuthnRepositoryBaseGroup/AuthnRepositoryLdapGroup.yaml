@@ -1,0 +1,6 @@
+---
+name: AuthnRepositoryLdapGroup
+version: 2
+class: com.vordel.security.auth.repository.LDAPRepository
+components:
+  AuthnRepositoryLdap: '*'

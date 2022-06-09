@@ -1,0 +1,10 @@
+---
+name: AWSQueryStringRequestSecurityDevice
+version: 2
+class: com.vordel.apiportal.runtime.AWSQueryStringSecurityDevice
+fields:
+  apiKeyFieldName:
+    type: string
+    defaultValues:
+    - data: AWSAccessKeyId
+    cardinality: 1

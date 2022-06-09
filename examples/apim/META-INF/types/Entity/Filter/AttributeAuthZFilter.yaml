@@ -1,0 +1,22 @@
+---
+name: AttributeAuthZFilter
+version: 1
+class: com.vordel.circuit.attribute.AttributeAuthZFilter
+fields:
+  requirementDelimiter:
+    type: string
+    defaultValues:
+    - data: ','
+    cardinality: 1
+  namespaceDelimiter:
+    type: string
+    defaultValues:
+    - data: ':'
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authorization
+    cardinality: 1
+components:
+  AttributeRequirement: '*'

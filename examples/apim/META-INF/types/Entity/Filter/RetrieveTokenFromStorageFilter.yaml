@@ -1,0 +1,13 @@
+---
+name: RetrieveTokenFromStorageFilter
+version: 2
+class: com.vordel.circuit.oauth.client.RetrieveTokenFilter
+fields:
+  profile:
+    type: '@OAuthAppProfile'
+    cardinality: '?'
+  tokenKey:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.id}
+    cardinality: '?'

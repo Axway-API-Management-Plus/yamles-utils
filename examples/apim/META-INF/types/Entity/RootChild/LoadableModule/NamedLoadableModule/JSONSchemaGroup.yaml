@@ -1,0 +1,8 @@
+---
+name: JSONSchemaGroup
+version: 1
+class: com.vordel.circuit.schema.JSONSchemaCache
+components:
+  JSONSchema: '*'
+  JSONSchemaContainer: '*'
+loadorder: 400

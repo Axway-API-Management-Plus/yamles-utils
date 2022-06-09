@@ -1,0 +1,59 @@
+---
+name: JMSConsumer
+version: 7
+fields:
+  extractMethod:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  attributeName:
+    type: string
+    defaultValues:
+    - data: jms.message
+    cardinality: 1
+  destinationType:
+    type: string
+    defaultValues:
+    - data: QUEUE
+    cardinality: 1
+  destination:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  selector:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  filterCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+  sendReply:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  logMask:
+    type: integer
+    defaultValues:
+    - data: 2
+    cardinality: 1
+  payloadMask:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  isDurableSubscriber:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  subscriberName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+keyFields:
+- destination

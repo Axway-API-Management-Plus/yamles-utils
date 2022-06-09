@@ -1,0 +1,61 @@
+---
+name: Cookie
+version: 3
+fields:
+  headerType:
+    type: string
+    defaultValues:
+    - data: Set-Cookie
+    cardinality: 1
+  cookieName:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  cookieValue:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  cookieDomain:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  cookiePath:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  cookieMaxAge:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  cookieExpires:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  cookieSecure:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  cookieSameSite:
+    type: string
+    defaultValues:
+    - data: Strict
+    cardinality: 1
+  cookieHttpOnly:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  name:
+    type: string
+    defaultValues:
+    - data: Cookie Details
+    cardinality: 1
+keyFields:
+- cookieName

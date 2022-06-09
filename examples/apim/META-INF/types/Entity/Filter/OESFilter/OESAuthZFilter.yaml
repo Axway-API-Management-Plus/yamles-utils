@@ -1,0 +1,32 @@
+---
+name: OESAuthZFilter
+version: 2
+class: com.vordel.circuit.oracle.oes.OESAuthZFilter
+fields:
+  resourceString:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  resourceAuthorityName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  actionString:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  actionAuthorityName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  direction:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+components:
+  Property: '*'

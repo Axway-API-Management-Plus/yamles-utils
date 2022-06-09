@@ -1,0 +1,26 @@
+---
+name: SourceDocument
+version: 0
+fields:
+  ID:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  messageAttribute:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  schemaName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  order:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- ID

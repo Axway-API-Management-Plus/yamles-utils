@@ -1,0 +1,16 @@
+---
+name: JSONSchema
+version: 0
+fields:
+  URL:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  contents:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- URL

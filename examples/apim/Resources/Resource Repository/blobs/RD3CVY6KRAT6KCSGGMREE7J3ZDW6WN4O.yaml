@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: RD3CVY6KRAT6KCSGGMREE7J3ZDW6WN4O
+  type: schema
+  content: '{{file "RD3CVY6KRAT6KCSGGMREE7J3ZDW6WN4O.xsd" "binary"}}'

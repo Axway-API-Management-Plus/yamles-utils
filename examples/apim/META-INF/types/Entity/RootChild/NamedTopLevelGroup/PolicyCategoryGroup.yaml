@@ -1,0 +1,5 @@
+---
+name: PolicyCategoryGroup
+version: 1
+components:
+  PolicyCategory: '*'

@@ -1,0 +1,161 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Create REST Request
+  fault: ./API Manager Handler
+  name: PingFederate
+  description: ""
+children:
+- type: CreateRESTRequestFilter
+  fields:
+    httpMethod: POST
+    name: Create REST Request
+  routing:
+    success: ../Call Token Service
+  children:
+  - type: Property
+    fields:
+      name: grant_type
+      value: changeme
+  - type: Property
+    fields:
+      name: client_secret
+      value: changeme
+  - type: Property
+    fields:
+      name: token
+      value: ${access_token}
+  - type: Property
+    fields:
+      name: client_id
+      value: changeme
+- type: ConnectToURLFilter
+  fields:
+    url: https://changeme/as/token.oauth2
+    profile: /null
+    caCerts: /Environment Configuration/Certificate Store/CN=StartCom Class 2 Primary Intermediate Server CA,OU=Secure Digital Certificate Signing,O=StartCom Ltd.,C=IL
+    sslUsers: /null
+    useRootCerts: false
+    ciphers: FIPS:!SSLv3:!aNULL
+    ssloptions:
+    - nosslv2
+    - nosslv3
+    - notlsv1
+    - notlsv1_1
+    retryHTTPRanges: /null
+    connectionFailurePolicy: /null
+    proxyServer: /null
+    name: Call Token Service
+  routing:
+    success: ../Token Service returned OK
+  logging:
+    fatal: 'Error occurred while routing request to endpoint. Error: ${circuit.exception}'
+    failure: Failed to route request to endpoint.
+    success: Successfully routed request to endpoint
+  children:
+  - type: SaveToFileFilter
+    fields:
+      name: Persistence Details
+- type: CompareAttributeFilter
+  fields:
+    name: Token Service returned OK
+  routing:
+    success: ../Extract token information
+    failure: ../Extract error information
+  children:
+  - type: AttributeCompare
+    fields:
+      attrName: 200
+      matchType: IS
+      expression: ${http.response.status}
+- type: JSONPathFilter
+  fields:
+    name: Extract token information
+  routing:
+    success: ../Set oauth.token.valid
+  children:
+  - type: JSONPath
+    fields:
+      attributeName: ping.oauth.token.scope
+      expression: $.scope
+      unmarshalType: java.lang.String
+  - type: JSONPath
+    fields:
+      attributeName: ping.oauth.token.expires_in
+      expression: $.expires_in
+      unmarshalType: java.lang.String
+  - type: JSONPath
+    fields:
+      attributeName: ping.oauth.token.client_id
+      expression: $.client_id
+      unmarshalType: java.lang.String
+      failOnError: true
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: oauth.token.valid
+    attributeValue: ${ping.oauth.token.expires_in > 0}
+    name: Set oauth.token.valid
+  routing:
+    success: ../Set oauth.token.client_id
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: oauth.token.client_id
+    attributeValue: ${ping.oauth.token.client_id}
+    name: Set oauth.token.client_id
+  routing:
+    success: ../Set oauth.token.scopes
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: StringReplaceFilter
+  fields:
+    sourceAttribute: ping.oauth.token.scope
+    destAttribute: oauth.token.scopes
+    destAttributeOverride: true
+    replacementString: ','
+    matchMode: REGEX_REPLACE
+    regexMatchString: \s+
+    matchBehaviour: MATCH_ALL
+    name: Set oauth.token.scopes
+  routing:
+    success: ../Successfully retrieved token information
+- type: TrueFilter
+  fields:
+    name: Successfully retrieved token information
+  logging:
+    fatal: 'True filter error. Error: ${circuit.exception}'
+    failure: ""
+    success: True filter passed
+- type: JSONPathFilter
+  fields:
+    name: Extract error information
+  routing:
+    success: ../Cannot retrieve token information
+  children:
+  - type: JSONPath
+    fields:
+      attributeName: ping.oauth.error
+      expression: $.error
+      unmarshalType: java.lang.String
+      failOnError: true
+  - type: JSONPath
+    fields:
+      attributeName: ping.oauth.error_description
+      expression: $.error_description
+      unmarshalType: java.lang.String
+- type: FalseFilter
+  fields:
+    name: Cannot retrieve token information
+  logging:
+    fatal: 'False filter error. Error: ${circuit.exception}'
+    success: ""
+- type: GenericFaultFilter
+  fields:
+    faultString: Security failure
+    userStylesheet: /null
+    name: API Manager Handler

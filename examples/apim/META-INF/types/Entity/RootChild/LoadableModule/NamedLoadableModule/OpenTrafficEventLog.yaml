@@ -1,0 +1,41 @@
+---
+name: OpenTrafficEventLog
+version: 1
+class: com.vordel.opentraffic.OpenTrafficConfig
+fields:
+  enabled:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  eventLogMethod:
+    type: string
+    defaultValues:
+    - data: FILE
+    cardinality: 1
+  openTrafficLogDir:
+    type: string
+    defaultValues:
+    - data: ${environment.VDISTDIR}/logs/opentraffic
+    cardinality: 1
+  payloadStorageMethod:
+    type: string
+    defaultValues:
+    - data: NONE
+    cardinality: 1
+  fileSystemStoragePath:
+    type: string
+    defaultValues:
+    - data: ${environment.VDISTDIR}/logs/payloads
+    cardinality: 1
+  dirSizePollFrequencySecs:
+    type: integer
+    defaultValues:
+    - data: 600
+    cardinality: 1
+  dirSizeMb:
+    type: integer
+    defaultValues:
+    - data: 1024
+    cardinality: 1
+loadorder: 94

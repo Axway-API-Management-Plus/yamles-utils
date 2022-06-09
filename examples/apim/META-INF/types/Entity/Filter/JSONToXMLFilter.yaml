@@ -1,0 +1,20 @@
+---
+name: JSONToXMLFilter
+version: 2
+class: com.vordel.circuit.json.JSONToXMLFilter
+fields:
+  virtualRootElement:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  multiplePI:
+    type: boolean
+    defaultValues:
+    - {}
+    cardinality: 1
+  convertElementNames:
+    type: boolean
+    defaultValues:
+    - {}
+    cardinality: 1

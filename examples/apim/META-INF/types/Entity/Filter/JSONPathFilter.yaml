@@ -1,0 +1,6 @@
+---
+name: JSONPathFilter
+version: 0
+class: com.vordel.circuit.json.JSONPathFilter
+components:
+  JSONPath: '?'

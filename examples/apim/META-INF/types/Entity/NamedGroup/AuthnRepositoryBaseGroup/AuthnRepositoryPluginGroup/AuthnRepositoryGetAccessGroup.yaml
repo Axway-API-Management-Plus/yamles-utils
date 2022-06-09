@@ -1,0 +1,6 @@
+---
+name: AuthnRepositoryGetAccessGroup
+version: 2
+class: com.vordel.security.auth.repository.GetAccessRepository
+components:
+  AuthnRepositoryGetAccess: '*'

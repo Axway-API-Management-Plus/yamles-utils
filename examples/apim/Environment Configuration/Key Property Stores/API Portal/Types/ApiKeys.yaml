@@ -1,0 +1,34 @@
+---
+type: KPSType
+fields:
+  name: ApiKeys
+  description: Individual API Keys & secrets bound to individual users
+children:
+- type: KPSTypeProperty
+  fields:
+    name: enabled
+    type: java.lang.Boolean
+- type: KPSTypeProperty
+  fields:
+    name: created
+    type: java.lang.Long
+- type: KPSTypeProperty
+  fields:
+    name: validTo
+    type: java.lang.Long
+- type: KPSTypeProperty
+  fields:
+    name: apiKey
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: clientID
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: deleted
+    type: java.lang.Long
+- type: KPSTypeProperty
+  fields:
+    name: apiSecret
+    type: java.lang.String

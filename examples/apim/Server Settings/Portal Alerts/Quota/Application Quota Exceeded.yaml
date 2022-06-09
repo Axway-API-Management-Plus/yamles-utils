@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Application Quota Exceeded
+  id: alert.run.appquota.exceeded
+  type: Run-time
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Quota/Application Quota Exceeded

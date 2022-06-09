@@ -1,0 +1,8 @@
+---
+type: ESConfiguration
+fields:
+  name: Entity Store Configuration
+  passphraseTest: aHR0cDsvL3d3dy52b3JkZWwuY29t
+  version: 7.7.0
+  productKey: VordelGateway
+  typerepoVersion: 1.38.17

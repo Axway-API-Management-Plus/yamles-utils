@@ -1,0 +1,23 @@
+---
+name: Servlet
+version: 0
+fields:
+  uri:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  class:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  name:
+    type: string
+    defaultValues:
+    - data: Anonymous
+    cardinality: 1
+components:
+  Property: '?'
+keyFields:
+- uri

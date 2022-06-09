@@ -1,0 +1,6 @@
+---
+name: SunAccessManagerRetrieveAttributesFilter
+version: 1
+class: com.vordel.circuit.sun.AccessManagerAttributesFilter
+components:
+  LookupAttribute: '*'

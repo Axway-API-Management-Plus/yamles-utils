@@ -1,0 +1,4 @@
+---
+type: LdapDirectoryGroup
+fields:
+  name: LDAP Directories

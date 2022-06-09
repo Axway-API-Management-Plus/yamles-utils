@@ -1,0 +1,7 @@
+---
+name: ProxyServerGroup
+version: 1
+class: com.vordel.circuit.proxy.ProxyServerGroup
+components:
+  ProxyServer: '*'
+loadorder: 500

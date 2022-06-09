@@ -1,0 +1,20 @@
+---
+name: RetrieveCookiesFilter
+version: 1
+class: com.vordel.circuit.cookie.RetrieveCookiesFilter
+fields:
+  cookieNameFilter:
+    type: string
+    defaultValues:
+    - data: .*
+    cardinality: 1
+  removeAfterGet:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  failOnNotFound:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1

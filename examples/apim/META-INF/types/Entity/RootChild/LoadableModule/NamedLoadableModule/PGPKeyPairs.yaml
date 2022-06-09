@@ -1,0 +1,7 @@
+---
+name: PGPKeyPairs
+version: 1
+class: com.vordel.store.pgpkeypairs.PGPKeyPairs
+components:
+  PGPKeyPair: '*'
+loadorder: 600

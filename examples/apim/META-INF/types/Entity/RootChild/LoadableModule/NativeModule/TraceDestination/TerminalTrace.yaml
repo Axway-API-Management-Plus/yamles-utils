@@ -1,0 +1,11 @@
+---
+name: TerminalTrace
+version: 0
+fields:
+  dest:
+    type: string
+    defaultValues:
+    - data: stderr
+    cardinality: 1
+keyFields:
+- dest

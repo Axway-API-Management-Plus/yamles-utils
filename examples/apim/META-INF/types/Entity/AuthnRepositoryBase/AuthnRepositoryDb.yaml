@@ -1,0 +1,50 @@
+---
+name: AuthnRepositoryDb
+version: 5
+class: com.vordel.security.auth.repository.DatabaseRepository
+fields:
+  dbConn:
+    type: '@DbConnection'
+    cardinality: 1
+  hashFlag:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  hashFormat:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  hashAlg:
+    type: string
+    defaultValues:
+    - data: MD5
+    cardinality: 1
+  stringConversionMethod:
+    type: string
+    defaultValues:
+    - data: base64
+    cardinality: 1
+  passColmn:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  passType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  authZColmn:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  authZFormat:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+components:
+  Query: 1

@@ -1,0 +1,15 @@
+---
+name: SAMLBearerAssertionGrantFilter
+version: 0
+class: com.vordel.circuit.oauth.provider.grants.SAMLBearerAssertionGrantFilter
+fields:
+  requiredAudience:
+    type: string
+    defaultValues:
+    - data: http://apiserver/api/oauth/token
+    cardinality: 1
+  driftTime:
+    type: long
+    defaultValues:
+    - data: 0
+    cardinality: 1

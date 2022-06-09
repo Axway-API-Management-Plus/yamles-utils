@@ -1,0 +1,10 @@
+---
+name: FTPDownloadFilter
+version: 0
+class: com.vordel.circuit.net.FTPDownloadFilter
+fields:
+  filename:
+    type: string
+    defaultValues:
+    - data: filename.xml
+    cardinality: 1

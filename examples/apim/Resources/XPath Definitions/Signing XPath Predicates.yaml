@@ -1,0 +1,67 @@
+---
+type: XPathPredicateSignGroup
+fields:
+  name: Signing XPath Predicates
+children:
+- type: XPath
+  fields:
+    name: Sign SOAP Body and SAML 1.0 assertion
+    xpath: ancestor-or-self::soap:Body | ancestor-or-self::saml:Assertion
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+  - type: XPathNamespace
+    fields:
+      prefix: saml
+      URI: urn:oasis:names:tc:SAML:1.0:assertion
+- type: XPath
+  fields:
+    name: Sign SAML 1.0 assertion
+    xpath: ancestor-or-self::saml:Assertion
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: saml
+      URI: urn:oasis:names:tc:SAML:1.0:assertion
+- type: XPath
+  fields:
+    name: Sign SOAP Body and SAML 2.0 assertion
+    xpath: ancestor-or-self::soap:Body | ancestor-or-self::saml:Assertion
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+  - type: XPathNamespace
+    fields:
+      prefix: saml
+      URI: urn:oasis:names:tc:SAML:2.0:assertion
+- type: XPath
+  fields:
+    name: Sign Entire Document (must be an enveloped signature)
+    xpath: not(ancestor-or-self::dsig:Signature)
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: dsig
+      URI: http://www.w3.org/2000/09/xmldsig#
+- type: XPath
+  fields:
+    name: Sign SAML 2.0 assertion
+    xpath: ancestor-or-self::saml:Assertion
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: saml
+      URI: urn:oasis:names:tc:SAML:2.0:assertion
+- type: XPath
+  fields:
+    name: Sign SOAP Body
+    xpath: ancestor-or-self::soap:Body
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/

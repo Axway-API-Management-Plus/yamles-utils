@@ -1,0 +1,5 @@
+---
+name: SophosDefaultSettings
+version: 1
+components:
+  SophosConfigSet: '*'

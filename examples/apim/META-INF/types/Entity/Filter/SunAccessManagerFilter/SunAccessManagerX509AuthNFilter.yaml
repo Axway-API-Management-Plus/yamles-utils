@@ -1,0 +1,30 @@
+---
+name: SunAccessManagerX509AuthNFilter
+version: 0
+class: com.vordel.circuit.sun.SunAccessManagerX509AuthNFilter
+fields:
+  moduleName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  orgName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  createSSOToken:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  ssoTokenAttrName:
+    type: string
+    defaultValues:
+    - data: sun.sso.token
+    cardinality: 1
+  addSSOTokenToUserAttrs:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1

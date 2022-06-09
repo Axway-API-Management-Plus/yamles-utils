@@ -1,0 +1,41 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Extract WSS Timestamp
+  name: Test Timestamp is Present and Valid
+children:
+- type: ExtractTimestampFilter
+  fields:
+    name: Extract WSS Timestamp
+  routing:
+    success: ../Validate 'Created' timestamp
+    failure: /null
+  logging:
+    fatal: 'Fatal error while extracting the Timestamp. Error: ${circuit.exception}'
+    failure: Failed to extract the Timestamp
+    success: Successfully extracted the Timestamp
+- type: ValidateTimeStampFilter
+  fields:
+    timestampAttributeName: ${wss.timestamp.Created}
+    timezone: UTC
+    name: Validate 'Created' timestamp
+  routing:
+    success: ../Validate 'Expires' timestamp
+    failure: /null
+  logging:
+    fatal: 'Error during validation of timestamp. Error: ${circuit.exception}'
+    failure: Invalid timestamp found in message
+    success: Timestamp is valid
+- type: ValidateTimeStampFilter
+  fields:
+    timestampAttributeName: ${wss.timestamp.Expires}
+    timezone: UTC
+    timestampCheckType: 2
+    name: Validate 'Expires' timestamp
+  routing:
+    success: /null
+    failure: /null
+  logging:
+    fatal: 'Error during validation of timestamp. Error: ${circuit.exception}'
+    failure: Invalid timestamp found in message
+    success: Timestamp is valid

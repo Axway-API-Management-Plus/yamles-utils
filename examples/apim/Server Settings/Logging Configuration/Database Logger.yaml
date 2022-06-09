@@ -1,0 +1,5 @@
+---
+type: DatabaseLogger
+fields:
+  connection: /External Connections/Database Connections/Default Database Connection
+  name: Database Logger

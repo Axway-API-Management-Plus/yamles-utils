@@ -1,0 +1,70 @@
+---
+type: FilterCircuit
+fields:
+  start: ./HTTP Header
+  name: Get User Details
+  description: ""
+children:
+- type: VordelAttributeExtractFilter
+  fields:
+    name: Retrieve from user store
+  routing:
+    success: ../Set Message
+  logging:
+    fatal: 'Error occurred during when looking up of local user attributes. Error: ${circuit.exception}'
+    failure: Failed to look up local user attributes
+    success: Successfully looked up local user attributes for the user ${authentication.subject.id}
+  children:
+  - type: LookupAttribute
+    fields:
+      name: picture
+  - type: LookupAttribute
+    fields:
+      name: given_name
+  - type: LookupAttribute
+    fields:
+      name: email_verified
+  - type: LookupAttribute
+    fields:
+      name: locale
+  - type: LookupAttribute
+    fields:
+      name: family_name
+  - type: LookupAttribute
+    fields:
+      name: gender
+  - type: LookupAttribute
+    fields:
+      name: hd
+  - type: LookupAttribute
+    fields:
+      name: email
+- type: ChangeMessageFilter
+  fields:
+    outputContentType: application/json
+    name: Set Message
+    body: '{{file "Get User Details-Files/Set Message.json"}}'
+  routing:
+    success: ../Reflect Message
+  logging:
+    fatal: 'Error in setting the message. Error: ${circuit.exception}'
+    failure: Failed in setting the message
+    success: Success in setting the message
+- type: Reflector
+  fields:
+    name: Reflect Message
+  logging:
+    fatal: 'Error occurred while echoing the message. Error: ${circuit.exception}'
+    failure: Failed to echo back the message
+    success: Successfully echoed back the message
+- type: HttpHeaderFilter
+  fields:
+    headerName: authentication.subject.id
+    tokenType: Username
+    name: HTTP Header
+  routing:
+    success: ../Retrieve from user store
+  logging:
+    fatal: 'Error while attempt to extract the HTTP headers. Error: ${circuit.exception}'
+    failure: Failed to extract the HTTP header token
+    success: Successfully extracted the HTTP header token

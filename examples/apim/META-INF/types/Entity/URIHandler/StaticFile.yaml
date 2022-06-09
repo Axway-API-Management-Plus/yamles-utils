@@ -1,0 +1,11 @@
+---
+name: StaticFile
+version: 1
+fields:
+  file:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  Property: '*'

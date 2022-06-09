@@ -1,0 +1,5 @@
+---
+name: HTTPStatusClassGroup
+version: 0
+components:
+  HTTPStatusClass: '*'

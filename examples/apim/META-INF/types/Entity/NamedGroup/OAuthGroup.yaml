@@ -1,0 +1,5 @@
+---
+name: OAuthGroup
+version: 0
+components:
+  OAuthProviderProfile: '*'

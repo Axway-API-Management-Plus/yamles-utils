@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: 2WOSIXSRY5G5ZJTWL4KLRN4YDLZYACQA
+  type: schema
+  content: '{{file "2WOSIXSRY5G5ZJTWL4KLRN4YDLZYACQA.xsd" "binary"}}'

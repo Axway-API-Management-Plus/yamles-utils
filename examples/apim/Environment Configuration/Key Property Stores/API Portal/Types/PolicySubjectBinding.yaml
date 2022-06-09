@@ -1,0 +1,15 @@
+---
+type: KPSType
+fields:
+  name: PolicySubjectBinding
+  description: Bindings to policies applied to a subject (app or org)
+children:
+- type: KPSTypeProperty
+  fields:
+    name: bindings
+    type: java.util.List
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: subject
+    type: java.lang.String

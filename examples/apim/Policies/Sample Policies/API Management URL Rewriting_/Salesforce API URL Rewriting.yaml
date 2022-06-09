@@ -1,0 +1,58 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Copy message contents to temp variable
+  name: Salesforce API URL Rewriting
+  description: ""
+children:
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: message.with.urls.to.be.rewritten
+    attributeValue: ${content.body}
+    name: Copy message contents to temp variable
+  routing:
+    success: ../Trace message contents before URL rewriting
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: TraceFilter
+  fields:
+    traceMsg: "Content-type: ${content.body.contentType}\r\nContent body: ${message.with.urls.to.be.rewritten}"
+    traceAttributes: false
+    name: Trace message contents before URL rewriting
+  routing:
+    success: ../Re-write URLs in message contents
+  logging:
+    fatal: 'Error while tracing the message properties. Error: ${circuit.exception}'
+    failure: Failed to trace the message properties
+    success: Traced the message properties
+- type: StringReplaceFilter
+  fields:
+    sourceAttribute: message.with.urls.to.be.rewritten
+    replacementString: ${api.path}
+    straightMatchString: /services/data/v33.0
+    matchBehaviour: MATCH_ALL
+    name: Re-write URLs in message contents
+  routing:
+    success: ../Trace message contents after URL rewriting
+- type: TraceFilter
+  fields:
+    traceMsg: "Content-type: ${content.body.contentType}\r\nContent body: ${message.with.urls.to.be.rewritten}"
+    traceAttributes: false
+    name: Trace message contents after URL rewriting
+  routing:
+    success: ../Update message contents post-transformation
+  logging:
+    fatal: 'Error while tracing the message properties. Error: ${circuit.exception}'
+    failure: Failed to trace the message properties
+    success: Traced the message properties
+- type: ChangeMessageFilter
+  fields:
+    body: ${message.with.urls.to.be.rewritten}
+    outputContentType: ${content.body.contentType}
+    name: Update message contents post-transformation
+  logging:
+    fatal: 'Error in setting the message. Error: ${circuit.exception}'
+    failure: Failed in setting the message
+    success: Success in setting the message

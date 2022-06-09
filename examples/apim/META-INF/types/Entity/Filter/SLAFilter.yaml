@@ -1,0 +1,25 @@
+---
+name: SLAFilter
+version: 2
+class: com.vordel.circuit.sla.SLAFilter
+fields:
+  alertSystem:
+    type: '@AlertSystem'
+    cardinality: +
+  sampleSize:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+  dataAge:
+    type: integer
+    defaultValues:
+    - data: 600000
+    cardinality: 1
+  pollRate:
+    type: integer
+    defaultValues:
+    - data: 30000
+    cardinality: 1
+components:
+  SLARequirement: '*'

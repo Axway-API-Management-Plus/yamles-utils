@@ -1,0 +1,15 @@
+---
+name: APIKeyOnlySecurityDevice
+version: 3
+class: com.vordel.apiportal.runtime.APIKeyOnlySecurityDevice
+fields:
+  apiKeyFieldName:
+    type: string
+    defaultValues:
+    - data: KeyId
+    cardinality: 1
+  takeFrom:
+    type: string
+    defaultValues:
+    - data: HEADER
+    cardinality: 1

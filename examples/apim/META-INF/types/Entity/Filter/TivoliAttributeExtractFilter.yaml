@@ -1,0 +1,32 @@
+---
+name: TivoliAttributeExtractFilter
+version: 2
+class: com.vordel.circuit.tivoli.TivoliAttributeExtractFilter
+fields:
+  enablyLegacyAttrNaming:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: '?'
+  failOnEmptyAttributeSet:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: '?'
+  messageAttrPrefix:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: '?'
+  userIdentityAttribName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)attribute
+    cardinality: 1
+components:
+  LookupAttribute: '*'

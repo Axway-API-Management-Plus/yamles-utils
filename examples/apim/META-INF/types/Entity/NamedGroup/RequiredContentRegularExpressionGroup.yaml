@@ -1,0 +1,5 @@
+---
+name: RequiredContentRegularExpressionGroup
+version: 0
+components:
+  RegularExpression: '*'

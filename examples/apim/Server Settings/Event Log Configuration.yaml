@@ -1,0 +1,4 @@
+---
+type: EventLog
+fields:
+  name: Event Log Configuration

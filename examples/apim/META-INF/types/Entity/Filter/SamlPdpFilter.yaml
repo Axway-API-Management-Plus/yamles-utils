@@ -1,0 +1,61 @@
+---
+name: SamlPdpFilter
+version: 2
+fields:
+  subjectAttributeName:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.id}
+    cardinality: 1
+  subjectAttributeFormat:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  urlSet:
+    type: '@UrlSet'
+    cardinality: 1
+  soapAction:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  samlVersion:
+    type: integer
+    defaultValues:
+    - data: 11
+    cardinality: '?'
+  driftTime:
+    type: long
+    defaultValues:
+    - {}
+    cardinality: '?'
+  insertAssertionActor:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  subjectConfirmationMethod:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  subjectConfirmationKeyInfo:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: '?'
+  specifyInclusiveNamespaces:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  readableFormat:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  signingCert:
+    type: '@Certificate'
+    cardinality: '?'
+abstract: true

@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: RGPRNF5TU2ORBS2T6CKZQB66I76GNTMA
+  type: schema
+  content: '{{file "RGPRNF5TU2ORBS2T6CKZQB66I76GNTMA.xsd" "binary"}}'

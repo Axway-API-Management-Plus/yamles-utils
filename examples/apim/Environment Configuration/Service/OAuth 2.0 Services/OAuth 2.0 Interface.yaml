@@ -1,0 +1,20 @@
+---
+type: SSLInterface
+fields:
+  serverCert: /Environment Configuration/Certificate Store/CN=Change this for production
+  caCert: []
+  ssloptions:
+  - notlsv1_1
+  - noSslRenegotiation
+  - nosslv3
+  - notlsv1
+  resolveSubjectCNtoNetAddr: false
+  name: OAuth 2.0 Interface
+  port: ${env.PORT.OAUTH2.SERVICES}
+  opsSettingsUsage: PORT
+  recordInboundTxns: false
+  recordOutboundTxns: false
+  recordCircuitPath: false
+  recordTrace: false
+  recordSent: false
+  recordReceived: false

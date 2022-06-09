@@ -1,0 +1,21 @@
+---
+name: GSSPrincipal
+version: 3
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  principalName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  principalNameTypeOid:
+    type: '@GSSPrincipalNameOid'
+    defaultValues:
+    - ref: /System/(GSSPrincipalNameOidGroup)GSS Principal Name OIDs/(GSSPrincipalNameOid)NT_USER_NAME
+    cardinality: 1
+keyFields:
+- name

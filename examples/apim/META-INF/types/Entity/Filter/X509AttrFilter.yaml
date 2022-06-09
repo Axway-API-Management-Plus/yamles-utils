@@ -1,0 +1,12 @@
+---
+name: X509AttrFilter
+version: 1
+class: com.vordel.circuit.x509.X509AttrFilter
+fields:
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authorization
+    cardinality: 1
+components:
+  X509AttrRequirement: '*'

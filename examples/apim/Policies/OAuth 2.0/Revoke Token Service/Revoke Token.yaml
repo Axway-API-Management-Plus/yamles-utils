@@ -1,0 +1,12 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Revoke OAuth token
+  name: Revoke Token
+  description: ""
+children:
+- type: RevokeOAuthAccessTokenFilter
+  fields:
+    tokenStore: /Libraries/OAuth2 Stores/Access Token Stores/OAuth Access Token Store
+    clientAttributeName: authentication.application.id
+    name: Revoke OAuth token

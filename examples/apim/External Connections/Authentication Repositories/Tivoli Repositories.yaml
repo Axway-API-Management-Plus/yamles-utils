@@ -1,0 +1,12 @@
+---
+type: AuthnRepositoryTivoliGroup
+fields:
+  allowedFilter:
+  - HttpBasicFilter
+  - HttpDigestFilter
+  - WsBasicFilter
+  - WsDigestFilter
+  - WsUsernameFilter
+  - AttributeAuthnFilter
+  - FormAuthnFilter
+  name: Tivoli Repositories

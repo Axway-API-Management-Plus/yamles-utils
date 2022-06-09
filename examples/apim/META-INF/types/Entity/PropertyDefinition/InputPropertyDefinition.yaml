@@ -1,0 +1,14 @@
+---
+name: InputPropertyDefinition
+version: 2
+fields:
+  description:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  selector:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

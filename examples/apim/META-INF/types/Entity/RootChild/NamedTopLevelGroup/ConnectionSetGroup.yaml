@@ -1,0 +1,5 @@
+---
+name: ConnectionSetGroup
+version: 0
+components:
+  ConnectionSetClearTrustGroup: '*'

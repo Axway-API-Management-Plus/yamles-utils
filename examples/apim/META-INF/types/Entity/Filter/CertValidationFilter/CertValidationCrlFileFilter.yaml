@@ -1,0 +1,10 @@
+---
+name: CertValidationCrlFileFilter
+version: 1
+class: com.vordel.circuit.cert.CertValidationCrlFileFilter
+fields:
+  crl:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

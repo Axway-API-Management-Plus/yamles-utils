@@ -1,0 +1,5 @@
+---
+name: ClientAccessTokenStoreGroup
+version: 0
+components:
+  ClientAccessTokenPersist: '*'

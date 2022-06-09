@@ -1,0 +1,4 @@
+---
+type: OAuthGroup
+fields:
+  name: OAuth2

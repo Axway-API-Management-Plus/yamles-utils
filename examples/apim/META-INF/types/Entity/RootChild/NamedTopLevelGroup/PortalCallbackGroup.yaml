@@ -1,0 +1,6 @@
+---
+name: PortalCallbackGroup
+version: 1
+components:
+  PortalCallback: '*'
+  PortalCallbackGroup: '*'

@@ -1,0 +1,40 @@
+---
+name: SendToSQSQueueFilter
+version: 2
+class: com.vordel.circuit.aws.sqs.SendToSQSQueueFilter
+fields:
+  queueName:
+    type: string
+    defaultValues:
+    - data: publishQueue
+    cardinality: 1
+  createQueue:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  handleLargeMessages:
+    type: string
+    defaultValues:
+    - data: Split
+    cardinality: 1
+  whatToSend:
+    type: string
+    defaultValues:
+    - data: ContentBody
+    cardinality: 1
+  attributeName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  contentType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  contentEncoding:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

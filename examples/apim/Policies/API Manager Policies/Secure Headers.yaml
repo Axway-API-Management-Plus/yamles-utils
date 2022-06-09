@@ -1,0 +1,82 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Add X-Frame-Options
+  name: Secure Headers
+  description: ""
+children:
+- type: AddHTTPHeaderFilter
+  fields:
+    headerName: X-Frame-Options
+    headerValue: DENY
+    name: Add X-Frame-Options
+  routing:
+    success: ../Add X-Content-Type-Options
+  logging:
+    fatal: 'Error in adding the HTTP header to the message. Error: ${circuit.exception}'
+    failure: Failed in adding the HTTP header to the message
+    success: Success in adding the HTTP header to the message
+- type: AddHTTPHeaderFilter
+  fields:
+    headerName: X-Content-Type-Options
+    headerValue: nosniff
+    name: Add X-Content-Type-Options
+  routing:
+    success: ../Add X-XSS-Protection
+  logging:
+    fatal: 'Error in adding the HTTP header to the message. Error: ${circuit.exception}'
+    failure: Failed in adding the HTTP header to the message
+    success: Success in adding the HTTP header to the message
+- type: AddHTTPHeaderFilter
+  fields:
+    headerName: X-XSS-Protection
+    headerValue: 1; mode=block
+    name: Add X-XSS-Protection
+  routing:
+    success: ../Add Content-Security-Policy
+  logging:
+    fatal: 'Error in adding the HTTP header to the message. Error: ${circuit.exception}'
+    failure: Failed in adding the HTTP header to the message
+    success: Success in adding the HTTP header to the message
+- type: AddHTTPHeaderFilter
+  fields:
+    headerName: Content-Security-Policy
+    headerValue: ${env.SERVICES.CONTENTSECURITYPOLICY}
+    name: Add Content-Security-Policy
+  routing:
+    success: ../Add Expires
+  logging:
+    fatal: 'Error in adding the HTTP header to the message. Error: ${circuit.exception}'
+    failure: Failed in adding the HTTP header to the message
+    success: Success in adding the HTTP header to the message
+- type: AddHTTPHeaderFilter
+  fields:
+    headerName: Expires
+    headerValue: 0
+    name: Add Expires
+  routing:
+    success: ../Add Pragma
+  logging:
+    fatal: 'Error in adding the HTTP header to the message. Error: ${circuit.exception}'
+    failure: Failed in adding the HTTP header to the message
+    success: Success in adding the HTTP header to the message
+- type: AddHTTPHeaderFilter
+  fields:
+    headerName: Pragma
+    headerValue: no-cache
+    name: Add Pragma
+  routing:
+    success: ../Add Cache-Control
+  logging:
+    fatal: 'Error in adding the HTTP header to the message. Error: ${circuit.exception}'
+    failure: Failed in adding the HTTP header to the message
+    success: Success in adding the HTTP header to the message
+- type: AddHTTPHeaderFilter
+  fields:
+    headerName: Cache-Control
+    headerValue: no-cache, no-store, must-revalidate
+    name: Add Cache-Control
+  logging:
+    fatal: 'Error in adding the HTTP header to the message. Error: ${circuit.exception}'
+    failure: Failed in adding the HTTP header to the message
+    success: Success in adding the HTTP header to the message

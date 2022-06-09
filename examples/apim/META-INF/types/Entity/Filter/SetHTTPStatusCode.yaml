@@ -1,0 +1,10 @@
+---
+name: SetHTTPStatusCode
+version: 0
+class: com.vordel.circuit.net.SetHTTPStatusFilter
+fields:
+  httpResponseStatus:
+    type: integer
+    defaultValues:
+    - data: 200
+    cardinality: 1

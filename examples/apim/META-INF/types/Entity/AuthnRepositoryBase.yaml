@@ -1,0 +1,15 @@
+---
+name: AuthnRepositoryBase
+version: 2
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  classloader:
+    type: '@ClassLoader'
+    cardinality: '?'
+keyFields:
+- name
+abstract: true

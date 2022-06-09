@@ -1,0 +1,39 @@
+---
+name: AttributeRegularExpression
+version: 2
+fields:
+  attributeName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  base64Decode:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  substringStart:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: '?'
+  substringEnd:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: '?'
+  required:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  libraryRegularExpression:
+    type: '@RegularExpression'
+    cardinality: '?'
+  onceOffRegularExpression:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+keyFields:
+- attributeName

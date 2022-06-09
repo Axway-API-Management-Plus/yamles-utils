@@ -1,0 +1,95 @@
+---
+type: ServletApplication
+fields:
+  uriprefix: /api/portal/
+children:
+- type: Servlet
+  fields:
+    uri: v1.4
+    class: com.vordel.apiportal.api.PortalServletContainer
+    name: API Portal v1.4
+  children:
+  - type: Property
+    fields:
+      name: RateLimitFilter.rateLimitSize
+      value: 5000
+  - type: Property
+    fields:
+      name: RateLimitFilter.rateLimitOffset
+      value: 60000
+  - type: Property
+    fields:
+      name: jersey.config.server.provider.packages
+      value: com.vordel.apiportal.api.portal.v1_4,com.vordel.apiportal.api.mappers
+  - type: Property
+    fields:
+      name: UnauthenticatedRateLimitFilter.rateLimitOffset
+      value: 60000
+  - type: Property
+    fields:
+      name: jersey.config.server.provider.classnames
+      value: org.glassfish.jersey.media.multipart.MultiPartFeature,com.vordel.common.apiserver.filter.CsrfBindingFeature,com.vordel.apiportal.api.filter.LicenceCheckBindingFeature,com.vordel.apiportal.api.filter.AlertingFilterFactory,com.vordel.apiportal.api.inject.StoreAccessContextProvider,com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider,com.vordel.common.apiserver.filter.CacheControlBindingFeature,com.vordel.common.apiserver.filter.SecureHeadersBindingFeature,com.vordel.apiportal.api.filter.RateLimitBindingFeature,com.vordel.apiportal.api.filter.UnauthenticatedRateLimitBindingFeature
+  - type: Property
+    fields:
+      name: UnauthenticatedRateLimitFilter.rateLimitSize
+      value: 200
+- type: Servlet
+  fields:
+    uri: v1.3
+    class: com.vordel.apiportal.api.PortalServletContainer
+    name: API Portal v1.3
+  children:
+  - type: Property
+    fields:
+      name: RateLimitFilter.rateLimitSize
+      value: 5000
+  - type: Property
+    fields:
+      name: RateLimitFilter.rateLimitOffset
+      value: 60000
+  - type: Property
+    fields:
+      name: UnauthenticatedRateLimitFilter.rateLimitOffset
+      value: 60000
+  - type: Property
+    fields:
+      name: UnauthenticatedRateLimitFilter.rateLimitSize
+      value: 200
+  - type: Property
+    fields:
+      name: jersey.config.server.provider.classnames
+      value: org.glassfish.jersey.media.multipart.MultiPartFeature,com.vordel.common.apiserver.filter.CsrfBindingFeature,com.vordel.apiportal.api.filter.LicenceCheckBindingFeature,com.vordel.apiportal.api.filter.AlertingFilterFactory,com.vordel.apiportal.api.inject.StoreAccessContextProvider,com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider,com.vordel.common.apiserver.filter.CacheControlBindingFeature,com.vordel.common.apiserver.filter.SecureHeadersBindingFeature,io.swagger.jaxrs.listing.SwaggerSerializers,com.vordel.apiportal.api.filter.RateLimitBindingFeature,com.vordel.apiportal.api.filter.UnauthenticatedRateLimitBindingFeature
+  - type: Property
+    fields:
+      name: jersey.config.server.provider.packages
+      value: com.vordel.apiportal.api.portal.v1_3,com.vordel.apiportal.api.mappers
+- type: Servlet
+  fields:
+    uri: v1.2
+    class: com.vordel.apiportal.api.PortalServletContainer
+    name: API Portal v1.2
+  children:
+  - type: Property
+    fields:
+      name: jersey.config.server.provider.packages
+      value: com.vordel.apiportal.api.portal.v1_2,com.vordel.apiportal.api.mappers
+  - type: Property
+    fields:
+      name: UnauthenticatedRateLimitFilter.rateLimitOffset
+      value: 60000
+  - type: Property
+    fields:
+      name: RateLimitFilter.rateLimitSize
+      value: 5000
+  - type: Property
+    fields:
+      name: RateLimitFilter.rateLimitOffset
+      value: 60000
+  - type: Property
+    fields:
+      name: jersey.config.server.provider.classnames
+      value: org.glassfish.jersey.media.multipart.MultiPartFeature,com.vordel.common.apiserver.filter.CsrfBindingFeature,com.vordel.apiportal.api.filter.LicenceCheckBindingFeature,com.vordel.apiportal.api.filter.AlertingFilterFactory, com.vordel.apiportal.api.inject.StoreAccessContextProvider,com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider,com.vordel.common.apiserver.filter.CacheControlBindingFeature,com.vordel.common.apiserver.filter.SecureHeadersBindingFeature,io.swagger.jaxrs.listing.SwaggerSerializers,com.vordel.apiportal.api.filter.RateLimitBindingFeature,com.vordel.apiportal.api.filter.UnauthenticatedRateLimitBindingFeature
+  - type: Property
+    fields:
+      name: UnauthenticatedRateLimitFilter.rateLimitSize
+      value: 200

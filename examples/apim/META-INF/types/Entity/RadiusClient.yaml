@@ -1,0 +1,23 @@
+---
+name: RadiusClient
+version: 0
+fields:
+  clientName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  hostName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  port:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  RadiusServer: +
+keyFields:
+- clientName

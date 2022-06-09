@@ -1,0 +1,9 @@
+---
+type: ResourceSetTag
+fields:
+  ID: BEHOATC3SE2TBBBKYUHXCDCE54AYQ7VF
+  resourceID: TW7TQ7AH7WDHCBN6EMIMDIBZDR52NXPJ
+  comment: Schema for WSDL 1.1
+  creator: catalog
+  timestamp: 1380037359203
+  version: 1

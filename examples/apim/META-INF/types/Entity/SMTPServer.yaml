@@ -1,0 +1,41 @@
+---
+name: SMTPServer
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  smtpServer:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  smtpPort:
+    type: integer
+    defaultValues:
+    - data: 25
+    cardinality: 1
+  connectionType:
+    type: string
+    defaultValues:
+    - data: NONE
+    cardinality: 1
+  username:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  password:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1
+  mailDebugOn:
+    type: string
+    defaultValues:
+    - data: 0
+    cardinality: 1
+keyFields:
+- name

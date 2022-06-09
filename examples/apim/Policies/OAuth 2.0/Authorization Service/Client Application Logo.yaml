@@ -1,0 +1,41 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Extract Path Parameters
+  name: Client Application Logo
+  description: ""
+children:
+- type: PathParameterFilter
+  fields:
+    uriTemplate: /api/oauth/application/image/{clientID}
+    name: Extract Path Parameters
+  routing:
+    success: ../Connect to URL
+  children:
+  - type: OutputPropertyDefinition
+    fields:
+      selector: client.app.id
+      name: clientID
+      type: java.lang.String
+- type: ConnectToURLFilter
+  fields:
+    url: https://${env.OAUTH.SERVER}:${env.PORT.OAUTH2.SERVICES}/api/portal/v1.4/applications/${client.app.id}/image
+    profileInUse: true
+    profile: /External Connections/Auth Profiles/HTTP Basic/Get Application Image
+    caCerts: /Environment Configuration/Certificate Store/CN=Change this for production
+    sslUsers: /null
+    useRootCerts: false
+    ciphers: DEFAULT
+    ssloptions: []
+    retryHTTPRanges: /null
+    connectionFailurePolicy: /null
+    proxyServer: /null
+    name: Connect to URL
+  logging:
+    fatal: 'Error occurred while routing request to endpoint. Error: ${circuit.exception}'
+    failure: Failed to route request to endpoint.
+    success: Successfully routed request to endpoint
+  children:
+  - type: SaveToFileFilter
+    fields:
+      name: Persistence Details

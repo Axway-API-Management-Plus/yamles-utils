@@ -1,0 +1,8 @@
+---
+name: CircuitDelegateFilter
+version: 1
+class: com.vordel.circuit.CircuitDelegateFilter
+fields:
+  circuitPK:
+    type: '@FilterCircuit'
+    cardinality: '?'

@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Disable Application
+  id: alert.application.disable
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Application/Disable Application

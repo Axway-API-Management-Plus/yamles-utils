@@ -1,0 +1,4 @@
+---
+type: ResourceBlobGroup
+fields:
+  name: blobs

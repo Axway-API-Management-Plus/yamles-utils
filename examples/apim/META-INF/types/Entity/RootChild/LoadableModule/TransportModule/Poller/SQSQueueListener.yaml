@@ -1,0 +1,93 @@
+---
+name: SQSQueueListener
+version: 5
+class: com.vordel.dwe.aws.sqs.SQSQueueListener
+constants:
+  descriptorClass:
+    type: string
+    value: com.vordel.client.manager.filter.aws.sqs.SQSTransportDescriptor
+fields:
+  clientConfiguration:
+    type: '@AWSClientConfiguration'
+    defaultValues:
+    - ref: /External Connections/(AWSSettings)Amazon Web Services Settings/(AWSClientConfiguration)Default AWS Client Configuration
+    cardinality: 1
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  awsCredential:
+    type: '@ApiKeyProfile'
+    cardinality: '?'
+  region:
+    type: string
+    defaultValues:
+    - data: us-west-1
+    cardinality: 1
+  filterCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+  queueName:
+    type: string
+    defaultValues:
+    - data: requestQueue
+    cardinality: 1
+  visibilityTimeout:
+    type: integer
+    defaultValues:
+    - data: 1000
+    cardinality: 1
+  numMessages:
+    type: integer
+    defaultValues:
+    - data: 10
+    cardinality: 1
+  pollRateMs:
+    type: integer
+    defaultValues:
+    - data: 10000
+    cardinality: 1
+  processSQSMessageAs:
+    type: string
+    defaultValues:
+    - data: Body
+    cardinality: 1
+  contentType:
+    type: string
+    defaultValues:
+    - data: text/xml
+    cardinality: 1
+  storeInAttribute:
+    type: string
+    defaultValues:
+    - data: sqs.body
+    cardinality: 1
+  deleteMessage:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  sendResponse:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  responseQueue:
+    type: string
+    defaultValues:
+    - data: responseQueue
+    cardinality: 1
+  takeResponseFrom:
+    type: string
+    defaultValues:
+    - data: Body
+    cardinality: 1
+  responseAttributeName:
+    type: string
+    defaultValues:
+    - data: ${sqs.body}
+    cardinality: 1
+keyFields:
+- name
+- queueName

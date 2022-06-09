@@ -1,0 +1,20 @@
+---
+name: ClamAvVirusCheck
+version: 0
+class: com.vordel.circuit.virus.ClamAvFilter
+fields:
+  clamdHost:
+    type: string
+    defaultValues:
+    - data: 127.0.0.1
+    cardinality: 1
+  clamdPort:
+    type: long
+    defaultValues:
+    - data: 3310
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)content-filtering
+    cardinality: 1

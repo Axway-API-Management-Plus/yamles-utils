@@ -1,0 +1,32 @@
+---
+name: RadiusServer
+version: 0
+fields:
+  host:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  port:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+  secret:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1
+  responseTimeoutSec:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+  retransmitCount:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- host
+- port

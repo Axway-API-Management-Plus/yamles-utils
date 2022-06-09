@@ -1,0 +1,4 @@
+---
+type: LocalUnixSyslogLogger
+fields:
+  name: Local Unix Syslog Logger

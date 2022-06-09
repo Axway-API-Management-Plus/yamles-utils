@@ -1,0 +1,26 @@
+---
+name: FileRolloverTrace
+version: 1
+fields:
+  filename:
+    type: string
+    defaultValues:
+    - data: trace.trc
+    cardinality: 1
+  directory:
+    type: string
+    defaultValues:
+    - data: trace
+    cardinality: 1
+  maxlen:
+    type: integer
+    defaultValues:
+    - data: 16777216
+    cardinality: 1
+  maxfiles:
+    type: integer
+    defaultValues:
+    - data: 256
+    cardinality: 1
+keyFields:
+- directory

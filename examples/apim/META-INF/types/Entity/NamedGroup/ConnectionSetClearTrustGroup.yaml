@@ -1,0 +1,5 @@
+---
+name: ConnectionSetClearTrustGroup
+version: 0
+components:
+  ConnectionSet: '*'

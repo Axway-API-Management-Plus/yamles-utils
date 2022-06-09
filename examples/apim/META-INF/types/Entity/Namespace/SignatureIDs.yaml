@@ -1,0 +1,9 @@
+---
+name: SignatureIDs
+version: 2
+fields:
+  namespace:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'

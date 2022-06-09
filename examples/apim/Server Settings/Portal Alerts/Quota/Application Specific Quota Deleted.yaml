@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Application Specific Quota Deleted
+  id: alert.quota.override.deleted
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Quota/Application Specific Quota Changed

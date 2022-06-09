@@ -1,0 +1,4 @@
+---
+name: CRLResponderFilter
+version: 1
+class: com.vordel.circuit.cert.CRLResponderFilter

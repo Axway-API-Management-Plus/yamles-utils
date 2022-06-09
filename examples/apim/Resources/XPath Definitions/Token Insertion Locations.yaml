@@ -1,0 +1,14 @@
+---
+type: XPathTokenInsertionLocationGroup
+fields:
+  name: Token Insertion Locations
+children:
+- type: XPath
+  fields:
+    name: First WSSE Security Element
+    xpath: //wsse:Security
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: wsse
+      URI: http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd

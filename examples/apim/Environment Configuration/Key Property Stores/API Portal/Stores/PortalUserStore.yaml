@@ -1,0 +1,14 @@
+---
+type: KPSReadWriteStore
+fields:
+  key: id
+  readKey: userDn
+  indexes:
+  - role
+  - userDn
+  encrypted: ""
+  name: PortalUserStore
+  description: Users of Applications
+  type: /Environment Configuration/Key Property Stores/API Portal/Types/PortalUsers
+  dataSource: /null
+  aliases: PortalUserStore

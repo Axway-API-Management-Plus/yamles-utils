@@ -1,0 +1,32 @@
+---
+name: APISecurityDevice
+version: 3
+fields:
+  id:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  order:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+  removeCredentialsOnSuccess:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  scopesMustMatch:
+    type: string
+    defaultValues:
+    - data: Any
+    cardinality: 1
+  scopes:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+keyFields:
+- id
+- order

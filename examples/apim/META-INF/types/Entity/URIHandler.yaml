@@ -1,0 +1,37 @@
+---
+name: URIHandler
+version: 6
+class: com.vordel.dwe.http.URIHandler
+fields:
+  uriprefix:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  httpMethod:
+    type: string
+    defaultValues:
+    - data: '*'
+    cardinality: 1
+  pathMatching:
+    type: string
+    defaultValues:
+    - data: LONGEST
+    cardinality: 1
+  corsProfile:
+    type: '@CORS'
+    cardinality: '?'
+  corsUsage:
+    type: string
+    defaultValues:
+    - data: HTTP
+    cardinality: 1
+  trafficMonitoringEnabled:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+keyFields:
+- uriprefix
+- httpMethod
+abstract: true

@@ -1,0 +1,39 @@
+---
+type: FilterCircuit
+fields:
+  start: './XSLT Conversion: Remove All Security Tokens from Message'
+  name: Remove All Security Tokens
+children:
+- type: StylesheetFilter
+  fields:
+    stylesheetURL: /Resources/Stylesheet Group/#removeSecurityTokensInCurrentActor
+    useMessageAttributesAsParameters: false
+    parameterAttributes: []
+    keepOriginalContentType: true
+    name: 'XSLT Conversion: Remove All Security Tokens from Message'
+  routing:
+    success: ../Reset Signed NodeList
+- type: LocateNodeFilter
+  fields:
+    elementSpecifier: /null
+    xpath: /null
+    nodeListAttributeName: nodeList.Signed
+    nodeListInsertionType: reset
+    name: Reset Signed NodeList
+  routing:
+    success: ../Reset Encrypted NodeList
+  logging:
+    fatal: 'Error during node location. Error: ${circuit.exception}'
+    failure: Failed to locate nodes
+    success: Located nodes successfully
+- type: LocateNodeFilter
+  fields:
+    elementSpecifier: /null
+    xpath: /null
+    nodeListAttributeName: nodeList.Encrypted
+    nodeListInsertionType: reset
+    name: Reset Encrypted NodeList
+  logging:
+    fatal: 'Error during node location. Error: ${circuit.exception}'
+    failure: Failed to locate nodes
+    success: Located nodes successfully

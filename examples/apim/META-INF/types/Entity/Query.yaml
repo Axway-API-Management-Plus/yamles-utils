@@ -1,0 +1,36 @@
+---
+name: Query
+version: 2
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  sqlStatement:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  statementType:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  resultSetType:
+    type: string
+    defaultValues:
+    - data: 2
+    cardinality: 1
+  expectNumRows:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  order:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+keyFields:
+- name

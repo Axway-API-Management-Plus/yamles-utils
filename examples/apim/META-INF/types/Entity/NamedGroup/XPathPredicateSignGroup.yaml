@@ -1,0 +1,5 @@
+---
+name: XPathPredicateSignGroup
+version: 1
+components:
+  XPath: '*'

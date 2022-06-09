@@ -1,0 +1,30 @@
+---
+name: WAFProfile
+version: 2
+class: com.vordel.dwe.mod_security.ModSecurity
+fields:
+  name:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  configFile:
+    type: string
+    defaultValues:
+    - data: modsecurity.conf
+    cardinality: 1
+  configDirectory:
+    type: string
+    defaultValues:
+    - data: ${environment.VDISTDIR}/system/conf/threat-protection/default
+    cardinality: 1
+  activatedRulesDirectory:
+    type: string
+    defaultValues:
+    - data: activated_rules
+    cardinality: 1
+  filterCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+keyFields:
+- name

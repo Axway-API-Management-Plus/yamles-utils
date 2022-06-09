@@ -1,0 +1,4 @@
+---
+name: TrueFilter
+version: 0
+class: com.vordel.circuit.basic.True

@@ -1,0 +1,15 @@
+---
+name: GlobalProperties
+version: 1
+class: com.vordel.circuit.GlobalProperties
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  Property: '?'
+keyFields:
+- name
+loadorder: 1400000

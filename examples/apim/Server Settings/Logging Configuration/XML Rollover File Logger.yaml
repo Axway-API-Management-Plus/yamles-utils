@@ -1,0 +1,5 @@
+---
+type: XMLRollOverLogger
+fields:
+  format: ${level} ${timestamp} ${id} '${text}' ${filterType} ${filterName}
+  name: XML Rollover File Logger

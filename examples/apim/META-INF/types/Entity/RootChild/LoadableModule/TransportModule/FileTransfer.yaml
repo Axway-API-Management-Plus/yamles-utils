@@ -1,0 +1,118 @@
+---
+name: FileTransfer
+version: 13
+class: com.vordel.fileservice.integration.VordelFileService
+constants:
+  descriptorClass:
+    type: string
+    value: com.vordel.client.manager.filetransfer.FileTransferServiceTransportDescriptor
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  serviceType:
+    type: string
+    defaultValues:
+    - data: ftp
+    cardinality: 1
+  port:
+    type: integer
+    defaultValues:
+    - data: 21
+    cardinality: 1
+  bindingAddress:
+    type: string
+    defaultValues:
+    - data: '*'
+    cardinality: 1
+  passwordAuthCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+  pubKeyAuthCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+  sslCertificate:
+    type: '@Certificate'
+    cardinality: 1
+  useImplicitFtps:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  keyPair:
+    type: '@KeyPair'
+    cardinality: 1
+  idleTimeout:
+    type: long
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  persistent:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  inDir:
+    type: string
+    defaultValues:
+    - data: ${environment.VINSTDIR}/file-transfer/in/
+    cardinality: 1
+  outDir:
+    type: string
+    defaultValues:
+    - data: out
+    cardinality: 1
+  quarantineDir:
+    type: string
+    defaultValues:
+    - data: quarantine
+    cardinality: 1
+  responseSuffix:
+    type: string
+    defaultValues:
+    - data: .resp.${id}
+    cardinality: 1
+  deleteFileOnSuccessfulResponse:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  fileExpiry:
+    type: long
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  filePurgerSleepTime:
+    type: long
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  welcomeMessage:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  goodbyeMessage:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  logMask:
+    type: integer
+    defaultValues:
+    - data: 2
+    cardinality: 1
+  payloadMask:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+components:
+  AccessControlList1: '*'
+  AccessControlList2: '*'
+  FileTransferCommand: '*'
+  PatternPolicyPair: '*'
+keyFields:
+- name

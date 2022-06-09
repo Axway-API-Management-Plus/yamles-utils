@@ -1,0 +1,23 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Read Account
+  name: Account Creation Success
+  description: ""
+children:
+- type: PortalApplicationDeveloperReadFilter
+  fields:
+    idSelector: ${authN.accountId}
+    name: Read Account
+  routing:
+    success: ../Trace Account
+- type: TraceFilter
+  fields:
+    traceMsg: Account ${authN.accountId} (${apimgmt.appdeveloper.name}) was created for login name ${authN.loginname}
+    traceLevel: 3
+    traceAttributes: false
+    name: Trace Account
+  logging:
+    fatal: 'Error while tracing the message properties. Error: ${circuit.exception}'
+    failure: Failed to trace the message properties
+    success: Traced the message properties

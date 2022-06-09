@@ -1,0 +1,107 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Add Secure Headers
+  name: Client App Registry Protection Policy
+  description: ""
+children:
+- type: CompareAttributeFilter
+  fields:
+    matchingRule: MATCH_ONE
+    name: Is This Root or Home?
+  routing:
+    success: ../Load Client App Registry Manager Login Page
+    failure: ../HTTP Redirect
+  logging:
+    maskType: FILTER
+    mask: 0
+  children:
+  - type: AttributeCompare
+    fields:
+      attrName: ${http.request.path}
+      matchType: IS
+      expression: /home
+  - type: AttributeCompare
+    fields:
+      attrName: ${http.request.path}
+      matchType: IS
+      expression: /
+- type: CircuitDelegateFilter
+  fields:
+    circuitPK: /Policies/Client App Registry Policies/Client App Registry Secure Headers
+    name: Add Secure Headers
+  routing:
+    success: ../Check Session
+    failure: /null
+  logging:
+    fatal: 'Error in calling policy shortcut circuit. Error: ${circuit.exception}'
+    failure: Failed in calling policy shortcut
+    success: Success in calling policy shortcut
+- type: CheckSessionFilter
+  fields:
+    cookie: AXCLIENTAPPREGSTATIC
+    name: Check Session
+  routing:
+    success: ../Is this Root (Valid Session)?
+    failure: ../Is This Root or Home?
+  logging:
+    maskType: FILTER
+    mask: 0
+- type: CompareAttributeFilter
+  fields:
+    name: Is this Root (Valid Session)?
+  routing:
+    success: ../Client App Registry Home Page
+    failure: ../Call internal service
+  logging:
+    maskType: FILTER
+    mask: 0
+  children:
+  - type: AttributeCompare
+    fields:
+      attrName: ${http.request.path}
+      matchType: IS
+      expression: /
+- type: ProtocolDelegateFilter
+  fields:
+    name: Call internal service
+  logging:
+    fatal: 'Error in calling protocol. Error: ${circuit.exception}'
+    failure: Failed in calling protocol
+    success: Success in calling protocol
+- type: RedirectFilter
+  fields:
+    httpResponseStatus: 302
+    url: /home
+    outputContentType: text/plain
+    content: Client App Registry Home Page
+    name: Client App Registry Home Page
+- type: RedirectFilter
+  fields:
+    httpResponseStatus: 302
+    url: /
+    outputContentType: text/html
+    content: <p>Please Login</p>
+    name: HTTP Redirect
+- type: LoadFileFilter
+  fields:
+    fileIn: ${environment.VDISTDIR}/webapps/apiportal/registry-login.html
+    treatFileAs: CONTENT_TYPE
+    inFileContentType: text/html
+    filterCircuit: /null
+    workDir: ""
+    outDir: ""
+    completeDir: ""
+    outPrefix: ""
+    outSuffix: ""
+    name: Load Client App Registry Manager Login Page
+  routing:
+    success: ../Send Login Page
+    failure: /null
+- type: Reflector
+  fields:
+    name: Send Login Page
+  logging:
+    fatal: 'Error occurred while echoing the message. Error: ${circuit.exception}'
+    failure: Failed to echo back the message
+    success: Successfully echoed back the message

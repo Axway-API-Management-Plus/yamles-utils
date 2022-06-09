@@ -1,0 +1,15 @@
+---
+name: AuthnRepositoryKPS
+version: 0
+class: com.vordel.security.auth.repository.KPSRepository
+fields:
+  kpsAlias:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  secretField:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

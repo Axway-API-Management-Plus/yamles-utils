@@ -1,0 +1,31 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Extract WSS Username Token
+  name: Test WSS Username Token is Absent
+children:
+- type: ExtractWssUsernameTokenFilter
+  fields:
+    name: Extract WSS Username Token
+  routing:
+    success: ../False
+    failure: ../True
+  logging:
+    maskType: FILTER
+    mask: 0
+    fatal: 'Fatal error while extracting the WSS Username Token. Error: ${circuit.exception}'
+    failure: Failed to extract the WSS Username Token
+    success: Successfully extracted the WSS Username Token
+- type: FalseFilter
+  fields:
+    name: "False"
+  logging:
+    fatal: 'False filter error. Error: ${circuit.exception}'
+    success: ""
+- type: TrueFilter
+  fields:
+    name: "True"
+  logging:
+    fatal: 'True filter error. Error: ${circuit.exception}'
+    failure: ""
+    success: True filter passed

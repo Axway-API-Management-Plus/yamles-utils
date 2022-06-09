@@ -1,0 +1,36 @@
+---
+name: ProxyServer
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  host:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  port:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  username:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  password:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: '?'
+  scheme:
+    type: string
+    defaultValues:
+    - data: HTTP
+    cardinality: 1
+keyFields:
+- name

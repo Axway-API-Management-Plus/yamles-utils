@@ -1,0 +1,13 @@
+{
+ "kind": "APIGatewayOpenIdConnect",
+ "gender": "${user.gender}",
+ "sub": "${authentication.subject.id}",
+ "name": "${user.given_name} ${user.family_name}",
+ "given_name": "${user.given_name}",
+ "family_name": "${user.family_name}",
+ "picture": "${user.picture}",
+ "email": "${user.email}",
+ "email_verified": "${user.email_verified}",
+ "locale": "${user.locale}",
+ "hd": "${user.hd}"
+}

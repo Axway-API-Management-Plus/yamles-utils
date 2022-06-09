@@ -1,0 +1,8 @@
+---
+name: SMIMEDecryptFilter
+version: 1
+class: com.vordel.circuit.smime.DecryptionFilter
+fields:
+  recipient:
+    type: '@Certificate'
+    cardinality: 1

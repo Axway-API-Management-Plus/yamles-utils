@@ -1,0 +1,40 @@
+---
+type: KPSType
+fields:
+  name: PortalUsers
+  description: Users in an Organization
+children:
+- type: KPSTypeProperty
+  fields:
+    name: tags
+    type: java.util.Map
+    key: java.lang.String
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: type
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: userDn
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: id
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: enabled
+    type: java.lang.Boolean
+- type: KPSTypeProperty
+  fields:
+    name: role
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: orgs2Role
+    type: java.util.Map
+    key: java.lang.String
+    value: java.lang.String

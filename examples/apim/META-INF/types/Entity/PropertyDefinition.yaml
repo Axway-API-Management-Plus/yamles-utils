@@ -1,0 +1,16 @@
+---
+name: PropertyDefinition
+version: 2
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  type:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- name

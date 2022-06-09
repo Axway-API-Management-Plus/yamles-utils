@@ -1,0 +1,9 @@
+---
+type: AuthnRepositoryOracleAccessManagerGroup
+fields:
+  allowedFilter:
+  - HttpBasicFilter
+  - WsBasicFilter
+  - AttributeAuthnFilter
+  - FormAuthnFilter
+  name: Oracle Access Manager Repositories

@@ -1,0 +1,4 @@
+---
+name: Reflector
+version: 0
+class: com.vordel.circuit.net.ReflectFilter

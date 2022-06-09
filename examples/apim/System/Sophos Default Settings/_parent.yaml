@@ -1,0 +1,4 @@
+---
+type: SophosDefaultSettings
+fields:
+  name: Sophos Default Settings

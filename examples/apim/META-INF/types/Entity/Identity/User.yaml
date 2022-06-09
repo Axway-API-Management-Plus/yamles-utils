@@ -1,0 +1,12 @@
+---
+name: User
+version: 3
+fields:
+  password:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1
+  certificate:
+    type: '@Certificate'
+    cardinality: '?'

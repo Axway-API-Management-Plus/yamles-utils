@@ -1,0 +1,24 @@
+---
+name: BasicProfile
+version: 0
+fields:
+  httpAuthType:
+    type: string
+    defaultValues:
+    - data: basic
+    cardinality: 1
+  httpAuthUser:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  httpAuthPass:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1
+  httpSendCredsWithoutPrompt:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1

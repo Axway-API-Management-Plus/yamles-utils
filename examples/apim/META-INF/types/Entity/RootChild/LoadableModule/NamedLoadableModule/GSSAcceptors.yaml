@@ -1,0 +1,7 @@
+---
+name: GSSAcceptors
+version: 1
+class: com.vordel.circuit.gss.GssAcceptors
+components:
+  GSSAcceptor: '?'
+loadorder: 500

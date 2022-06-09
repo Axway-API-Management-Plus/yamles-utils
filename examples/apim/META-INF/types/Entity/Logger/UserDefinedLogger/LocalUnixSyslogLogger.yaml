@@ -1,0 +1,10 @@
+---
+name: LocalUnixSyslogLogger
+version: 0
+class: com.vordel.log.syslog.LocalUnixSyslogLogger
+fields:
+  facility:
+    type: string
+    defaultValues:
+    - data: LOCAL0
+    cardinality: 1

@@ -1,0 +1,10 @@
+---
+name: OracleAccessManagerAuthZFilter
+version: 6
+class: com.vordel.circuit.oracle.AccessManagerAuthZFilter
+fields:
+  installDir:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'

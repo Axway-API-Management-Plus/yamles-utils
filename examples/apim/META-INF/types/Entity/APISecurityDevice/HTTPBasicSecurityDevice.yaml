@@ -1,0 +1,10 @@
+---
+name: HTTPBasicSecurityDevice
+version: 1
+class: com.vordel.apiportal.runtime.HTTPBasicSecurityDevice
+fields:
+  realm:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

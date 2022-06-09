@@ -1,0 +1,8 @@
+---
+name: SophosVirusCheck
+version: 2
+class: com.vordel.circuit.virus.SophosFilter
+fields:
+  settings:
+    type: '@SophosConfigSet'
+    cardinality: 1

@@ -1,0 +1,21 @@
+---
+name: Engine
+version: 1
+class: com.vordel.dwe.EngineConfig
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  defaultFor:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  EngineCommand: '?'
+  EngineConversation: '?'
+keyFields:
+- name
+loadorder: 95

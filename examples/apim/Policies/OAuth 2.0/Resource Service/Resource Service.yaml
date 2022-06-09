@@ -1,0 +1,36 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Validate Access Token in Message
+  name: Resource Service
+children:
+- type: ValidateOAuth2AccessTokenFilter
+  fields:
+    accessTokenLocationSelector: ""
+    accessTokenLocationQueryString: ""
+    tokenStore: /Libraries/OAuth2 Stores/Access Token Stores/OAuth Access Token Store
+    clientAttributeName: authentication.application.id
+    name: Validate Access Token in Message
+  routing:
+    success: ../Set Congrats Message
+  children:
+  - type: WithScopes
+    fields:
+      name: resource.WRITE
+  - type: WithScopes
+    fields:
+      name: resource.READ
+- type: ChangeMessageFilter
+  fields:
+    body: <html>Congrats! You've hit an OAuth protected resource</html>
+    outputContentType: text/html
+    name: Set Congrats Message
+  routing:
+    success: ../Reflect
+- type: Reflector
+  fields:
+    name: Reflect
+  logging:
+    fatal: 'Error occurred while echoing the message. Error: ${circuit.exception}'
+    failure: Failed to echo back the message
+    success: Successfully echoed back the message

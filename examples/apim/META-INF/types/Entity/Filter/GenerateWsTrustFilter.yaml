@@ -1,0 +1,155 @@
+---
+name: GenerateWsTrustFilter
+version: 2
+class: com.vordel.circuit.wstrust.GenerateWsTrustFilter
+fields:
+  messageType:
+    type: string
+    defaultValues:
+    - data: requestSecurityToken
+    cardinality: 1
+  insertRequestType:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  requestType:
+    type: string
+    defaultValues:
+    - data: http://schemas.xmlsoap.org/ws/2005/02/trust/Issue
+    cardinality: '?'
+  insertTokenType:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  tokenType:
+    type: string
+    defaultValues:
+    - data: http://schemas.xmlsoap.org/ws/2005/02/sc/sct
+    cardinality: '?'
+  wsTrustRequestContentType:
+    type: string
+    defaultValues:
+    - data: binaryExchange
+    cardinality: '?'
+  binaryExchangeValueType:
+    type: string
+    defaultValues:
+    - data: http://schemas.xmlsoap.org/ws/2005/02/trust/spnego
+    cardinality: '?'
+  binarySecretType:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: '?'
+  insertRequestedProofToken:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  requestedProofTokenType:
+    type: string
+    defaultValues:
+    - data: encryptedKey
+    cardinality: '?'
+  insertKeySize:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  keySize:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: '?'
+  insertKeyType:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  keyType:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: '?'
+  insertComputedKeyAlgorithm:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  computedKeyAlgorithm:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: '?'
+  insertLifetime:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  lifetime:
+    type: long
+    defaultValues:
+    - {}
+    cardinality: '?'
+  lifetimeFormat:
+    type: string
+    defaultValues:
+    - data: yyyy-MM-dd'T'HH:mm:ss.SSS'Z'
+    cardinality: '?'
+  insertRequestedTokenCancelled:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  insertAuthenticator:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  authenticatorDigestContents:
+    type: integer
+    defaultValues:
+    - data: 27
+    cardinality: 1
+  insertEndpointReference:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  endpointReference:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  contentType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  wsTrustNamespace:
+    type: string
+    defaultValues:
+    - data: http://schemas.xmlsoap.org/ws/2005/02/trust
+    cardinality: 1
+  soapNamespace:
+    type: string
+    defaultValues:
+    - data: http://www.w3.org/2003/05/soap-envelope
+    cardinality: 1
+  overwriteSOAP:
+    type: string
+    defaultValues:
+    - data: overwriteMethod
+    cardinality: 1
+  wsAddressingNamespace:
+    type: string
+    defaultValues:
+    - data: http://www.w3.org/2005/08/addressing
+    cardinality: '?'
+  wsPolicyNamespace:
+    type: string
+    defaultValues:
+    - data: http://schemas.xmlsoap.org/ws/2004/09/policy
+    cardinality: '?'

@@ -1,0 +1,16 @@
+---
+name: TFXSLTMappingFilter
+version: 3
+class: com.vordel.circuit.mapper.MapperFilter
+fields:
+  map:
+    type: '@TFXSLTMapping'
+    cardinality: '?'
+  defaultEncoding:
+    type: string
+    defaultValues:
+    - data: UTF-8
+    cardinality: 1
+components:
+  ExternalParameter: '*'
+  SourceDocument: +

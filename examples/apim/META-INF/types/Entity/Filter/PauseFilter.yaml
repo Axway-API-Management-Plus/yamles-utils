@@ -1,0 +1,10 @@
+---
+name: PauseFilter
+version: 0
+class: com.vordel.circuit.basic.PauseFilter
+fields:
+  pause:
+    type: integer
+    defaultValues:
+    - data: 10000
+    cardinality: 1

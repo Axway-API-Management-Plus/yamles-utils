@@ -1,0 +1,4 @@
+---
+type: UrlSetSamlPdpGroup
+fields:
+  name: SAML PDP URL Sets

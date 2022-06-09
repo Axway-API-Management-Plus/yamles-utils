@@ -1,0 +1,12 @@
+---
+name: PathParameterFilter
+version: 0
+class: com.vordel.circuit.net.PathParameterFilter
+fields:
+  uriTemplate:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  OutputPropertyDefinition: '*'

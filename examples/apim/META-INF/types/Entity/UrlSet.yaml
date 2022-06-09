@@ -1,0 +1,13 @@
+---
+name: UrlSet
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  UrlSetMember: '*'
+keyFields:
+- name

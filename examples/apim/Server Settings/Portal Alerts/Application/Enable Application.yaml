@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Enable Application
+  id: alert.application.enable
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Application/Enable Application

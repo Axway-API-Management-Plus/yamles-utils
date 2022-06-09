@@ -1,0 +1,42 @@
+---
+name: JMSSession
+version: 5
+class: com.vordel.dwe.jms.JMSSession
+constants:
+  descriptorClass:
+    type: string
+    value: com.vordel.client.manager.filter.jms.JMSTransportDescriptor
+fields:
+  servicePK:
+    type: '@JMSService'
+    cardinality: 1
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  cloneCount:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  duplicatesOK:
+    type: boolean
+    defaultValues:
+    - {}
+    cardinality: '?'
+  messageRemovalPolicy:
+    type: string
+    defaultValues:
+    - data: UNLESS_EXCEPTION
+    cardinality: 1
+  messageRemovalProperty:
+    type: string
+    defaultValues:
+    - data: jms.message.remove
+    cardinality: '?'
+components:
+  JMSConsumer: '?'
+keyFields:
+- name
+loadorder: 1000100

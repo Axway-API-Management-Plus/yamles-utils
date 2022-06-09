@@ -1,0 +1,6 @@
+---
+name: RegularExpressionGroup
+version: 0
+components:
+  RequiredContentRegularExpressionGroup: '*'
+  ThreatContentRegularExpressionGroup: '*'

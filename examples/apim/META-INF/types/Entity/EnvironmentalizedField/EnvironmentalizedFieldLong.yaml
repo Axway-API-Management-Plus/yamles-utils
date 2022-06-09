@@ -1,0 +1,10 @@
+---
+name: EnvironmentalizedFieldLong
+version: 0
+class: com.vordel.api.deployment.model.EnvironmentalizedFieldLong
+fields:
+  value:
+    type: long
+    defaultValues:
+    - {}
+    cardinality: '?'

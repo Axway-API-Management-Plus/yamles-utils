@@ -1,0 +1,7 @@
+---
+name: KeyPairs
+version: 0
+class: com.vordel.store.keypairs.KeyPairs
+components:
+  KeyPair: '*'
+loadorder: 150

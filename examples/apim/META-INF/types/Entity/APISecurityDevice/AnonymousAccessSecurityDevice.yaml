@@ -1,0 +1,10 @@
+---
+name: AnonymousAccessSecurityDevice
+version: 2
+class: com.vordel.apiportal.runtime.AnonymousAccessSecurityDevice
+fields:
+  subjectIdFieldName:
+    type: string
+    defaultValues:
+    - data: Pass Through
+    cardinality: 1

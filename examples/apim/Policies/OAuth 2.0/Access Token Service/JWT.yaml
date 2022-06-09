@@ -1,0 +1,14 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Access token using JWT
+  name: JWT
+  description: ""
+children:
+- type: JWTBearerTokenProfileFilter
+  fields:
+    locationOfClientDetails: QueryString
+    refreshChoice: NoRefresh
+    tokenStore: /Libraries/OAuth2 Stores/Access Token Stores/OAuth Access Token Store
+    clientAttributeName: authentication.application.id
+    name: Access token using JWT

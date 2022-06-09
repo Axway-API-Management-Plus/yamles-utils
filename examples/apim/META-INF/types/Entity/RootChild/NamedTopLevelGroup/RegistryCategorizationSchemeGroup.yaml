@@ -1,0 +1,5 @@
+---
+name: RegistryCategorizationSchemeGroup
+version: 3
+components:
+  RegistryCategorizationScheme: '*'

@@ -1,0 +1,4 @@
+---
+type: DbConnectionGroup
+fields:
+  name: Database Connections

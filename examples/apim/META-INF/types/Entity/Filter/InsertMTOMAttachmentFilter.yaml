@@ -1,0 +1,15 @@
+---
+name: InsertMTOMAttachmentFilter
+version: 2
+class: com.vordel.circuit.mtom.InsertMTOMAttachmentFilter
+fields:
+  includeLocation:
+    type: '@XPath'
+    defaultValues:
+    - ref: /Resources/(XPathGroup)XPath Definitions/(XPathMTOMIncludeGroup)MTOM Include References/(XPath)First MTOM Include in SOAP Body (SOAP 1.1 or SOAP 1.2)
+    cardinality: 1
+  removeParts:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1

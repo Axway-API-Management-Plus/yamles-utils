@@ -1,0 +1,70 @@
+---
+name: XACMLPEPFilter
+version: 1
+class: com.vordel.circuit.httpclient.XACMLPEPFilter
+fields:
+  xacmlVersion:
+    type: string
+    defaultValues:
+    - data: XACML2_0
+    cardinality: 1
+  soapVersion:
+    type: string
+    defaultValues:
+    - data: SOAP1_1
+    cardinality: 1
+  soapOperation:
+    type: string
+    defaultValues:
+    - data: XACMLAuthzDecisionQuery
+    cardinality: '?'
+  soapOperationPrefix:
+    type: string
+    defaultValues:
+    - data: xacml-samlp
+    cardinality: '?'
+  soapOperationNamespace:
+    type: string
+    defaultValues:
+    - data: urn:oasis:xacml:2.0:saml:protocol:schema:os
+    cardinality: '?'
+  soapAction:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  inputContextOnly:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  returnContext:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  combinePolicies:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  requiredDecision:
+    type: string
+    defaultValues:
+    - data: Permit
+    cardinality: 1
+  splitSubjects:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  splitResources:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+components:
+  SubjectAttribute: '*'
+  ResourceAttribute: '*'
+  ActionAttribute: '*'
+  EnvironmentAttribute: '*'

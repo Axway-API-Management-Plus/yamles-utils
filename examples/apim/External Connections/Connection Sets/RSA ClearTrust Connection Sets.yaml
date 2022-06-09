@@ -1,0 +1,4 @@
+---
+type: ConnectionSetClearTrustGroup
+fields:
+  name: RSA ClearTrust Connection Sets

@@ -1,0 +1,25 @@
+---
+type: RequiredContentRegularExpressionGroup
+fields:
+  name: Required Content Regular Expressions
+children:
+- type: RegularExpression
+  fields:
+    name: Numeric
+    expression: ^[0-9]+$
+- type: RegularExpression
+  fields:
+    name: Printable ASCII
+    expression: ^[\p{Print}\s]+$
+- type: RegularExpression
+  fields:
+    name: Alphanumeric
+    expression: ^[a-zA-Z0-9\s]*$
+- type: RegularExpression
+  fields:
+    name: Date (yyyy-mm-dd)
+    expression: ^(\d{4})[- /.]((1[012])|(0?[1-9]))[- /.]((3[01])|([012]?[1-9])|([12]0))$
+- type: RegularExpression
+  fields:
+    name: Alphabetic
+    expression: ^[a-zA-Z\s]*$

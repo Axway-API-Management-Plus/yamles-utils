@@ -1,0 +1,55 @@
+---
+name: McAfeeVirusCheck
+version: 3
+class: com.vordel.circuit.virus.McAfeeFilter
+fields:
+  decompArchives:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  decompExes:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  failAnyMacros:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  heuristicProgramAnalysis:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  heusristicMacroAnalysis:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  scanEmbedded:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  scanTests:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  scanType:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  cleanType:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)content-filtering
+    cardinality: 1

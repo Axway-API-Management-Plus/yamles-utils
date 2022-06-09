@@ -1,0 +1,10 @@
+---
+name: EnvironmentalizedFieldBinary
+version: 0
+class: com.vordel.api.deployment.model.EnvironmentalizedFieldBinary
+fields:
+  value:
+    type: binary
+    defaultValues:
+    - {}
+    cardinality: '?'

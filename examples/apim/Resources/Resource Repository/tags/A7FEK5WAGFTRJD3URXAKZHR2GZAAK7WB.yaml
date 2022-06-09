@@ -1,0 +1,9 @@
+---
+type: ResourceSetTag
+fields:
+  ID: A7FEK5WAGFTRJD3URXAKZHR2GZAAK7WB
+  resourceID: G7MRM7PY3ATNUTHCZWFJICFISDUZNLMH
+  comment: Schema defined in the SOAP Version 1.2 Part 1 specification
+  creator: catalog
+  timestamp: 1380037356566
+  version: 1

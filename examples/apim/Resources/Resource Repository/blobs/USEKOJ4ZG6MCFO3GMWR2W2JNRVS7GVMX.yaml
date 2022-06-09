@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: USEKOJ4ZG6MCFO3GMWR2W2JNRVS7GVMX
+  type: schema
+  content: '{{file "USEKOJ4ZG6MCFO3GMWR2W2JNRVS7GVMX.xsd" "binary"}}'

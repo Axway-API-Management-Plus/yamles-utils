@@ -1,0 +1,31 @@
+---
+type: AuthnRepositoryLdapGroup
+fields:
+  allowedFilter:
+  - HttpBasicFilter
+  - WsBasicFilter
+  - WsUsernameFilter
+  - AttributeAuthnFilter
+  - FormAuthnFilter
+  name: LDAP Repositories
+children:
+- type: AuthnRepositoryLdap
+  fields:
+    ldapDir: /External Connections/LDAP Directories/API Management Sample LDAP Connection
+    searchBase: ou=people,o=sevenSeas
+    searchClass: inetOrgPerson
+    searchAttrib: uid
+    loginAttrib: ""
+    authzAttribute: uid
+    authZAttribFormat: Username
+    name: API Management Sample LDAP Repository
+- type: AuthnRepositoryLdap
+  fields:
+    ldapDir: /External Connections/LDAP Directories/API Management Sample Active Directory Connection
+    searchBase: OU=Employees,DC=company,DC=com
+    searchClass: organizationalPerson
+    searchAttrib: userPrincipalName
+    loginAttrib: distinguishedName
+    authzAttribute: userPrincipalName
+    authZAttribFormat: Username
+    name: API Management Sample Active Directory Repository

@@ -1,0 +1,4 @@
+---
+name: FileService
+version: 0
+class: com.vordel.dwe.file.Service

@@ -1,0 +1,4 @@
+---
+type: Cache
+fields:
+  name: WSS UsernameToken Nonce Cache

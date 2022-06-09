@@ -1,0 +1,9 @@
+---
+type: ResourceSetTag
+fields:
+  ID: AXJTSZ6MJLQNZEQNO2TCOPGIDBQRPX55
+  resourceID: LKDSNPTX56MUHQQ7RTARYXP4G2TGKY2Z
+  comment: Schema for Encrypted XML
+  creator: catalog
+  timestamp: 1380037412004
+  version: 1

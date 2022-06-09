@@ -1,0 +1,24 @@
+---
+type: KPSType
+fields:
+  name: PolicyParameters
+  description: Instantiate parameters to a policy.
+children:
+- type: KPSTypeProperty
+  fields:
+    name: values
+    type: java.util.Map
+    key: java.lang.String
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: policy
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: ID
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: enabled
+    type: java.lang.Boolean

@@ -1,0 +1,14 @@
+---
+name: ApiKeyProfile
+version: 0
+fields:
+  apikey:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  apisecret:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: '?'

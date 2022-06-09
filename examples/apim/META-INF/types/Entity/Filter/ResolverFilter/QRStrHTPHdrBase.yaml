@@ -1,0 +1,6 @@
+---
+name: QRStrHTPHdrBase
+version: 0
+components:
+  AttributeRegularExpression: '*'
+abstract: true

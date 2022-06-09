@@ -1,0 +1,4 @@
+---
+type: ResourceTagGroup
+fields:
+  name: tags

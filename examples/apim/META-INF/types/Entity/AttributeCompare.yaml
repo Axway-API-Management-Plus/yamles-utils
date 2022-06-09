@@ -1,0 +1,23 @@
+---
+name: AttributeCompare
+version: 1
+fields:
+  attrName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  matchType:
+    type: string
+    defaultValues:
+    - data: CONTAINS
+    cardinality: 1
+  expression:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- attrName
+- matchType
+- expression

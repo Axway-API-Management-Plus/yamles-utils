@@ -1,0 +1,10 @@
+---
+name: AuthnRepositoryBaseGroup
+version: 0
+fields:
+  allowedFilter:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: +
+abstract: true

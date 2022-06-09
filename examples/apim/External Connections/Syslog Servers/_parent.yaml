@@ -1,0 +1,4 @@
+---
+type: SyslogServerGroup
+fields:
+  name: Syslog Servers

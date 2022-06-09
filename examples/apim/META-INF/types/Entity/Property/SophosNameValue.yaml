@@ -1,0 +1,9 @@
+---
+name: SophosNameValue
+version: 1
+fields:
+  type:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

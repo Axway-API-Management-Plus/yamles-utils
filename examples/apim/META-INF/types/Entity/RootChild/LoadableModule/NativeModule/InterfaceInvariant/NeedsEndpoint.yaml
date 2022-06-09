@@ -1,0 +1,9 @@
+---
+name: NeedsEndpoint
+version: 1
+fields:
+  endpoint:
+    type: '@RemoteHost'
+    cardinality: 1
+keyFields:
+- endpoint

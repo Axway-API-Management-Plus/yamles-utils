@@ -1,0 +1,47 @@
+---
+type: KPSType
+fields:
+  name: PortalIdentityStore
+children:
+- type: KPSTypeProperty
+  fields:
+    name: lastSeen
+    type: java.lang.Long
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: providerType
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: id
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: passwordSetOn
+    type: java.lang.Long
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: loginName
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: accountId
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: createdOn
+    type: java.lang.Long
+    key: ""
+    value: ""

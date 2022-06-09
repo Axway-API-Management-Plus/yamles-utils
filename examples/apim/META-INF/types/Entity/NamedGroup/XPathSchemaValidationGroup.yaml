@@ -1,0 +1,5 @@
+---
+name: XPathSchemaValidationGroup
+version: 0
+components:
+  XPath: '*'

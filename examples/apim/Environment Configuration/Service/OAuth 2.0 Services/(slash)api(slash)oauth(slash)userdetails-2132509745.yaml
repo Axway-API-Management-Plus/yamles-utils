@@ -1,0 +1,27 @@
+---
+type: XMLFirewall
+fields:
+  filterCircuit: /Policies/OAuth 2.0/Authorization Service/Get User Details
+  uriprefix: /api/oauth/userdetails
+  corsProfile: /null
+children:
+- type: SoftCircuitReference
+  fields:
+    circuitPK: system.policy.response
+    name: GLOBAL_POLICY_RSP
+    priority: 4
+- type: PortableCircuitReference
+  fields:
+    circuitPK: /null
+    name: CUSTOM_POLICY_RSP
+    priority: 3
+- type: PortableCircuitReference
+  fields:
+    circuitPK: /null
+    name: CUSTOM_POLICY_REQ
+    priority: 1
+- type: SoftCircuitReference
+  fields:
+    circuitPK: system.policy.request
+    name: GLOBAL_POLICY_REQ
+    priority: 0

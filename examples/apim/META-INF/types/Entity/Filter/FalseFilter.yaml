@@ -1,0 +1,4 @@
+---
+name: FalseFilter
+version: 0
+class: com.vordel.circuit.basic.False

@@ -1,0 +1,26 @@
+---
+name: JSONPath
+version: 1
+fields:
+  attributeName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  expression:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  unmarshalType:
+    type: string
+    defaultValues:
+    - data: java.util.List
+    cardinality: 1
+  failOnError:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+keyFields:
+- expression

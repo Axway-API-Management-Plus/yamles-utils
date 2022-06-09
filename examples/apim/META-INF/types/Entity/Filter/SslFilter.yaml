@@ -1,0 +1,10 @@
+---
+name: SslFilter
+version: 0
+class: com.vordel.circuit.authn.SslFilter
+fields:
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authentication
+    cardinality: 1

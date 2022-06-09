@@ -1,0 +1,10 @@
+---
+name: AuthProfilesGroup
+version: 0
+components:
+  OAuthGroup: '*'
+  SAMLGroup: '*'
+  ApiKeyGroup: '*'
+  BasicAuthGroup: '*'
+  KerberosGroup: '*'
+  ApiKeySignerGroup: '*'

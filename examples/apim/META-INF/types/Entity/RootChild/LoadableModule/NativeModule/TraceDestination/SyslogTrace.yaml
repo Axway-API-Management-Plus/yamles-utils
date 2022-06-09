@@ -1,0 +1,11 @@
+---
+name: SyslogTrace
+version: 0
+fields:
+  application:
+    type: string
+    defaultValues:
+    - data: vhttpd
+    cardinality: 1
+keyFields:
+- application

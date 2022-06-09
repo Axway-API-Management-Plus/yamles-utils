@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Enable Application Developer
+  id: alert.appdev.enable
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Application Developer/Enable Application Developer

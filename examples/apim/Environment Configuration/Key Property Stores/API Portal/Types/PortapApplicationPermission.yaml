@@ -1,0 +1,42 @@
+---
+type: KPSType
+fields:
+  name: PortapApplicationPermission
+  description: Application access control entry
+children:
+- type: KPSTypeProperty
+  fields:
+    name: createdBy
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: permission
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: creatorId
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: applicationId
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: userId
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: id
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: ID
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: timestamp
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: createdOn
+    type: java.lang.Long

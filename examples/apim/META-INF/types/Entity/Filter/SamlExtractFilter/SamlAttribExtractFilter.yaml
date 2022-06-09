@@ -1,0 +1,31 @@
+---
+name: SamlAttribExtractFilter
+version: 1
+class: com.vordel.circuit.saml.SamlAttribExtractFilter
+constants:
+  logContext:
+    type: string
+    value: SamlAttrib
+fields:
+  subjectMatchType:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  subjectMatch:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  insertAll:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)attribute
+    cardinality: 1
+components:
+  LookupAttribute: '*'

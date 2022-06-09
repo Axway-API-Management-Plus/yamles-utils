@@ -1,0 +1,41 @@
+---
+type: KPSType
+fields:
+  name: PortalApiQuota
+  description: A group of constraints to apply on matching method calls
+children:
+- type: KPSTypeProperty
+  fields:
+    name: ID
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: timestamp
+    type: java.lang.Long
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: constraintIDs
+    type: java.util.List
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: apiID
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: methodID
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: httpMethod
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: quotaID
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: type
+    type: java.lang.String

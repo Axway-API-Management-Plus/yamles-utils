@@ -1,0 +1,8 @@
+---
+name: OAuth2AccessTokenFilter
+version: 1
+fields:
+  tokenStore:
+    type: '@AccessTokenPersist'
+    cardinality: 1
+abstract: true

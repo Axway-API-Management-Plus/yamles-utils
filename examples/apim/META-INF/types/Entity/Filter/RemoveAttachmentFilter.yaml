@@ -1,0 +1,4 @@
+---
+name: RemoveAttachmentFilter
+version: 0
+class: com.vordel.circuit.conversion.RemoveAttachmentFilter

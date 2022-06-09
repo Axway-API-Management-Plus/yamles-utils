@@ -1,0 +1,57 @@
+---
+type: XPathWSAddressingGroup
+fields:
+  name: WS-Addressing Xpaths
+children:
+- type: XPath
+  fields:
+    name: The contents of the WS-Addressing FaultTo element
+    xpath: /soap:Envelope/soap:Header/wsa:FaultTo/wsa:Address/text()
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: wsa
+      URI: http://schemas.xmlsoap.org/ws/2004/08/addressing
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: The contents of the WS-Addressing To element
+    xpath: /soap:Envelope/soap:Header/wsa:To/text()
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: wsa
+      URI: http://schemas.xmlsoap.org/ws/2004/08/addressing
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: The contents of the WS-Addressing ReplyTo element
+    xpath: /soap:Envelope/soap:Header/wsa:ReplyTo/wsa:Address/text()
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: wsa
+      URI: http://schemas.xmlsoap.org/ws/2004/08/addressing
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/
+- type: XPath
+  fields:
+    name: The contents of the WS-Addressing From element
+    xpath: /soap:Envelope/soap:Header/wsa:From/wsa:Address/text()
+  children:
+  - type: XPathNamespace
+    fields:
+      prefix: wsa
+      URI: http://schemas.xmlsoap.org/ws/2004/08/addressing
+  - type: XPathNamespace
+    fields:
+      prefix: soap
+      URI: http://schemas.xmlsoap.org/soap/envelope/

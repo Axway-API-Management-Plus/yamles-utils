@@ -1,0 +1,12 @@
+---
+name: AccessLogger
+version: 1
+class: com.vordel.circuit.log.AccessLogger2
+fields:
+  pattern:
+    type: string
+    defaultValues:
+    - data: '%h %l %u %t "%r" %s %b'
+    cardinality: 1
+components:
+  AccessLoggerFile: 1

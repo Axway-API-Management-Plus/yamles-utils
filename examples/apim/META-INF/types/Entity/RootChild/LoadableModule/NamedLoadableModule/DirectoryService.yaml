@@ -1,0 +1,16 @@
+---
+name: DirectoryService
+version: 0
+class: com.vordel.dwe.ldap.service.DirectoryService
+fields:
+  enabled:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  dataDirectory:
+    type: string
+    defaultValues:
+    - data: conf/directory
+    cardinality: 1
+loadorder: 800000

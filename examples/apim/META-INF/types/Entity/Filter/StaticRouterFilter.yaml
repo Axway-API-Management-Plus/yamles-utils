@@ -1,0 +1,20 @@
+---
+name: StaticRouterFilter
+version: 0
+class: com.vordel.circuit.net.StaticRouterFilter
+fields:
+  host:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  port:
+    type: string
+    defaultValues:
+    - data: 8080
+    cardinality: 1
+  scheme:
+    type: string
+    defaultValues:
+    - data: http
+    cardinality: 1

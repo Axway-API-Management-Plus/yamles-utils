@@ -1,0 +1,174 @@
+---
+name: ConnectionFilter
+version: 22
+class: com.vordel.circuit.net.ConnectionFilter
+fields:
+  profileInUse:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  profileType:
+    type: string
+    defaultValues:
+    - data: reference
+    cardinality: '?'
+  profile:
+    type: '@NamedAuthnProfile'
+    cardinality: '?'
+  profileSelector:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: '?'
+  caCerts:
+    type: '@Certificate'
+    cardinality: '*'
+  sslUsers:
+    type: '@Certificate'
+    cardinality: '*'
+  useRootCerts:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  ciphers:
+    type: string
+    defaultValues:
+    - data: FIPS:!SSLv3:!aNULL:!TLSv1:!kRSA
+    cardinality: 1
+  ssloptions:
+    type: string
+    defaultValues:
+    - data: nosslv2
+    - data: nosslv3
+    - data: notlsv1
+    - data: notlsv1_1
+    - data: noSslRenegotiation
+    cardinality: '*'
+  sendProxyMode:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: '?'
+  forwardClientHostHeader:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: '?'
+  transparentProxy:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  sendReceivedContentHeaders:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  handleRedirects:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  performRetries:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  retryHTTPRanges:
+    type: '@HTTPStatusClass'
+    cardinality: '*'
+  retryCount:
+    type: string
+    defaultValues:
+    - data: 5
+    cardinality: 1
+  retryLatency:
+    type: string
+    defaultValues:
+    - data: 500
+    cardinality: 1
+  slaBreachAsFailure:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  saveTransactionOnFailure:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  runPolicyOnConnectionFailure:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  connectionFailurePolicy:
+    type: '@FilterCircuit'
+    cardinality: '?'
+  proxyServer:
+    type: '@ProxyServer'
+    cardinality: '?'
+  stickyness:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: '?'
+  stickyCookieName:
+    type: string
+    defaultValues:
+    - data: unnamed
+    cardinality: '?'
+  stickyCookieExpiry:
+    type: long
+    defaultValues:
+    - data: 600000
+    cardinality: '?'
+  stickyCookiePath:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: '?'
+  stickyCookieDomain:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: '?'
+  loadResponseBody:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: '?'
+  closePreviousConnection:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: '?'
+  overrideTimeouts:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: '?'
+  connectTimeout:
+    type: integer
+    defaultValues:
+    - data: 30000
+    cardinality: '?'
+  activetimeout:
+    type: integer
+    defaultValues:
+    - data: 30000
+    cardinality: '?'
+  maxTransTimeout:
+    type: integer
+    defaultValues:
+    - data: 240000
+    cardinality: '?'
+  idletimeout:
+    type: integer
+    defaultValues:
+    - data: 15000
+    cardinality: '?'
+components:
+  SaveToFileFilter: 1

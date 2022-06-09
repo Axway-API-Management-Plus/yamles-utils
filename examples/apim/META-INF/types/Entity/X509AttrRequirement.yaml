@@ -1,0 +1,11 @@
+---
+name: X509AttrRequirement
+version: 0
+fields:
+  requirement:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- requirement

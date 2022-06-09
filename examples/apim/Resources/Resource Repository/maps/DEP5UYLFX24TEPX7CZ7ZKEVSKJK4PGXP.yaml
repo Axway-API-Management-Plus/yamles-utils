@@ -1,0 +1,7 @@
+---
+type: ResourceMap
+fields:
+  ID: DEP5UYLFX24TEPX7CZ7ZKEVSKJK4PGXP
+  uri: jar:http://docs.oasis-open.org/security/saml/v2.0/saml-2.0-os.zip!/saml-schema-protocol-2.0.xsd
+  blobID: MLYIMM6S2N4Q7OFEX3BXJMTQV2GTBC6A
+  locked: true

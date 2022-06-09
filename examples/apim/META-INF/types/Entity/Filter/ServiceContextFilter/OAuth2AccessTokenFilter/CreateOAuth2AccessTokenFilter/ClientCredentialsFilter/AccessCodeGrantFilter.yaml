@@ -1,0 +1,8 @@
+---
+name: AccessCodeGrantFilter
+version: 0
+class: com.vordel.circuit.oauth.provider.grants.AccessCodeGrantFilter
+fields:
+  authzCodeCache:
+    type: '@AuthzCodePersist'
+    cardinality: 1

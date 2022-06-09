@@ -1,0 +1,10 @@
+---
+type: BasicAuthGroup
+fields:
+  name: HTTP Basic
+children:
+- type: BasicProfile
+  fields:
+    httpAuthUser: regadmin
+    httpAuthPass: Y2hhbmdlbWU=
+    name: Get Application Image

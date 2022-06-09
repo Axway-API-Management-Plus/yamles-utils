@@ -1,0 +1,5 @@
+---
+name: UrlSetSamlPdpGroup
+version: 0
+components:
+  UrlSet: '*'

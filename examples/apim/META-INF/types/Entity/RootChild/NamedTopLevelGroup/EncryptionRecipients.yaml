@@ -1,0 +1,5 @@
+---
+name: EncryptionRecipients
+version: 0
+components:
+  EncryptionRecipient: '*'

@@ -1,0 +1,8 @@
+---
+name: ICAPFilter
+version: 1
+class: com.vordel.circuit.icap.IcapFilter
+fields:
+  icapServer:
+    type: '@ICAPServer'
+    cardinality: 1

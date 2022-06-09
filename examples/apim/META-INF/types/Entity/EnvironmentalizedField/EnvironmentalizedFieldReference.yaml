@@ -1,0 +1,23 @@
+---
+name: EnvironmentalizedFieldReference
+version: 1
+class: com.vordel.api.deployment.model.EnvironmentalizedFieldReference
+fields:
+  value:
+    type: '@Entity'
+    cardinality: '?'
+  selectorAttributeType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  selectorSearch:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  selectorType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

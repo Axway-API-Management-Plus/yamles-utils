@@ -1,0 +1,37 @@
+---
+type: PolicyCategoryGroup
+fields:
+  name: Policy Categories
+children:
+- type: PolicyCategory
+  fields:
+    name: integration
+- type: PolicyCategory
+  fields:
+    name: authorization
+- type: PolicyCategory
+  fields:
+    name: monitoring
+- type: PolicyCategory
+  fields:
+    name: trust
+- type: PolicyCategory
+  fields:
+    name: content-filtering
+- type: PolicyCategory
+  fields:
+    hide: true
+    name: management
+- type: PolicyCategory
+  fields:
+    name: miscellaneous
+- type: PolicyCategory
+  fields:
+    name: security
+- type: PolicyCategory
+  fields:
+    hide: true
+    name: generated
+- type: PolicyCategory
+  fields:
+    name: custom

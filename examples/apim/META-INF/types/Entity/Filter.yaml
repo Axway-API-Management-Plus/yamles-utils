@@ -1,0 +1,56 @@
+---
+name: Filter
+version: 5
+fields:
+  successNode:
+    type: '@Filter'
+    cardinality: '?'
+  failureNode:
+    type: '@Filter'
+    cardinality: '?'
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  logMask:
+    type: integer
+    defaultValues:
+    - data: 2
+    cardinality: 1
+  logFatal:
+    type: string
+    defaultValues:
+    - data: Filter aborted due to exception
+    cardinality: 1
+  logFailure:
+    type: string
+    defaultValues:
+    - data: Filter failed
+    cardinality: 1
+  logSuccess:
+    type: string
+    defaultValues:
+    - data: Filter passed
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)miscellaneous
+    cardinality: 1
+  abortProcessingOnLogError:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  logMaskType:
+    type: string
+    defaultValues:
+    - data: SERVICE
+    cardinality: 1
+  classloader:
+    type: '@ClassLoader'
+    cardinality: '*'
+keyFields:
+- name
+abstract: true

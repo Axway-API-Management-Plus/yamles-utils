@@ -1,0 +1,5 @@
+---
+name: XPathGSSTokenLocationGroup
+version: 2
+components:
+  XPath: '*'

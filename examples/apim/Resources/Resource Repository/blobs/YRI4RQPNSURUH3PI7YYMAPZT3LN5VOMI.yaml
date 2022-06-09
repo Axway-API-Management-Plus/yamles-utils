@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: YRI4RQPNSURUH3PI7YYMAPZT3LN5VOMI
+  type: schema
+  content: '{{file "YRI4RQPNSURUH3PI7YYMAPZT3LN5VOMI.xsd" "binary"}}'

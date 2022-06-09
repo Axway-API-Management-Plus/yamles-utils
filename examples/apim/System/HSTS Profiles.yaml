@@ -1,0 +1,4 @@
+---
+type: HSTSProfileGroup
+fields:
+  name: HSTS Profiles

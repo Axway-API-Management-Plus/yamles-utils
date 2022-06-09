@@ -1,0 +1,32 @@
+---
+name: Root
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  lastModificationTime:
+    type: utctime
+    defaultValues:
+    - {}
+    cardinality: 1
+  pkInc:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+  tagName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  tagValue:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+components:
+  RootChild: '*'
+keyFields:
+- name

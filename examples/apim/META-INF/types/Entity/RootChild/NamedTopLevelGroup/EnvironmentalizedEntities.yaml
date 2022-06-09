@@ -1,0 +1,5 @@
+---
+name: EnvironmentalizedEntities
+version: 0
+components:
+  EnvironmentalizedEntity: '*'

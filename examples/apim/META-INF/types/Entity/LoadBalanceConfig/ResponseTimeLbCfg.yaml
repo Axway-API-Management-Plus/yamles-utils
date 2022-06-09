@@ -1,0 +1,9 @@
+---
+name: ResponseTimeLbCfg
+version: 0
+fields:
+  decayHalfLife:
+    type: integer
+    defaultValues:
+    - data: 10000
+    cardinality: 1

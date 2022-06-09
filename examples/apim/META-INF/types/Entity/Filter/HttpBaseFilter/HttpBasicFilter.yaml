@@ -1,0 +1,10 @@
+---
+name: HttpBasicFilter
+version: 0
+class: com.vordel.circuit.authn.HttpBasicFilter
+fields:
+  allowClientRetry:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1

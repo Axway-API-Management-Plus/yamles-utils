@@ -1,0 +1,4 @@
+---
+type: TextRollOverLogger
+fields:
+  name: Text Rollover File Logger

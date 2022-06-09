@@ -1,0 +1,32 @@
+---
+Server_Settings:
+  Cassandra_Settings:
+    replicationStrategy: org.apache.cassandra.locator.SimpleStrategy
+    replication: 1
+    throttlingReplicationStrategy: org.apache.cassandra.locator.SimpleStrategy
+    throttlingReplication: 1
+    throttlingReadConsistencyLevel: ONE
+    throttlingWriteConsistencyLevel: ONE
+Environment_Configuration:
+  Key_Property_Stores:
+    API_Portal:
+      Data_Sources:
+        Cassandra_Storage:
+          readConsistencyLevel: ONE
+          writeConsistencyLevel: ONE
+    API_Server:
+      Data_Sources:
+        Cassandra_Storage:
+          readConsistencyLevel: ONE
+          writeConsistencyLevel: ONE
+    OAuth:
+      DataSources:
+        Cassandra_Storage:
+          readConsistencyLevel: ONE
+          writeConsistencyLevel: ONE
+External_Connections:
+  Database_Connections:
+    Default_Database_Connection:
+      url: jdbc:mysql://127.0.0.1:3306/DefaultDb
+      username: root
+      password: ""

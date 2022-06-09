@@ -1,0 +1,12 @@
+---
+type: KPSReadWriteStore
+fields:
+  key: id
+  readKey: organizationDn
+  indexes: organizationDn
+  encrypted: ""
+  name: PortalOrganizationStore
+  description: Organization
+  type: /Environment Configuration/Key Property Stores/API Portal/Types/PortalOrgs
+  dataSource: /null
+  aliases: PortalOrganizationStore

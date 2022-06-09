@@ -1,0 +1,16 @@
+---
+name: SolutionPackLoader
+version: 0
+class: com.vordel.dwe.SolutionPackModule
+fields:
+  path:
+    type: string
+    defaultValues:
+    - data: solutions
+    cardinality: 1
+  pattern:
+    type: string
+    defaultValues:
+    - data: '*.spar'
+    cardinality: 1
+loadorder: 950000

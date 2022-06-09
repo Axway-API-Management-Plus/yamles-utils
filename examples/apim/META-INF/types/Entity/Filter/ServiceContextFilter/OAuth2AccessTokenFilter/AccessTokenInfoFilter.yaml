@@ -1,0 +1,22 @@
+---
+name: AccessTokenInfoFilter
+version: 1
+class: com.vordel.circuit.oauth.provider.AccessTokenInfoFilter
+fields:
+  accessTokenLocation:
+    type: string
+    defaultValues:
+    - data: QUERYSTRING
+    cardinality: 1
+  accessTokenLocationSelector:
+    type: string
+    defaultValues:
+    - data: ${http.client.getCgiArgument('access_token')}
+    cardinality: '?'
+  accessTokenLocationQueryString:
+    type: string
+    defaultValues:
+    - data: access_token
+    cardinality: '?'
+components:
+  Property: '?'

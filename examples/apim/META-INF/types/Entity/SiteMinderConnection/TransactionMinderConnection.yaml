@@ -1,0 +1,24 @@
+---
+name: TransactionMinderConnection
+version: 0
+fields:
+  ServerVendor:
+    type: string
+    defaultValues:
+    - data: CA
+    cardinality: 1
+  ServerProductName:
+    type: string
+    defaultValues:
+    - data: SOASecurityManagerGateway
+    cardinality: 1
+  ServerVersion:
+    type: string
+    defaultValues:
+    - data: R12
+    cardinality: 1
+  XMLSDKAcceptSMSessionCookie:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1

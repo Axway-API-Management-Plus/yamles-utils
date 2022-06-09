@@ -1,0 +1,36 @@
+---
+name: CoreAPIMethodQueryStringParameter
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  description:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  paramType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  dataType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  required:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  allowMultiple:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+keyFields:
+- name

@@ -1,0 +1,33 @@
+---
+name: ResponseTimeRequirement
+version: 1
+fields:
+  timeMillis:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: 1
+  startTimingPoint:
+    type: integer
+    defaultValues:
+    - data: 6
+    cardinality: 1
+  endTimingPoint:
+    type: integer
+    defaultValues:
+    - data: 5
+    cardinality: 1
+  breachAlertMessage:
+    type: string
+    defaultValues:
+    - data: ' Raising a Response Time SLA Alert. Alert details are as follows:- SLA Name: ${sla.name}. Requirement: At least ${sla.threshold}% of requests should have response times less than ${sla.upper} millis. Failing Percentage: ${sla.value}%. Failing Time: ${sla.time}.'
+    cardinality: 1
+  clearAlertMessage:
+    type: string
+    defaultValues:
+    - data: ' Clearing a Response Time SLA Alert. Alert details are as follows:- SLA Name: ${sla.name}. Requirement: At least ${sla.threshold}% of requests should have response times less than ${sla.upper} millis. Current Percentage: ${sla.value}%. Current Time: ${sla.time}.'
+    cardinality: 1
+keyFields:
+- timeMillis
+- startTimingPoint
+- endTimingPoint

@@ -1,0 +1,43 @@
+---
+type: User
+fields:
+  password: Y2hhbmdlbWU=
+  certificate: /null
+  name: sampleuser
+children:
+- type: IdentityAttribute
+  fields:
+    name: email
+    value: sampleuser@apigateway.sample
+- type: IdentityAttribute
+  fields:
+    name: hd
+    value: apigateway.sample
+- type: IdentityAttribute
+  fields:
+    name: family_name
+    value: User
+- type: IdentityAttribute
+  fields:
+    name: role
+    value: resourceowner
+- type: IdentityAttribute
+  fields:
+    name: email_verified
+    value: "true"
+- type: IdentityAttribute
+  fields:
+    name: given_name
+    value: Sample
+- type: IdentityAttribute
+  fields:
+    name: locale
+    value: en
+- type: IdentityAttribute
+  fields:
+    name: picture
+    value: /xlib/images/sampleuser.png
+- type: IdentityAttribute
+  fields:
+    name: gender
+    value: female

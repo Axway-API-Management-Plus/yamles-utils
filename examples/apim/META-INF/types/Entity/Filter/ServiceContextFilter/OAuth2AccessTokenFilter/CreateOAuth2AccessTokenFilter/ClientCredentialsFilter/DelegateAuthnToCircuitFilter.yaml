@@ -1,0 +1,26 @@
+---
+name: DelegateAuthnToCircuitFilter
+version: 2
+fields:
+  authNWith:
+    type: string
+    defaultValues:
+    - data: REPOSITORY
+    cardinality: 1
+  circuitPK:
+    type: '@FilterCircuit'
+    cardinality: '?'
+  subjectAttr:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.id}
+    cardinality: 1
+  repository:
+    type: '@AuthnRepositoryBase'
+    cardinality: 1
+  recordOutboundTxns:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+abstract: true

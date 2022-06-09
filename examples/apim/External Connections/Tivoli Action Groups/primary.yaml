@@ -1,0 +1,77 @@
+---
+type: TivoliActionGroup
+fields:
+  name: primary
+children:
+- type: TivoliAction
+  fields:
+    actionBit: T
+    description: Traverse
+- type: TivoliAction
+  fields:
+    actionBit: d
+    description: Delete
+- type: TivoliAction
+  fields:
+    actionBit: a
+    description: Attach
+- type: TivoliAction
+  fields:
+    actionBit: c
+    description: Control
+- type: TivoliAction
+  fields:
+    actionBit: v
+    description: View
+- type: TivoliAction
+  fields:
+    actionBit: "N"
+    description: Create
+- type: TivoliAction
+  fields:
+    actionBit: B
+    description: Bypass protected object policy (POP)
+- type: TivoliAction
+  fields:
+    actionBit: l
+    description: List directory
+- type: TivoliAction
+  fields:
+    actionBit: m
+    description: Modify
+- type: TivoliAction
+  fields:
+    actionBit: t
+    description: Trace
+- type: TivoliAction
+  fields:
+    actionBit: W
+    description: Password
+- type: TivoliAction
+  fields:
+    actionBit: R
+    description: Bypass
+- type: TivoliAction
+  fields:
+    actionBit: x
+    description: Execute
+- type: TivoliAction
+  fields:
+    actionBit: g
+    description: Delegation
+- type: TivoliAction
+  fields:
+    actionBit: b
+    description: Browse
+- type: TivoliAction
+  fields:
+    actionBit: r
+    description: Read
+- type: TivoliAction
+  fields:
+    actionBit: s
+    description: Server administration
+- type: TivoliAction
+  fields:
+    actionBit: A
+    description: Add

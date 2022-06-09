@@ -1,0 +1,8 @@
+---
+name: WSContextFilter
+version: 2
+class: com.vordel.circuit.ws.WSContextFilter
+fields:
+  webService:
+    type: '@WebService'
+    cardinality: 1

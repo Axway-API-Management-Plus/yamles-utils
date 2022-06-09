@@ -1,0 +1,26 @@
+---
+name: ClientRegistrySettings
+version: 1
+class: com.vordel.common.apiserver.ClientRegistrySettings
+fields:
+  circuitPK:
+    type: '@FilterCircuit'
+    cardinality: '?'
+  subject:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.id}
+    cardinality: 1
+  role:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.role}
+    cardinality: 1
+  email:
+    type: string
+    defaultValues:
+    - data: ${user.email}
+    cardinality: 1
+components:
+  Cookie: 1
+loadorder: 149

@@ -1,0 +1,28 @@
+---
+name: PassPortAuthZFilter
+version: 1
+class: com.vordel.circuit.passport.PassPortAuthZFilter
+fields:
+  resource:
+    type: string
+    defaultValues:
+    - data: ${http.request.uri}
+    cardinality: 1
+  action:
+    type: string
+    defaultValues:
+    - data: ${http.request.verb}
+    cardinality: 1
+  userId:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.id}
+    cardinality: 1
+  passportConn:
+    type: '@AuthnRepositoryPassPort'
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authorization
+    cardinality: 1

@@ -1,0 +1,11 @@
+---
+name: MVProperty
+version: 1
+fields:
+  value:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+components:
+  Property: '*'

@@ -1,0 +1,16 @@
+---
+name: SessionManager
+version: 0
+class: com.vordel.circuit.session.SessionManager
+fields:
+  clearExpiredSessionsPeriodSecs:
+    type: integer
+    defaultValues:
+    - data: 60
+    cardinality: 1
+  cacheToUse:
+    type: '@Cache'
+    defaultValues:
+    - ref: /Libraries/(CacheManager)Cache Manager/(Cache)HTTP Sessions
+    cardinality: 1
+loadorder: 20

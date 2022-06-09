@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: C5ZTMR6LXBDXFTKXE3FPUGWWBAKEOPZS
+  type: schema
+  content: '{{file "C5ZTMR6LXBDXFTKXE3FPUGWWBAKEOPZS.xsd" "binary"}}'

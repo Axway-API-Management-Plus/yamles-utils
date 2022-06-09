@@ -1,0 +1,21 @@
+---
+name: ExternalParameter
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  required:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  expression:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- name

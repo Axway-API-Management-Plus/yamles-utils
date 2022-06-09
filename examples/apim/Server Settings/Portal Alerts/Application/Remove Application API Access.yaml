@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Remove Application API Access
+  id: alert.application.removeapi
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Application/Remove Application API Access

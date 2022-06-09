@@ -1,0 +1,15 @@
+---
+name: RendezvousForwardFilter
+version: 2
+class: com.vordel.circuit.tibco.RendezvousForwardFilter
+fields:
+  rendezvousDaemon:
+    type: '@RendezvousDaemon'
+    cardinality: 1
+  subject:
+    type: string
+    defaultValues:
+    - data: subject
+    cardinality: 1
+components:
+  MessageField: '?'

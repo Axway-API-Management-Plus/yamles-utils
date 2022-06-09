@@ -1,0 +1,13 @@
+---
+type: KPSReadWriteStore
+fields:
+  key: id
+  readKey: ""
+  indexes:
+  - applicationID
+  - subject
+  name: Authorizations
+  description: OAuth Authorizations
+  type: /Environment Configuration/Key Property Stores/OAuth/Type Group/Authorizations
+  dataSource: /null
+  aliases: Authorizations

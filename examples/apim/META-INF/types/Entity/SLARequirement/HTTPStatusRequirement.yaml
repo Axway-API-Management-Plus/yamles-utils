@@ -1,0 +1,19 @@
+---
+name: HTTPStatusRequirement
+version: 2
+fields:
+  httpStatusClass:
+    type: '@HTTPStatusClass'
+    cardinality: 1
+  breachAlertMessage:
+    type: string
+    defaultValues:
+    - data: ' Raising a HTTP Status Code SLA Alert. Alert details are as follows:- SLA Name: ${sla.name}. Requirement: ${sla.threshold.type.str} ${sla.threshold}% of requests should have HTTP status codes in range [${sla.lower} - ${sla.upper}]. Current Percentage: ${sla.value}%. Current Time: ${sla.time}.'
+    cardinality: 1
+  clearAlertMessage:
+    type: string
+    defaultValues:
+    - data: ' Clearing a HTTP Status Code SLA Alert. Alert details are as follows:- SLA Name: ${sla.name}. Requirement: ${sla.threshold.type.str} ${sla.threshold}% of requests should have HTTP status codes in range [${sla.lower} - ${sla.upper}]. Current Percentage: ${sla.value}%. Clearance Time: ${sla.time}.'
+    cardinality: 1
+keyFields:
+- httpStatusClass

@@ -1,0 +1,7 @@
+---
+name: SentinelServerGroup
+version: 0
+class: com.vordel.circuit.axway.sentinel.SentinelServers
+components:
+  SentinelServer: '*'
+loadorder: 300

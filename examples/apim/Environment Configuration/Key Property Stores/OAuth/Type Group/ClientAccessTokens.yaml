@@ -1,0 +1,65 @@
+---
+type: KPSType
+fields:
+  name: ClientAccessTokens
+children:
+- type: KPSTypeProperty
+  fields:
+    name: accessToken
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: refreshToken
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: created
+    type: java.lang.Long
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: authentication
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: tokenType
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: clientId
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: params
+    type: java.util.Map
+    key: java.lang.String
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: idToken
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: expiresIn
+    type: java.lang.Integer
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: id
+    type: java.lang.String
+    key: ""
+    value: ""

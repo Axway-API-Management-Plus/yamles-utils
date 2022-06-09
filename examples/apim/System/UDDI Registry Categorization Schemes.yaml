@@ -1,0 +1,245 @@
+---
+type: RegistryCategorizationSchemeGroup
+fields:
+  name: UDDI Registry Categorization Schemes
+children:
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:wsdl:address
+    description: A tModel used to indicate the WSDL address option.
+    uuid: uuid:ad61de98-4db8-31b2-a299-a2373dc97212
+    uddiV3Key: uddi:uddi.org:wsdl:address
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:owningBusiness
+    description: A pointer to a businessEntity that owns the tagged data.
+    uuid: uuid:4064C064-6D14-4F35-8953-9652106476A9
+    uddiV3Key: uddi:uddi.org:categorization:owningbusiness
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:fax
+    description: Fax-based web service.
+    uuid: uuid:1A2B00BE-6E2C-42F5-875B-56F32686E0E7
+    uddiV3Key: uddi:uddi.org:transport:fax
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:wsdl:types
+    description: WSDL Type Category System
+    uuid: uuid:6e090afa-33e5-36eb-81b7-1ca18373f457
+    uddiV3Key: uddi:uddi.org:wsdl:types
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:derivedFrom
+    description: Category system for referring tModels to other tModels for the purpose of reuse
+    uuid: uuid:5678dd4f-f95d-35f9-9ea6-f79a7dd64656
+    uddiV3Key: uddi:uddi.org:categorization:derivedfrom
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:isReplacedBy
+    description: An identifier system used to point (using UDDI keys) to the tModel (or businessEntity) that is the logical replacement for the one in which isReplacedBy is used.
+    uuid: uuid:E59AE320-77A5-11D5-B898-0004AC49CC1E
+    uddiV3Key: uddi:uddi.org:identifier:isreplacedby
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:iso-ch:3166-1999
+    description: 'ISO 3166-1:1997 and 3166-2:1998. Codes for names of countries and their subdivisions. Part 1: Country codes. Part 2: Country subdivision codes. Update newsletters include ISO 3166-1 V-1 (1998-02-05), V-2 (1999-10-01), ISO 3166-2 I-1 (1998).'
+    uuid: uuid:4E49A8D6-D5A2-4FC2-93A0-0411D8D19E88
+    uddiV3Key: uddi:uddi.org:ubr:categorization:iso3166
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:xml:namespace
+    description: A category system used to indicate namespaces
+    uuid: uuid:d01987d1-ab2e-3013-9be2-2a66eb99d824
+    uddiV3Key: uddi:uddi.org:xml:namespace
+- type: RegistryCategorizationScheme
+  fields:
+    name: microsoft-com:geoweb:2000
+    description: 'Geographic Taxonomy: GeoWeb (2000 Release)'
+    uuid: uuid:297aaa47-2de3-4454-a04a-cf38e889d0c4
+    uddiV3Key: uddi:297aaa47-2de3-4454-a04a-cf38e889d0c4
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:relationships
+    description: Starter set classifications of businessEntity relationships
+    uuid: uuid:807A2C6A-EE22-470D-ADC7-E0424A337C03
+    uddiV3Key: uddi:uddi.org:relationships
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:operators
+    description: Taxonomy for categorizing the businessEntity of an operator of a registry
+    uuid: uuid:327A56F0-3299-4461-BC23-5CD513E95C55
+    uddiV3Key: uddi:uddi.org:categorization:nodes
+- type: RegistryCategorizationScheme
+  fields:
+    name: ubr-uddi-org:postalAddress
+    description: Postal address structure
+    uuid: uuid:48eb2518-c1bd-354f-92c9-21a53b0ff2b1
+    uddiV3Key: uddi:uddi.org:ubr:postaladdress
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:misc-taxomony
+    description: Special taxonomy consisting of namespace identifiers and the keywords associated with the namespaces
+    uuid: uuid:A035A07C-F362-44dd-8F95-E2B134BF43B4
+    uddiV3Key: uuid:A035A07C-F362-44dd-8F95-E2B134BF43B4
+- type: RegistryCategorizationScheme
+  fields:
+    name: ubr-uddi-org:iso-ch:3166-2003
+    description: ISO 3166 Codes for names of countries or regions. Updated with newsletters ISO 3166-1 V-1, V-2, V-3, V-4, V-5, V-6, V-7, ISO 3166-2 I-1, I-2, I-3, I-4.
+    uuid: uuid:4e49a8d6-d5a2-4fc2-93a0-0411d8d19e88
+    uddiV3Key: uddi:uddi.org:ubr:categorization:iso3166
+- type: RegistryCategorizationScheme
+  fields:
+    name: systinet-com:dependency
+    description: Creates link between two structures (may be different types). Both keyName and keyValue must be specified. KeyName must be one of businessEntity, businessService, bindingTemplate and tModel. KeyValue must be existing UDDI key of specified structure.
+    uuid: uuid:179e5540-f27b-11d6-9738-b8a03c50a862
+    uddiV3Key: uddi:systinet.com:dependency
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:protocol:soap
+    description: A tModel that represents the SOAP 1.1 protocol
+    uuid: uuid:aa254698-93de-3870-8df3-a5c075d64a0e
+    uddiV3Key: uddi:uddi.org:protocol:soap
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:entityKeyValues
+    description: Category system used to declare that a value set uses entity keys as valid values.
+    uuid: uuid:916b87bf-0756-3919-8eae-97dfa325e5a4
+    uddiV3Key: uddi:uddi.org:categorization:entitykeyvalues
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:xml:localName
+    description: A category system used to indicate XML local names
+    uuid: uuid:2ec65201-9109-3919-9bec-c9dbefcaccf6
+    uddiV3Key: uddi:uddi.org:xml:localname
+- type: RegistryCategorizationScheme
+  fields:
+    name: unspsc-org:unspsc:3-1
+    description: 'Product Taxonomy: UNSPSC (Version 3.1)'
+    uuid: uuid:DB77450D-9FA8-45D4-A7BC-04411D14E384
+    uddiV3Key: uuid:DB77450D-9FA8-45D4-A7BC-04411D14E384
+- type: RegistryCategorizationScheme
+  fields:
+    name: unspsc-org:unspsc:v6.0501
+    description: 'Product and Service Category System: United Nations Standard Products and Services Code (UNSPSC)'
+    uuid: ' uuid:4614c240-b483-11d7-8be8-000629dc0a53'
+    uddiV3Key: uddi:uddi.org:ubr:categorization:unspsc
+- type: RegistryCategorizationScheme
+  fields:
+    name: ntis-gov:sic:1997
+    description: 'Business Taxonomy: SIC (1997 Release)'
+    uuid: uuid:70a80f61-77bc-4821-a5e2-2a406acc35dd
+    uddiV3Key: uddi:70a80f61-77bc-4821-a5e2-2a406acc35dd
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:telephone
+    description: Telephone based service.
+    uuid: uuid:38E12427-5536-4260-A6F9-B5B530E63A07
+    uddiV3Key: uddi:uddi.org:transport:telephone
+- type: RegistryCategorizationScheme
+  fields:
+    name: http://www.w3.org/ns/ws-policy/remotepolicyreference
+    description: Category system used for UDDI entities to point to an external Web services policy attachment policy that describes their characteristics. See Web Services Policy 1.5 - Attachment specification for further details.
+    uuid: uuid:2ea5f9d3-9b84-39f9-b334-e9d5f535b4c1
+    uddiV3Key: uddi:w3.org:ws-policy:v1.5:attachment:remotepolicyreference
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:wsdl:categorization:transport
+    description: Category system used to describe the transport supported by a wsdl:binding.
+    uuid: uuid:e5c43936-86e4-37bf-8196-1d04b35c0099
+    uddiV3Key: uddi:uddi.org:wsdl:categorization:transport
+- type: RegistryCategorizationScheme
+  fields:
+    name: ntis-gov:naics:2002
+    description: 'Business Taxonomy: NAICS (2002 Release)'
+    uuid: uuid:1ff729f2-1948-46cf-b660-31ec107f1663
+    uddiV3Key: uddi:uddi.org:ubr:categorization:naics:2002
+- type: RegistryCategorizationScheme
+  fields:
+    name: http://www.w3.org/ns/ws-policy/policytypes
+    description: Web services policy types category system used for UDDI tModels to characterize them as Web services policy-based policy expressions.
+    uuid: uuid:90eda65e-ffd7-33df-965f-98ebb1c2a941
+    uddiV3Key: uddi:w3.org:ws-policy:v1.5:attachment:policytypes
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:general_keywords
+    description: Special taxonomy consisting of namespace identifiers and the keywords associated with the namespaces
+    uuid: uuid:a035a07c-f362-44dd-8f95-e2b134bf43b4
+    uddiV3Key: uddi:uddi.org:categorization:general_keywords
+- type: RegistryCategorizationScheme
+  fields:
+    name: systinet-com:taxonomy:compatibility
+    description: Enhances a taxonomy tModel with additional information, in which structures the taxonomy can be used.
+    uuid: uuid:cf68c700-f93d-11d6-8cfc-b8a03c50a862
+    uddiV3Key: 'uddi:systinet.com:taxonomy:compatibility '
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:wsdl:portTypeReference
+    description: A category system used to reference a wsdl:portType tModel
+    uuid: uuid:082b0851-25d8-303c-b332-f24a6d53e38e
+    uddiV3Key: uddi:uddi.org:wsdl:porttypereference
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:validatedBy
+    description: Category system used to point a value set or category group system tModel to associated value set Web service implementations.
+    uuid: uuid:25b22e3e-3dfa-3024-b02a-3438b9050b59
+    uddiV3Key: uddi:uddi.org:categorization:validatedby
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:ftp
+    description: File Transfer Protocol (FTP) based web service.
+    uuid: uuid:5FCF5CD0-629A-4C50-8B16-F94E9CF2A674
+    uddiV3Key: uddi:uddi.org:transport:ftp
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:http
+    description: An HTTP or web browser-based web service.
+    uuid: uuid:68DE9E80-AD09-469D-8A37-088422BFBC36
+    uddiV3Key: uddi:uddi.org:transport:http
+- type: RegistryCategorizationScheme
+  fields:
+    name: unspsc-org:unspsc
+    description: 'ECCMA Product and Service Category Code System: UNSPSC Version 7.3.'
+    uuid: uuid:CD153257-086A-4237-B336-6BDCBDCC6634
+    uddiV3Key: uddi:cd153257-086a-4237-b336-6bdcbdcc6634
+- type: RegistryCategorizationScheme
+  fields:
+    name: http://www.w3.org/ns/ws-policy/localpolicyreference
+    description: Category system used for UDDI entities to point to a Web services policy policy expression tModel that describes their characteristics. See Web Services Policy 1.5 - Attachment specification for further details.
+    uuid: uuid:5da4fc61-a302-35ad-91d3-775150429035
+    uddiV3Key: uddi:w3.org:ws-policy:v1.5:attachment:localpolicyreference
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:protocol:http
+    description: 'A tModel that represents the HTTP protocol '
+    uuid: uuid:6e10b91b-babc-3442-b8fc-5a3c8fde0794
+    uddiV3Key: uddi:uddi.org:protocol:http
+- type: RegistryCategorizationScheme
+  fields:
+    name: ws-i-org:conformsTo:2002_12
+    description: Category system used for UDDI entities to point to the WS-I concept to which they conform.
+    uuid: uuid:65719168-72c6-3f29-8c20-62defb0961c0
+    uddiV3Key: uddi:65719168-72c6-3f29-8c20-62defb0961c0
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:smtp
+    description: E-mail based web service.
+    uuid: uuid:93335D49-3EFB-48A0-ACEA-EA102B60DDC6
+    uddiV3Key: uddi:uddi.org:transport:smtp
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:types
+    description: UDDI Type Taxonomy
+    uuid: uuid:c1acf26d-9672-4404-9d70-39b756e62ab4
+    uddiV3Key: uddi:uddi.org:categorization:types
+- type: RegistryCategorizationScheme
+  fields:
+    name: ntis-gov:naics:1997
+    description: 'Industry Category System: NAICS (1997 Release)'
+    uuid: uuid:C0B9FE13-179F-413D-8A5B-5004DB8E5BB2
+    uddiV3Key: uddi:uddi.org:ubr:categorization:naics:1997
+- type: RegistryCategorizationScheme
+  fields:
+    name: uddi-org:wsdl:categorization:protocol
+    description: Category system used to describe the protocol supported by a wsdl:binding.
+    uuid: uuid:4dc74177-7806-34d9-aecd-33c57dc3a865
+    uddiV3Key: uddi:uddi.org:wsdl:categorization:protocol

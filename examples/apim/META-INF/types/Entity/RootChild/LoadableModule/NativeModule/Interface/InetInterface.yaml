@@ -1,0 +1,120 @@
+---
+name: InetInterface
+version: 14
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  port:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  address:
+    type: string
+    defaultValues:
+    - data: '*'
+    cardinality: 1
+  enabled:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  auditConn:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  backlog:
+    type: integer
+    defaultValues:
+    - data: 64
+    cardinality: 1
+  idletimeout:
+    type: integer
+    defaultValues:
+    - data: 60000
+    cardinality: 1
+  activetimeout:
+    type: integer
+    defaultValues:
+    - data: 60000
+    cardinality: 1
+  protocol:
+    type: string
+    defaultValues:
+    - data: ipv4
+    cardinality: 1
+  maxRequestMemory:
+    type: string
+    defaultValues:
+    - data: 27262976
+    cardinality: 1
+  transparentProxy:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  reuseAddress:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  opsSettingsUsage:
+    type: string
+    defaultValues:
+    - data: SYSTEM
+    cardinality: 1
+  recordInboundTxns:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordOutboundTxns:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordCircuitPath:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordTrace:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordSent:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  recordReceived:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  exportCorrelationId:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  inputEncodings:
+    type: string
+    defaultValues:
+    - data: .inherit
+    cardinality: '*'
+  outputEncodings:
+    type: string
+    defaultValues:
+    - data: .inherit
+    cardinality: '*'
+  wafProfile:
+    type: '@WAFProfile'
+    cardinality: '?'
+keyFields:
+- name
+loadorder: 1500000

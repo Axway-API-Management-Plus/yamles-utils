@@ -1,0 +1,11 @@
+---
+name: HELOHandler
+version: 3
+class: com.vordel.dwe.smtp.HELOPlugin
+fields:
+  greeting:
+    type: string
+    defaultValues:
+    - data: Hello ${smtp.helo.domain}
+    cardinality: 1
+loadorder: 2000000

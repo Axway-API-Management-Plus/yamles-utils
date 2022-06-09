@@ -1,0 +1,84 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Add Secure Headers
+  name: Client App Registry Static Content Protection Policy
+  description: ""
+children:
+- type: CircuitDelegateFilter
+  fields:
+    circuitPK: /Policies/Client App Registry Policies/Client App Registry Secure Headers
+    name: Add Secure Headers
+  routing:
+    success: ../Query String Exists?
+    failure: /null
+  logging:
+    fatal: 'Error in calling policy shortcut circuit. Error: ${circuit.exception}'
+    failure: Failed in calling policy shortcut
+    success: Success in calling policy shortcut
+- type: CompareAttributeFilter
+  fields:
+    name: Query String Exists?
+  routing:
+    success: ../Return 400 Bad Request
+    failure: ../Load Client App Registry Manager Login Page
+  children:
+  - type: AttributeCompare
+    fields:
+      attrName: ${http.raw.querystring}
+      matchType: MATCHES
+      expression: .*
+- type: LoadFileFilter
+  fields:
+    fileIn: ${environment.VDISTDIR}/webapps/apiportal/registry-login.html
+    treatFileAs: CONTENT_TYPE
+    inFileContentType: text/html
+    filterCircuit: /null
+    workDir: ""
+    outDir: ""
+    completeDir: ""
+    outPrefix: ""
+    outSuffix: ""
+    name: Load Client App Registry Manager Login Page
+  routing:
+    success: ../Delete AXCLIENTAPPREGSTATIC cookie
+    failure: /null
+- type: AddHTTPHeaderFilter
+  fields:
+    headerName: Set-Cookie
+    headerValue: AXCLIENTAPPREGSTATIC=deleted;Max-Age=0;Secure;HttpOnly
+    overwriteExistingHeader: false
+    name: Delete AXCLIENTAPPREGSTATIC cookie
+  routing:
+    success: ../Delete CLIENTREGISTRYCOOKIE
+  logging:
+    fatal: 'Error in adding the HTTP header to the message. Error: ${circuit.exception}'
+    failure: Failed in adding the HTTP header to the message
+    success: Success in adding the HTTP header to the message
+- type: AddHTTPHeaderFilter
+  fields:
+    headerName: Set-Cookie
+    headerValue: CLIENTREGISTRYCOOKIE=deleted;Max-Age=0;Secure;HttpOnly
+    overwriteExistingHeader: false
+    name: Delete CLIENTREGISTRYCOOKIE
+  routing:
+    success: ../Send Login Page
+  logging:
+    fatal: 'Error in adding the HTTP header to the message. Error: ${circuit.exception}'
+    failure: Failed in adding the HTTP header to the message
+    success: Success in adding the HTTP header to the message
+- type: Reflector
+  fields:
+    name: Send Login Page
+  logging:
+    fatal: 'Error occurred while echoing the message. Error: ${circuit.exception}'
+    failure: Failed to echo back the message
+    success: Successfully echoed back the message
+- type: Reflector
+  fields:
+    httpResponseStatus: 400
+    name: Return 400 Bad Request
+  logging:
+    fatal: 'Error occurred while echoing the message. Error: ${circuit.exception}'
+    failure: Failed to echo back the message
+    success: Successfully echoed back the message

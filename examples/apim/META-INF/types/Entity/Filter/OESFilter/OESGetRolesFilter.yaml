@@ -1,0 +1,27 @@
+---
+name: OESGetRolesFilter
+version: 2
+class: com.vordel.circuit.oracle.oes.OESGetRolesFilter
+fields:
+  resourceString:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  resourceAuthorityName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  actionString:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  actionAuthorityName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  Property: '*'

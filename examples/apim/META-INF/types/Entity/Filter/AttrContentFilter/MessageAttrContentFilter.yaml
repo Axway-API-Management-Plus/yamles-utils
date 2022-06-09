@@ -1,0 +1,4 @@
+---
+name: MessageAttrContentFilter
+version: 0
+class: com.vordel.circuit.attribute.MessageAttrContentFilter

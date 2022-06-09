@@ -1,0 +1,13 @@
+---
+name: CertChainCheckFilter
+version: 3
+class: com.vordel.circuit.cert.CertChainCheckFilter
+fields:
+  certMessageAttribute:
+    type: string
+    defaultValues:
+    - data: certificates
+    cardinality: 1
+  certificates:
+    type: '@Certificate'
+    cardinality: '*'

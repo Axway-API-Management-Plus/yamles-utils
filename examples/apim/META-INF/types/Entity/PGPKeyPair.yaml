@@ -1,0 +1,21 @@
+---
+name: PGPKeyPair
+version: 0
+fields:
+  alias:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  publicKey:
+    type: binary
+    defaultValues:
+    - {}
+    cardinality: '?'
+  privateKey:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: '?'
+keyFields:
+- alias

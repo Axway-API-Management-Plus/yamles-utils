@@ -1,0 +1,9 @@
+---
+name: SoftCircuitReference
+version: 0
+fields:
+  circuitPK:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'

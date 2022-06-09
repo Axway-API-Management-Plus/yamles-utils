@@ -1,0 +1,24 @@
+---
+name: ClassLoader
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  parent:
+    type: '@ClassLoader'
+    cardinality: '?'
+  prePath:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  postPath:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+keyFields:
+- name

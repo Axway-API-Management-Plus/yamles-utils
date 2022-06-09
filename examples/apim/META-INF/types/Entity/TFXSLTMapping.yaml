@@ -1,0 +1,92 @@
+---
+name: TFXSLTMapping
+version: 2
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  sourceType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  targetType:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  sourceRoot:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: +
+  targetRoot:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  xslContent:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  xcfContent:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  xcdContent:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  sourceJsonSchemaRef:
+    type: '@JSONSchema'
+    cardinality: '*'
+  targetJsonSchemaRef:
+    type: '@JSONSchema'
+    cardinality: '?'
+  sourceXsdKey:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  targetXsdKey:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  externalSourceSchema:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  externalTargetSchema:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  sourceSchema:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  targetSchema:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  externalSourceSchemaFilename:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  externalTargetSchemaFilename:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+keyFields:
+- name

@@ -1,0 +1,4 @@
+---
+name: PortalAPIBroker
+version: 0
+class: com.vordel.apiportal.runtime.PortalBroker

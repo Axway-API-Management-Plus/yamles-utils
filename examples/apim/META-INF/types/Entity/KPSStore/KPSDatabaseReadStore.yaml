@@ -1,0 +1,14 @@
+---
+name: KPSDatabaseReadStore
+version: 1
+fields:
+  readKey:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  getQuery:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

@@ -1,0 +1,31 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Extract WSS Timestamp
+  name: Test Timestamp is Absent
+children:
+- type: ExtractTimestampFilter
+  fields:
+    name: Extract WSS Timestamp
+  routing:
+    success: ../False
+    failure: ../True
+  logging:
+    maskType: FILTER
+    mask: 0
+    fatal: 'Fatal error while extracting the Timestamp. Error: ${circuit.exception}'
+    failure: Failed to extract the Timestamp
+    success: Successfully extracted the Timestamp
+- type: FalseFilter
+  fields:
+    name: "False"
+  logging:
+    fatal: 'False filter error. Error: ${circuit.exception}'
+    success: ""
+- type: TrueFilter
+  fields:
+    name: "True"
+  logging:
+    fatal: 'True filter error. Error: ${circuit.exception}'
+    failure: ""
+    success: True filter passed

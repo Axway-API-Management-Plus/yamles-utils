@@ -1,0 +1,5 @@
+---
+name: CRLRetriever
+version: 1
+class: com.vordel.circuit.cert.CRLRetriever
+loadorder: 10

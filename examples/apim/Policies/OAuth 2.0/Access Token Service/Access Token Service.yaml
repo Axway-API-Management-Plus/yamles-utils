@@ -1,0 +1,55 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Decide what grant type to use
+  name: Access Token Service
+  description: ""
+children:
+- type: SwitchFilter
+  fields:
+    attributeName: ${content.body.getParameters().get("grant_type")}
+    defaultCircuit: '/Policies/Policy Library/Return HTTP Error 401: Unauthorized'
+    name: Decide what grant type to use
+  children:
+  - type: SwitchCircuitReference
+    fields:
+      comparatorType: is
+      compareWith: urn:ietf:params:oauth:grant-type:saml2-bearer
+      name: Id-0001386691053525-000000003910f87e-1
+      priority: 5
+      circuitPK: ../../../SAML
+  - type: SwitchCircuitReference
+    fields:
+      comparatorType: is
+      compareWith: authorization_code
+      name: Id-0001340660962253-0000000023c88300-2
+      priority: 1
+      circuitPK: ../../../Access Code
+  - type: SwitchCircuitReference
+    fields:
+      comparatorType: is
+      compareWith: refresh_token
+      name: Id-0001340660962253-0000000023c88300-1
+      priority: 1
+      circuitPK: ../../../Refresh
+  - type: SwitchCircuitReference
+    fields:
+      comparatorType: is
+      compareWith: password
+      name: Id-0001340660962253-0000000023c88300-4
+      priority: 1
+      circuitPK: ../../../Resource Owner Password Credentials
+  - type: SwitchCircuitReference
+    fields:
+      comparatorType: is
+      compareWith: client_credentials
+      name: Id-0001340660962253-0000000023c88300-3
+      priority: 1
+      circuitPK: ../../../Client Credentials
+  - type: SwitchCircuitReference
+    fields:
+      comparatorType: is
+      compareWith: urn:ietf:params:oauth:grant-type:jwt-bearer
+      name: Id-0001340660819595-0000000038480ba3-1
+      priority: 0
+      circuitPK: ../../../JWT

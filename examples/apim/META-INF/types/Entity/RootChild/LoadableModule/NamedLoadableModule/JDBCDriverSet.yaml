@@ -1,0 +1,7 @@
+---
+name: JDBCDriverSet
+version: 3
+class: com.vordel.store.system.JDBCDrivers
+components:
+  JDBCDriver: '?'
+loadorder: 92

@@ -1,0 +1,9 @@
+---
+type: AuthnRepositoryOracleEntitlementsServerGroup
+fields:
+  allowedFilter:
+  - HttpBasicFilter
+  - WsBasicFilter
+  - AttributeAuthnFilter
+  - FormAuthnFilter
+  name: Oracle Entitlements Server 10g Repositories

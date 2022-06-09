@@ -1,0 +1,14 @@
+---
+name: PatternPolicyPair
+version: 0
+fields:
+  pattern:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  policy:
+    type: '@FilterCircuit'
+    cardinality: 1
+keyFields:
+- pattern

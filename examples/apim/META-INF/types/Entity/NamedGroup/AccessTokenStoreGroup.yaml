@@ -1,0 +1,5 @@
+---
+name: AccessTokenStoreGroup
+version: 0
+components:
+  AccessTokenPersist: '*'

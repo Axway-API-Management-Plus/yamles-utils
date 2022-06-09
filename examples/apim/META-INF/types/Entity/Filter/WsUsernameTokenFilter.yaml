@@ -1,0 +1,68 @@
+---
+name: WsUsernameTokenFilter
+version: 15
+class: com.vordel.circuit.authn.WsUsernameTokenFilter
+fields:
+  actor:
+    type: string
+    defaultValues:
+    - data: '##current##'
+    cardinality: 1
+  credentialFormat:
+    type: string
+    defaultValues:
+    - data: User Name
+    cardinality: 1
+  driftTime:
+    type: long
+    defaultValues:
+    - {}
+    cardinality: 1
+  validityPeriodSecs:
+    type: long
+    defaultValues:
+    - {}
+    cardinality: 1
+  repository:
+    type: '@AuthnRepositoryBase'
+    cardinality: '?'
+  respositoryAction:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  requiredPasswordType:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  noPassword:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  nonceRequired:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  cacheToUse:
+    type: '@Cache'
+    defaultValues:
+    - ref: /Libraries/(CacheManager)Cache Manager/(Cache)WSS UsernameToken Nonce Cache
+    cardinality: 1
+  timestampRequired:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  removeWsSecurity:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)authentication
+    cardinality: 1

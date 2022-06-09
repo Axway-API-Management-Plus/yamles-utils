@@ -1,0 +1,15 @@
+---
+name: RollOverLogger
+version: 1
+fields:
+  baseLogFileName:
+    type: string
+    defaultValues:
+    - data: transactionLog
+    cardinality: 1
+  maxLogFileSize:
+    type: integer
+    defaultValues:
+    - data: 1000
+    cardinality: 1
+abstract: true

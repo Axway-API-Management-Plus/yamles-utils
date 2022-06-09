@@ -1,0 +1,15 @@
+---
+name: KPSRoot
+version: 0
+class: com.vordel.kps.impl.KPS
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  KPSPackage: '*'
+keyFields:
+- name
+loadorder: 300

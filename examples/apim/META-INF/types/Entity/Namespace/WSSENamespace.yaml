@@ -1,0 +1,9 @@
+---
+name: WSSENamespace
+version: 2
+fields:
+  wsuNamespace:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

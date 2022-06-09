@@ -1,0 +1,21 @@
+---
+name: ResourceSet
+version: 0
+fields:
+  ID:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  primaryMapID:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  linkedMapID:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+keyFields:
+- ID

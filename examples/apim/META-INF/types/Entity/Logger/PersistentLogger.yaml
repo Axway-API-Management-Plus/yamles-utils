@@ -1,0 +1,8 @@
+---
+name: PersistentLogger
+version: 1
+fields:
+  signingCert:
+    type: '@Certificate'
+    cardinality: '?'
+abstract: true

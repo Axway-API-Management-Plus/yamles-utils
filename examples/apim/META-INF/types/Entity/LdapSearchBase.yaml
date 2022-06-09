@@ -1,0 +1,26 @@
+---
+name: LdapSearchBase
+version: 2
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  base:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  filter:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  scope:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+keyFields:
+- name

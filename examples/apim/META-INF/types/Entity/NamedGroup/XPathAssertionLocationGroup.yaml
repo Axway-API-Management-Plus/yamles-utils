@@ -1,0 +1,5 @@
+---
+name: XPathAssertionLocationGroup
+version: 0
+components:
+  XPath: '*'

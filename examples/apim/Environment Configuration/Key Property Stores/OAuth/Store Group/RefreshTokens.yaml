@@ -1,0 +1,16 @@
+---
+type: KPSReadWriteStore
+fields:
+  key: tokenId
+  readKey: ""
+  indexes:
+  - applicationId
+  - userName
+  encrypted:
+  - authRequest
+  - oauth2RefreshToken
+  name: RefreshTokens
+  description: RefreshTokens
+  type: /Environment Configuration/Key Property Stores/OAuth/Type Group/RefreshTokens
+  dataSource: /null
+  aliases: RefreshTokens

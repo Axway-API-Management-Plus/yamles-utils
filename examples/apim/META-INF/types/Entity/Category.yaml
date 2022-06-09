@@ -1,0 +1,11 @@
+---
+name: Category
+version: 4
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- name

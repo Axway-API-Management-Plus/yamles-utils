@@ -1,0 +1,56 @@
+---
+name: CompareLDAPAttributeFilter
+version: 0
+class: com.vordel.circuit.ldap.CompareLDAPAttributeFilter
+fields:
+  ldapConnection:
+    type: '@LdapDirectory'
+    cardinality: 1
+  ldapBase:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  ldapSearch:
+    type: string
+    defaultValues:
+    - data: (&(objectclass=inetOrgPerson)(cn=${authentication.subject.id}))
+    cardinality: 1
+  ldapScope:
+    type: string
+    defaultValues:
+    - data: SUBTREE_SCOPE
+    cardinality: 1
+  cacheResults:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  cacheToUse:
+    type: '@Cache'
+    cardinality: 1
+  cacheKeyToUse:
+    type: string
+    defaultValues:
+    - data: LDAP_FILTER_VALUE
+    cardinality: 1
+  customCacheKey:
+    type: string
+    defaultValues:
+    - data: ${authentication.subject.id}
+    cardinality: 1
+  mutliValueBehavior:
+    type: string
+    defaultValues:
+    - data: CONCATENATE
+    cardinality: 1
+  mutliValueSeperator:
+    type: string
+    defaultValues:
+    - data: ','
+    cardinality: 1
+  mutliValueIndex:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1

@@ -1,0 +1,7 @@
+---
+name: DbConnectionGroup
+version: 1
+class: com.vordel.common.db.DbConnectionCache
+components:
+  DbConnection: '*'
+loadorder: 93

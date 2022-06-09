@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: Add Organization API Access
+  id: alert.organization.addapi
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Organization/Add Organization API Access

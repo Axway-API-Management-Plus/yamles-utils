@@ -1,0 +1,28 @@
+---
+name: ElementSpecifier
+version: 3
+fields:
+  namespace:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  index:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  encryptNodeType:
+    type: string
+    defaultValues:
+    - data: element
+    cardinality: 1
+keyFields:
+- namespace
+- name
+- index

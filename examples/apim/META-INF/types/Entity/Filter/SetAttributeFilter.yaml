@@ -1,0 +1,15 @@
+---
+name: SetAttributeFilter
+version: 0
+class: com.vordel.circuit.attribute.SetAttributeFilter
+fields:
+  messageAttribute:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  attributeValue:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1

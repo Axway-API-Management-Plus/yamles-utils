@@ -1,0 +1,7 @@
+---
+name: StylesheetGroup
+version: 1
+class: com.vordel.circuit.conversion.StylesheetGroup
+components:
+  Stylesheet: '*'
+loadorder: 100

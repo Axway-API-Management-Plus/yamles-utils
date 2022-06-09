@@ -1,0 +1,13 @@
+---
+name: ResourceMapGroup
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  ResourceMap: '*'
+keyFields:
+- name

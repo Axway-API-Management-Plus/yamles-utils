@@ -1,0 +1,19 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Exchange AuthZ Code for Access Token
+  name: Access Code
+children:
+- type: AccessCodeGrantFilter
+  fields:
+    authzCodeCache: /Libraries/OAuth2 Stores/Authorization Code Stores/Authz Code Store
+    locationOfClientDetails: QueryString
+    tokenStore: /Libraries/OAuth2 Stores/Access Token Stores/OAuth Access Token Store
+    clientAttributeName: authentication.application.id
+    name: Exchange AuthZ Code for Access Token
+  routing:
+    success: ../Create an Open ID Connect ID Token
+- type: CreateIDTokenFilter
+  fields:
+    jwtSigner: /Environment Configuration/Certificate Store/CN=Change this for production
+    name: Create an Open ID Connect ID Token

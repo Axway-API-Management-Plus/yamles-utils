@@ -1,0 +1,8 @@
+---
+name: UrlSetGroup
+version: 0
+components:
+  UrlSetGetAccessGroup: '*'
+  UrlSetOcspGroup: '*'
+  UrlSetXkmsGroup: '*'
+  UrlSetSamlPdpGroup: '*'

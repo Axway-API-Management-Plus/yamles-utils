@@ -1,0 +1,5 @@
+---
+name: RegistryConnectionGroup
+version: 0
+components:
+  RegistryConnection: '*'

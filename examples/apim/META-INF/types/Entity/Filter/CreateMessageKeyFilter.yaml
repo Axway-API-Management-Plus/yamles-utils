@@ -1,0 +1,15 @@
+---
+name: CreateMessageKeyFilter
+version: 1
+class: com.vordel.circuit.cache.CreateMessageKeyFilter
+fields:
+  uniqueAttributeName:
+    type: string
+    defaultValues:
+    - data: content.body
+    cardinality: 1
+  outputAttributeName:
+    type: string
+    defaultValues:
+    - data: message.key
+    cardinality: 1

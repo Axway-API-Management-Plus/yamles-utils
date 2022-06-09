@@ -1,0 +1,20 @@
+---
+name: RevokeOAuthAccessTokenFilter
+version: 1
+class: com.vordel.circuit.oauth.provider.RevokeOAuthAccessTokenFilter
+fields:
+  locationOfClientDetails:
+    type: string
+    defaultValues:
+    - data: AuthorizationHeader
+    cardinality: 1
+  clientIdHeaderName:
+    type: string
+    defaultValues:
+    - data: client_id
+    cardinality: 1
+  clientSecretHeaderName:
+    type: string
+    defaultValues:
+    - data: client_secret
+    cardinality: 1

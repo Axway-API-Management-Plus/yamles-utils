@@ -1,0 +1,14 @@
+---
+name: KPSCertStore
+version: 0
+fields:
+  getQuery:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  key:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1

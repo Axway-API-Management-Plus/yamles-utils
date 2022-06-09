@@ -1,0 +1,56 @@
+---
+type: KPSType
+fields:
+  name: PortalAction
+  description: Type for the PortalActionQueue
+children:
+- type: KPSTypeProperty
+  fields:
+    name: State
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: EntryType
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: EntryString
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: EntryData
+    type: java.util.Map
+    key: java.lang.String
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: CreatingUser
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: Age
+    type: java.lang.Long
+- type: KPSTypeProperty
+  fields:
+    name: ID
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: ApprovalState
+    type: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: StringList
+    type: java.util.List
+    key: ""
+    value: java.lang.String
+- type: KPSTypeProperty
+  fields:
+    name: EmailSent
+    type: java.lang.Boolean
+- type: KPSTypeProperty
+  fields:
+    name: ActionClass
+    type: java.lang.String

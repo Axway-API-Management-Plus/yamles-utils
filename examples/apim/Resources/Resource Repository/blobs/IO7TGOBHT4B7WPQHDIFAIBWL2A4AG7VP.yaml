@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: IO7TGOBHT4B7WPQHDIFAIBWL2A4AG7VP
+  type: schema
+  content: '{{file "IO7TGOBHT4B7WPQHDIFAIBWL2A4AG7VP.xsd" "binary"}}'

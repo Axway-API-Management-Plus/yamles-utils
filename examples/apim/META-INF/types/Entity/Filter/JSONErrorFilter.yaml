@@ -1,0 +1,35 @@
+---
+name: JSONErrorFilter
+version: 0
+class: com.vordel.circuit.faulthandlers.json.JSONErrorFilter
+fields:
+  showStack:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  showPath:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  showAttributes:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  showDetailedReason:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  faultString:
+    type: string
+    defaultValues:
+    - data: ${circuit.failure.reason}
+    cardinality: 1
+  httpResponseStatus:
+    type: integer
+    defaultValues:
+    - data: 500
+    cardinality: 1

@@ -1,0 +1,50 @@
+---
+name: SMTP
+version: 6
+class: com.vordel.dwe.smtp.SMTPSocketProtocol
+fields:
+  name:
+    type: string
+    defaultValues:
+    - data: SMTP
+    cardinality: 1
+  destinationConnSecurity:
+    type: string
+    defaultValues:
+    - data: None
+    cardinality: 1
+  destinationHost:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  destinationPort:
+    type: integer
+    defaultValues:
+    - data: 25
+    cardinality: 1
+  caCerts:
+    type: '@Certificate'
+    cardinality: '*'
+  clientCerts:
+    type: '@Certificate'
+    cardinality: '*'
+  ciphers:
+    type: string
+    defaultValues:
+    - data: DEFAULT
+    cardinality: 1
+  authUsername:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  authPassword:
+    type: encrypted
+    defaultValues:
+    - data: ""
+    cardinality: 1
+components:
+  SMTPHandler: '?'
+keyFields:
+- name

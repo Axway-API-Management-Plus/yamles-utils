@@ -1,0 +1,10 @@
+---
+name: SamlAttributeInsertFilter
+version: 0
+class: com.vordel.circuit.saml.SamlAttributeInsertFilter
+fields:
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)attribute
+    cardinality: 1

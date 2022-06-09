@@ -1,0 +1,17 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Trace Error
+  name: Account Creation Failure
+  description: ""
+children:
+- type: TraceFilter
+  fields:
+    traceMsg: 'Error creating account for external identity ${authN.loginname}: ${authN.failureCause.getMessage()}'
+    traceLevel: 2
+    traceAttributes: false
+    name: Trace Error
+  logging:
+    fatal: 'Error while tracing the message properties. Error: ${circuit.exception}'
+    failure: Failed to trace the message properties
+    success: Traced the message properties

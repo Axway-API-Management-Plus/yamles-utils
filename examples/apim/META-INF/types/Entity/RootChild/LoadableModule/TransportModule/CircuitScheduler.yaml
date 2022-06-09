@@ -1,0 +1,28 @@
+---
+name: CircuitScheduler
+version: 2
+class: com.vordel.dwe.scheduler.CircuitScheduler
+constants:
+  descriptorClass:
+    type: string
+    value: com.vordel.client.manager.filter.scheduler.SchedulerTransportDescriptor
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  filterCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+  cronExpression:
+    type: '@CronExpression'
+    cardinality: 1
+  enabled:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+keyFields:
+- name
+loadorder: 2000000

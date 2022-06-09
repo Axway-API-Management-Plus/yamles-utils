@@ -1,0 +1,8 @@
+---
+type: PortalCallback
+fields:
+  name: System Quota Changed
+  id: alert.quota.system.changed
+  type: Governance
+  enabled: true
+  filterCircuit: /Policies/Sample Policies/API Management Alerts/Quota/System Quota Changed

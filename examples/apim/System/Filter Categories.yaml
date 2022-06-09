@@ -1,0 +1,20 @@
+---
+type: CategoryGroup
+fields:
+  name: Filter Categories
+children:
+- type: Category
+  fields:
+    name: miscellaneous
+- type: Category
+  fields:
+    name: authentication
+- type: Category
+  fields:
+    name: authorization
+- type: Category
+  fields:
+    name: content-filtering
+- type: Category
+  fields:
+    name: attribute

@@ -1,0 +1,29 @@
+---
+type: KPSType
+fields:
+  name: PortalExports
+children:
+- type: KPSTypeProperty
+  fields:
+    name: createdBy
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: data
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: id
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: createdOn
+    type: java.lang.Long
+    key: ""
+    value: ""

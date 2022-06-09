@@ -1,0 +1,6 @@
+---
+name: JMSServiceGroup
+version: 0
+class: com.vordel.dwe.jms.JMSServiceGroup
+components:
+  JMSService: '?'

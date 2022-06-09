@@ -1,0 +1,7 @@
+---
+type: SMTPServer
+fields:
+  name: Portal SMTP
+  smtpServer: localhost
+  username: ""
+  password: ""

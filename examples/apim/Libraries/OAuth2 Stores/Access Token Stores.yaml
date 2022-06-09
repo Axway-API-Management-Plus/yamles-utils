@@ -1,0 +1,11 @@
+---
+type: AccessTokenStoreGroup
+fields:
+  name: Access Token Stores
+children:
+- type: AccessTokenPersist
+  fields:
+    name: OAuth Access Token Store
+    type: 3
+    cache: /Libraries/Cache Manager/OAuth Access Token Cache
+    database: /null

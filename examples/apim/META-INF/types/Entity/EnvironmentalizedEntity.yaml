@@ -1,0 +1,11 @@
+---
+name: EnvironmentalizedEntity
+version: 0
+fields:
+  entityPk:
+    type: '@Entity'
+    cardinality: 1
+components:
+  EnvironmentalizedField: +
+keyFields:
+- entityPk

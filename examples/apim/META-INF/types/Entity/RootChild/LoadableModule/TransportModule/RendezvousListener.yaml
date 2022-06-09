@@ -1,0 +1,27 @@
+---
+name: RendezvousListener
+version: 3
+class: com.vordel.circuit.tibco.RendezvousListener
+constants:
+  descriptorClass:
+    type: string
+    value: com.vordel.client.manager.filter.tibco.RendezvousTransportDescriptor
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  rendezvousDaemon:
+    type: '@RendezvousDaemon'
+    cardinality: 1
+  subject:
+    type: string
+    defaultValues:
+    - data: subject
+    cardinality: 1
+  filterCircuit:
+    type: '@FilterCircuit'
+    cardinality: 1
+keyFields:
+- name

@@ -1,0 +1,30 @@
+---
+name: SnmpAlertSystem
+version: 0
+class: com.vordel.alert.snmp.AlertSNMP
+fields:
+  nmsHost:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  nmsPort:
+    type: integer
+    defaultValues:
+    - data: 162
+    cardinality: 1
+  nmsTimeout:
+    type: integer
+    defaultValues:
+    - data: 60
+    cardinality: 1
+  nmsRetries:
+    type: integer
+    defaultValues:
+    - data: 3
+    cardinality: 1
+  snmpVersion:
+    type: integer
+    defaultValues:
+    - data: 2
+    cardinality: 1

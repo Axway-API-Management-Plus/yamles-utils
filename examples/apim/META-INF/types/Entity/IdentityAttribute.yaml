@@ -1,0 +1,27 @@
+---
+name: IdentityAttribute
+version: 3
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  value:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  type:
+    type: string
+    defaultValues:
+    - data: String
+    cardinality: 1
+  encryptedValue:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: '?'
+keyFields:
+- name
+- value

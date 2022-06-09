@@ -1,0 +1,6 @@
+---
+name: ElementSpecifiers
+version: 3
+class: com.vordel.dwe.ElementSpecifiers
+components:
+  ElementSpecifier: '?'

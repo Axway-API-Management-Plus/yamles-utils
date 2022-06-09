@@ -1,0 +1,23 @@
+---
+name: VerifyIDTokenFilter
+version: 0
+class: com.vordel.circuit.openidconnect.VerifyIDTokenFilter
+fields:
+  verifyWith:
+    type: string
+    defaultValues:
+    - data: KEYSET
+    cardinality: '?'
+  issuer:
+    type: string
+    defaultValues:
+    - data: ${oauth.client.application.getTokenURL().toString()}
+    cardinality: '?'
+  jwtVerifier:
+    type: '@Certificate'
+    cardinality: '?'
+  clockSkew:
+    type: long
+    defaultValues:
+    - data: 60
+    cardinality: '?'

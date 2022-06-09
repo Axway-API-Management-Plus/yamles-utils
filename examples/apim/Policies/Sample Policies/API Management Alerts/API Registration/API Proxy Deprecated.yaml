@@ -1,0 +1,26 @@
+---
+type: FilterCircuit
+fields:
+  start: ./Set Attribute Filter
+  name: API Proxy Deprecated
+  description: An API Proxy is deprecated
+children:
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: alert.message
+    attributeValue: Frontend API ${alert.apiproxy.name} with ID ${alert.apiproxy.id} has been deprecated.
+    name: Set Attribute Filter
+  routing:
+    success: ../Call 'Send Alert'
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: CircuitDelegateFilter
+  fields:
+    circuitPK: /Policies/Sample Policies/API Management Alerts/Send Alert
+    name: Call 'Send Alert'
+  logging:
+    fatal: 'Error in calling policy shortcut circuit. Error: ${circuit.exception}'
+    failure: Failed in calling policy shortcut
+    success: Success in calling policy shortcut

@@ -1,0 +1,19 @@
+---
+name: HTTPWatchdog
+version: 0
+fields:
+  method:
+    type: string
+    defaultValues:
+    - data: OPTIONS
+    cardinality: 1
+  uri:
+    type: string
+    defaultValues:
+    - data: '*'
+    cardinality: 1
+components:
+  Interval: '?'
+keyFields:
+- method
+- uri

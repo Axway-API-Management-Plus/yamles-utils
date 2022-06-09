@@ -1,0 +1,5 @@
+---
+name: CronExpressionGroup
+version: 0
+components:
+  CronExpression: '*'

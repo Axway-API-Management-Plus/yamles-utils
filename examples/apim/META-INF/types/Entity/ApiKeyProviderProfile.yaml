@@ -1,0 +1,28 @@
+---
+name: ApiKeyProviderProfile
+version: 0
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  apiKeyWhere:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  apiKeyName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  apiKeySigner:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+components:
+  ApiKeyProfile: '*'
+keyFields:
+- name

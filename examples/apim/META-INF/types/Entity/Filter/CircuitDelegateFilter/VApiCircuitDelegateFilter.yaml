@@ -1,0 +1,8 @@
+---
+name: VApiCircuitDelegateFilter
+version: 0
+class: com.vordel.apiportal.runtime.virtualized.VApiCircuitDelegateFilter
+fields:
+  authnprofile:
+    type: '@Entity'
+    cardinality: 1

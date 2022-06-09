@@ -1,0 +1,41 @@
+---
+name: ThreateningContentFilter
+version: 2
+class: com.vordel.circuit.contentfiltering.ThreateningContentFilter
+fields:
+  includeHeaders:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  includeQueryString:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  threatRegExprs:
+    type: '@RegularExpression'
+    defaultValues:
+    - ref: /Libraries/(RegularExpressionGroup)Regular Expression Library/(ThreatContentRegularExpressionGroup)Threatening Content Regular Expressions/(RegularExpression)ASCII Control Characters Except Line Feed and Carriage Return
+    - ref: /Libraries/(RegularExpressionGroup)Regular Expression Library/(ThreatContentRegularExpressionGroup)Threatening Content Regular Expressions/(RegularExpression)Content Longer Than 1024 Chars
+    - ref: /Libraries/(RegularExpressionGroup)Regular Expression Library/(ThreatContentRegularExpressionGroup)Threatening Content Regular Expressions/(RegularExpression)DOCTYPE DTD Reference
+    - ref: /Libraries/(RegularExpressionGroup)Regular Expression Library/(ThreatContentRegularExpressionGroup)Threatening Content Regular Expressions/(RegularExpression)SQL Delete Attack
+    - ref: /Libraries/(RegularExpressionGroup)Regular Expression Library/(ThreatContentRegularExpressionGroup)Threatening Content Regular Expressions/(RegularExpression)SQL Drop Table Attack
+    - ref: /Libraries/(RegularExpressionGroup)Regular Expression Library/(ThreatContentRegularExpressionGroup)Threatening Content Regular Expressions/(RegularExpression)SQL Insert Attack
+    - ref: /Libraries/(RegularExpressionGroup)Regular Expression Library/(ThreatContentRegularExpressionGroup)Threatening Content Regular Expressions/(RegularExpression)SQL Server Shutdown Attack
+    - ref: /Libraries/(RegularExpressionGroup)Regular Expression Library/(ThreatContentRegularExpressionGroup)Threatening Content Regular Expressions/(RegularExpression)SQL Update Attack
+    - ref: /Libraries/(RegularExpressionGroup)Regular Expression Library/(ThreatContentRegularExpressionGroup)Threatening Content Regular Expressions/(RegularExpression)OR Attack
+    cardinality: '*'
+  scanMimeTypes:
+    type: '@MimeType'
+    defaultValues:
+    - ref: /Server Settings/(MimeTypeGroup)Mime Types/(MimeType)application/*+xml
+    - ref: /Server Settings/(MimeTypeGroup)Mime Types/(MimeType)application/xml
+    - ref: /Server Settings/(MimeTypeGroup)Mime Types/(MimeType)application/xml*
+    - ref: /Server Settings/(MimeTypeGroup)Mime Types/(MimeType)http://schemas.xmlsoap.org/soap/envelope/
+    - ref: /Server Settings/(MimeTypeGroup)Mime Types/(MimeType)text/html
+    - ref: /Server Settings/(MimeTypeGroup)Mime Types/(MimeType)text/plain
+    - ref: /Server Settings/(MimeTypeGroup)Mime Types/(MimeType)text/richtext
+    - ref: /Server Settings/(MimeTypeGroup)Mime Types/(MimeType)text/xml
+    - ref: /Server Settings/(MimeTypeGroup)Mime Types/(MimeType)text/xml*
+    cardinality: '*'

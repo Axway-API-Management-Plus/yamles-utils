@@ -1,0 +1,37 @@
+---
+name: KPSStore
+version: 3
+fields:
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  description:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  impl:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  type:
+    type: '@KPSType'
+    cardinality: 1
+  dataSource:
+    type: '@KPSDataSource'
+    cardinality: 1
+  aliases:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  cacheToUse:
+    type: '@Cache'
+    cardinality: 1
+components:
+  KPSProperty: '*'
+keyFields:
+- name

@@ -1,0 +1,8 @@
+---
+type: SystemSettings
+fields:
+  name: Default System Settings
+children:
+- type: EhcacheConfiguration
+  fields:
+    name: Ehcache Configuration

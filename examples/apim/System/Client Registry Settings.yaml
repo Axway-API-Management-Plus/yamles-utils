@@ -1,0 +1,15 @@
+---
+type: ClientRegistrySettings
+fields:
+  circuitPK: /Policies/OAuth 2.0/Management Services/Client Registry AuthN-AuthZ
+  name: Client Registry Settings
+children:
+- type: Cookie
+  fields:
+    cookieName: CLIENTREGISTRYCOOKIE
+    cookiePath: /
+    cookieMaxAge: 3600
+    cookieExpires: 3600
+    cookieSecure: true
+    cookieHttpOnly: true
+    name: CookieDetails

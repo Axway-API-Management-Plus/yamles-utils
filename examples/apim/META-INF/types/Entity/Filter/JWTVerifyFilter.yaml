@@ -1,0 +1,158 @@
+---
+name: JWTVerifyFilter
+version: 8
+class: com.vordel.circuit.jwt.JWTVerifyFilter
+fields:
+  jwsToken:
+    type: string
+    defaultValues:
+    - data: ${payload}
+    cardinality: 1
+  keyDiscoverySelection:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  usePublicKey:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  publicKeyLocation:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  publicKeyAlias:
+    type: '@Certificate'
+    cardinality: 1
+  publicKeyMsgAttribute:
+    type: string
+    defaultValues:
+    - data: ${certificate}
+    cardinality: 1
+  useSharedKey:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  sharedKeySelection:
+    type: integer
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  sharedKey:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1
+  sharedKeyInMsgAttr:
+    type: string
+    defaultValues:
+    - data: ${symmetric.key}
+    cardinality: 1
+  useJwkKey:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  jwkKey:
+    type: string
+    defaultValues:
+    - data: ${jwk}
+    cardinality: 1
+  critHeader:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  signAlgorithms:
+    type: string
+    defaultValues:
+    - data: RS256
+    - data: RS384
+    - data: RS512
+    - data: ES256
+    - data: ES384
+    - data: ES512
+    - data: PS256
+    - data: PS384
+    - data: PS512
+    - data: HS256
+    - data: HS384
+    - data: HS512
+    cardinality: '*'
+  keyDiscoveryCircuit:
+    type: '@FilterCircuit'
+    cardinality: '?'
+  keyDiscoveryResultType:
+    type: string
+    defaultValues:
+    - data: JWK
+    cardinality: '*'
+  detachedSignature:
+    type: string
+    defaultValues:
+    - data: ${content.body}
+    cardinality: 1
+  isDetachedSignatureEnabled:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  headerClaimValidationPolicy:
+    type: '@FilterCircuit'
+    cardinality: '?'
+  contentTypes:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  types:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  payloadClaimValidationPolicy:
+    type: '@FilterCircuit'
+    cardinality: '?'
+  setPayloadAsContentBody:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  useCtyHeaderContentType:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  defaultContentType:
+    type: string
+    defaultValues:
+    - data: application/octet-stream
+    cardinality: '?'
+  setPayloadMsgAttribute:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  setPayloadMsgAttributeName:
+    type: string
+    defaultValues:
+    - data: jwt.body
+    cardinality: '?'
+  setPayloadOutputType:
+    type: string
+    defaultValues:
+    - data: string
+    cardinality: '?'
+  setHeaderMsgAttribute:
+    type: boolean
+    defaultValues:
+    - data: "false"
+    cardinality: 1
+  setHeaderMsgAttributeName:
+    type: string
+    defaultValues:
+    - data: jwt.header
+    cardinality: '?'

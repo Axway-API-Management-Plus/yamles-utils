@@ -1,0 +1,9 @@
+---
+type: AuthnRepositoryClearTrustGroup
+fields:
+  allowedFilter:
+  - HttpBasicFilter
+  - WsBasicFilter
+  - AttributeAuthnFilter
+  - FormAuthnFilter
+  name: RSA Access Manager Repositories

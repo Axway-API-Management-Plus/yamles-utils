@@ -1,0 +1,38 @@
+---
+name: JWTDecryptFilter
+version: 1
+class: com.vordel.circuit.jwt.JWTDecryptFilter
+fields:
+  decryptPrivateKeyAlias:
+    type: '@Certificate'
+    cardinality: 1
+  decryptPrivateKeyMsgAttribute:
+    type: string
+    defaultValues:
+    - data: ${certificate}
+    cardinality: 1
+  decryptMessageAttributeOfJWT:
+    type: string
+    defaultValues:
+    - data: ${payload}
+    cardinality: 1
+  decryptPrivateKeyLocation:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  decryptSharedKey:
+    type: encrypted
+    defaultValues:
+    - {}
+    cardinality: 1
+  decryptSharedKeyInMsgAttr:
+    type: string
+    defaultValues:
+    - data: ${symmetric.key}
+    cardinality: 1
+  decryptSharedKeySelection:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: '?'

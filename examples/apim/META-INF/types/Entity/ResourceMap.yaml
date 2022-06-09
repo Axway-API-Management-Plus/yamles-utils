@@ -1,0 +1,26 @@
+---
+name: ResourceMap
+version: 1
+fields:
+  ID:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  uri:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  blobID:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  locked:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+keyFields:
+- ID

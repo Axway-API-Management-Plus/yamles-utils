@@ -1,0 +1,14 @@
+---
+name: InternationalizationCategory
+version: 0
+fields:
+  category:
+    type: '@Category'
+    cardinality: 1
+  displayName:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+keyFields:
+- category

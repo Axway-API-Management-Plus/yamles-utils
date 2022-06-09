@@ -1,0 +1,31 @@
+---
+name: MessageField
+version: 1
+fields:
+  name:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  type:
+    type: integer
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  valueType:
+    type: integer
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  directValue:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+  objectValue:
+    type: string
+    defaultValues:
+    - data: ""
+    cardinality: 1
+keyFields:
+- name

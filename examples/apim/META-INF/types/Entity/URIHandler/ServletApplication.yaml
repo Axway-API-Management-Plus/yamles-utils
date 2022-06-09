@@ -1,0 +1,11 @@
+---
+name: ServletApplication
+version: 1
+fields:
+  sessiontimeoutSeconds:
+    type: integer
+    defaultValues:
+    - data: 300
+    cardinality: 1
+components:
+  Servlet: '?'

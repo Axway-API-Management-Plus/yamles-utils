@@ -1,0 +1,4 @@
+---
+type: APISecurityProfileGroup
+fields:
+  name: REST API Security Profiles

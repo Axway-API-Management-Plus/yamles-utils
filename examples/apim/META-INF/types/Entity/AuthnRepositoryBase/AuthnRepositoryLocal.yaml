@@ -1,0 +1,10 @@
+---
+name: AuthnRepositoryLocal
+version: 0
+class: com.vordel.security.auth.repository.VordelRepository
+fields:
+  authZAttribFormat:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'

@@ -1,0 +1,7 @@
+---
+name: MimeTypeGroup
+version: 2
+class: com.vordel.system.MimeTypes
+components:
+  MimeType: '*'
+loadorder: 4000

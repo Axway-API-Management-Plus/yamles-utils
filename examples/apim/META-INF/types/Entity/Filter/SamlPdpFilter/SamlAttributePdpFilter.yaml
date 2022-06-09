@@ -1,0 +1,12 @@
+---
+name: SamlAttributePdpFilter
+version: 1
+class: com.vordel.circuit.saml.SamlAttributePdpFilter
+fields:
+  category:
+    type: '@Category'
+    defaultValues:
+    - ref: /System/(CategoryGroup)Filter Categories/(Category)attribute
+    cardinality: 1
+components:
+  LookupAttribute: '*'

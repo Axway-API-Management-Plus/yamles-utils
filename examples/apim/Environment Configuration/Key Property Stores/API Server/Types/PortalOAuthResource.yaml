@@ -1,0 +1,30 @@
+---
+type: KPSType
+fields:
+  name: PortalOAuthResource
+  description: LIst of uris that are using non virtualized oauth security device
+children:
+- type: KPSTypeProperty
+  fields:
+    name: uriprefix
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: applicationId
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: id
+    type: java.lang.String
+    key: ""
+    value: ""
+- type: KPSTypeProperty
+  fields:
+    name: enabled
+    type: java.lang.Boolean
+    key: ""
+    value: ""

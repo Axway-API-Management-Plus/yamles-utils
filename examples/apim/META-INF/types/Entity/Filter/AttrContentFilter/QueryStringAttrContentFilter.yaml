@@ -1,0 +1,10 @@
+---
+name: QueryStringAttrContentFilter
+version: 0
+class: com.vordel.circuit.attribute.QueryStringAttrContentFilter
+fields:
+  allowUnspecified:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1

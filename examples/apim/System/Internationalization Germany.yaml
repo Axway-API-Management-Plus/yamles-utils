@@ -1,0 +1,1069 @@
+---
+type: Internationalization
+fields:
+  language: de
+  country: DE
+  name: Internationalization Germany
+children:
+- type: InternationalizationFilter
+  fields:
+    type: PauseFilter
+  logging:
+    fatal: 'Fehler beim Pausenfilter. Fehler: ${circuit.exception}'
+    failure: Pausenfilter fehlgeschlagen
+    success: Pausenfilter erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: CertValidityCheckFilter
+  logging:
+    fatal: 'Fehler bei der Zertifikatüberprüfung. Fehler: ${circuit.exception}'
+    failure: Zertifikatüberprüfung fehlgeschlagen
+    success: Zertifikatüberprüfung erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: CRLValidationFilter
+  logging:
+    fatal: 'Fehler bei CRL-Überprüfung. Fehler: ${circuit.exception}'
+    failure: CRL-Überprüfung fehlgeschlagen
+    success: CRL-Überprüfung erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: QaReflector
+  logging:
+    fatal: 'Beim Wiedergeben der Nachricht und aktuellen Attribute ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Wiedergeben der Nachricht und aktuellen Attribute
+    success: Wiedergeben der Nachricht und aktuellen Attribute erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: CertValidationXkmsFilter
+  logging:
+    fatal: 'Fehler bei der XKMS-Überprüfung des Zertifikats. Fehler: ${circuit.exception}'
+    failure: XKMS-Überprüfung für Zertifikat fehlgeschlagen
+    success: XKMS-Überprüfung für das Zertifikat erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: TivoliAttributeExtractFilter
+  logging:
+    fatal: 'Beim Nachschlagen von Tivoli-Benutzerattributen ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Nachschlagen von Tivoli-Benutzerattributen
+    success: Nachschlagen von Tivoli-Benutzerattributen für den Benutzer ${authentication.subject.id} erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: CircuitDelegatePerBodyFilter
+  logging:
+    fatal: 'Fehler beim Aufrufen der Richtlinienverknüpfungsverbindung. Fehler: ${circuit.exception}'
+    failure: Fehler beim Aufrufen der Richtlinienverknüpfung
+    success: Erfolgreiches Aufrufen der Richtlinienverknüpfung
+- type: InternationalizationFilter
+  fields:
+    type: JavaScriptFilter
+  logging:
+    fatal: 'Beim Ausführen des Skriptfilters ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Skriptfilter fehlgeschlagen
+    success: Skriptfilter erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SiteMinderLogoutFilter
+  logging:
+    fatal: 'Beim Abmelden von der SiteMinder-Sitzung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Abmeldung von SiteMinder-Sitzung fehlgeschlagen
+    success: Abmeldung von SiteMinder-Sitzung erfolgreich
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/generated
+    displayName: Generiert
+- type: InternationalizationFilter
+  fields:
+    type: SchemaValidationFilter
+  logging:
+    fatal: 'Fehler bei der Schemaüberprüfung. Fehler: ${circuit.exception}'
+    failure: Schemaüberprüfung fehlgeschlagen
+    success: Schemaüberprüfung erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: GSSAcceptorFilter
+  logging:
+    fatal: 'Beim Annehmen der Kerberos-Verbindung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Annehmen der Kerberos-Verbindung
+    success: Kerberos-Verbindung erfolgreich angenommen
+- type: InternationalizationFilter
+  fields:
+    type: ValidateTimeStampFilter
+  logging:
+    fatal: 'Fehler bei der Überprüfung des Zeitstempels. Fehler: ${circuit.exception}'
+    failure: Ungültiger Zeitstempel in Nachricht gefunden
+    success: Zeitstempel ist gültig.
+- type: InternationalizationFilter
+  fields:
+    type: SunAccessManagerX509AuthNFilter
+  logging:
+    fatal: 'Fehler beim Authentifizieren des X.509-Zertifikats für Sun Access Manager. Fehler: ${circuit.exception}'
+    failure: Fehler beim Authentifizieren des X.509-Zertifikats für Sun Access Manager
+    success: Authentifizierung des X.509-Zertifikats für Sun Access Manager erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: WsUsernameInsertFilter
+  logging:
+    fatal: 'Beim Einfügen des WS-Benutzernamentokens ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Einfügen des WS-Benutzernamentokens
+    success: WS-Benutzernamentoken für ${ws.username.token.name} wurde eingefügt
+- type: InternationalizationFilter
+  fields:
+    type: RelativePathResolver
+  logging:
+    fatal: 'Fehler beim Versuch der Auflösung anhand des relativen Pfads. Fehler: ${circuit.exception}'
+    failure: Nachricht konnte anhand des relativen Pfads nicht aufgelöst werden.
+    success: Nachricht anhand des relativen Pfads aufgelöst
+- type: InternationalizationFilter
+  fields:
+    type: StylesheetFilter
+  logging:
+    fatal: 'Fehler beim Konvertieren der Nachricht. Fehler: ${circuit.exception}'
+    failure: Fehler beim Konvertieren der Nachricht
+    success: Erfolgreiches Konvertieren der Nachricht
+- type: InternationalizationFilter
+  fields:
+    type: XPathContentFilter
+  logging:
+    fatal: 'Bei der XPath-Filterung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: XPath-Filterung für Nachricht fehlgeschlagen
+    success: XPath-Filterung für Nachricht erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: HttpHeaderAttrContentFilter
+  logging:
+    fatal: 'Bei der Inhaltsüberprüfung des HTTP-Headerattributs ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Inhaltsüberprüfung des HTTP-Headerattributs fehlgeschlagen
+    success: Inhaltsüberprüfung des HTTP-Headerattributs erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: XMLDecryptionFilter
+  logging:
+    fatal: 'Fehler bei der XML-Entschlüsselung. Fehler: ${circuit.exception}'
+    failure: XML-Entschlüsselung fehlgeschlagen
+    success: XML-Entschlüsselung erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: CertChainCheckFilter
+  logging:
+    fatal: 'Fehler beim Überprüfen der Zertifikatkette. Fehler: ${circuit.exception}'
+    failure: Kettenüberprüfung für das Zertifikat fehlgeschlagen.
+    success: Kettenüberprüfung für das Zertifikat erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SamlAttribExtractFilter
+  logging:
+    fatal: 'Beim Extrahieren von Attributen aus der SAML-Attributassertion ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Extrahieren von Attributen aus der SAML-Attributassertion
+    success: Attribute wurden aus der SAML-Attributassertion für ${attribute.subject.id} extrahiert.
+- type: InternationalizationFilter
+  fields:
+    type: ConsumeWsTrustFilter
+  logging:
+    fatal: 'Beim Verarbeiten einer WS-Trust-Nachricht ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Verarbeiten einer WS-Trust-Nachricht
+    success: WS-Trust-Nachricht wurde erfolgreich verarbeitet.
+- type: InternationalizationFilter
+  fields:
+    type: McAfeeVirusCheck
+  logging:
+    fatal: 'Bei der McAfee-Antivirusfilterung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: 'McAfee-Antivirus: Virus in Nachricht gefunden.'
+    success: 'McAfee-Antivirus: Kein Virus in der Nachricht gefunden.'
+- type: InternationalizationFilter
+  fields:
+    type: AttributeExtractHTTPHeaderFilter
+  logging:
+    fatal: 'Beim Extrahieren von Attributen aus dem HTTP-Header ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Extrahieren des HTTP-Headers für das Attribut
+    success: Attribut wurde aus HTTP-Header extrahiert.
+- type: InternationalizationFilter
+  fields:
+    type: LocateNodeFilter
+  logging:
+    fatal: 'Fehler beim Suchen der Knoten. Fehler: ${circuit.exception}'
+    failure: Die Knoten konnten nicht gefunden werden.
+    success: Knoten gefunden
+- type: InternationalizationFilter
+  fields:
+    type: SophosVirusCheck
+  logging:
+    fatal: 'Bei der Sophos-Antivirusfilterung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Sophos-Antivirusfilterung fehlgeschlagen
+    success: Sophos-Antivirusfilterung erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: URLRewriteFilter
+  logging:
+    fatal: 'Fehler beim erneuten Schreiben der URL. Fehler: ${circuit.exception}'
+    failure: Fehler beim erneuten Schreiben der URL
+    success: Erneutes Schreiben der URL erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: GSSInitiatorFilter
+  logging:
+    fatal: 'Beim Initiieren der Kerberos-Verbindung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Initiieren der Kerberos-Verbindung
+    success: Kerberos-Verbindung erfolgreich initiiert
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/monitoring
+    displayName: Überwachung
+- type: InternationalizationFilter
+  fields:
+    type: AuthzTransactionMinderFilter
+  logging:
+    fatal: 'Bei der Autorisierung für SOA Security Manager ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Autorisierung für SOA Security Manager-Filter fehlgeschlagen
+    success: Autorisierung für SOA Security Manager-Filter erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SamlAuthZInsertFilter
+  logging:
+    fatal: 'Fehler beim Einfügen der SAML-Autorisierungsassertion. Fehler: ${circuit.exception}'
+    failure: Fehler beim Einfügen der SAML-Autorisierungsassertion
+    success: Einfügen der SAML-Autorisierungsassertion erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: AuthnTransactionMinderFilter
+  logging:
+    fatal: 'Beim Authentifizieren für SOA Security Manager ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Authentifizierung für SOA Security Manager-Filter fehlgeschlagen
+    success: Authentifizierung für SOA Security Manager-Filter erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SetResponseStatusFilter
+  logging:
+    fatal: 'SetResponseStatusFilter-Fehler. Fehler: ${circuit.exception}'
+    failure: Fehler beim Festlegen des Antwortstatus
+    success: Festlegen des Antwortstatus erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: CRLResponderFilter
+  logging:
+    fatal: 'Fehler bei CRL-Responder. Fehler: ${circuit.exception}'
+    failure: CRL-Responder fehlgeschlagen
+    success: CRL-Responder erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SamlAuthZPdpFilter
+  logging:
+    fatal: 'Fehler beim Anfordern der SAML-Autorisierungsassertion von SAML PDP. Fehler: ${circuit.exception}'
+    failure: Fehler beim Anfordern der SAML-Autorisierungsassertion von SAML PDP
+    success: SAML-Autorisierungsassertion von SAML PDP für ${samlpdp.subject.id} angefordert
+- type: InternationalizationFilter
+  fields:
+    type: ReadWSAddressingFilter
+  logging:
+    fatal: 'Fehler beim Lesen der WS-Adressierungsinformationen. Fehler: ${circuit.exception}'
+    failure: Lesen der WS-Adressierungsinformationen fehlgeschlagen
+    success: Lesen der WS-Adressierungsinformationen erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: ExtractTimestampFilter
+  logging:
+    fatal: 'Schwerwiegender Fehler beim Extrahieren des Zeitstempels. Fehler: ${circuit.exception}'
+    failure: Fehler beim Extrahieren des Zeitstempels
+    success: Zeitstempel wurde erfolgreich extrahiert.
+- type: InternationalizationFilter
+  fields:
+    type: DigestCertificateFilter
+  logging:
+    fatal: 'Fehler beim Erstellen des Zertifikatdigests. Fehler: ${circuit.exception}'
+    failure: Fehler beim Erstellen des Zertifikatdigests
+    success: Zertifikatdigest wurde erstellt.
+- type: InternationalizationFilter
+  fields:
+    type: ExtractWssHeaderBlockFilter
+  logging:
+    fatal: 'Schwerwiegender Fehler beim Extrahieren des WSS-Headerblocks. Fehler: ${circuit.exception}'
+    failure: Fehler beim Extrahieren des WSS-Headerblocks
+    success: WSS-Headerblocks wurde erfolgreich extrahiert.
+- type: InternationalizationFilter
+  fields:
+    type: AttributeExtractLdapFilter
+  logging:
+    fatal: 'Beim Extrahieren von Attributen aus LDAP ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Extrahieren von Attributen aus LDAP
+    success: Attribute wurden aus LDAP extrahiert.
+- type: InternationalizationFilter
+  fields:
+    type: SunAccessManagerSSOTokenValidationFilter
+  logging:
+    fatal: 'Fehler beim Überprüfen des SSO-Tokens für Sun Access Manager. Fehler: ${circuit.exception}'
+    failure: Fehler beim Überprüfen des SSO-Tokens für Sun Access Manager
+    success: Überprüfung des SSO-Tokens mit Sun Access Manager erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: OracleAccessManagerAuthZFilter
+  logging:
+    fatal: 'Fehler bei der Autorisierung für Oracle Access Manager. Fehler: ${circuit.exception}'
+    failure: Fehler bei Autorisierung für Oracle Access Manager
+    success: Autorisierung für Oracle Access Manager erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: Reflector
+  logging:
+    fatal: 'Beim Wiedergeben der Nachricht ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Wiedergeben der Nachricht fehlgeschlagen
+    success: Die Nachricht wurde erfolgreich wiedergegeben.
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/miscellaneous
+    displayName: Sonstiges
+- type: InternationalizationFilter
+  fields:
+    type: IsCachedAttributeFilter
+  logging:
+    fatal: 'Fehler beim Suchen des Schlüssels im Nachrichtenattributcache. Fehler: ${circuit.exception}'
+    failure: Fehler beim Suchen des Schlüssels im Nachrichtenattributcache
+    success: Schlüssel im Nachrichtenattributcache gefunden
+- type: InternationalizationFilter
+  fields:
+    type: InsertMTOMAttachmentInMessageFilter
+  logging:
+    fatal: 'Fehler beim Einfügen des MTOM-Anhangs in die Nachricht. Fehler: ${circuit.exception}'
+    failure: Fehler beim Einfügen des MTOM-Anhangs in die Nachricht
+    success: MTOM-Anhang wurde erfolgreich in die Nachricht eingefügt.
+- type: InternationalizationFilter
+  fields:
+    type: JMSFilter
+  logging:
+    fatal: 'Fehler beim Weiterleiten der Nachricht an das Messaging System. Fehler: ${circuit.exception}'
+    failure: Nachricht konnte nicht an das Messaging System gesendet werden.
+    success: Nachricht wurde erfolgreich an das Messaging System gesendet.
+- type: InternationalizationFilter
+  fields:
+    type: SamlAttributePdpFilter
+  logging:
+    fatal: 'Fehler beim Anfordern der SAML-Attributassertion von SAML PDP. Fehler: ${circuit.exception}'
+    failure: Fehler beim Anfordern der SAML-Attributassertion von SAML PDP
+    success: SAML-Attributassertion von SAML PDP für ${samlpdp.subject.id} angefordert
+- type: InternationalizationFilter
+  fields:
+    type: XmlComplexityFilter
+  logging:
+    fatal: 'Fehler bei der Komplexitätsfilterung der XML-Nachricht. Fehler: ${circuit.exception}'
+    failure: Komplexitätsfilterung der XML-Nachricht fehlgeschlagen
+    success: Komplexitätsfilterung der XML-Nachricht erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: ExceptionFilter
+  logging:
+    fatal: 'Fehler beim Aufrufen des Ausnahmefilters. Fehler: ${circuit.exception}'
+    failure: Fehler beim Ausnahmefilter
+    success: Ausnahmefilter erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: AttributeExtractDbFilter
+  logging:
+    fatal: 'Beim Extrahieren von Attributen aus dem Datenbank-/Entitätsspeicher ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Extrahieren der Attribute aus dem Datenbank-/Entitätsspeicher
+    success: Attribute wurden aus Datenbank-/Entitätsspeicher für ${attribute.subject.id} extrahiert.
+- type: InternationalizationFilter
+  fields:
+    type: ProtocolDelegateFilter
+  logging:
+    fatal: 'Fehler beim Aufrufen des Protokolls. Fehler: ${circuit.exception}'
+    failure: Fehler beim Aufrufen des Protokolls
+    success: Aufrufen des Protokolls erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: HTTPBodyParserFilter
+  logging:
+    fatal: 'Beim Analysieren der HTTP-Nachricht ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Analysieren der HTTP-Nachricht
+    success: HTTP-Nachricht wurde erfolgreich analysiert.
+- type: InternationalizationFilter
+  fields:
+    type: FalseFilter
+  logging:
+    fatal: 'Fehler beim False-Filter. Fehler: ${circuit.exception}'
+    failure: Filter fehlgeschlagen
+    success: ""
+- type: InternationalizationFilter
+  fields:
+    type: HttpBasicFilter
+  logging:
+    fatal: 'Beim Authentifizieren über HTTP Basic ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: HTTP Basic-Authentifizierung fehlgeschlagen
+    success: HTTP Basic-Authentifizierung für ${authentication.subject.id} erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: MessageAttrContentFilter
+  logging:
+    fatal: 'Bei der Inhaltsüberprüfung des Nachrichtenattributs ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Inhaltsüberprüfung des Nachrichtenattributs fehlgeschlagen
+    success: Inhaltsüberprüfung des Nachrichtenattributs erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SiteMinderSessionFilter
+  logging:
+    fatal: 'Fehler bei der Überprüfung der SiteMinder-Sitzung. Fehler: ${circuit.exception}'
+    failure: Überprüfung der SiteMinder-Sitzung fehlgeschlagen
+    success: Überprüfung der SiteMinder-Sitzung erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: ExtractCertAttributesFilter
+  logging:
+    fatal: 'Beim Extrahieren von Attributen aus dem Zertifikat ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Extrahieren von Attributen aus dem Zertifikat
+    success: Attribute wurden aus Zertifikat extrahiert.
+- type: InternationalizationFilter
+  fields:
+    type: XMLEncryptionFilter
+  logging:
+    fatal: 'Fehler bei der XML-Verschlüsselung. Fehler: ${circuit.exception}'
+    failure: XML-Verschlüsselung fehlgeschlagen
+    success: XML-Verschlüsselung erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: ChangeMessageFilter
+  logging:
+    fatal: 'Fehler beim Festlegen der Nachricht. Fehler: ${circuit.exception}'
+    failure: Fehler beim Festlegen der Nachricht
+    success: Festlegen der Nachricht erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: X509AttrFilter
+  logging:
+    fatal: 'Bei der X509-Autorisierung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: X.509-Autorisierung fehlgeschlagen
+    success: X.509-Autorisierung erfolgreich für '${authentication.issuer.id}'
+- type: InternationalizationFilter
+  fields:
+    type: OracleAccessManagerLogoutFilter
+  logging:
+    fatal: 'Fehler beim Abmelden von der Sitzung in Oracle Access Manager. Fehler: ${circuit.exception}'
+    failure: Fehler beim Abmelden von der Sitzung in Oracle Access Manager
+    success: Abmeldung von der Sitzung in Oracle Access Manager erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SetAttributeFilter
+  logging:
+    fatal: 'Fehler beim Festlegen des Attributwerts. Fehler: ${circuit.exception}'
+    failure: Fehler beim Festlegen des Attributwerts
+    success: Attributwert wurde festgelegt.
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/management
+    displayName: Verwaltung
+- type: InternationalizationFilter
+  fields:
+    type: ConnectToURLFilter
+  logging:
+    fatal: 'Beim Routen der Anforderung zum Endpunkt ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Routen der Anforderung zum Endpunkt
+    success: Routen der Anforderung zum Endpunkt erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: EncryptWebServiceFilter
+  logging:
+    fatal: 'Bei der Verarbeitung des Verschlüsselungswebdiensts ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Die Nachricht konnte vom Verschlüsselungswebdienst nicht verarbeitet werden.
+    success: Die Nachricht wurde vom Verschlüsselungswebdienst erfolgreich verarbeitet.
+- type: InternationalizationFilter
+  fields:
+    type: SOAPFaultFilter
+  logging:
+    fatal: 'Fehler beim Generieren eines SOAP-Fehlers. Fehler: ${circuit.exception}'
+    failure: Fehler beim Erstellen eines SOAP-Fehlers
+    success: SOAP-Fehler wurde erstellt.
+- type: InternationalizationFilter
+  fields:
+    type: SetDecryptionPropertiesFilter
+  logging:
+    fatal: 'Beim Festlegen der XML-Entschlüsselung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Festlegen der XML-Entschlüsselungseigenschaften fehlgeschlagen
+    success: Festlegen der XML-Entschlüsselungseigenschaften erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SmtpFilter
+  logging:
+    fatal: 'Fehler beim Senden der Nachricht über SMTP. Fehler: ${circuit.exception}'
+    failure: Fehler beim Senden der Nachricht über SMTP
+    success: Nachricht wurde über SMTP gesendet.
+- type: InternationalizationFilter
+  fields:
+    type: SunAccessManagerAuthZFilter
+  logging:
+    fatal: 'Fehler bei der Autorisierung für Sun Access Manager. Fehler: ${circuit.exception}'
+    failure: Autorisierung für Sun Access Manager fehlgeschlagen
+    success: Für Sun Access Manager autorisiert
+- type: InternationalizationFilter
+  fields:
+    type: GenerateSignatureFilter
+  logging:
+    fatal: 'Fehler bei der Nachrichtensignierung. Fehler: ${circuit.exception}'
+    failure: Fehler beim Signieren der Nachricht
+    success: Nachricht erfolgreich signiert
+- type: InternationalizationFilter
+  fields:
+    type: IntegrityVerifySignatureFilter
+  logging:
+    fatal: 'Integrität: Fehler bei der Signaturüberprüfung. Fehler: ${circuit.exception}'
+    failure: 'Integrität: Signaturüberprüfung fehlgeschlagen'
+    success: 'Integrität: Signaturüberprüfung erfolgreich'
+- type: InternationalizationFilter
+  fields:
+    type: InsertXMLNodeFilter
+  logging:
+    fatal: 'Fehler beim Einfügen des XML-Knoten in die Nachricht. Fehler: ${circuit.exception}'
+    failure: Fehler beim Einfügen des XML-Knoten in die Nachricht
+    success: Einfügen des XML-Knoten in die Nachricht erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: RemoveCachedAttributeFilter
+  logging:
+    fatal: 'Fehler beim Entfernen des Attributs aus dem Cache. Fehler: ${circuit.exception}'
+    failure: Fehler beim Entfernen des Nachrichtenattributs aus dem Cache
+    success: Das Nachrichtenattribut wurde aus dem Cache entfernt.
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/content-filtering
+    displayName: Inhaltsfilterung
+- type: InternationalizationFilter
+  fields:
+    type: SunAccessManagerLogoutFilter
+  logging:
+    fatal: 'Fehler beim Abmelden von der Sitzung in Sun Access Manager. Fehler: ${circuit.exception}'
+    failure: Fehler beim Abmelden von der Sitzung in Sun Access Manager
+    success: Abmeldung von der Sitzung in Sun Access Manager erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: AttributeAuthZFilter
+  logging:
+    fatal: 'Attributbasierte Autorisierung abgebrochen: ${circuit.exception}'
+    failure: Attributbasierte Autorisierung fehlgeschlagen
+    success: Erfolgreiche attributbasierte Autorisierung für ${attribute.subject.id}
+- type: InternationalizationFilter
+  fields:
+    type: Filter
+  logging:
+    fatal: Filter wegen Ausnahme abgebrochen
+    failure: Filter fehlgeschlagen
+    success: Filter erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SamlAttributeInsertFilter
+  logging:
+    fatal: 'Fehler beim Einfügen der SAML-Attributassertion. Fehler: ${circuit.exception}'
+    failure: Fehler beim Einfügen der SAML-Attributassertion
+    success: Einfügen der SAML-Attributassertion erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: GetAccessAuthZFilter
+  logging:
+    fatal: 'Bei der GetAccess-Autorisierung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: GetAccess-Autorisierung fehlgeschlagen
+    success: GetAccess-Autorisierung für ${authentication.subject.id} erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: FindCertificateFilter
+  logging:
+    fatal: 'Beim Suchen des Zertifikats in der Nachricht ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: In der Nachricht wurde kein Zertifikat gefunden.
+    success: Zertifikat in der Nachricht gefunden
+- type: InternationalizationFilter
+  fields:
+    type: AddHTTPHeaderFilter
+  logging:
+    fatal: 'Fehler beim Hinzufügen des HTTP-Headers zur Nachricht. Fehler: ${circuit.exception}'
+    failure: Fehler beim Hinzufügen des HTTP-Headers zur Nachricht
+    success: HTTP-Header wurde erfolgreich zur Nachricht hinzugefügt.
+- type: InternationalizationFilter
+  fields:
+    type: ExtractMTOMContentFilter
+  logging:
+    fatal: 'Beim Extrahieren der MTOM-Inhalte aus der Nachricht ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Extrahieren der MTOM-Inhalte aus der Nachricht
+    success: Extrahieren der MTOM-Inhalte aus der Nachricht erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: OESGetRolesFilter
+  logging:
+    fatal: 'Fehler beim Abrufen der Rollen vom Oracle Entitlements Server. Fehler: ${circuit.exception}'
+    failure: Rollen konnten nicht vom Oracle Entitlements Server abgerufen werden.
+    success: Rufen Sie die Rollen vom Oracle Entitlements Server ab.
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/authorization
+    displayName: Autorisierung
+- type: InternationalizationFilter
+  fields:
+    type: AttributeAuthnFilter
+  logging:
+    fatal: 'Fehler beim Authentifizieren mit Benutzername-Kennwort-Attributen. Fehler: ${circuit.exception}'
+    failure: Fehler beim Authentifizieren mit Benutzername-Kennwort-Attributen
+    success: Authentifizieren mit Benutzername-Kennwort-Attributen erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SLAFilter
+  logging:
+    fatal: 'Festlegen von SLA abgebrochen: ${circuit.exception}'
+    failure: Festlegen von SLA fehlgeschlagen
+    success: Festlegen von SLA erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: AlertFilter
+  logging:
+    fatal: 'Warnungsgenerierung abgebrochen: ${circuit.exception}'
+    failure: Warnungsgenerierung fehlgeschlagen
+    success: Warnungsgenerierung erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: CircuitDelegateFilter
+  logging:
+    fatal: 'Fehler beim Aufrufen der Richtlinienverknüpfungsverbindung. Fehler: ${circuit.exception}'
+    failure: Fehler beim Aufrufen der Richtlinienverknüpfung
+    success: Erfolgreiches Aufrufen der Richtlinienverknüpfung
+- type: InternationalizationFilter
+  fields:
+    type: IpFilter
+  logging:
+    fatal: 'Bei der IP-Adressfilterung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: IP-Adressfilterung für ${http.request.clientaddr} fehlgeschlagen
+    success: IP-Adressfilterung für ${http.request.clientaddr} erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: WSFilter
+  logging:
+    fatal: 'Fehler beim Ausführen des Webdienstfilters. Fehler: ${circuit.exception}'
+    failure: Webdienstfilter fehlgeschlagen
+    success: Webdienstfilter erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: CertValidationCrlFileFilter
+  logging:
+    fatal: 'Fehler bei der CRL-Überprüfung des Zertifikats. Fehler: ${circuit.exception}'
+    failure: CRL-Überprüfung für Zertifikat fehlgeschlagen
+    success: CRL-Überprüfung für Zertifikat erfolgreich
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/custom
+    displayName: Benutzerdefiniert
+- type: InternationalizationFilter
+  fields:
+    type: InsertWSAddressingFilter
+  logging:
+    fatal: 'Fehler beim Einfügen der WS-Adressierungsinformationen. Fehler: ${circuit.exception}'
+    failure: Fehler beim Einfügen von WS-Adressierungsinformationen
+    success: WS-Adressierungsinformationen wurden eingefügt.
+- type: InternationalizationFilter
+  fields:
+    type: RemoveXMLNodeFilter
+  logging:
+    fatal: 'Fehler beim Entfernen des XML-Knoten aus der Nachricht. Fehler: ${circuit.exception}'
+    failure: Fehler beim Entfernen des XML-Knoten aus der Nachricht
+    success: XML-Knoten wurde erfolgreich aus der Nachricht entfernt.
+- type: InternationalizationFilter
+  fields:
+    type: HttpDigestFilter
+  logging:
+    fatal: 'Beim Authentifizieren über HTTP Digest ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: HTTP Digest-Authentifizierung fehlgeschlagen
+    success: HTTP Digest-Authentifizierung für ${authentication.subject.id} erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: CacheAttributeFilter
+  logging:
+    fatal: 'Fehler beim Zwischenspeichern des Nachrichtenattributs. Fehler: ${circuit.exception}'
+    failure: Fehler beim Zwischenspeichern des Nachrichtenattributs
+    success: Das Nachrichtenattribut wurde zwischengespeichert.
+- type: InternationalizationFilter
+  fields:
+    type: MaximumNumberMsgsFilter
+  logging:
+    fatal: 'Drosselfilter abgebrochen: ${circuit.exception}'
+    failure: Filter für maximale Anzahl an Nachrichten wurde ausgelöst.
+    success: Filter für maximale Anzahl an Nachrichten wurde nicht ausgelöst.
+- type: InternationalizationFilter
+  fields:
+    type: VordelAttributeExtractFilter
+  logging:
+    fatal: 'Beim Nachschlagen von lokalen Benutzerattributen ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Nachschlagen von lokalen Benutzerattributen
+    success: Nachschlagen von lokalen Benutzerattributen für den Benutzer ${authentication.subject.id} erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: TivoliFilter
+  logging:
+    fatal: 'Bei der IBM Tivoli-Autorisierung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: IBM Tivoli-Autorisierung fehlgeschlagen
+    success: IBM Tivoli-Autorisierung für ${authentication.subject.id} erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SignWebServiceFilter
+  logging:
+    fatal: 'Beim Signieren durch den digitalen Signaturdienst ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Nachricht konnte vom digitalen Signaturdienst nicht signiert werden.
+    success: Nachricht vom digitalen Signaturdienst erfolgreich signiert
+- type: InternationalizationFilter
+  fields:
+    type: RemoveHTTPHeaderFilter
+  logging:
+    fatal: 'Fehler beim Entfernen des HTTP-Headers aus der Nachricht. Fehler: ${circuit.exception}'
+    failure: Fehler beim Entfernen des HTTP-Headers aus der Nachricht
+    success: HTTP-Header wurde erfolgreich aus der Nachricht entfernt.
+- type: InternationalizationFilter
+  fields:
+    type: SamlAuthNExtractFilter
+  logging:
+    fatal: 'Fehler beim Suchen einer SAML-Authentifizierungsassertion. Fehler: ${circuit.exception}'
+    failure: Eine SAML-Authentifizierungsassertion konnte nicht gefunden werden.
+    success: SAML-Authentifizierungsassertion für ${attribute.subject.id} gefunden
+- type: InternationalizationFilter
+  fields:
+    type: SetHTTPStatusCode
+  logging:
+    fatal: 'Beim Festlegen des HTTP-Statuscodes ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Festlegen des HTTP-Statuscodes
+    success: HTTP-Statuscode wurde erfolgreich festgelegt.
+- type: InternationalizationFilter
+  fields:
+    type: StaticRouterFilter
+  logging:
+    fatal: 'Beim Festlegen von Host und Port ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Festlegen von Host und Port
+    success: Host '${http.destination.host}' und Port '${http.destination.port}' festlegen
+- type: InternationalizationFilter
+  fields:
+    type: CopyAttributeFilter
+  logging:
+    fatal: 'Beim Kopieren der Attribute ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Kopieren der Attribute
+    success: Attribute wurden erfolgreich kopiert.
+- type: InternationalizationFilter
+  fields:
+    type: SamlAuthNInsertFilter
+  logging:
+    fatal: 'Fehler beim Einfügen der SAML-Authentifizierungsassertion. Fehler: ${circuit.exception}'
+    failure: Fehler beim Einfügen der SAML-Authentifizierungsassertion
+    success: Einfügen der SAML-Authentifizierungsassertion erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: RendezvousForwardFilter
+  logging:
+    fatal: Fehler beim Aufrufen von RendezvousForwardFilter
+    failure: RendezvousForwardFilter fehlgeschlagen
+    success: RendezvousForwardFilter erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: QuoteOftheDayFilter
+  logging:
+    fatal: 'Fehler beim Filter "Zitat des Tages". Fehler: ${circuit.exception}'
+    failure: Dienst "Zitat des Tages" fehlgeschlagen
+    success: Dienst "Zitat des Tages" erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: CreateMessageKeyFilter
+  logging:
+    fatal: 'Fehler bei der Nachrichtenerstellung des Nachrichtenschlüssels aus dem Attribut. Fehler: ${circuit.exception}'
+    failure: Fehler bei der Erstellung des Nachrichtenschlüssels aus dem Attribut
+    success: Nachrichtenschlüssel wurde aus Attribut erstellt.
+- type: InternationalizationFilter
+  fields:
+    type: MessageSizeFilter
+  logging:
+    fatal: 'Fehler beim Filtern der Nachrichtengröße. Fehler: ${circuit.exception}'
+    failure: Filterung der Nachrichtengröße fehlgeschlagen
+    success: Filterung der Nachrichtengröße erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SslFilter
+  logging:
+    fatal: 'Bei der SSL-Authentifizierung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: SSL-Authentifizierung fehlgeschlagen
+    success: SSL-Authentifizierung für ${authentication.subject.id} erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: ConnectionFilter
+  logging:
+    fatal: 'Beim Senden der Anforderung zum Endpunkt ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Senden der Anforderung zum Endpunkt ${http.destination.protocol}://${http.destination.host}:${http.destination.port}${http.request.uri}
+    success: Anforderung erfolgreich zum Endpunkt ${http.destination.protocol}://${http.destination.host}:${http.destination.port}${http.request.uri} gesendet
+- type: InternationalizationFilter
+  fields:
+    type: RemoveAttributeFilter
+  logging:
+    fatal: 'Fehler beim Entfernen des Attributs. Fehler: ${circuit.exception}'
+    failure: Entfernen des Attributs fehlgeschlagen
+    success: Attribut wurde entfernt.
+- type: InternationalizationFilter
+  fields:
+    type: TraceFilter
+  logging:
+    fatal: 'Fehler bei der Ablaufverfolgung der Nachrichteneigenschaften. Fehler: ${circuit.exception}'
+    failure: Fehler bei der Ablaufverfolgung der Nachrichteneigenschaften
+    success: Ablaufverfolgung der Nachrichteneigenschaften erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: RestoreContentBodyFromAttributeFilter
+  logging:
+    fatal: 'Fehler beim Wiederherstellen der Nachricht. Fehler: ${circuit.exception}'
+    failure: Nachricht konnte nicht wiederhergestellt werden.
+    success: Erfolgreiche Wiederherstellung der Nachricht
+- type: InternationalizationFilter
+  fields:
+    type: DecryptWebServiceFilter
+  logging:
+    fatal: 'Bei der Verarbeitung des Entschlüsselungswebdiensts ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Die Nachricht konnte vom Entschlüsselungswebdienst nicht verarbeitet werden.
+    success: Die Nachricht wurde vom Entschlüsselungswebdienst erfolgreich verarbeitet.
+- type: InternationalizationFilter
+  fields:
+    type: OracleAccessManagerSSOTokenValidationFilter
+  logging:
+    fatal: 'Fehler beim Überprüfen des SSO-Tokens für Oracle Access Manager. Fehler: ${circuit.exception}'
+    failure: Fehler beim Überprüfen des SSO-Tokens für Oracle Access Manager
+    success: Überprüfung des SSO-Tokens für Oracle Access Manager erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: StoreContentBodyToAttributeFilter
+  logging:
+    fatal: 'Fehler beim Speichern der Nachricht. Fehler: ${circuit.exception}'
+    failure: Fehler beim Speichern der Nachricht im Attribut
+    success: 'Speichern der Nachricht im Attribut erfolgreich '
+- type: InternationalizationFilter
+  fields:
+    type: QueryStringAttrContentFilter
+  logging:
+    fatal: 'Bei der Inhaltsüberprüfung des Abfragezeichenfolgenattributs ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Inhaltsüberprüfung des Abfragezeichenfolgenattributs fehlgeschlagen
+    success: Inhaltsüberprüfung des Abfragezeichenfolgenattributs erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: MimeTypeFilter
+  logging:
+    fatal: 'Fehler bei der Anhangfilterung. Fehler: ${circuit.exception}'
+    failure: Anhangfilterung für Anforderung fehlgeschlagen
+    success: Anhangfilterung für Anforderung erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: DynamicRouterFilter
+  logging:
+    fatal: 'Fehler beim Aufrufen der Analyse der Ziel-URL. Fehler: ${circuit.exception}'
+    failure: Fehler beim Analysieren der Ziel-URL
+    success: Ziel-URL erfolgreich analysiert
+- type: InternationalizationFilter
+  fields:
+    type: RemoveAttachmentFilter
+  logging:
+    fatal: 'Fehler beim Entfernen von Anhängen. Fehler: ${circuit.exception}'
+    failure: Fehler beim Entfernen von Anhängen
+    success: Entfernen von Anhängen erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: WsSecurityPolicyLayoutFilter
+  logging:
+    fatal: 'Fehler beim Überprüfen des WS-SecurityPolicy-Layouts. Fehler: ${circuit.exception}'
+    failure: Layoutüberprüfung für WS-SecurityPolicy fehlgeschlagen
+    success: Layoutüberprüfung für WS-SecurityPolicy erfolgreich
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/trust
+    displayName: Vertrauen
+- type: InternationalizationFilter
+  fields:
+    type: ClearTrustAuthZFilter
+  logging:
+    fatal: 'Bei der RSA Access Manager-Autorisation ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: RSA Access Manager-Autorisation fehlgeschlagen
+    success: RSA Access Manager-Autorisation für ${authentication.subject.id} erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: ExtractWssUsernameTokenFilter
+  logging:
+    fatal: 'Schwerwiegender Fehler beim Extrahieren des WSS-Benutzernamentokens. Fehler: ${circuit.exception}'
+    failure: Fehler beim Extrahieren des WSS-Benutzernamentokens
+    success: Der WSS-Benutzernamentoken wurde erfolgreich extrahiert.
+- type: InternationalizationFilter
+  fields:
+    type: CircuitChainFilter
+  logging:
+    fatal: 'Fehler beim Verarbeiten der Richtlinienverknüpfungen. Fehler: ${circuit.exception}'
+    failure: Fehler bei Aufrufen in der Richtlinienverknüpfungskette
+    success: Erfolgreiches Aufrufen aller Richtlinienverknüpfungen
+- type: InternationalizationFilter
+  fields:
+    type: MonitorConnectionFilter
+  logging:
+    fatal: 'Beim Schalten der Monitorverbindung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Schalten der Monitorverbindung
+    success: Monitorverbindung erfolgreich geschaltet
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/security
+    displayName: Sicherheit
+- type: InternationalizationFilter
+  fields:
+    type: VerifySigWebServiceFilter
+  logging:
+    fatal: 'Bei der Überprüfung des digitalen Signaturdiensts ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Nachricht konnte vom digitalen Signaturdienst nicht überprüft werden.
+    success: Nachricht vom digitalen Signaturdienst erfolgreich überprüft
+- type: InternationalizationFilter
+  fields:
+    type: HttpHeaderFilter
+  logging:
+    fatal: 'Bei dem Versuch, die HTTP-Header zu extrahieren, ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Extrahieren des HTTP-Headertokens
+    success: Extrahieren des HTTP-Headertokens erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: FTPUploadFilter
+  logging:
+    fatal: 'Beim Hochladen der Anforderung über FTP ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Hochladen der Anforderung über FTP
+    success: Hochladen der Anforderung über FTP erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: MethodNameResolver
+  logging:
+    fatal: 'Fehler beim Versuch der Auflösung anhand des Methodennamens Fehler: ${circuit.exception}'
+    failure: Nachricht konnte anhand des Methodennamens nicht aufgelöst werden.
+    success: Nachricht anhand des Methodennamens aufgelöst
+- type: InternationalizationFilter
+  fields:
+    type: CertValidationCrlFilter
+  logging:
+    fatal: 'Fehler bei der CRL-Überprüfung des Zertifikats. Fehler: ${circuit.exception}'
+    failure: CRL-Überprüfung für Zertifikat fehlgeschlagen
+    success: CRL-Überprüfung für Zertifikat erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SetHTTPVerbFilter
+  logging:
+    fatal: 'Fehler beim Festlegen des HTTP-Verbs für die Nachricht. Fehler: ${circuit.exception}'
+    failure: Fehler beim Festlegen des HTTP-Verbs für die Nachricht
+    success: Erfolgreiches Festlegen des HTTP-Verbs für die Nachricht
+- type: InternationalizationFilter
+  fields:
+    type: SunAccessManagerRetrieveAttributesFilter
+  logging:
+    fatal: 'Fehler beim Abrufen von Attributen von Sun Access Manager. Fehler: ${circuit.exception}'
+    failure: Fehler beim Abrufen von Attributen von Sun Access Manager
+    success: Attribute wurden von Sun Access Manager abgerufen.
+- type: InternationalizationFilter
+  fields:
+    type: LogMessagePayloadFilter
+  logging:
+    fatal: 'Beim Protokollieren der Nachrichtennutzlast ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Protokollieren der Nachrichtennutzlast
+    success: Nachrichtennutzlast wurde erfolgreich protokolliert.
+- type: InternationalizationFilter
+  fields:
+    type: ClamAvVirusCheck
+  logging:
+    fatal: 'Bei der ClamAV-Antivirusfilterung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: 'ClamAV-Antivirus: Virus in Nachricht gefunden'
+    success: 'ClamAV-Antivirus: Kein Virus in der Nachricht gefunden.'
+- type: InternationalizationFilter
+  fields:
+    type: ThreateningContentFilter
+  logging:
+    fatal: 'Beim Überprüfen der Nachricht auf bedrohliche Inhalte ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Nachricht enthält bekannte Angriffe.
+    success: Nachricht ist einwandfrei und enthält keine bekannten Bedrohungen.
+- type: InternationalizationFilter
+  fields:
+    type: AttributeExtractXPathFilter
+  logging:
+    fatal: 'Beim Extrahieren von Attributen durch XPath ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Extrahieren von Attributen durch XPath
+    success: Attribut wurde durch XPath aus der Nachricht extrahiert.
+- type: InternationalizationFilter
+  fields:
+    type: SOAPActionResolver
+  logging:
+    fatal: 'Fehler beim Versuch der Auflösung anhand der SOAP-Aktion Fehler: ${circuit.exception}'
+    failure: Nachricht konnte anhand der SOAP-Aktion nicht aufgelöst werden.
+    success: Nachricht anhand relativer SOAP-Aktion aufgelöst
+- type: InternationalizationFilter
+  fields:
+    type: SetEncryptionPropertiesFilter
+  logging:
+    fatal: 'Beim Festlegen der XML-Verschlüsselung ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Festlegen der XML-Verschlüsselungseigenschaften fehlgeschlagen
+    success: Festlegen der XML-Verschlüsselungseigenschaften erfolgreich
+- type: InternationalizationCategory
+  fields:
+    category: /System/Policy Categories/integration
+    displayName: Integration
+- type: InternationalizationFilter
+  fields:
+    type: InsertTimestampFilter
+  logging:
+    fatal: 'Fehler beim Einfügen des Zeitstempels Fehler: ${circuit.exception}'
+    failure: Zeitstempel konnte nicht eingefügt werden.
+    success: Zeitstempel erfolgreich eingefügt
+- type: InternationalizationFilter
+  fields:
+    type: StsWebServiceFilter
+  logging:
+    fatal: 'Bei der Verarbeitung des Sicherheitstokendiensts ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Die Nachricht konnte vom Sicherheitstokendienst nicht verarbeitet werden.
+    success: Nachricht von Sicherheitstokendienst erfolgreich verarbeitet
+- type: InternationalizationFilter
+  fields:
+    type: TrueFilter
+  logging:
+    fatal: 'Fehler beim True-Filter. Fehler: ${circuit.exception}'
+    failure: ""
+    success: True-Filter erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: FormAuthnFilter
+  logging:
+    fatal: 'Fehler beim Authentifizieren mit formularbasierter Authentifizierung. Fehler: ${circuit.exception}'
+    failure: Fehler beim Authentifizieren mit Benutzername-Kennwort in HTML-Formular-POST
+    success: Authentifizieren über HTML-Formular-POST mit Benutzername-Kennwort erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SiteMinderCertFilter
+  logging:
+    fatal: 'Beim Authentifizieren des Zertifikats für SiteMinder ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Authentifizieren des Zertifikats für SiteMinder
+    success: Authentifizierung des Zertifikats für SiteMinder erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: GenerateWsTrustFilter
+  logging:
+    fatal: 'Beim Generieren einer WS-Trust-Nachricht ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Generieren einer WS-Trust-Nachricht
+    success: Generieren der WS-Trust-Nachricht erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SamlAuthNPdpFilter
+  logging:
+    fatal: 'Fehler beim Anfordern der SAML-Authentifizierungsassertion von SAML PDP Fehler: ${circuit.exception}'
+    failure: Fehler beim Anfordern der SAML-Authentifizierungsassertion von SAML PDP
+    success: SAML-Authentifizierungsassertion von SAML PDP für ${samlpdp.subject.id} angefordert
+- type: InternationalizationFilter
+  fields:
+    type: WsUsernameTokenFilter
+  logging:
+    fatal: 'Beim Authentifizieren mit dem WS-Benutzernamentoken ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Fehler beim Authentifizieren mit dem WS-Benutzernamentoken
+    success: Authentifizierung mit dem WS-Benutzernamentoken erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: OESAuthZFilter
+  logging:
+    fatal: 'Fehler beim Autorisieren für Oracle Entitlements Server. Fehler: ${circuit.exception}'
+    failure: Fehler beim Autorisieren für Oracle Entitlements Server.
+    success: Autorisierung für Oracle Entitlements Server erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: AuthzSiteMinderFilter
+  logging:
+    fatal: 'Bei der Autorisierung für SiteMinder ist ein Fehler aufgetreten. Fehler: ${circuit.exception}'
+    failure: Autorisierung für SiteMinder-Filter fehlgeschlagen
+    success: Autorisierung für SiteMinder-Filter erfolgreich
+- type: InternationalizationFilter
+  fields:
+    type: SamlAuthZExtractFilter
+  logging:
+    fatal: 'Fehler beim Suchen einer SAML-Autorisierungsassertion. Fehler: ${circuit.exception}'
+    failure: Eine SAML-Autorisierungsassertion konnte nicht gefunden werden.
+    success: SAML-Autorisierungsassertion für ${attribute.subject.id} gefunden

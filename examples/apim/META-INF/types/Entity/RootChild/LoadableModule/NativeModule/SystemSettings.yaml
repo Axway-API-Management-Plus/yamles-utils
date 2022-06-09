@@ -1,0 +1,133 @@
+---
+name: SystemSettings
+version: 16
+class: com.vordel.dwe.SystemSettings
+fields:
+  realm:
+    type: string
+    defaultValues:
+    - data: DefaultRealm
+    cardinality: 1
+  externalDataCacheRefreshIntervalSecs:
+    type: integer
+    defaultValues:
+    - data: 5
+    cardinality: 1
+  dateFormat:
+    type: string
+    defaultValues:
+    - data: MM.dd.yyyy HH:mm:ss,SSS
+    cardinality: 1
+  ldapServiceProvider:
+    type: string
+    defaultValues:
+    - data: com.sun.jndi.ldap.LdapCtxFactory
+    cardinality: 1
+  sunLdapConnectTimeout:
+    type: string
+    defaultValues:
+    - data: 20000
+    cardinality: 1
+  tokenDriftTimeSecs:
+    type: integer
+    defaultValues:
+    - data: 300
+    cardinality: 1
+  schemaParserMaxPoolSize:
+    type: integer
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  name:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: 1
+  serverBrand:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '*'
+  connectTimeout:
+    type: integer
+    defaultValues:
+    - data: 30000
+    cardinality: 1
+  idletimeout:
+    type: integer
+    defaultValues:
+    - data: 15000
+    cardinality: '?'
+  activetimeout:
+    type: integer
+    defaultValues:
+    - data: 30000
+    cardinality: '?'
+  maxTransTimeout:
+    type: integer
+    defaultValues:
+    - data: 240000
+    cardinality: 1
+  maxInputLen:
+    type: long
+    defaultValues:
+    - data: 20971520
+    cardinality: 1
+  maxOutputLen:
+    type: long
+    defaultValues:
+    - data: 20971520
+    cardinality: 1
+  maxRequestMemory:
+    type: integer
+    defaultValues:
+    - {}
+    cardinality: '?'
+  sessionCacheSize:
+    type: integer
+    defaultValues:
+    - data: 32
+    cardinality: 1
+  tracelevel:
+    type: string
+    defaultValues:
+    - data: INFO
+    cardinality: 1
+  verifyServerHostname:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  offerTlsServerName:
+    type: boolean
+    defaultValues:
+    - data: 1
+    cardinality: 1
+  inputEncodings:
+    type: string
+    defaultValues:
+    - data: .inherit
+    cardinality: '*'
+  outputEncodings:
+    type: string
+    defaultValues:
+    - data: .inherit
+    cardinality: '*'
+  xpathAllowedNodeOpsNum:
+    type: integer
+    defaultValues:
+    - data: 4096
+    cardinality: 1
+  exportCorrelationId:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  clientRegistryLoginPK:
+    type: '@FilterCircuit'
+    cardinality: '?'
+components:
+  EhcacheConfiguration: 1
+keyFields:
+- name
+loadorder: 100

@@ -1,0 +1,6 @@
+---
+type: ResourceBlob
+fields:
+  ID: T2VD4UW72Z2FTHCHIZHRWPXCCQFX67CW
+  type: schema
+  content: '{{file "T2VD4UW72Z2FTHCHIZHRWPXCCQFX67CW.xsd" "binary"}}'

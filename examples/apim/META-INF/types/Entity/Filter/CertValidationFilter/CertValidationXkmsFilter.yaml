@@ -1,0 +1,8 @@
+---
+name: CertValidationXkmsFilter
+version: 1
+class: com.vordel.circuit.cert.CertValidationXkmsFilter
+fields:
+  xkmsCheck:
+    type: '@XkmsConfig'
+    cardinality: +

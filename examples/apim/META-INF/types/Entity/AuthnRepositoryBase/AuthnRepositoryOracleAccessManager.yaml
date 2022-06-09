@@ -1,0 +1,57 @@
+---
+name: AuthnRepositoryOracleAccessManager
+version: 8
+class: com.vordel.circuit.oracle.AccessManagerAuthNRepository
+fields:
+  createSSOToken:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  ssoTokenAttrName:
+    type: string
+    defaultValues:
+    - data: oracle.sso.token
+    cardinality: 1
+  addSSOTokenToUserAttrs:
+    type: boolean
+    defaultValues:
+    - data: "true"
+    cardinality: 1
+  installDir:
+    type: string
+    defaultValues:
+    - {}
+    cardinality: '?'
+  resType:
+    type: string
+    defaultValues:
+    - data: http
+    cardinality: 1
+  resName:
+    type: string
+    defaultValues:
+    - data: //hostname${http.request.uri}
+    cardinality: 1
+  operation:
+    type: string
+    defaultValues:
+    - data: ${http.request.verb}
+    cardinality: 1
+  includeQueryString:
+    type: boolean
+    defaultValues:
+    - data: 0
+    cardinality: 1
+  location:
+    type: string
+    defaultValues:
+    - data: ${http.request.clientaddr.getAddress().getHostAddress()}
+    cardinality: 1
+  compatibilityMode:
+    type: string
+    defaultValues:
+    - data: OAM_11G
+    cardinality: 1
+components:
+  Property: '*'
