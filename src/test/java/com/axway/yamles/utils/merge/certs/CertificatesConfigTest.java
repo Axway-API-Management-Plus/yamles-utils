@@ -5,9 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.Test;
 
-import com.axway.yamles.utils.merge.certs.Alias;
-import com.axway.yamles.utils.merge.certs.CertificatesConfig;
-
 class CertificatesConfigTest {
 
 	@Test

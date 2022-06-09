@@ -175,40 +175,6 @@
 					</execution>
 				</executions>
 			</plugin>
-
-			<!--
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>3.3.0</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<transformers>
-								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>com.axway.yamles.utils.YamlEsUtils</mainClass>
-									<manifestEntries>
-										<Multi-Release>true</Multi-Release>
-									</manifestEntries>
-								</transformer>
-								<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-								<transformer implementation="org.apache.maven.plugins.shade.resource.ApacheLicenseResourceTransformer" />
-								<transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer">
-									<addHeader>false</addHeader>
-								</transformer>
-								<transformer implementation="org.apache.maven.plugins.shade.resource.DontIncludeResourceTransformer">
-									<resource>DEPENDENCIES</resource>
-								</transformer>
-							</transformers>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			-->
 		</plugins>
 	</build>
 </project>
