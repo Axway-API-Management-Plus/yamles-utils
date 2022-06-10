@@ -25,11 +25,6 @@ public class LookupManager implements Helper<String> {
 	
 	private LookupManager() {
 		this.lookupProviders = ServiceLoader.load(LookupProvider.class);
-		if (log.isDebugEnabled()) {
-			this.lookupProviders.forEach(p -> {
-				log.debug("lookup provider found: {}", p.getName());
-			});
-		}
 	}
 	
 	public Iterator<LookupProvider> getProviders() {
@@ -37,17 +32,17 @@ public class LookupManager implements Helper<String> {
 	}
 
 	public String lookup(String key) {
-		Optional<String> secret = Optional.empty();
+		Optional<String> value = Optional.empty();
 		Iterator<LookupProvider> iter = lookupProviders.iterator();
 		while (iter.hasNext()) {
 			LookupProvider sp = iter.next(); 
-			secret = sp.lookup(key);
-			if (secret.isPresent()) {
+			value = sp.lookup(key);
+			if (value.isPresent()) {
 				log.info("lookup '{}' provided by '{}'", key, sp.getName());
 				break;
 			}
 		}
-		return secret.orElseThrow(() -> new LookupManagerException("secret not found"));
+		return value.orElseThrow(() -> new LookupManagerException("lookup key not found: " + key));
 	}
 	
 

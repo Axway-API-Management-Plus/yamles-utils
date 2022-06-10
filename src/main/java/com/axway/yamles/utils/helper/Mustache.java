@@ -3,12 +3,17 @@ package com.axway.yamles.utils.helper;
 import java.io.IOException;
 import java.util.Iterator;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.axway.yamles.utils.spi.LookupManager;
 import com.axway.yamles.utils.spi.LookupProvider;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 
 public class Mustache {
+	
+	private static final Logger log = LogManager.getLogger(Mustache.class);
 
 	private final Handlebars hb;
 
@@ -29,12 +34,14 @@ public class Mustache {
 	private Mustache() {
 		this.hb = new Handlebars();
 		
-		this.hb.registerHelper("secret", LookupManager.getInstance());
+		this.hb.registerHelper("lookup", LookupManager.getInstance());
+		log.debug("generic lookup provider registered: lookup");
 
 		Iterator<LookupProvider> iter = LookupManager.getInstance().getProviders();
 		while(iter.hasNext()) {
 			LookupProvider sp = iter.next();
 			this.hb.registerHelper(sp.getName(), sp);
+			log.debug("lookup provider registered: {}", sp.getName());
 		}
 	}
 
