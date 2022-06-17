@@ -39,7 +39,7 @@ public class YamlLookupProvider extends AbstractLookupProvider {
 
 	private static final Logger log = LogManager.getLogger(YamlLookupProvider.class);
 
-	@Option(names = { "--lookup-yaml" }, description = "Path to an YAML file", paramLabel = "FILE")
+	@Option(names = { "--lookup-yaml" }, description = "path to an YAML file", paramLabel = "FILE")
 	private List<File> yamlFiles;
 	private List<YamlDoc> docs;
 
@@ -47,10 +47,15 @@ public class YamlLookupProvider extends AbstractLookupProvider {
 	public String getName() {
 		return "yaml";
 	}
+	
+	@Override
+	public boolean isEnabled() {
+		return this.yamlFiles != null && !this.yamlFiles.isEmpty();
+	}
 
 	@Override
 	public Optional<String> lookup(String key) {
-		if (this.yamlFiles == null || key == null || key.trim().isEmpty())
+		if (!isEnabled() || key == null || key.trim().isEmpty())
 			return Optional.empty();
 
 		synchronized (this) {
@@ -82,8 +87,10 @@ public class YamlLookupProvider extends AbstractLookupProvider {
 			}
 		}
 
-		if (result == null || result.isNull() || !result.isTextual())
+		if (result == null || result.isNull())
 			return Optional.empty();
+		if (!result.isValueNode())
+			throw new LookupProviderException(this, "key is not a value node: " + key);
 
 		return Optional.of(result.asText());
 	}

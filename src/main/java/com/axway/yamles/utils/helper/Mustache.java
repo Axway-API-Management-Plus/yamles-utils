@@ -12,7 +12,7 @@ import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 
 public class Mustache {
-	
+
 	private static final Logger log = LogManager.getLogger(Mustache.class);
 
 	private final Handlebars hb;
@@ -33,15 +33,14 @@ public class Mustache {
 
 	private Mustache() {
 		this.hb = new Handlebars();
-		
-		this.hb.registerHelper("lookup", LookupManager.getInstance());
-		log.debug("generic lookup provider registered: lookup");
 
 		Iterator<LookupProvider> iter = LookupManager.getInstance().getProviders();
-		while(iter.hasNext()) {
+		while (iter.hasNext()) {
 			LookupProvider sp = iter.next();
-			this.hb.registerHelper(sp.getName(), sp);
-			log.debug("lookup provider registered: {}", sp.getName());
+			if (sp.isEnabled()) {
+				this.hb.registerHelper(sp.getName(), sp);
+				log.debug("lookup provider registered: {}", sp.getName());
+			}
 		}
 	}
 

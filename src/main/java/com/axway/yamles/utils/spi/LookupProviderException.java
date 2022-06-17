@@ -25,13 +25,4 @@ public class LookupProviderException extends RuntimeException {
 		str.append(super.getMessage());
 		return str.toString();
 	}
-
-	@Override
-	public String getLocalizedMessage() {
-		StringBuilder str = new StringBuilder();
-		str.append("[").append(this.secretsProviderName).append("] ");
-		str.append(super.getLocalizedMessage());
-		return str.toString();
-	}
-
 }

@@ -14,7 +14,7 @@ public abstract class AbstractLookupProvider implements LookupProvider {
 	public Object apply(String key, Options options) throws IOException {
 		Optional<String> value = lookup(key);
 		if (!value.isPresent()) {
-			throw new LookupProviderException(this, "lookup not found: " + key);
+			throw new LookupProviderException(this, "lookup key not found: " + key);
 		}
 
 		return new Handlebars.SafeString(value.get());

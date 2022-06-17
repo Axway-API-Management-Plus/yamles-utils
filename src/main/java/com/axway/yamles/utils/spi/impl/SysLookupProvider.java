@@ -18,6 +18,12 @@ public class SysLookupProvider extends AbstractLookupProvider {
 	}
 
 	@Override
+	public boolean isEnabled() {
+		return true;
+	}
+
+	
+	@Override
 	public Optional<String> lookup(String key) {
 		if (key == null || key.isEmpty()) {
 			return Optional.empty();

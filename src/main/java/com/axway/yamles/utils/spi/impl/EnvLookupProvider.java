@@ -17,6 +17,11 @@ public class EnvLookupProvider extends AbstractLookupProvider {
 	public String getName() {
 		return "env";
 	}
+	
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 
 	@Override
 	public Optional<String> lookup(String key) {

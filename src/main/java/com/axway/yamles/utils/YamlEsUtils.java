@@ -19,12 +19,15 @@ import picocli.CommandLine.ParseResult;
 		LintCommand.class }, mixinStandardHelpOptions = true, versionProvider = VersionProvider.class)
 public class YamlEsUtils {
 
-	@Option(names = { "-v", "--verbose" }, description = "Enable verbose logging")
-	boolean verbose = false;
+	@Option(names = { "-v", "--verbose" }, description = "increase logging verbosity")
+	boolean[] verbosity;
 
 	private int executionStrategy(ParseResult parseResult) {
-		if (this.verbose) {
-			Configurator.setLevel("com.axway.yamles.utils", Level.DEBUG);
+		if (this.verbosity != null) {
+			if (this.verbosity.length > 1)
+				Configurator.setLevel("com.axway.yamles.utils", Level.TRACE);
+			else if (this.verbosity.length == 1)
+				Configurator.setLevel("com.axway.yamles.utils", Level.DEBUG);
 		}
 		return new CommandLine.RunLast().execute(parseResult);
 	}

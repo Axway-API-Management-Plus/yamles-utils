@@ -29,6 +29,9 @@ class ConfigSourceScanner {
 	}
 
 	public void addDirectory(File dir) {
+		if (dir == null) {
+			return;
+		}
 		if (!dir.isDirectory()) {
 			throw new IllegalArgumentException("not a directory: " + dir.getAbsolutePath());
 		}
@@ -37,6 +40,9 @@ class ConfigSourceScanner {
 	}
 
 	public void addDirectories(List<File> dirs) {
+		if (dirs == null) {
+			return;
+		}
 		dirs.forEach((d) -> addDirectory(d));
 	}
 
