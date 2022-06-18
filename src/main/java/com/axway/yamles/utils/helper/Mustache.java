@@ -1,21 +1,20 @@
 package com.axway.yamles.utils.helper;
 
 import java.io.IOException;
-import java.util.Iterator;
+import java.io.StringWriter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.spi.LookupManager;
-import com.axway.yamles.utils.spi.LookupProvider;
-import com.github.jknack.handlebars.Handlebars;
-import com.github.jknack.handlebars.Template;
+import com.mitchellbosecke.pebble.PebbleEngine;
+import com.mitchellbosecke.pebble.template.PebbleTemplate;
 
 public class Mustache {
 
 	private static final Logger log = LogManager.getLogger(Mustache.class);
 
-	private final Handlebars hb;
+	private final PebbleEngine pe;
 
 	private static final Mustache instance = new Mustache();
 
@@ -32,20 +31,19 @@ public class Mustache {
 	}
 
 	private Mustache() {
-		this.hb = new Handlebars();
-
-		Iterator<LookupProvider> iter = LookupManager.getInstance().getProviders();
-		while (iter.hasNext()) {
-			LookupProvider sp = iter.next();
-			if (sp.isEnabled()) {
-				this.hb.registerHelper(sp.getName(), sp);
-				log.debug("lookup provider registered: {}", sp.getName());
-			}
-		}
+		this.pe = new PebbleEngine.Builder() //
+				.extension(LookupManager.getInstance()) //
+				.autoEscaping(false) //
+				.strictVariables(true) //
+				.build();
+		log.debug("Pebble template engine initialized");
 	}
 
 	public String evaluate(String template) throws IOException {
-		Template t = this.hb.compileInline(template);
-		return t.apply(null);
+		PebbleTemplate pt = pe.getLiteralTemplate(template);
+		StringWriter result = new StringWriter();
+		pt.evaluate(result);
+		
+		return result.toString();
 	}
 }

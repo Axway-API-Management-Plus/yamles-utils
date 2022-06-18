@@ -3,6 +3,7 @@ package com.axway.yamles.utils.spi.impl;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -31,7 +32,6 @@ import org.apache.logging.log4j.Logger;
 import com.axway.yamles.utils.spi.LookupProviderException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.jknack.handlebars.internal.Files;
 
 import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
@@ -97,7 +97,8 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 		private String getToken() throws IOException {
 			String token = this.token.value;
 			if (this.token.file != null) {
-				token = Files.read(this.token.file, TOKEN_CHARSET);
+				byte[] b = Files.readAllBytes(this.token.file.toPath());
+				token = new String(b, TOKEN_CHARSET);
 			}
 			return token;
 		}

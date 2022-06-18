@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.helper.KeePassDB;
 import com.axway.yamles.utils.helper.KeePassDB.EntryPath;
+import com.axway.yamles.utils.spi.LookupProviderException;
 
 import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Option;
@@ -120,6 +121,17 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 
 			return new Key(new EntryPath(path), what, pname);
 		}
+
+		@Override
+		public String toString() {
+			StringBuilder str = new StringBuilder();
+			str.append("path=").append(this.ep);
+			str.append("; ");
+			str.append("what=").append(this.what);
+			str.append("; ");
+			str.append("pname=").append(this.pname);
+			return str.toString();
+		}
 	}
 
 	static class Kdb {
@@ -135,16 +147,17 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 		KeePassDB db = null;
 
 		Optional<String> getValue(String key) throws Exception {
+			Key k = Key.parse(key);
+			return getValue(k);
+		}
+
+		private Optional<String> getValue(Key key) throws Exception {
 			synchronized (this) {
 				if (db == null) {
 					db = new KeePassDB(this.dbFile, this.passphrase, this.keyFile);
 				}
 			}
-			Key k = Key.parse(key);
-			return getValue(k);
-		}
 
-		private Optional<String> getValue(Key key) {
 			Optional<String> value;
 
 			switch (key.what) {
@@ -193,19 +206,25 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 		if (!isEnabled())
 			return Optional.empty();
 
-		Key k = Key.parse(key);
-
 		Optional<String> result = Optional.empty();
-		for (Kdb kdb : this.kdbs) {
-			Optional<String> value = kdb.getValue(k);
-			if (value.isPresent()) {
-				if (!result.isPresent()) {
-					log.debug("found lookup key '{}' in {}", key, kdb);
-				} else {
-					log.debug("overwrite lookup key '{}' by {}", key, kdb);
+
+		try {
+			Key k = Key.parse(key);
+			log.debug("search for KeePass key: {}", k);
+
+			for (Kdb kdb : this.kdbs) {
+				Optional<String> value = kdb.getValue(k);
+				if (value.isPresent()) {
+					if (!result.isPresent()) {
+						log.debug("found lookup key '{}' in {}", key, kdb);
+					} else {
+						log.debug("overwrite lookup key '{}' by {}", key, kdb);
+					}
+					result = value;
 				}
-				result = value;
 			}
+		} catch (Exception e) {
+			throw new LookupProviderException(this, "error on lookup key '" + key + "'", e);
 		}
 		return result;
 	}

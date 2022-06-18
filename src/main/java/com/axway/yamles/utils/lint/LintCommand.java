@@ -28,21 +28,16 @@ public class LintCommand implements Callable<Integer> {
 	@Override
 	public Integer call() throws Exception {
 		log.info("check project");
-		try {
-			YamlEs project = new YamlEs(this.projectDir);
+		YamlEs project = new YamlEs(this.projectDir);
 
-			Linter linter = new Linter(project, rulesFiles);
-			Results results = linter.apply();
+		Linter linter = new Linter(project, rulesFiles);
+		Results results = linter.apply();
 
-			if (results.hasFindings()) {
-				results.log(Level.ERROR);
-				return 1;
-			}
-
-			return 0;
-		} catch (Exception e) {
-			log.error("error on checking project", e);
+		if (results.hasFindings()) {
+			results.log(Level.ERROR);
 			return 1;
 		}
+
+		return 0;
 	}
 }

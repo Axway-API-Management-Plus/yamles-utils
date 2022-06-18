@@ -1,13 +1,17 @@
 package com.axway.yamles.utils.spi;
 
+import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Optional;
+import java.util.Map;
 import java.util.ServiceLoader;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class LookupManager {
+import com.mitchellbosecke.pebble.extension.AbstractExtension;
+import com.mitchellbosecke.pebble.extension.Function;
+
+public class LookupManager extends AbstractExtension {
 	private static final Logger log = LogManager.getLogger(LookupManager.class);
 
 	private static final LookupManager instance = new LookupManager();
@@ -26,19 +30,19 @@ public class LookupManager {
 		return this.lookupProviders.iterator();
 	}
 
-	public String lookup(String key) {
-		Optional<String> value = Optional.empty();
+	@Override
+	public Map<String, Function> getFunctions() {
+		Map<String, Function> functions = new HashMap<>();
 		Iterator<LookupProvider> iter = lookupProviders.iterator();
 		while (iter.hasNext()) {
 			LookupProvider sp = iter.next();
 			if (sp.isEnabled()) {
-				value = sp.lookup(key);
-				if (value.isPresent()) {
-					log.info("lookup '{}' provided by '{}'", key, sp.getName());
-					break;
-				}
+				functions.put(sp.getName(), sp);
+				log.debug("lookup provider registered: {}", sp.getName());
+			} else {
+				log.debug("lookup provider skipped: {}", sp.getName());
 			}
 		}
-		return value.orElseThrow(() -> new LookupManagerException("lookup key not found: " + key));
+		return functions;
 	}
 }

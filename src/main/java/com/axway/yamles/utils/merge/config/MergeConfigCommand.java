@@ -39,43 +39,38 @@ public class MergeConfigCommand implements Callable<Integer> {
 	private List<File> files;
 
 	@Override
-	public Integer call() {
-		try {
-			ConfigSourceScanner scanner = new ConfigSourceScanner();
-			scanner.addDirectories(this.directories);
-			scanner.scan();
+	public Integer call() throws Exception {
+		ConfigSourceScanner scanner = new ConfigSourceScanner();
+		scanner.addDirectories(this.directories);
+		scanner.scan();
 
-			File out;
-			if (this.target.projectDir != null) {
-				YamlEs es = new YamlEs(this.target.projectDir);
-				out = es.getValuesFile();
-			} else {
-				out = this.target.file;
-			}
-
-			List<ConfigSource> csl = new ArrayList<>();
-			csl.addAll(scanner.getSources());
-			if (this.files != null) {
-				for (File f : this.files) {
-					ConfigSource cs = ConfigSourceFactory.load(f);
-					csl.add(cs);
-				}
-			}
-
-			YamlEsConfig esConfig = new YamlEsConfig();
-			esConfig.merge(csl);
-
-			if (out.getName().equals("-")) {
-				System.out.println(esConfig.toYaml());
-			} else {
-				Yaml.write(out, esConfig.getConfig());
-				log.info("configuration written to {}", out.getAbsoluteFile());
-			}
-
-			return 0;
-		} catch (Exception e) {
-			log.error(e);
-			return 1;
+		File out;
+		if (this.target.projectDir != null) {
+			YamlEs es = new YamlEs(this.target.projectDir);
+			out = es.getValuesFile();
+		} else {
+			out = this.target.file;
 		}
+
+		List<ConfigSource> csl = new ArrayList<>();
+		csl.addAll(scanner.getSources());
+		if (this.files != null) {
+			for (File f : this.files) {
+				ConfigSource cs = ConfigSourceFactory.load(f);
+				csl.add(cs);
+			}
+		}
+
+		YamlEsConfig esConfig = new YamlEsConfig();
+		esConfig.merge(csl);
+
+		if (out.getName().equals("-")) {
+			System.out.println(esConfig.toYaml());
+		} else {
+			Yaml.write(out, esConfig.getConfig());
+			log.info("configuration written to {}", out.getAbsoluteFile());
+		}
+
+		return 0;
 	}
 }

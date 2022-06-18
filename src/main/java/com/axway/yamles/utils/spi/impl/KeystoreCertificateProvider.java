@@ -7,11 +7,16 @@ import java.security.KeyStore;
 import java.security.cert.Certificate;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.axway.yamles.utils.helper.Mustache;
 import com.axway.yamles.utils.spi.Cert;
 import com.axway.yamles.utils.spi.CertificateProviderException;
 
 public class KeystoreCertificateProvider extends AbstractCertificateProvider {
+	
+	private static final Logger log = LogManager.getLogger(KeystoreCertificateProvider.class);
 
 	public static final String CFG_PATH = "path";
 	public static final String CFG_PASSPHRASE = "pass";
@@ -45,6 +50,8 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 		}
 
 		String type = determineType(keystoreFile);
+		
+		log.debug("searching for certificate alias '{}' in keystore '{}' of type '{}'", aliasName, path, type);
 
 		try {
 			KeyStore ks = KeyStore.getInstance(type);
@@ -54,8 +61,11 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 			if (cert == null) {
 				throw new CertificateProviderException("certificate not found for alias: " + aliasName);
 			}
+			
+			log.debug("certificate with alias '{}' found", aliasName);
 
 			Key key = ks.getKey(aliasName, password);
+			log.debug("key with alias '{}' {}found", aliasName, (key == null) ? "not " : "");
 
 			return new Cert(aliasName, cert, key);
 

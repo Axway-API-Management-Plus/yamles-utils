@@ -2,9 +2,9 @@ package com.axway.yamles.utils.spi;
 
 import java.util.Optional;
 
-import com.github.jknack.handlebars.Helper;
+import com.mitchellbosecke.pebble.extension.Function;
 
-public interface LookupProvider extends Helper<String> {
+public interface LookupProvider extends Function {
 
 	public String getName();
 	
