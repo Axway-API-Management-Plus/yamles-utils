@@ -1,0 +1,24 @@
+---
+rules:
+  # Database connections must be environmentalized
+  "db_connections":
+    name: DB Connection Environmentalization
+    description: Connection to databases are usually stage specific and Field must be environmentalized
+
+    fileType: DbConnection
+    filePatterns:
+      - '/External Connections/Database Connections/.*'
+
+    assertions:
+      - path: '$.fields.username'
+        type: environmentalized
+        message: User for DB must be environmentalized
+
+      - path: '$.fields.password'
+        type: environmentalized
+        message: Password for DB must be environmentalized
+
+      - path: '$.fields.url'
+        type: environmentalized
+        message: DB connection URL must be environmentalized
+...

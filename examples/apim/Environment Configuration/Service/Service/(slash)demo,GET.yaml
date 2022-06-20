@@ -1,0 +1,25 @@
+---
+type: XMLFirewall
+fields:
+  uriprefix: /demo
+  httpMethod: GET
+  filterCircuit: /Policies/Demo/Demo Service
+children:
+- type: PortableCircuitReference
+  fields:
+    name: CUSTOM_POLICY_REQ
+    priority: 1
+- type: PortableCircuitReference
+  fields:
+    name: CUSTOM_POLICY_RSP
+    priority: 3
+- type: SoftCircuitReference
+  fields:
+    name: GLOBAL_POLICY_REQ
+    circuitPK: system.policy.request
+    priority: 0
+- type: SoftCircuitReference
+  fields:
+    name: GLOBAL_POLICY_RSP
+    circuitPK: system.policy.response
+    priority: 4

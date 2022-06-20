@@ -75,6 +75,11 @@ class KeepassLookupProviderTest {
 		assertEquals("/path", k.ep.toString());
 		assertSame(What.password, k.what);
 		assertNull(k.pname);
+		
+		k = Key.parse("/path:url");
+		assertEquals("/path", k.ep.toString());
+		assertSame(What.url, k.what);
+		assertNull(k.pname);
 
 		k = Key.parse("/path:prop.field");
 		assertEquals("/path", k.ep.toString());
@@ -112,6 +117,7 @@ class KeepassLookupProviderTest {
 		
 		assertEquals("user", kdb.getValue("/generic-user:user").get());
 		assertEquals("password", kdb.getValue("/generic-user:password").get());
+		assertEquals("https://www.example.com", kdb.getValue("/generic-user:url").get());
 		assertEquals("value", kdb.getValue("/generic-user:prop.field").get());
 		assertEquals(expectedBin, kdb.getValue("/generic-user:binUTF8.text.txt").get());
 		assertEquals(expectedBin, kdb.getValue("/generic-user:binISO8859.text.txt").get());

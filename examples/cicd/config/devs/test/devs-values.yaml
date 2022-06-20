@@ -1,0 +1,15 @@
+---
+External_Connections:
+  Database_Connections:
+    Masterdata:
+      url: '{{ keepass("/Database/test/MasterData:url") }}'
+      username: '{{ keepass("/Database/test/MasterData:user") }}'
+      password: '{{ keepass("/Database/test/MasterData:password") | base64encode }}'
+
+Policies:
+  Demo:
+    Demo_Service:
+      Set_name:
+        attributeValue: Test Developer
+      Feature_toggle:
+        attributeValue: "true"

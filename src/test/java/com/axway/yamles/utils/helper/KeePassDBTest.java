@@ -108,6 +108,18 @@ public class KeePassDBTest {
 	}
 
 	@Test
+	void getURL() throws Exception  {
+		KeePassDB kdb = getTestKDB();
+		EntryPath ep;
+		Optional<String> url;
+
+		ep = new EntryPath("/generic-user");
+		url = kdb.getURL(ep);
+		assertTrue(url.isPresent());
+		assertEquals("https://www.example.com", url.get());
+	}
+
+	@Test
 	void getProperty() throws Exception  {
 		KeePassDB kdb = getTestKDB();
 		EntryPath ep;

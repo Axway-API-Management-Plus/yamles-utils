@@ -23,7 +23,7 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 	private static final Charset ISO8859 = Charset.forName("ISO-8859-1");
 
 	static enum What {
-		user(false), password(false), prop(true), binUTF8(true) {
+		user(false), password(false), url(false), prop(true), binUTF8(true) {
 			@Override
 			public Optional<String> toString(Optional<byte[]> value) {
 				if (Objects.requireNonNull(value).isPresent() && !(value.get() instanceof byte[])) {
@@ -167,6 +167,9 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 			case password:
 				value = db.getPassword(key.ep);
 				break;
+			case url:
+				value = db.getURL(key.ep);
+				break;
 			case prop:
 				value = db.getProperty(key.ep, key.pname);
 				break;
@@ -188,7 +191,7 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 		}
 	}
 
-	@ArgGroup(exclusive = false)
+	@ArgGroup(exclusive = false, multiplicity = "0..*")
 	List<Kdb> kdbs;
 
 	@Override

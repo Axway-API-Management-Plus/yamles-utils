@@ -31,7 +31,7 @@ children:
       cookieHttpOnly: true
 - type: CreateIDTokenFilter
   fields:
-    jwtSigner: /Environment Configuration/Certificate Store/CN=Change this for production
+    jwtSigner: /Environment Configuration/Certificate Store/example-server
     name: Create an Open ID Connect ID Token
   routing:
     success: ../Remove Cookie Header

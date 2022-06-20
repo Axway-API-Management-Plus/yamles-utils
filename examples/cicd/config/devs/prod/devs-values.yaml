@@ -1,0 +1,16 @@
+---
+External_Connections:
+  Database_Connections:
+    Masterdata:
+      url: '{{ keepass("/Database/prod/MasterData:url") }}'
+      username: '{{ keepass("/Database/prod/MasterData:user") }}'
+      password: "changeme"
+#      password: '{{ keepass("/Database/prod/MasterData:password") }}'
+
+Policies:
+  Demo:
+    Demo_Service:
+      Set_name:
+        attributeValue: Prod Developer
+      Feature_toggle:
+        attributeValue: "false"

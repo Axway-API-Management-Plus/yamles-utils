@@ -77,13 +77,11 @@ public class YamlEsUtils implements IExecutionExceptionHandler {
 			log.error("execution failed", ex);
 		} else {
 			log.error("'{}' command failed: {}", commandLine.getCommandName(), ex.getMessage());
-			Throwable cause = ex;
-			Throwable next = null;
-			while ((next = cause.getCause()) != null) {
-				cause = next;
+			Throwable cause = ex.getCause();
+			while (cause != null) {
 				log.error("caused by: {}", cause.getMessage());
+				cause = cause.getCause();
 			}
-
 		}
 		return 1;
 	}

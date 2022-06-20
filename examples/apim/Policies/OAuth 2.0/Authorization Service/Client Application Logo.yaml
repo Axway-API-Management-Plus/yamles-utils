@@ -22,7 +22,10 @@ children:
     url: https://${env.OAUTH.SERVER}:${env.PORT.OAUTH2.SERVICES}/api/portal/v1.4/applications/${client.app.id}/image
     profileInUse: true
     profile: /External Connections/Auth Profiles/HTTP Basic/Get Application Image
-    caCerts: /Environment Configuration/Certificate Store/CN=Change this for production
+    caCerts:
+    - /Environment Configuration/Certificate Store/example-server
+    - /Environment Configuration/Certificate Store/example-root-ca
+    - /Environment Configuration/Certificate Store/example-sub-ca
     sslUsers: /null
     useRootCerts: false
     ciphers: DEFAULT

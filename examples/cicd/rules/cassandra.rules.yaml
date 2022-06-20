@@ -1,0 +1,84 @@
+---
+rules:
+  #
+  # Cassandra Settings
+  #
+  "cassandra_settings":
+    name: Cassandra Nodes
+    description: Check Cassandra nodes
+
+    fileType: CassandraSettings
+    filePatterns:
+      - '/Server Settings/Cassandra Settings.yaml'
+
+    assertions:
+      # Cassandra nodes should be configured by envSettings.props to support
+      # datacenter aware node connections.
+      #
+      # Three nodes should be configured to ensure quorum.
+      - path: '$.children[0].fields.host'
+        type: regex
+        param: '^\$\{env\..+\}'
+        message: Cassandra nodes must be configured via envSettings.props
+
+      - path: '$.children[1].fields.host'
+        type: regex
+        param: '^\$\{env\..+\}'
+        message: Cassandra nodes must be configured via envSettings.props
+
+      - path: '$.children[2].fields.host'
+        type: regex
+        param: '^\$\{env\..+\}'
+        message: Cassandra nodes must be configured via envSettings.props
+
+      # Credentials must be environmentalized
+      - path: '$.fields.username'
+        type: environmentalized
+
+      - path: '$.fields.password'
+        type: environmentalized
+
+      # SSL security must be environmentalized
+      - path: '$.fields.useSSL'
+        type: environmentalized
+
+      # Replication strategy and factors must be environmentalized
+      - path: '$.fields.replication'
+        type: environmentalized
+
+      - path: '$.fields.replicationStrategy'
+        type: environmentalized
+
+      - path: '$.fields.throttlingReplication'
+        type: environmentalized
+
+      - path: '$.fields.throttlingReplication'
+        type: environmentalized
+
+      - path: '$.fields.throttlingReplicationStrategy'
+        type: environmentalized
+
+      # Consistency level for throttling must be environmentalized
+      - path: '$.fields.throttlingReadConsistencyLevel'
+        type: environmentalized
+
+      - path: '$.fields.throttlingWriteConsistencyLevel'
+        type: environmentalized
+
+  # Cassandra for KPS Data Sources
+  "kps_data_source":
+    name: KPS Data Source
+    description: Check data source for KPS tables
+
+    fileType: KPSCassandraDataSource
+    filePatterns:
+      - '/Environment Configuration/Key Property Stores/.*/.+\.yaml'
+
+    # Consistency levels must be environmentalized
+    assertions:
+      - path: '$.fields.readConsistencyLevel'
+        type: environmentalized
+
+      - path: '$.fields.writeConsistencyLevel'
+        type: environmentalized
+...

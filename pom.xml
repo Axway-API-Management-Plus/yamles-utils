@@ -17,10 +17,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.axway-api-management-plus</groupId>
 	<artifactId>yamles-utils</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<packaging>jar</packaging>
-	<name>YAML EntityStore Utilities</name>
-	<description>Utilities for YAML EntityStore projects.</description>
+	<name>YAML Entity Store Utilities</name>
+	<description>Utilities for YAML Entity Store based API Gateway projects.</description>
 	<url>https://github.com/Axway-API-Management-Plus/yamles-utils</url>
 	<licenses>
 		<license>
@@ -37,7 +37,6 @@
 		</developer>
 	</developers>
 	<properties>
-		<revision>0.0.1-SNAPSHOT</revision>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>

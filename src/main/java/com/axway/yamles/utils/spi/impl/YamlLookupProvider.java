@@ -87,7 +87,7 @@ public class YamlLookupProvider extends AbstractLookupProvider {
 			}
 		}
 
-		if (result == null || result.isNull())
+		if (result == null || result.isNull() || result.isMissingNode())
 			return Optional.empty();
 		if (!result.isValueNode())
 			throw new LookupProviderException(this, "key is not a value node: " + key);

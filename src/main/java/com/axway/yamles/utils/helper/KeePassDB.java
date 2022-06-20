@@ -87,6 +87,14 @@ public class KeePassDB {
 		}
 		return Optional.empty();
 	}
+	
+	public Optional<String> getURL(EntryPath ep) {
+		SimpleEntry entry = getEntry(ep);
+		if (entry != null && entry.getUrl() != null) {
+			return Optional.of(entry.getUrl());
+		}
+		return Optional.empty();
+	}
 
 	public Optional<String> getProperty(EntryPath ep, String name) {
 		SimpleEntry entry = getEntry(ep);

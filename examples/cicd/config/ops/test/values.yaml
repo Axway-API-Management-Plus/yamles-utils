@@ -1,0 +1,5 @@
+# All values for which Ops is responsible for
+Server_Settings:
+  Cassandra_Settings:
+    username: "{{ keepass('/test/ops-keystore:user') }}"
+    password: "{{ keepass('/test/ops-keystore:password') | base64encode }}"

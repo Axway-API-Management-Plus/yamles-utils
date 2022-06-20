@@ -1,0 +1,8 @@
+---
+type: DbConnection
+fields:
+  name: Masterdata
+  username: '{{External_Connections.Database_Connections.Masterdata.username}}'
+  password: '{{External_Connections.Database_Connections.Masterdata.password}}'
+  url: '{{External_Connections.Database_Connections.Masterdata.url}}'
+  wildcardPassword: ""
