@@ -14,7 +14,7 @@ import java.util.Base64;
 import java.util.Map;
 
 import com.axway.yamles.utils.helper.Mustache;
-import com.axway.yamles.utils.spi.Cert;
+import com.axway.yamles.utils.spi.CertificateReplacement;
 import com.axway.yamles.utils.spi.CertificateProvider;
 import com.axway.yamles.utils.spi.CertificateProviderException;
 
@@ -28,7 +28,7 @@ public class SimpleCertificateProvider implements CertificateProvider {
 	}
 
 	@Override
-	public Cert getCertificate(File configSource, String aliasName, Map<String, String> config)
+	public CertificateReplacement getCertificate(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
 		try {
 			Certificate c = null;
@@ -48,7 +48,7 @@ public class SimpleCertificateProvider implements CertificateProvider {
 				k = kf.generatePrivate(ks);
 			}
 			
-			return new Cert(aliasName, c, k);
+			return new CertificateReplacement(aliasName, c, k);
 		} catch (CertificateException | NoSuchAlgorithmException | InvalidKeySpecException e) {
 			throw new CertificateProviderException("error on creating certificate", e);
 		}

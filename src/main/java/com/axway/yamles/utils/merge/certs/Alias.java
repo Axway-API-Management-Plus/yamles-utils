@@ -1,6 +1,7 @@
 package com.axway.yamles.utils.merge.certs;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
@@ -16,9 +17,8 @@ class Alias {
 
 	@JsonCreator
 	public Alias(@JsonProperty("provider") String provider, @JsonProperty("config") Map<String, String> config) {
-		this.provider = Objects.requireNonNull(provider);
-		this.config = Objects.requireNonNull(config);
-
+		this.provider = Objects.requireNonNull(provider, "provider property requried");
+		this.config = (config != null) ? config : Collections.emptyMap();
 	}
 
 	void setName(String name) {

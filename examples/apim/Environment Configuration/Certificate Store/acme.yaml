@@ -1,0 +1,10 @@
+---
+type: Certificate
+fields:
+  dname: acme
+  engine: ""
+  keyId: ""
+  certificateRealm: ""
+  conversation: ""
+  content: "{{file 'acme-cert.pem'}}"
+  key: "{{file 'acme-key.pem'}}"

@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.helper.YamlEs;
-import com.axway.yamles.utils.spi.Cert;
+import com.axway.yamles.utils.spi.CertificateReplacement;
 import com.axway.yamles.utils.spi.CertificateManager;
 import com.axway.yamles.utils.spi.CertificateProvider;
 
@@ -54,10 +54,15 @@ class AliasSet {
 		}
 
 		try {
-			Cert cert = cp.getCertificate(alias.getConfigSource(), alias.getName(), alias.getConfig());
-			project.writeCertificate(alias.getName(), cert.getCert(), cert.getKey());
-			
-			log.info("write certificate (alias={}; config-source={}; provider={})", alias.getName(), alias.getConfigSource().getAbsolutePath(), alias.getProvider());
+			CertificateReplacement cert = cp.getCertificate(alias.getConfigSource(), alias.getName(),
+					alias.getConfig());
+			if (cert.isEmpty()) {
+				project.removeCertificate(alias.getName());
+				log.info("certificate removed: alias={}", alias.getName());
+			} else {
+				project.writeCertificate(alias.getName(), cert.getCert().get(), cert.getKey());
+				log.info("certificate created: alias={}; config-source={}; provider={}", alias.getName(), alias.getConfigSource().getAbsolutePath(), alias.getProvider());				
+			}
 		} catch (Exception e) {
 			throw new CertificatesConfigException(alias.getConfigSource(),
 					"certificate failed for alias '" + alias.getName() + "'", e);

@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.helper.Mustache;
-import com.axway.yamles.utils.spi.Cert;
+import com.axway.yamles.utils.spi.CertificateReplacement;
 import com.axway.yamles.utils.spi.CertificateProviderException;
 
 public class KeystoreCertificateProvider extends AbstractCertificateProvider {
@@ -28,7 +28,7 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 	}
 
 	@Override
-	public Cert getCertificate(File configSource, String aliasName, Map<String, String> config)
+	public CertificateReplacement getCertificate(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
 
 		String path = getRequiredConfig(config, CFG_PATH);
@@ -67,7 +67,7 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 			Key key = ks.getKey(aliasName, password);
 			log.debug("key with alias '{}' {}found", aliasName, (key == null) ? "not " : "");
 
-			return new Cert(aliasName, cert, key);
+			return new CertificateReplacement(aliasName, cert, key);
 
 		} catch (Exception e) {
 			throw new CertificateProviderException("error on loading keystore: " + keystoreFile.getAbsolutePath(), e);

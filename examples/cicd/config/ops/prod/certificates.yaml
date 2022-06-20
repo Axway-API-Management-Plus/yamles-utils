@@ -20,4 +20,8 @@ certificates:
       path: ../all/ops-keystore.jks
       pass: "{{ keepass('/prod/ops-keystore:password') }}"
       alias: demo-axway-sub-ca
+
+  # Remove test certificate
+  acme:
+    provider: remover
 ...

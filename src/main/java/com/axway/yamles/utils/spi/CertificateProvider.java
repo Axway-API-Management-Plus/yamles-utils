@@ -6,5 +6,5 @@ import java.util.Map;
 public interface CertificateProvider {
 	
 	public String getName();
-	public Cert getCertificate(File configSource, String aliasName, Map<String, String> config) throws CertificateProviderException;
+	public CertificateReplacement getCertificate(File configSource, String aliasName, Map<String, String> config) throws CertificateProviderException;
 }

@@ -6,6 +6,7 @@ import java.security.Key;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,24 +29,27 @@ public class YamlEs {
 			this.keyFile = new File(certStore, alias + "-key.pem");
 		}
 
-		public void write(Certificate cert, Key key) throws IOException, CertificateEncodingException {
+		public void write(Certificate cert, Optional<Key> key) throws IOException, CertificateEncodingException {
 			Objects.requireNonNull(cert);
+			
+			removeFiles();
 
-			// remove files
-			this.yamlFile.delete();
-			this.certFile.delete();
-			this.keyFile.delete();
-
-			ObjectNode yaml = buildYaml(key != null);
+			ObjectNode yaml = buildYaml(key);
 			Yaml.write(this.yamlFile, yaml);
 
 			PemFile.write(this.certFile, cert.getEncoded());
-			if (key != null) {
-				PemFile.write(this.keyFile, key.getEncoded());
+			if (key.isPresent()) {
+				PemFile.write(this.keyFile, key.get().getEncoded());
 			}
 		}
+		
+		public void removeFiles() {
+			this.yamlFile.delete();
+			this.certFile.delete();
+			this.keyFile.delete();
+		}
 
-		private ObjectNode buildYaml(boolean hasKey) {
+		private ObjectNode buildYaml(Optional<Key> key) {
 			ObjectNode yaml = Yaml.createObjectNode();
 
 			yaml.put("type", "Certificate");
@@ -55,7 +59,7 @@ public class YamlEs {
 			fields.put("engine", "RAW");
 			fields.put("certificateRealm", "");
 			fields.put("content", "{{file '" + this.certFile.getName() + "'}}");
-			if (hasKey) {
+			if (key.isPresent()) {
 				fields.put("key", "{{file '" + this.keyFile.getName() + "'}}");
 			}
 
@@ -96,7 +100,13 @@ public class YamlEs {
 	public void writeValues(ObjectNode values) throws IOException {
 		Yaml.write(getValuesFile(), values);
 	}
-	public void writeCertificate(String alias, Certificate cert, Key key) throws IOException, CertificateEncodingException {
+
+	public void removeCertificate(String alias) {
+		CertFiles files = new CertFiles(this, alias);
+		files.removeFiles();
+	}
+
+	public void writeCertificate(String alias, Certificate cert, Optional<Key> key) throws IOException, CertificateEncodingException {
 		CertFiles files = new CertFiles(this, alias);
 		files.write(cert, key);
 	}

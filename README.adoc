@@ -12,26 +12,37 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :warning-caption: :warning:
 endif::[]
-:project-ver: 0.0.1
+:project-ver: 0.0.4
+
+image:https://github.com/Axway-API-Management-Plus/yamles-utils/actions/workflows/maven-publish.yml/badge.svg[Workflow Status]
+image:https://img.shields.io/github/license/Axway-API-Management-Plus/yamles-utils?style=plastic[]
+image:https://img.shields.io/github/v/release/Axway-API-Management-Plus/yamles-utils?style=plastic[]
 
 == Introduction
 
-Some utilities to make live easier with YAML EnityStore.
+Some utilities to make live easier with YAML Entity Store.
 
 .Features
+* Lint API Gateway project with customized rules
 * Merge configuration values from multiple files into a result `values.yaml`
 * Merge certificates from multiple sources into the API Gateway project.
-* Lint API Gateway project with rules
-* Retrieve secrets from external sources
+** Keystore: add/overwrite certificates from PKCS#12 or JKS key stores
+** Simple: add/overwrite certificates with by simple base64 encoded values
+** Remover: remove certificates from the project
+* Lookup values from multiple sources
 ** Environment variables
 ** System properties
-** YAML file (not encrypted)
+** YAML files
+** KeePass DB
 ** Hashicorp Vault (beta)
 
-Checkout commands in `examples` folder.
+== Examples
+
+Checkout the `examples` folder.
 
 The `examples/apim` folder contains a YAML entity store of an API Manager.
 
+The `example/cicd` folder contains a sample script for configuring a project for different stages.
 
 == Contributing
 Please read https://github.com/Axway-API-Management-Plus/Common/blob/master/Contributing.md[Contributing] for details on our code of conduct, and the process for submitting pull requests to us.
