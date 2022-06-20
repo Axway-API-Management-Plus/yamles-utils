@@ -42,7 +42,12 @@ Checkout the `examples` folder.
 
 The `examples/apim` folder contains a YAML entity store of an API Manager.
 
-The `example/cicd` folder contains a sample script for configuring a project for different stages.
+The `examples/cicd` folder contains a sample script for configuring a project for different stages.
+
+[source,shell]
+----
+examples/cicd/bin/build-archive.sh -e test
+----
 
 == Contributing
 Please read https://github.com/Axway-API-Management-Plus/Common/blob/master/Contributing.md[Contributing] for details on our code of conduct, and the process for submitting pull requests to us.
