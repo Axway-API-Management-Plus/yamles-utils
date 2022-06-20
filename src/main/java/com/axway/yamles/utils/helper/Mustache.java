@@ -1,16 +1,20 @@
 package com.axway.yamles.utils.helper;
 
 import java.io.IOException;
-import java.util.Iterator;
+import java.io.StringWriter;
 
-import com.axway.yamles.utils.spi.SecretsManager;
-import com.axway.yamles.utils.spi.SecretsProvider;
-import com.github.jknack.handlebars.Handlebars;
-import com.github.jknack.handlebars.Template;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.axway.yamles.utils.spi.LookupManager;
+import com.mitchellbosecke.pebble.PebbleEngine;
+import com.mitchellbosecke.pebble.template.PebbleTemplate;
 
 public class Mustache {
 
-	private final Handlebars hb;
+	private static final Logger log = LogManager.getLogger(Mustache.class);
+
+	private final PebbleEngine pe;
 
 	private static final Mustache instance = new Mustache();
 
@@ -27,19 +31,19 @@ public class Mustache {
 	}
 
 	private Mustache() {
-		this.hb = new Handlebars();
-		
-		this.hb.registerHelper("secret", SecretsManager.getInstance());
-
-		Iterator<SecretsProvider> iter = SecretsManager.getInstance().getProviders();
-		while(iter.hasNext()) {
-			SecretsProvider sp = iter.next();
-			this.hb.registerHelper(sp.getName(), sp);
-		}
+		this.pe = new PebbleEngine.Builder() //
+				.extension(LookupManager.getInstance()) //
+				.autoEscaping(false) //
+				.strictVariables(true) //
+				.build();
+		log.debug("Pebble template engine initialized");
 	}
 
 	public String evaluate(String template) throws IOException {
-		Template t = this.hb.compileInline(template);
-		return t.apply(null);
+		PebbleTemplate pt = pe.getLiteralTemplate(template);
+		StringWriter result = new StringWriter();
+		pt.evaluate(result);
+		
+		return result.toString();
 	}
 }

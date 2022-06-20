@@ -1,0 +1,34 @@
+---
+# All values for which Ops is responsible for
+Server_Settings:
+  Cassandra_Settings:
+    replicationStrategy: '{{ yaml("/cassandra/replication/strategy") }}'
+    replication: '{{ yaml("/cassandra/replication/factor") }}'
+    throttlingReplicationStrategy: '{{ yaml("/cassandra/replication/strategy") }}'
+    throttlingReplication: '{{ yaml("/cassandra/replication/factor") }}'
+    throttlingReadConsistencyLevel: '{{ yaml("/cassandra/consistency/read") }}'
+    throttlingWriteConsistencyLevel: '{{ yaml("/cassandra/consistency/write") }}'
+    useSSL: '{{ yaml("/cassandra/security/ssl_enabled") }}'
+Environment_Configuration:
+  Key_Property_Stores:
+    API_Portal:
+      Data_Sources:
+        Cassandra_Storage:
+          readConsistencyLevel: '{{ yaml("/cassandra/consistency/read") }}'
+          writeConsistencyLevel: '{{ yaml("/cassandra/consistency/write") }}'
+    API_Server:
+      Data_Sources:
+        Cassandra_Storage:
+          readConsistencyLevel: '{{ yaml("/cassandra/consistency/read") }}'
+          writeConsistencyLevel: '{{ yaml("/cassandra/consistency/write") }}'
+    OAuth:
+      DataSources:
+        Cassandra_Storage:
+          readConsistencyLevel: '{{ yaml("/cassandra/consistency/read") }}'
+          writeConsistencyLevel: '{{ yaml("/cassandra/consistency/write") }}'
+External_Connections:
+  Database_Connections:
+    Default_Database_Connection:
+      url: '{{ yaml("/db/metrics/url") }}'
+      username: '{{ yaml("/db/metrics/user") }}'
+      password: '{{ yaml("/db/metrics/password") | base64encode }}'

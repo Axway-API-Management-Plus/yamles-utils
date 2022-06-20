@@ -1,0 +1,21 @@
+cassandra:
+  replication:
+    strategy: org.apache.cassandra.locator.SimpleStrategy
+    factor: 1
+  consistency:
+    read: ONE
+    write: ONE
+  security:
+    username: ""
+    password: ""
+    ssl_enabled: "false"
+
+db:
+  metrics:
+    url: "jdbc:mysql://127.0.0.1:3306/metrics"
+    user: "metrics"
+    password: "changeme"
+  masterdata:
+    url: "jdbc:mysql://127.0.0.1:3306/masterdata"
+    user: "md"
+    password: "changeme"

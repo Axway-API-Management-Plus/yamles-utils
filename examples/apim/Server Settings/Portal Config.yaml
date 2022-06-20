@@ -12,3 +12,4 @@ fields:
   apiregOAuthTokenStores: /Libraries/OAuth2 Stores/Access Token Stores/OAuth Access Token Store
   name: Portal Config
   adminPassword: Y2hhbmdlbWU=
+  apiregResponsePolicies: []

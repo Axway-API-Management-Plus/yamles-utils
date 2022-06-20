@@ -8,6 +8,11 @@ fields:
   throttlingReplicationStrategy: '{{Server_Settings.Cassandra_Settings.throttlingReplicationStrategy}}'
   throttlingReadConsistencyLevel: '{{Server_Settings.Cassandra_Settings.throttlingReadConsistencyLevel}}'
   throttlingWriteConsistencyLevel: '{{Server_Settings.Cassandra_Settings.throttlingWriteConsistencyLevel}}'
+  username: '{{Server_Settings.Cassandra_Settings.username}}'
+  password: '{{Server_Settings.Cassandra_Settings.password}}'
+  useSSL: '{{Server_Settings.Cassandra_Settings.useSSL}}'
+  sslTrustedCerts: []
+  sslCipherSuite: ""
 children:
 - type: CassandraServer
   fields:

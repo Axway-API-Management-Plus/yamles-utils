@@ -33,12 +33,13 @@ children:
   fields:
     url: https://changeme/as/token.oauth2
     profile: /null
-    caCerts: /Environment Configuration/Certificate Store/CN=StartCom Class 2 Primary Intermediate Server CA,OU=Secure Digital Certificate Signing,O=StartCom Ltd.,C=IL
+    caCerts:
+    - /Environment Configuration/Certificate Store/example-root-ca
+    - /Environment Configuration/Certificate Store/example-sub-ca
     sslUsers: /null
     useRootCerts: false
     ciphers: FIPS:!SSLv3:!aNULL
     ssloptions:
-    - nosslv2
     - nosslv3
     - notlsv1
     - notlsv1_1

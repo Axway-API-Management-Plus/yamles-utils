@@ -1,6 +1,7 @@
 package com.axway.yamles.utils.merge.config;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -31,38 +32,45 @@ public class MergeConfigCommand implements Callable<Integer> {
 	Target target;
 
 	@Option(names = { "-d",
-			"--dir" }, description = "Directory to scan for YAML configuration sources", paramLabel = "DIR", required = true)
+			"--dir" }, description = "Directory to scan for YAML configuration sources", paramLabel = "DIR", required = false)
 	private List<File> directories;
 
+	@Option(names = { "-c", "--config" }, description = "Configuration file", paramLabel = "FILE", required = false)
+	private List<File> files;
+
 	@Override
-	public Integer call() {
-		try {
-			ConfigSourceScanner scanner = new ConfigSourceScanner();
-			scanner.addDirectories(this.directories);
-			scanner.scan();
+	public Integer call() throws Exception {
+		ConfigSourceScanner scanner = new ConfigSourceScanner();
+		scanner.addDirectories(this.directories);
+		scanner.scan();
 
-			File out;
-			if (this.target.projectDir != null) {
-				YamlEs es = new YamlEs(this.target.projectDir);
-				out = es.getValuesFile();
-			} else {
-				out = this.target.file;
-			}
-
-			YamlEsConfig esConfig = new YamlEsConfig();
-			esConfig.merge(scanner.getSources());
-
-			if (out.getName().equals("-")) {
-				System.out.println(esConfig.toYaml());
-			} else {
-				Yaml.write(out, esConfig.getConfig());
-				log.info("configuration written to {}", out.getAbsoluteFile());
-			}
-
-			return 0;
-		} catch (Exception e) {
-			log.error(e);
-			return 1;
+		File out;
+		if (this.target.projectDir != null) {
+			YamlEs es = new YamlEs(this.target.projectDir);
+			out = es.getValuesFile();
+		} else {
+			out = this.target.file;
 		}
+
+		List<ConfigSource> csl = new ArrayList<>();
+		csl.addAll(scanner.getSources());
+		if (this.files != null) {
+			for (File f : this.files) {
+				ConfigSource cs = ConfigSourceFactory.load(f);
+				csl.add(cs);
+			}
+		}
+
+		YamlEsConfig esConfig = new YamlEsConfig();
+		esConfig.merge(csl);
+
+		if (out.getName().equals("-")) {
+			System.out.println(esConfig.toYaml());
+		} else {
+			Yaml.write(out, esConfig.getConfig());
+			log.info("configuration written to {}", out.getAbsoluteFile());
+		}
+
+		return 0;
 	}
 }

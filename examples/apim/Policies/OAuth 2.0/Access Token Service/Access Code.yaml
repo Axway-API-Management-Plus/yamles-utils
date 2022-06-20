@@ -15,5 +15,5 @@ children:
     success: ../Create an Open ID Connect ID Token
 - type: CreateIDTokenFilter
   fields:
-    jwtSigner: /Environment Configuration/Certificate Store/CN=Change this for production
+    jwtSigner: /Environment Configuration/Certificate Store/example-server
     name: Create an Open ID Connect ID Token

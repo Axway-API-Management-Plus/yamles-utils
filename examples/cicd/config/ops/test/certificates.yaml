@@ -1,0 +1,23 @@
+---
+certificates:
+  example-server:
+    provider: keystore
+    config:
+      path: ../all/ops-keystore.jks
+      pass: "{{ keepass('/test/ops-keystore:password') }}"
+      alias: test-axway-server
+      
+  example-root-ca:
+    provider: keystore
+    config:
+      path: ../all/ops-keystore.jks
+      pass: "{{ keepass('/test/ops-keystore:password') }}"
+      alias: test-demo-axway-root-ca
+
+  example-sub-ca:
+    provider: keystore
+    config:
+      path: ../all/ops-keystore.jks
+      pass: "{{ keepass('/test/ops-keystore:password') }}"
+      alias: test-demo-axway-sub-ca
+...

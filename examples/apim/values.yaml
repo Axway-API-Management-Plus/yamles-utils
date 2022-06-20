@@ -7,6 +7,9 @@ Server_Settings:
     throttlingReplication: 1
     throttlingReadConsistencyLevel: ONE
     throttlingWriteConsistencyLevel: ONE
+    username: ""
+    password: ""
+    useSSL: "false"
 Environment_Configuration:
   Key_Property_Stores:
     API_Portal:
@@ -30,3 +33,14 @@ External_Connections:
       url: jdbc:mysql://127.0.0.1:3306/DefaultDb
       username: root
       password: ""
+    Masterdata:
+      url: jdbc:mysql://127.0.0.1:3306/masterdata
+      username: md
+      password: Y2hhbmdlbWU=
+Policies:
+  Demo:
+    Demo_Service:
+      Set_name:
+        attributeValue: World
+      Feature_toggle:
+        attributeValue: "false"

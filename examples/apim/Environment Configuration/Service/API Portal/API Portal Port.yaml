@@ -1,7 +1,7 @@
 ---
 type: SSLInterface
 fields:
-  serverCert: /Environment Configuration/Certificate Store/CN=Change this for production
+  serverCert: /Environment Configuration/Certificate Store/example-server
   caCert: []
   ssloptions:
   - notlsv1_1

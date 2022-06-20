@@ -1,0 +1,73 @@
+---
+type: FilterCircuit
+fields:
+  name: Demo Service
+  description: ""
+  start: ./Set name
+children:
+- type: AddHTTPHeaderFilter
+  fields:
+    name: Add HTTP header to response
+    headerName: X-Demo
+    headerValue: feature-enabled
+  routing:
+    success: ../Set Message
+  logging:
+    fatal: 'Error in adding the HTTP header to the message. Error: ${circuit.exception}'
+    failure: Failed in adding the HTTP header to the message
+    success: Success in adding the HTTP header to the message
+- type: CompareAttributeFilter
+  fields:
+    name: Is feature enabled
+  routing:
+    success: ../Add HTTP header to response
+    failure: ../Set Message
+  logging:
+    maskType: FILTER
+    mask: 0
+  children:
+  - type: AttributeCompare
+    fields:
+      matchType: IS
+      attrName: feature.demo.enabled
+      expression: "true"
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: feature.demo.enabled
+    attributeValue: '{{Policies.Demo.Demo_Service.Feature_toggle.attributeValue}}'
+    name: Feature toggle
+  routing:
+    success: ../Is feature enabled
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: ChangeMessageFilter
+  fields:
+    name: Set Message
+    outputContentType: application/json
+    body: '{{file "Demo Service-Files/Set Message.json"}}'
+  routing:
+    success: ../Reflect Message
+  logging:
+    fatal: 'Error in setting the message. Error: ${circuit.exception}'
+    failure: Failed in setting the message
+    success: Success in setting the message
+- type: SetAttributeFilter
+  fields:
+    messageAttribute: name
+    attributeValue: '{{Policies.Demo.Demo_Service.Set_name.attributeValue}}'
+    name: Set name
+  routing:
+    success: ../Feature toggle
+  logging:
+    fatal: 'Error while setting the attribute value. Error: ${circuit.exception}'
+    failure: Failed to set the attribute value
+    success: Set the attribute value
+- type: Reflector
+  fields:
+    name: Reflect Message
+  logging:
+    fatal: 'Error occurred while echoing the message. Error: ${circuit.exception}'
+    failure: Failed to echo back the message
+    success: Successfully echoed back the message

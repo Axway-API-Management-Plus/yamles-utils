@@ -15,7 +15,6 @@ import picocli.CommandLine.Option;
 @Command(name = "certs", description = "Merge certificates for YAML entiry store.")
 public class MergeCertificatesCommand implements Callable<Integer> {
 	private static final Logger log = LogManager.getLogger(MergeCertificatesCommand.class);
-	
 
 	@Option(names = {
 			"--project" }, description = "Project directory (YAML entity store)", paramLabel = "DIR", required = true)
@@ -28,19 +27,14 @@ public class MergeCertificatesCommand implements Callable<Integer> {
 
 	@Override
 	public Integer call() throws Exception {
-		try {
-			log.info("merge certificates");
-			YamlEs es = new YamlEs(projectDir);
+		log.info("merge certificates");
+		YamlEs es = new YamlEs(projectDir);
 
-			loadAliases();
+		loadAliases();
 
-			this.aliases.writeAliases(es);
+		this.aliases.writeAliases(es);
 
-			return 0;
-		} catch (Exception e) {
-			log.error("merge certificates failed", e);
-			return 1;
-		}
+		return 0;
 	}
 
 	private void loadAliases() {
