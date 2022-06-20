@@ -62,16 +62,6 @@
 		<url>https://github.com/Axway-API-Management-Plus/yamles-utils</url>
 		<!-- <tag>yamles-utils-0.0.1</tag> -->
 	</scm>
-	<distributionManagement>
-		<snapshotRepository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</snapshotRepository>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-		</repository>
-	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>io.pebbletemplates</groupId>
