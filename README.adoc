@@ -27,7 +27,7 @@ Some utilities to make live easier with YAML Entity Store.
 * Merge configuration values from multiple files into a result `values.yaml`
 * Merge certificates from multiple sources into the API Gateway project.
 ** Keystore: add/overwrite certificates from PKCS#12 or JKS key stores
-** Simple: add/overwrite certificates with by simple base64 encoded values
+** Simple: add/overwrite certificates by simple base64 encoded values
 ** Remover: remove certificates from the project
 * Lookup values from multiple sources
 ** Environment variables
