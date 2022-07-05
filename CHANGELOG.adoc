@@ -1,0 +1,19 @@
+= Changelog
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+== Version 0.0.4
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|0
+|Enhancement
+|Initial release.
+|===
