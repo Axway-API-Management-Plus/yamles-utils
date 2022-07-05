@@ -1,0 +1,30 @@
+= YAML Entity Store Utilities
+:Author: Martin Look
+:Email: mlook@axway.com
+:revnumber: 0.0.4
+:toc:
+:sectnums:
+:source-highlighter: prettify
+ifndef::env-github[]
+:icons: font
+:icon-set: far
+endif::[]
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+:mvn-plugin-ver: {revnumber}
+
+== Introduction
+
+include::_usage.adoc[leveloffset=+1]
+
+include::_reference.adoc[leveloffset=+1]
+
+include::_faq.adoc[leveloffset=+1]

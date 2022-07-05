@@ -1,0 +1,48 @@
+= Reference
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+== Rules
+
+
+
+== Lookups
+
+=== Environment Variables
+
+=== System Properties
+
+=== YAML File
+
+=== KeePass DB
+
+=== Hashicorp Vault
+
+
+== Certificates
+
+[source,yaml]
+----
+certificates: #<1>
+  <alias-1>: #<2>
+    provider: <provider> #<3>
+    config: #<4>
+      <provider configuration> #<5>
+----
+<1> hhjhjh
+<2> Certificate alias
+
+
+
+=== Simple Certificate Provider
+
+=== Keystore File
+
+=== Remover
