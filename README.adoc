@@ -20,34 +20,107 @@ image:https://img.shields.io/github/v/release/Axway-API-Management-Plus/yamles-u
 
 == Introduction
 
-Some utilities to make live easier with YAML Entity Store.
+[sidebar]
+.tl;dr
+--
+Utilities to verify coding rules of YAML Entity Store based projects and to configure projects for target environments using various configuration sources.
+--
 
-.Features
-* Lint API Gateway project with customized rules
-* Merge configuration values from multiple files into a result `values.yaml`
-* Merge certificates from multiple sources into the API Gateway project.
-** Keystore: add/overwrite certificates from PKCS#12 or JKS key stores
-** Simple: add/overwrite certificates by simple base64 encoded values
-** Remover: remove certificates from the project
-* Lookup values from multiple sources
-** Environment variables
-** System properties
-** YAML files
-** KeePass DB
-** Hashicorp Vault (beta)
+Since the 7.7 February'22 release of the Axway API Gateway, Policy Studio supports to edit policy projects in the YAML Entity Store (YAML-ES) format.
+This format enables fine grained storage of project entities in easy to read and easy to compare YAML files.
 
-== Examples
+The YAML Entity Store has many advantages compared to the legacy XML based Entity Store:
 
-Checkout the `examples` folder.
+* Project entities are stored in fine grained, easy to read YAML files.
+* Easy comparison of different versions of a file.
+* Easy file merge, on concurrent editing.
+* Storing in a SCM (e.g, Git) changes can be easily checked.
+* Environmentalized values configured in a single YAML file.
+
+With the experience of the link:https://github.com/Axway-API-Management-Plus/apigw-maven-plugin[Maven Plugin for API Gateway] project, storing configuration in one single file doesn't always met the requirements.
+This project is created to provide the flexibility of the Maven Plugin (for XML based ES only) to the YAML-ES based projects also (and even more).
+
+== Use Cases
+
+NOTE: The following use case is for explanation purpose only.
+Projects don't have to follow the described responsibilities.
+
+=== CI/CD Pipeline
+
+==== Challenge
+
+In this example, a development team implements policies for the Axway API Manager/Gateway.
+The development team is responsible for the configuration of policies and for the connections to the backend systems.
+
+The operation team is responsible to setup the infrastructure and to configure the main API Manager settings.
+
+Policy Studio project contains the full configuration of an API Gateway.
+This includes configurations the developers are responsible for and configuration for which the operation team is responsible.
+Even if the values are environmentalized, both teams are responsible to configure the same file (`values.yaml`) for the different stages.
+In addition to non critical configurations, the file also contains confidential values (e.g., passwords).
+
+For staging the project, certificates stored in the YAML-ES have to be replaced by the stage specific counterpart.
+
+==== Solution
+
+Configurations with shared responsibility or staged dependent values are environmentalized.
+A linter checks the project against coding rules (defined by the Ops team) to ensure that all required fields are environmentalized and all required entities exists.
+
+With stage specific configurations (including certificates), a stage specific project is created.
+
+Configuration parameter are sourced from multiple locations.
+Configurations are retrieved from plain text files stored in the Git repository or from encrypted data sources.
+Each team has its own set of configuration parameter (depending on their responsibility). Hierarchies of configurations ensures that values configured the Ops team supersede values defined by the Dev team.
+
+The generated, stage specific project is verified for unconfigured fields or broken references.
+
+After successful verification the project will be deployed to the target environment.
+During the deployment a passphrase is added to protect the configurations.
+
+.CI/CD Pipeline
+image:docs/manual/images/pipeline.png[]
+
+The picture above visualize the CI/CD pipeline.
+The _YAML-ES Utilities_ tool provided by this project is used for linting and for the configuration of the stage specific project.
+
+==== Example
+
+The `examples` folder provides a demo of the previously described pipeline (except the deployment task).
 
 The `examples/apim` folder contains a YAML entity store of an API Manager.
 
 The `examples/cicd` folder contains a sample script for configuring a project for different stages.
 
+Execute the following command in a Bash shell to generate a YAML-ES archive for the test environment.
+
 [source,shell]
 ----
 examples/cicd/bin/build-archive.sh -e test
 ----
+
+
+== Features
+
+The YAMLES Utility provides the following features:
+
+* Linting.
+** Lint API Gateway project against customized rules.
+** Rules can be sourced from different locations.
+* Merge configuration from multiple files into a result `values.yaml` file.
+* Lookup values from multiple data sources.
+*** YAML files
+*** Environment variables
+*** System properties
+*** Keepass DB
+*** Hashicorp Vault
+* Merge certificates from multiple sources into the API Gateway project.
+** Keystore: Add/overwrite certificates from PKCS#12 or JKS key stores
+** Simple: Add/overwrite certificates by simple Base64 encoded values (can be combined with value lookup, see above).
+** Remover: Remove certificates from the project
+
+== More to Read
+
+* link:manual/user-guide.adoc[User Guide]
 
 == Contributing
 Please read https://github.com/Axway-API-Management-Plus/Common/blob/master/Contributing.md[Contributing] for details on our code of conduct, and the process for submitting pull requests to us.
