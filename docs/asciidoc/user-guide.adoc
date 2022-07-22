@@ -18,13 +18,19 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :warning-caption: :warning:
 endif::[]
+ifndef::imagesdir[:imagesdir: ./images]
+
 
 :mvn-plugin-ver: {revnumber}
 
-== Introduction
+include::_intro.adoc[leveloffset=+1]
 
 include::_usage.adoc[leveloffset=+1]
 
 include::_reference.adoc[leveloffset=+1]
 
+include::_extend.adoc[leveloffset=+1]
+
 include::_faq.adoc[leveloffset=+1]
+
+include::../../CHANGELOG.adoc[leveloffset=+1]

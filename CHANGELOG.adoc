@@ -9,6 +9,32 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+== Version 0.0.5
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|0
+|Enhancement
+|Use Maven wrapper
+
+|0
+|Enhancement
+|Build ZIP distribution instead of single JAR
+
+|0
+|Enhancement
+|Include HTML documentation in distribution
+
+|0
+|Enhancement
+|Help option for sub-commands
+
+|0
+|Enhancement
+|JSON lookup provider
+
+|===
+
 == Version 0.0.4
 [cols="1,2,<10a", options="header"]
 |===

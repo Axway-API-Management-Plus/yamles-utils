@@ -78,26 +78,14 @@ After successful verification the project will be deployed to the target environ
 During the deployment a passphrase is added to protect the configurations.
 
 .CI/CD Pipeline
-image:docs/manual/images/pipeline.png[]
+image:docs/asciidoc/images/pipeline.png[]
 
 The picture above visualize the CI/CD pipeline.
 The _YAML-ES Utilities_ tool provided by this project is used for linting and for the configuration of the stage specific project.
 
 ==== Example
 
-The `examples` folder provides a demo of the previously described pipeline (except the deployment task).
-
-The `examples/apim` folder contains a YAML entity store of an API Manager.
-
-The `examples/cicd` folder contains a sample script for configuring a project for different stages.
-
-Execute the following command in a Bash shell to generate a YAML-ES archive for the test environment.
-
-[source,shell]
-----
-examples/cicd/bin/build-archive.sh -e test
-----
-
+The `examples` folder provides a demo of the previously described pipeline (except the deployment task) - see link:examples/README.adoc[examples] for details.
 
 == Features
 
@@ -105,11 +93,12 @@ The YAMLES Utility provides the following features:
 
 * Linting.
 ** Lint API Gateway project against customized rules.
-** Rules can be sourced from different locations.
+** Rules can be sourced from multiple locations.
 * Merge configuration from multiple files into a result `values.yaml` file.
 * Lookup values from multiple data sources.
 *** YAML files
-*** Environment variables
+*** JSON files
+*** Environment variables (plain text or JSON document)
 *** System properties
 *** Keepass DB
 *** Hashicorp Vault

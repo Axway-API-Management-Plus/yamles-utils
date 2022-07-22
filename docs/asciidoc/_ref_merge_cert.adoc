@@ -1,4 +1,4 @@
-= Reference
+= Merge Certificates
 ifdef::env-github[]
 :outfilesuffix: .adoc
 :!toc-title:
@@ -8,25 +8,6 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :warning-caption: :warning:
 endif::[]
-
-== Rules
-
-
-
-== Lookups
-
-=== Environment Variables
-
-=== System Properties
-
-=== YAML File
-
-=== KeePass DB
-
-=== Hashicorp Vault
-
-
-== Certificates
 
 [source,yaml]
 ----
@@ -41,8 +22,8 @@ certificates: #<1>
 
 
 
-=== Simple Certificate Provider
+== Simple Certificate Provider
 
-=== Keystore File
+== Keystore File
 
-=== Remover
+== Remover

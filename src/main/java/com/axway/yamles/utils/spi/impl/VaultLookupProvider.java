@@ -147,6 +147,14 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 	public boolean isEnabled() {
 		return this.clients != null && !this.clients.isEmpty();
 	}
+	
+	
+	@Override
+	public void onRegistered() {
+		for (VaultClient client : this.clients) {
+			log.info("Vault lookup server registered: addr={}, basePath={}", client.addr, client.basePath);
+		}
+	}
 
 	@Override
 	public Optional<String> lookup(String key) {

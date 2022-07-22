@@ -5,7 +5,7 @@ import com.axway.yamles.utils.merge.config.MergeConfigCommand;
 
 import picocli.CommandLine.Command;
 
-@Command(name = "merge", description = "Merge configuration from various sources.", subcommands={MergeConfigCommand.class, MergeCertificatesCommand.class})
+@Command(name = "merge", description = "Merge configuration from various sources.", subcommands={MergeConfigCommand.class, MergeCertificatesCommand.class}, mixinStandardHelpOptions = true)
 public class MergeCommand {
 
 }

@@ -104,26 +104,54 @@ RULES_DIR="$(realpath ${CMD_HOME}/../rules)"
 LOOKUP_DIR="$(realpath ${CMD_HOME}/../lookup)"
 
 TARGET_DIR="${PRJ_HOME}/target"
-TARGET_TMP_DIR="${TARGET_DIR}/tmp"
-TARGET_ARCHIVE="${TARGET_DIR}/apim.tar.gz"
+TARGET_EXAMPLE_DIR="${TARGET_DIR}/example"
+TARGET_TMP_DIR="${TARGET_EXAMPLE_DIR}/tmp"
+TARGET_ARCHIVE="${TARGET_EXAMPLE_DIR}/apim.tar.gz"
+
+echo ""
+echo "============================================================"
+echo "== Tooling"
+echo "============================================================"
+# Unzip package
+if [ -d "${TARGET_DIR}" ]
+then
+  YAMLES_UTILS_ZIP=$(find "${TARGET_DIR}" -maxdepth 1 -type f -name "yamles-utils-*-bin.zip")
+fi
+if [ -z "${YAMLES_UTILS_ZIP:-}" ]
+then
+  echo "ERROR: yamles-utils archive not found; build project first"
+  echo "ERROR:   $ mvn clean package"
+  exit 1
+fi
+if [ ! -d "${TARGET_EXAMPLE_DIR}" ]
+then
+  mkdir -p "${TARGET_EXAMPLE_DIR}"
+fi
+YAMLES_UTILS_HOME=$(find "${TARGET_EXAMPLE_DIR}" -mindepth 1 -maxdepth 1 -type d -name "yamles-utils-*")
+if [ -z "${YAMLES_UTILS_HOME}" ]
+then
+  unzip -q -d "${TARGET_EXAMPLE_DIR}" "${YAMLES_UTILS_ZIP}"
+  YAMLES_UTILS_HOME=$(find "${TARGET_EXAMPLE_DIR}" -mindepth 1 -maxdepth 1 -type d -name "yamles-utils-*")  
+fi
 
 # Set tools
-YAMLES="${AXWAY_HOME}/apigateway/posix/bin/yamles"
-if [ ! -f "${YAMLES}" ]
+YAMLES_UTILS="${YAMLES_UTILS_HOME}/bin/yamlesutils.sh"
+AXWAY_BIN="${AXWAY_HOME}/apigateway/posix/bin"
+YAMLES="${AXWAY_BIN}/yamles"
+if [ ! -z "${WINDIR:-}" ]
 then
-  YAMLES="${AXWAY_HOME}/apigateway/Win32/bin/yamles.bat"
+  AXWAY_BIN="${AXWAY_HOME}/apigateway/Win32/bin"
+  YAMLES="${AXWAY_BIN}/yamles.bat"
+  YAMLES_UTILS="${YAMLES_UTILS_HOME}/bin/yamlesutils.cmd"
 fi
-for j in "${TARGET_DIR}/yamles-utils-*-jar-with-dependencies.jar"
-do
-  JAR="$j"
-  break;
-done
-YAMLES_UTILS="java -jar ${JAR}"
+echo "yamles: ${YAMLES}"
+echo "yamlesutils: ${YAMLES_UTILS}"
+
+# Add debug option
 if [ ${DEBUG} -gt 0 ]
 then
   YAMLES_UTILS="${YAMLES_UTILS} -v"
 fi
-
 
 # Prepare for configuration
 echo ""
@@ -214,6 +242,9 @@ case $OPT_ENV in
     )
     ;;
   test)
+    export DB_METRICS_USER="metrics_t"
+    export LOOKUP_JSON_TEST='{"db":{"metrics":{"password": "changeme_t"}}}'
+
     args+=( \
       # Read values for which only developers are responsible for
       "--config=${CFG_DIR}/devs/test/devs-values.yaml" \
@@ -232,9 +263,18 @@ case $OPT_ENV in
 
       # Use operators maintained YAML based lookup file
       "--lookup-yaml=${LOOKUP_DIR}/ops/test/lookup.yaml" \
+
+      # Use operators maintained JSON based lookup file
+      "--lookup-json=${LOOKUP_DIR}/ops/test/lookup.json" \
+
+      # Use operators maintained JSON based lookup environment variable
+      "--lookup-envjson=LOOKUP_JSON_TEST" \
     )
     ;;
   prod)
+    export DB_METRICS_USER="metrics_p"
+    export LOOKUP_JSON_PROD='{"db":{"metrics":{"password": "changeme_p"}}}'
+
     args+=( \
       # Read values for which only developers are responsible for    
       "--config=${CFG_DIR}/devs/prod/devs-values.yaml" \
@@ -253,6 +293,12 @@ case $OPT_ENV in
 
       # Use operators maintained YAML based lookup file
       "--lookup-yaml=${LOOKUP_DIR}/ops/prod/lookup.yaml" \
+
+      # Use operators maintained JSON based lookup file
+      "--lookup-json=${LOOKUP_DIR}/ops/test/lookup.json" \
+
+      # Use operators maintained JSON based lookup environment variable
+      "--lookup-envjson=LOOKUP_JSON_PROD" \
     )
     ;;
   *)
@@ -285,7 +331,7 @@ echo ""
 echo "Use the following command to deploy the configured archive to"
 echo "the API Gateway."
 echo ""
-echo "  ${AXWAY_HOME}/apigateway/posix/bin/managedomain --deploy \\"
+echo "  ${AXWAY_BIN}/managedomain --deploy \\"
 echo "    --archive_filename ${TARGET_ARCHIVE} \\"
 echo "    --group APIM \\"
 echo "    --username admin --password changeme"

@@ -1,0 +1,289 @@
+= Linting
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+The tool can be used to check the project against coding guidelines.
+The coding guidelines are represented by rules defined in a set of YAML files.
+
+== Command
+
+The `lint` command of `yamlesutils` is used to verify the project.
+
+[source]
+----
+$ yamlesutils.sh lint --help
+Usage: yamlesutils lint [-hV] --project=DIR -r=FILE [-r=FILE]...
+Lint YAML entity store.
+  -h, --help          Show this help message and exit.
+      --project=DIR   Path to the YAML entity store project.
+  -r, --rules=FILE    Rules file
+  -V, --version       Print version information and exit.
+----
+
+The command requires the path to the project directory and a list of rules files.
+
+.Example
+[source,shell]
+----
+$ yamlesutils.sh lint --project=src/apim --rules=rules/db.yaml --rules=rules/cassandra.yaml
+----
+
+== Rules
+
+The rules are defined in YAML files having to following structure:
+
+.Structure of a rules definition file (YAML)
+[source,yaml]
+----
+rules: #<1>
+  "rule_id": #<2>
+    # Description of the rule
+    name: "Rule Name" #<3>
+    description: "Additional description (optional)"
+
+    # Files to be checked by the rules
+    fileType: ...type of the project file...
+    filePatterns:
+      - '...array or search patterns for files...'
+
+    # Assertions applied to the file
+    assertions:
+      - '...array of assertions...'
+----
+<1> Container for rules.
+<2> Each rule has its unique ID within the rules container.
+<3> Mandatory name of the rule.
+
+An assertion checks a property in t
+
+.Properties of Assertions
+[cols="1,<5a,1", options="header"]
+|===
+|Property
+|Description
+|Mandatory
+
+|path
+|JSON path to the property of the YAML file to be checked
+|yes
+
+|type
+|Type of the assertion (see table below).
+|yes
+
+|param
+|Parameters to be passed to the 
+|no
+
+|message
+|Message to be displayed in case of the failed assertion.
+|no
+|===
+
+.Assertions
+[cols="2,<5a", options="header"]
+|===
+|Assertion|Description and Example
+
+|environmentalized
+|Check if the field is environmentalized
+[source,yaml]
+----
+- path: '$.fields.username'
+  type: environmentalized
+  message: Cassandra user name must be environmentalized
+----
+
+|exists
+|Check the existence of a property in the YAML file.
+[source,yaml]
+----
+- path: '$.children[0].fields.host'
+  type: exists
+  message: One Cassandra node must be configured
+----
+
+|not_exists
+|Ensure that property doesn't exist in the YAML file.
+[source,yaml]
+----
+- path: '$.children[1].fields.host'
+  type: not_exists
+  message: Only one Cassandra node must be configured
+----
+
+|regex
+|Check the content of property against a regular expression.
+[source,yaml]
+----
+- path: '$.children[0].fields.host'
+  type: regex
+  param: '^\$\{env\..+\}'
+  message: Cassandra node must be configured via envSettings.props
+----
+|===
+
+=== Example
+
+==== Cassandra Nodes and KPS Tables
+The following example checks the configuration of the Cassandra database and the KPS tables using Cassandra as data source.
+
+In this example it is assumed that exactly three Cassandra nodes must be configured.
+To enable database center specific Cassandra nodes, the node must be retrieved from the `envSettings.props` of the gateway instance.
+
+To support stage specific configurations, the following settings must be environmentalized:
+
+. Credentials for Cassandra connection
+. TLS security switch
+. Replication strategy and replication factor (KPS tables and throttling)
+. Read/write consistency level (KPS tables and throttling)
+
+.Example rules file for Cassandra
+[source,yaml]
+----
+rules:
+  #
+  # Cassandra Settings
+  #
+  "cassandra_settings": #<1>
+    name: Cassandra Nodes
+    description: Check Cassandra nodes
+
+    fileType: CassandraSettings #<2>
+    filePatterns:
+      - '/Server Settings/Cassandra Settings.yaml'
+
+    assertions:
+      # Three nodes should be configured to ensure quorum.
+      - path: '$.children[0].fields.host'
+        type: exists
+        message: Three Cassandra nodes must be configured to ensure quorum        
+      - path: '$.children[1].fields.host'
+        type: exists
+        message: Three Cassandra nodes must be configured to ensure quorum        
+      - path: '$.children[2].fields.host'
+        type: exists
+        message: Three Cassandra nodes must be configured to ensure quorum
+      - path: '$.children[3].fields.host'
+        type: not_exists
+        message: Only three Cassandra nodes must be configured to ensure quorum
+
+      # Cassandra nodes should be configured by envSettings.props to support
+      # datacenter aware node connections.
+      #
+      - path: '$.children[0].fields.host'
+        type: regex
+        param: '^\$\{env\..+\}'
+        message: Cassandra nodes must be configured via envSettings.props
+
+      - path: '$.children[1].fields.host'
+        type: regex
+        param: '^\$\{env\..+\}'
+        message: Cassandra nodes must be configured via envSettings.props
+
+      - path: '$.children[2].fields.host'
+        type: regex
+        param: '^\$\{env\..+\}'
+        message: Cassandra nodes must be configured via envSettings.props
+
+      # Credentials must be environmentalized
+      - path: '$.fields.username'
+        type: environmentalized
+
+      - path: '$.fields.password'
+        type: environmentalized
+
+      # SSL security must be environmentalized
+      - path: '$.fields.useSSL'
+        type: environmentalized
+
+      # Replication strategy and factors must be environmentalized
+      - path: '$.fields.replication'
+        type: environmentalized
+
+      - path: '$.fields.replicationStrategy'
+        type: environmentalized
+
+      - path: '$.fields.throttlingReplication'
+        type: environmentalized
+
+      - path: '$.fields.throttlingReplication'
+        type: environmentalized
+
+      - path: '$.fields.throttlingReplicationStrategy'
+        type: environmentalized
+
+      # Consistency level for throttling must be environmentalized
+      - path: '$.fields.throttlingReadConsistencyLevel'
+        type: environmentalized
+
+      - path: '$.fields.throttlingWriteConsistencyLevel'
+        type: environmentalized
+
+  # Cassandra for KPS Data Sources
+  "kps_data_source": #<3>
+    name: KPS Data Source
+    description: Check data source for KPS tables
+
+    fileType: KPSCassandraDataSource #<4>
+    filePatterns:
+      - '/Environment Configuration/Key Property Stores/.*/.+\.yaml'
+
+    # Consistency levels must be environmentalized
+    assertions:
+      - path: '$.fields.readConsistencyLevel'
+        type: environmentalized
+
+      - path: '$.fields.writeConsistencyLevel'
+        type: environmentalized
+----
+<1> ID of the rules for Cassandra settings.
+<2> Cassandra settings are stored in the entity `/Server Settings/Cassandra Settings.yaml` of type `CassandraSettings`.
+<3> ID of the rules for KPS data sources.
+<4> KPS settings for Cassandra data sources are stored in entities matching the file path `/Environment Configuration/Key Property Stores/.*/.+\.yaml` and which are of type `KPSCassandraDataSource`
+
+=== Database Connections
+
+The following example checks the configuration of external database connections.
+
+To enable stage specific configuration, the following fields of the database connections must be environmentalized:
+
+. Connection URL
+. User name
+. Password
+
+.Example rules file for database connections
+[source,yaml]
+----
+rules:
+  # Database connections must be environmentalized
+  "db_connections": #<1>
+    name: DB Connection Environmentalization
+    description: Connection to databases are usually stage specific and Field must be environmentalized
+
+    fileType: DbConnection #<2>
+    filePatterns:
+      - '/External Connections/Database Connections/.*'
+
+    assertions:
+      - path: '$.fields.username'
+        type: environmentalized
+        message: User for DB must be environmentalized
+
+      - path: '$.fields.password'
+        type: environmentalized
+        message: Password for DB must be environmentalized
+
+      - path: '$.fields.url'
+        type: environmentalized
+        message: DB connection URL must be environmentalized
+----
+<1> ID of the database connection rules.
+<2> Database connections are stored in entities under the `/External Connections/Database Connections` folder which are of type `DbConnection`.

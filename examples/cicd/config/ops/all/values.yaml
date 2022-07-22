@@ -29,6 +29,6 @@ Environment_Configuration:
 External_Connections:
   Database_Connections:
     Default_Database_Connection:
-      url: '{{ yaml("/db/metrics/url") }}'
-      username: '{{ yaml("/db/metrics/user") }}'
-      password: '{{ yaml("/db/metrics/password") | base64encode }}'
+      url: '{{ json("/db/metrics/url") }}'
+      username: '{{ env("DB_METRICS_USER") }}'
+      password: '{{ envjson("/db/metrics/password") | base64encode }}'

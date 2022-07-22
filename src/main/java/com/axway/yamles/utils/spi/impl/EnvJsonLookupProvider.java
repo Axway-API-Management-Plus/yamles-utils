@@ -1,6 +1,5 @@
 package com.axway.yamles.utils.spi.impl;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -9,27 +8,33 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.axway.yamles.utils.helper.Yaml;
+import com.axway.yamles.utils.helper.Json;
 import com.axway.yamles.utils.spi.LookupProviderException;
+import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 @Command
-public class YamlLookupProvider extends AbstractLookupProvider {
+public class EnvJsonLookupProvider extends AbstractLookupProvider {
 
-	static class YamlDoc {
-		private final File file;
+	static class EnvJsonDoc {
+		private final String name;
 		private final JsonNode doc;
 
-		public YamlDoc(File file) {
-			this.file = Objects.requireNonNull(file);
-			this.doc = Yaml.load(file);
+		public EnvJsonDoc(String name) throws JacksonException {
+			this.name = Objects.requireNonNull(name);
+			String json = System.getenv(name);
+			if (json == null) {
+				throw new RuntimeException("environment variable not found: " + name);
+			}
+
+			this.doc = Json.read(json);
 		}
 
-		public File getFile() {
-			return this.file;
+		public String getName() {
+			return this.name;
 		}
 
 		public JsonNode at(String key) {
@@ -37,35 +42,36 @@ public class YamlLookupProvider extends AbstractLookupProvider {
 		}
 	}
 
-	private static final Logger log = LogManager.getLogger(YamlLookupProvider.class);
+	private static final Logger log = LogManager.getLogger(EnvJsonLookupProvider.class);
 
-	@Option(names = { "--lookup-yaml" }, description = "path to an YAML file", paramLabel = "FILE")
-	private List<File> yamlFiles;
-	private List<YamlDoc> docs;
+	@Option(names = {
+			"--lookup-envjson" }, description = "environment variable containing a JSON document", paramLabel = "NAME")
+	private List<String> names;
+	private List<EnvJsonDoc> docs;
 
 	@Override
 	public String getName() {
-		return "yaml";
+		return "envjson";
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return this.yamlFiles != null && !this.yamlFiles.isEmpty();
+		return this.names != null && !this.names.isEmpty();
 	}
 
 	@Override
 	public void onRegistered() {
 		synchronized (this) {
 			if (this.docs == null) {
-				this.docs = new ArrayList<YamlDoc>();
-				for (File file : this.yamlFiles) {
+				this.docs = new ArrayList<EnvJsonDoc>();
+				for (String name : this.names) {
 					try {
-						YamlDoc doc = new YamlDoc(file);
+						EnvJsonDoc doc = new EnvJsonDoc(name);
 						this.docs.add(doc);
-						log.info("YAML lookup file registered: {}", doc.getFile().getAbsolutePath());
+						log.info("JSON lookup from environment var registered: {}", doc.getName());
 					} catch (Exception e) {
 						throw new LookupProviderException(this,
-								"error on loading lookup YAML file: " + file.getAbsolutePath(), e);
+								"error on initialize JSON lookup from environment variable: " + name, e);
 					}
 				}
 			}
@@ -79,13 +85,13 @@ public class YamlLookupProvider extends AbstractLookupProvider {
 
 		JsonNode result = null;
 
-		for (YamlDoc doc : this.docs) {
+		for (EnvJsonDoc doc : this.docs) {
 			JsonNode value = doc.at(key);
 			if (value != null) {
 				if (result == null) {
-					log.debug("found lookup key '{}' in {}", key, doc.getFile().getAbsoluteFile());
+					log.debug("found lookup key '{}' in {}", key, doc.getName());
 				} else {
-					log.debug("overwrite lookup key '{}' by {}", key, doc.getFile().getAbsoluteFile());
+					log.debug("overwrite lookup key '{}' by {}", key, doc.getName());
 				}
 				result = value;
 			}

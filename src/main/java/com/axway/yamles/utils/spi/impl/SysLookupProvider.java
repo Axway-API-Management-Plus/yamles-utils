@@ -35,4 +35,8 @@ public class SysLookupProvider extends AbstractLookupProvider {
 		}
 		return Optional.of(value);
 	}
+
+	@Override
+	public void onRegistered() {
+	}
 }

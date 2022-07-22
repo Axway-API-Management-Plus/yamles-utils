@@ -15,11 +15,12 @@ import com.axway.yamles.utils.spi.LookupProvider;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
+import picocli.CommandLine.HelpCommand;
 import picocli.CommandLine.IExecutionExceptionHandler;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.ParseResult;
 
-@Command(name = "yamlestools", description = "YAML Enity Store Tools", subcommands = { MergeCommand.class,
+@Command(name = "yamlesutils", description = "YAML Enity Store Utilities", subcommands = { HelpCommand.class, MergeCommand.class,
 		LintCommand.class }, mixinStandardHelpOptions = true, versionProvider = VersionProvider.class)
 public class YamlEsUtils implements IExecutionExceptionHandler {
 

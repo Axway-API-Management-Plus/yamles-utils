@@ -14,7 +14,7 @@ import com.axway.yamles.utils.lint.rules.Results;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
-@Command(name = "lint", description = "Lint YAML entity stores.")
+@Command(name = "lint", description = "Lint YAML entity store.", mixinStandardHelpOptions = true)
 public class LintCommand implements Callable<Integer> {
 	private static final Logger log = LogManager.getLogger(LintCommand.class);
 

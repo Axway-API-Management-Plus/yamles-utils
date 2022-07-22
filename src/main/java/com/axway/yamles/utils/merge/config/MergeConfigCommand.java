@@ -15,7 +15,7 @@ import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
-@Command(name = "config", description = "Merge configuration files for YAML entiry store.")
+@Command(name = "config", description = "Merge configuration files for YAML entiry store.", mixinStandardHelpOptions = true)
 public class MergeConfigCommand implements Callable<Integer> {
 	private static final Logger log = LogManager.getLogger(MergeConfigCommand.class);
 

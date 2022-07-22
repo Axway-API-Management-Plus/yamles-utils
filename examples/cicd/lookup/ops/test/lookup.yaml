@@ -7,9 +7,3 @@ cassandra:
     write: ONE
   security:
     ssl_enabled: false
-
-db:
-  metrics:
-    url: "jdbc:mysql://127.0.0.1:3306/metrics"
-    user: "metrics"
-    password: "changeme"

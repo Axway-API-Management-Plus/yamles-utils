@@ -12,7 +12,7 @@ import com.axway.yamles.utils.helper.YamlEs;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
-@Command(name = "certs", description = "Merge certificates for YAML entiry store.")
+@Command(name = "certs", description = "Merge certificates for YAML entiry store.", mixinStandardHelpOptions = true)
 public class MergeCertificatesCommand implements Callable<Integer> {
 	private static final Logger log = LogManager.getLogger(MergeCertificatesCommand.class);
 

@@ -11,6 +11,7 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class YamlEs {
@@ -109,6 +110,13 @@ public class YamlEs {
 	public void writeCertificate(String alias, Certificate cert, Optional<Key> key) throws IOException, CertificateEncodingException {
 		CertFiles files = new CertFiles(this, alias);
 		files.write(cert, key);
+	}
+	
+	public static Optional<String> getEnityType(ObjectNode yaml) {
+		JsonNode type = yaml.get("type");
+		if (type == null || !type.isTextual())
+			return Optional.empty();
+		return Optional.of(type.asText());
 	}
 
 	public static boolean isValid(File projectDir) {

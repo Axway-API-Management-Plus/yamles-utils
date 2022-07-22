@@ -39,6 +39,7 @@ public class LookupManager extends AbstractExtension {
 			if (sp.isEnabled()) {
 				functions.put(sp.getName(), sp);
 				log.debug("lookup provider registered: {}", sp.getName());
+				sp.onRegistered();				
 			} else {
 				log.debug("lookup provider skipped: {}", sp.getName());
 			}

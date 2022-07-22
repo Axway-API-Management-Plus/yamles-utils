@@ -145,6 +145,14 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 		File keyFile;
 
 		KeePassDB db = null;
+		
+		void init() throws Exception {
+			synchronized (this) {
+				if (db == null) {
+					db = new KeePassDB(this.dbFile, this.passphrase, this.keyFile);
+				}
+			}
+		}
 
 		Optional<String> getValue(String key) throws Exception {
 			Key k = Key.parse(key);
@@ -152,12 +160,6 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 		}
 
 		private Optional<String> getValue(Key key) throws Exception {
-			synchronized (this) {
-				if (db == null) {
-					db = new KeePassDB(this.dbFile, this.passphrase, this.keyFile);
-				}
-			}
-
 			Optional<String> value;
 
 			switch (key.what) {
@@ -204,6 +206,18 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 		return this.kdbs != null && !this.kdbs.isEmpty();
 	}
 
+	@Override
+	public void onRegistered() {
+		for (Kdb db : this.kdbs) {
+			try {
+				db.init();
+			} catch (Exception e) {
+				throw new LookupProviderException(this, "error on initializing KeePass DB: " + db.dbFile.getAbsolutePath(), e);
+			}
+			log.info("KeePass lookup DB registered: {}", db.dbFile.getAbsolutePath());
+		}
+	}
+	
 	@Override
 	public Optional<String> lookup(String key) {
 		if (!isEnabled())

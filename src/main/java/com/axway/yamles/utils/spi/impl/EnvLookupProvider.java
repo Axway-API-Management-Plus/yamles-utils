@@ -35,4 +35,8 @@ public class EnvLookupProvider extends AbstractLookupProvider {
 		}
 		return Optional.of(value);
 	}
+	
+	@Override
+	public void onRegistered() {
+	}
 }

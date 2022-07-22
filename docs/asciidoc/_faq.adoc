@@ -32,9 +32,6 @@ So, please *don't* open a case in the Axway support portal.
 Feedback is always appreciated.
 So open an issue on the GitHub project and describe your ideas.
 
-== Features
-
-
 == Documentation
 
 === What about the `.adoc` extension?
@@ -56,5 +53,5 @@ To generate the PDF execute the following command in the root project folder:
 
 [source,shell]
 ----
-  $ asciidoctor-pdf -a pdf-themesdir=doc/pdf-themes -a pdf-theme=axway doc/manual/user-guide.adoc -d book -o user-guide.pdf
+$ asciidoctor-pdf -a pdf-themesdir=docs/pdf-themes -a pdf-theme=axway docs/asciidoc/user-guide.adoc -d book -o user-guide.pdf
 ----

@@ -17,7 +17,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.axway-api-management-plus</groupId>
 	<artifactId>yamles-utils</artifactId>
-	<version>0.0.4</version>
+	<version>0.0.5</version>
 	<packaging>jar</packaging>
 	<name>YAML Entity Store Utilities</name>
 	<description>Utilities for YAML Entity Store based API Gateway projects.</description>
@@ -60,7 +60,6 @@
 		<connection>scm:git:https://github.com/Axway-API-Management-Plus/yamles-utils.git</connection>
 		<developerConnection>scm:git:https://github.com/Axway-API-Management-Plus/yamles-utils.git</developerConnection>
 		<url>https://github.com/Axway-API-Management-Plus/yamles-utils</url>
-		<!-- <tag>yamles-utils-0.0.1</tag> -->
 	</scm>
 	<distributionManagement>
 		<repository>
@@ -68,7 +67,7 @@
 			<name>GitHub Packages</name>
 			<url>https://maven.pkg.github.com/Axway-API-Management-Plus/yamles-utils</url>
 		</repository>
-	</distributionManagement>	
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>io.pebbletemplates</groupId>
@@ -141,7 +140,40 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>${project.basedir}/src/main/resources-filtered</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
+			<plugin>
+				<groupId>org.asciidoctor</groupId>
+				<artifactId>asciidoctor-maven-plugin</artifactId>
+				<version>2.2.2</version>
+				<executions>
+					<execution>
+						<id>convert-to-html</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>process-asciidoc</goal>
+						</goals>
+						<configuration>
+							<sourceDirectory>${basedir}/docs/asciidoc</sourceDirectory>
+							<outputDirectory>${project.build.directory}/docs</outputDirectory>
+							<attributes>
+								<toc>left</toc>
+								<icons>font</icons>
+								<imagesdir>./images</imagesdir>
+							</attributes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -151,22 +183,14 @@
 					<workingDirectory>./target</workingDirectory>
 				</configuration>
 			</plugin>
-
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>3.3.0</version>
 				<configuration>
-					<archive>
-						<manifest>
-							<mainClass>com.axway.yamles.utils.YamlEsUtils</mainClass>
-						</manifest>
-						<manifestEntries>
-							<Multi-Release>true</Multi-Release>
-						</manifestEntries>
-					</archive>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
+					<descriptors>
+						<descriptor>src/main/assembly/assembly.xml</descriptor>
+					</descriptors>
 				</configuration>
 				<executions>
 					<execution>
