@@ -109,7 +109,7 @@ The YAMLES Utility provides the following features:
 
 == More to Read
 
-* link:manual/user-guide.adoc[User Guide]
+* link:docs/asciidoc/user-guide.adoc[User Guide]
 
 == Contributing
 Please read https://github.com/Axway-API-Management-Plus/Common/blob/master/Contributing.md[Contributing] for details on our code of conduct, and the process for submitting pull requests to us.
