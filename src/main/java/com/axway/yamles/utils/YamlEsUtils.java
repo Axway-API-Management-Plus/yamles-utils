@@ -67,6 +67,7 @@ public class YamlEsUtils implements IExecutionExceptionHandler {
 				.setExecutionStrategy(app::executionStrategy) //
 				.setExecutionExceptionHandler(app) //
 				.execute(args);
+		log.info("finished with exit code: {}", exitCode);
 		System.exit(exitCode);
 	}
 
