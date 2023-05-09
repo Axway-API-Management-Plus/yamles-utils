@@ -33,7 +33,8 @@ public class Mustache {
 	private Mustache() {
 		this.pe = new PebbleEngine.Builder() //
 				.extension(LookupManager.getInstance()) //
-				.autoEscaping(false) //
+				.autoEscaping(true) //
+				.defaultEscapingStrategy("json") //
 				.strictVariables(true) //
 				.build();
 		log.debug("Pebble template engine initialized");
