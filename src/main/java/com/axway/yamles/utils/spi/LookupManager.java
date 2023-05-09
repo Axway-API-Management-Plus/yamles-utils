@@ -8,8 +8,8 @@ import java.util.ServiceLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.mitchellbosecke.pebble.extension.AbstractExtension;
-import com.mitchellbosecke.pebble.extension.Function;
+import io.pebbletemplates.pebble.extension.AbstractExtension;
+import io.pebbletemplates.pebble.extension.Function;
 
 public class LookupManager extends AbstractExtension {
 	private static final Logger log = LogManager.getLogger(LookupManager.class);
@@ -39,7 +39,7 @@ public class LookupManager extends AbstractExtension {
 			if (sp.isEnabled()) {
 				functions.put(sp.getName(), sp);
 				log.debug("lookup provider registered: {}", sp.getName());
-				sp.onRegistered();				
+				sp.onRegistered();
 			} else {
 				log.debug("lookup provider skipped: {}", sp.getName());
 			}

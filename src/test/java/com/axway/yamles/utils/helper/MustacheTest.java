@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import com.axway.yamles.utils.spi.LookupProviderException;
-import com.mitchellbosecke.pebble.error.PebbleException;
+import io.pebbletemplates.pebble.error.PebbleException;
 
 class MustacheTest {
 	private static final String PROP_KEY = "mustache.test";

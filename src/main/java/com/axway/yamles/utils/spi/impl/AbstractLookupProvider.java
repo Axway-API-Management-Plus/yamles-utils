@@ -7,8 +7,8 @@ import java.util.Optional;
 
 import com.axway.yamles.utils.spi.LookupProvider;
 import com.axway.yamles.utils.spi.LookupProviderException;
-import com.mitchellbosecke.pebble.template.EvaluationContext;
-import com.mitchellbosecke.pebble.template.PebbleTemplate;
+import io.pebbletemplates.pebble.template.EvaluationContext;
+import io.pebbletemplates.pebble.template.PebbleTemplate;
 
 public abstract class AbstractLookupProvider implements LookupProvider {
 

@@ -2,7 +2,7 @@ package com.axway.yamles.utils.spi;
 
 import java.util.Optional;
 
-import com.mitchellbosecke.pebble.extension.Function;
+import io.pebbletemplates.pebble.extension.Function;
 
 public interface LookupProvider extends Function {
 
