@@ -9,5 +9,8 @@ SET CLASSMAIN=com.axway.yamles.utils.YamlEsUtils
 SET CLASSPATH=%DIR_LIB%\*;%DIR_PLUGINS%\*
 
 java %CLASSMAIN% %*
+SET RC=%errorlevel%
 
-ENDLOCAL
+ENDLOCAL & SET RC=%RC%
+
+EXIT /B %RC%
