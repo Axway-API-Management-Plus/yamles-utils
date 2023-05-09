@@ -14,7 +14,6 @@ import javax.net.ssl.SSLContext;
 
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.client5.http.impl.io.BasicHttpClientConnectionManager;
 import org.apache.hc.client5.http.socket.ConnectionSocketFactory;
@@ -76,9 +75,10 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 				HttpGet request = new HttpGet(uri.build());
 				request.addHeader("X-Vault-Token", getToken());
 
-				try (CloseableHttpResponse response = client.execute(request)) {
+				return client.execute(request, response -> {
+					Optional<String> result = Optional.empty();
 					if (response.getCode() == 404) {
-						return Optional.empty();
+						return result;
 					}
 					if (response.getCode() != 200) {
 						throw new IOException("error on accessing vault (status=" + response.getCode() + ")");
@@ -87,10 +87,11 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 					JsonNode node = om.readTree(response.getEntity().getContent());
 
 					JsonNode value = node.at("/data/data/" + field);
-					if (value.isMissingNode())
-						return Optional.empty();
-					return Optional.of(value.asText());
-				}
+					if (!value.isMissingNode()) {
+						result = Optional.of(value.asText());
+					}
+					return result;
+				});
 			}
 		}
 
@@ -142,13 +143,12 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 	public String getName() {
 		return "vault";
 	}
-	
+
 	@Override
 	public boolean isEnabled() {
 		return this.clients != null && !this.clients.isEmpty();
 	}
-	
-	
+
 	@Override
 	public void onRegistered() {
 		for (VaultClient client : this.clients) {
@@ -158,7 +158,7 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 
 	@Override
 	public Optional<String> lookup(String key) {
-		if (!isEnabled()) 
+		if (!isEnabled())
 			return Optional.empty();
 
 		try {
