@@ -28,7 +28,7 @@ public class AwsSecretsManagerLookupProvider extends AbstractJsonDocLookupProvid
 
 	@Override
 	public String getName() {
-		return "aws-sm";
+		return "aws_sm";
 	}
 
 	@Override
