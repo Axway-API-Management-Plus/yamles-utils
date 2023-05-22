@@ -10,6 +10,10 @@ class YamlLocation {
 	
 	public YamlLocation() {
 	}
+	
+	public void clear() {
+		this.location.clear();
+	}
 
 	public void push(String fieldName) {
 		this.location.push(fieldName);

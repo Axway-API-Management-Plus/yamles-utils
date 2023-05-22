@@ -37,6 +37,9 @@ public class MergeConfigCommand implements Callable<Integer> {
 
 	@Option(names = { "-c", "--config" }, description = "Configuration file", paramLabel = "FILE", required = false)
 	private List<File> files;
+	
+	@Option(names = { "--audit"}, description = "Audit field sources", paramLabel = "FILE", required = false)
+	private File auditFile = null;
 
 	@Override
 	public Integer call() throws Exception {
@@ -69,6 +72,10 @@ public class MergeConfigCommand implements Callable<Integer> {
 		} else {
 			Yaml.write(out, esConfig.getConfig());
 			log.info("configuration written to {}", out.getAbsoluteFile());
+		}
+		
+		if (this.auditFile != null) {
+			esConfig.getAudit().write(this.auditFile);
 		}
 
 		return 0;

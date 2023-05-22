@@ -18,18 +18,20 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 class YamlEsConfig {
 	private static final Logger log = LogManager.getLogger(YamlEsConfig.class);
 	private ObjectNode config = Yaml.createObjectNode();
+	private final FieldAudit audit = new FieldAudit();
 
 	public YamlEsConfig() {
 	}
 
 	public void merge(List<ConfigSource> sources) throws MergeException {
-		sources.forEach((cs) -> merge(cs));
+		this.audit.clear();
+		sources.forEach((cs) -> merge(audit, cs));
 		evalValues();
 	}
 
-	protected void merge(ConfigSource cs) throws MergeException {
+	protected void merge(FieldAudit audit, ConfigSource cs) throws MergeException {
 		log.info("merge configuration: {}", cs.getName());
-		new Merger(this.config, cs).merge();
+		new Merger(this.audit, this.config, cs).merge();
 	}
 
 	protected void evalValues() {
@@ -65,6 +67,10 @@ class YamlEsConfig {
 
 	public ObjectNode getConfig() {
 		return this.config;
+	}
+	
+	public FieldAudit getAudit() {
+		return this.audit;
 	}
 
 	@Override
