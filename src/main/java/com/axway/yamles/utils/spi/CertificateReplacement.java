@@ -2,6 +2,9 @@ package com.axway.yamles.utils.spi;
 
 import java.security.Key;
 import java.security.cert.Certificate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -10,6 +13,7 @@ public class CertificateReplacement {
 	private final String alias;
 	private final Optional<Certificate> cert;
 	private final Optional<Key> key;
+	private final List<Certificate> chain = new ArrayList<>();
 
 	public CertificateReplacement(String alias) {
 		this.alias = Objects.requireNonNull(alias, "alias must not be null");
@@ -42,6 +46,18 @@ public class CertificateReplacement {
 
 	public Optional<Key> getKey() {
 		return this.key;
+	}
+
+	public void addChain(Certificate cert) {
+		this.chain.add(cert);
+	}
+
+	public void addChain(Collection<? extends Certificate> certs) {
+		this.chain.addAll(certs);
+	}
+
+	public List<Certificate> getChain() {
+		return this.chain;
 	}
 
 	@Override

@@ -1,7 +1,9 @@
 package com.axway.yamles.utils.merge.certs;
 
+import java.security.cert.Certificate;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
@@ -61,7 +63,17 @@ class AliasSet {
 				log.info("certificate removed: alias={}", alias.getName());
 			} else {
 				project.writeCertificate(alias.getName(), cert.getCert().get(), cert.getKey());
-				log.info("certificate created: alias={}; config-source={}; provider={}", alias.getName(), alias.getConfigSource().getAbsolutePath(), alias.getProvider());				
+				log.info("certificate created: alias={}; config-source={}; provider={}", alias.getName(), alias.getConfigSource().getAbsolutePath(), alias.getProvider());
+				
+				if (!cert.getChain().isEmpty()) {
+					int i = 0;
+					for(Certificate c : cert.getChain()) {
+						String chainAlias = alias.getName() + "_chain_" + i;
+						project.writeCertificate(chainAlias, c, Optional.empty());
+						log.info("chain certificate created: alias={}; config-source={}; provider={}", chainAlias, alias.getConfigSource().getAbsolutePath(), alias.getProvider());
+						i++;
+					}
+				}
 			}
 		} catch (Exception e) {
 			throw new CertificatesConfigException(alias.getConfigSource(),

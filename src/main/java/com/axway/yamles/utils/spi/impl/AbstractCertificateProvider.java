@@ -15,6 +15,13 @@ public abstract class AbstractCertificateProvider implements CertificateProvider
 		}
 		return value;
 	}
+	
+	protected String getConfig(Map<String, String> config, String name, String defaultValue) {
+		String value = config.get(name);
+		if (value == null)
+			value = defaultValue;
+		return value;
+	}
 
 	protected File buildFile(File configSource, String filePath) {
 		File file = new File(filePath);
