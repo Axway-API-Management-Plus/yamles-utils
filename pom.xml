@@ -91,14 +91,6 @@ language governing permissions and
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
-<!--		<dependency>
-			<groupId>software.amazon.awssdk</groupId>
-			<artifactId>kms</artifactId>
-		</dependency> -->
-		<dependency>
-			<groupId>software.amazon.awssdk</groupId>
-			<artifactId>secretsmanager</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>io.pebbletemplates</groupId>
 			<artifactId>pebble</artifactId>
@@ -167,6 +159,16 @@ language governing permissions and
 			<artifactId>junit-platform-suite</artifactId>
 			<version>${junit.platform.version}</version>
 			<scope>test</scope>
+		</dependency>
+
+		<!-- AWS services -->
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>acm</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>secretsmanager</artifactId>
 		</dependency>
 	</dependencies>
 	<build>
