@@ -5,11 +5,13 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.helper.Mustache;
+import com.axway.yamles.utils.helper.ValueNodeSet;
 import com.axway.yamles.utils.helper.Yaml;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -27,6 +29,16 @@ class YamlEsConfig {
 		this.audit.clear();
 		sources.forEach((cs) -> merge(audit, cs));
 		evalValues();
+	}
+	
+	public List<String> getMissingValues(ValueNodeSet required) {
+		ValueNodeSet configValues = new ValueNodeSet(this.config);
+		return configValues.detectMissing(Objects.requireNonNull(required));
+	}
+	
+	public List<String> getUnusedValues(ValueNodeSet required) {
+		ValueNodeSet configValues = new ValueNodeSet(this.config);
+		return Objects.requireNonNull(required).detectMissing(configValues);
 	}
 
 	protected void merge(FieldAudit audit, ConfigSource cs) throws MergeException {

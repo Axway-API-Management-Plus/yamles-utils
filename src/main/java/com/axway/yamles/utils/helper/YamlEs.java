@@ -32,7 +32,7 @@ public class YamlEs {
 
 		public void write(Certificate cert, Optional<Key> key) throws IOException, CertificateEncodingException {
 			Objects.requireNonNull(cert);
-			
+
 			removeFiles();
 
 			ObjectNode yaml = buildYaml(key);
@@ -43,7 +43,7 @@ public class YamlEs {
 				PemFile.write(this.keyFile, key.get().getEncoded());
 			}
 		}
-		
+
 		public void removeFiles() {
 			this.yamlFile.delete();
 			this.certFile.delete();
@@ -74,18 +74,30 @@ public class YamlEs {
 	public static final String ENV_CONF_CERT = "Certificate Store";
 
 	private final File projectDir;
+	private final ValueNodeSet requiredValues;
 
 	public YamlEs(File projectDir) {
 		if (!isValid(projectDir))
 			throw new IllegalArgumentException("invalid project dir: " + projectDir);
 		log.info("project: {}", projectDir.getAbsoluteFile());
+
 		this.projectDir = projectDir;
+
+		if (getValuesFile().exists()) {
+			requiredValues = new ValueNodeSet(Yaml.load(getValuesFile()));
+		} else {
+			requiredValues = null;
+		}
 	}
-	
+
+	public Optional<ValueNodeSet> getRequiredValues() {
+		return Optional.ofNullable(this.requiredValues);
+	}
+
 	public File getProjectDir() {
 		return this.projectDir;
 	}
-	
+
 	public String getAbsolutePath() {
 		return this.projectDir.getAbsolutePath();
 	}
@@ -107,11 +119,12 @@ public class YamlEs {
 		files.removeFiles();
 	}
 
-	public void writeCertificate(String alias, Certificate cert, Optional<Key> key) throws IOException, CertificateEncodingException {
+	public void writeCertificate(String alias, Certificate cert, Optional<Key> key)
+			throws IOException, CertificateEncodingException {
 		CertFiles files = new CertFiles(this, alias);
 		files.write(cert, key);
 	}
-	
+
 	public static Optional<String> getEnityType(ObjectNode yaml) {
 		JsonNode type = yaml.get("type");
 		if (type == null || !type.isTextual())

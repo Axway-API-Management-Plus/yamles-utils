@@ -8,6 +8,7 @@ import java.util.concurrent.Callable;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.axway.yamles.utils.helper.ValueNodeSet;
 import com.axway.yamles.utils.helper.Yaml;
 import com.axway.yamles.utils.helper.YamlEs;
 
@@ -37,9 +38,13 @@ public class MergeConfigCommand implements Callable<Integer> {
 
 	@Option(names = { "-c", "--config" }, description = "Configuration file", paramLabel = "FILE", required = false)
 	private List<File> files;
-	
-	@Option(names = { "--audit"}, description = "Audit field sources", paramLabel = "FILE", required = false)
+
+	@Option(names = { "--audit" }, description = "Audit field sources", paramLabel = "FILE", required = false)
 	private File auditFile = null;
+
+	@Option(names = {
+			"--ignore-missing-values" }, description = "Ignore missing configuration of values (only for projects)", required = false)
+	private boolean ignoreMissingValues = false;
 
 	@Override
 	public Integer call() throws Exception {
@@ -47,9 +52,10 @@ public class MergeConfigCommand implements Callable<Integer> {
 		scanner.addDirectories(this.directories);
 		scanner.scan();
 
+		YamlEs es = null;
 		File out;
 		if (this.target.projectDir != null) {
-			YamlEs es = new YamlEs(this.target.projectDir);
+			es = new YamlEs(this.target.projectDir);
 			out = es.getValuesFile();
 		} else {
 			out = this.target.file;
@@ -67,13 +73,30 @@ public class MergeConfigCommand implements Callable<Integer> {
 		YamlEsConfig esConfig = new YamlEsConfig();
 		esConfig.merge(csl);
 
+		if (es != null && es.getRequiredValues().isPresent()) {
+			ValueNodeSet required = es.getRequiredValues().get();
+
+			List<String> values = esConfig.getUnusedValues(required);
+			for (String value : values) {
+				log.warn("unused config: {}", value);
+			}
+
+			values = esConfig.getMissingValues(required);
+			for (String value : values) {
+				log.error("missing config: {}", value);
+			}
+			if (!values.isEmpty() && !this.ignoreMissingValues) {
+				throw new RuntimeException("Some required values are not configured. Check log for details!");
+			}
+		}
+
 		if (out.getName().equals("-")) {
 			System.out.println(esConfig.toYaml());
 		} else {
 			Yaml.write(out, esConfig.getConfig());
 			log.info("configuration written to {}", out.getAbsoluteFile());
 		}
-		
+
 		if (this.auditFile != null) {
 			esConfig.getAudit().write(this.auditFile);
 		}

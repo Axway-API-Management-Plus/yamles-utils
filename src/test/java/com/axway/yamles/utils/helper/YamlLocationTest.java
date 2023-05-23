@@ -1,4 +1,4 @@
-package com.axway.yamles.utils.merge.config;
+package com.axway.yamles.utils.helper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

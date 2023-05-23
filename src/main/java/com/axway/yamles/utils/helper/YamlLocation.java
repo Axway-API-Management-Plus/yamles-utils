@@ -1,9 +1,9 @@
-package com.axway.yamles.utils.merge.config;
+package com.axway.yamles.utils.helper;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-class YamlLocation {
+public class YamlLocation {
 	
 	private final Deque<String> location = new ArrayDeque<>();
 	
