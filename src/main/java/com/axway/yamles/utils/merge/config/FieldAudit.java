@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 public class FieldAudit {
 	private static final Logger log = LogManager.getLogger(FieldAudit.class);
-	
+
 	private static final Field[] EMPTY = new Field[0];
 
 	public static class Field {
@@ -85,6 +85,7 @@ public class FieldAudit {
 
 	public void write(Writer out) throws IOException {
 		out.write("FIELD\tSOURCE");
+		out.write(System.lineSeparator());
 		for (Field f : this.fieldAudit.values()) {
 			out.write(f.getPath());
 			out.write("\t");
@@ -94,14 +95,12 @@ public class FieldAudit {
 	}
 
 	public void write(File file) throws IOException {
-		try {
-			Writer out = new FileWriter(Objects.requireNonNull(file, "audit file is null"));
+		try (Writer out = new FileWriter(Objects.requireNonNull(file, "audit file is null"))) {
 			write(out);
-			out.close();
-			log.info("Field audit written to {}", file.getAbsolutePath());
 		} catch (IOException e) {
 			throw new IOException("error writing field audit file: " + file.getAbsolutePath(), e);
 		}
+		log.info("Field audit written to {}", file.getAbsolutePath());
 	}
 
 	@Override
