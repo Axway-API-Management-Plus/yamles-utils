@@ -1,6 +1,10 @@
 package com.axway.yamles.utils.merge.certs;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -23,6 +27,9 @@ public class MergeCertificatesCommand implements Callable<Integer> {
 	@Option(names = { "-c", "--config" }, description = "Certificate config file", paramLabel = "FILE", required = true)
 	private List<File> configs;
 
+	@Option(names = { "--audit" }, description = "Audit certificate sources", paramLabel = "FILE", required = false)
+	private File auditFile = null;
+
 	private final AliasSet aliases = new AliasSet();
 
 	@Override
@@ -33,6 +40,8 @@ public class MergeCertificatesCommand implements Callable<Integer> {
 		loadAliases();
 
 		this.aliases.writeAliases(es);
+
+		writeAudit();
 
 		return 0;
 	}
@@ -49,5 +58,30 @@ public class MergeCertificatesCommand implements Callable<Integer> {
 		log.info("load certificate config: {}", file.getAbsoluteFile());
 		CertificatesConfig cc = CertificatesConfig.loadConfig(file);
 		this.aliases.addOrReplace(cc.getAliases().values());
+	}
+
+	private void writeAudit() throws IOException {
+		if (this.auditFile == null)
+			return;
+
+		try (Writer out = new FileWriter(this.auditFile)) {
+			writeAudit(out);
+		}
+		log.info("Alias audit written to {}", this.auditFile.getAbsolutePath());
+	}
+
+	private void writeAudit(Writer out) throws IOException {
+		out.write("ALIAS\tPROVIDER\tSOURCE");
+		out.write(System.lineSeparator());
+		Iterator<Alias> iter = this.aliases.getAliases();
+		while (iter.hasNext()) {
+			Alias alias = iter.next();
+			out.write(alias.getName());
+			out.write('\t');
+			out.write(alias.getProvider());
+			out.write('\t');
+			out.write(alias.getConfigSource().getAbsolutePath());
+			out.write(System.lineSeparator());
+		}
 	}
 }

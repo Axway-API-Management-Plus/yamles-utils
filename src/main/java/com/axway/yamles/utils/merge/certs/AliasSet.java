@@ -3,6 +3,7 @@ package com.axway.yamles.utils.merge.certs;
 import java.security.cert.Certificate;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 
@@ -35,6 +36,10 @@ class AliasSet {
 			}
 			this.aliases.add(a);
 		});
+	}
+	
+	public Iterator<Alias> getAliases() {
+		return this.aliases.iterator();
 	}
 
 	public void writeAliases(YamlEs project) {
