@@ -1,5 +1,6 @@
 package com.axway.yamles.utils.spi.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -24,6 +25,15 @@ public class EnvJsonLookupProvider extends AbstractJsonDocLookupProvider {
 		super(log);
 	}
 
+	protected void addVariable(String name) {
+		if (name == null || name.isEmpty())
+			return;
+		if (this.names == null) {
+			this.names = new ArrayList<>();
+		}
+		this.names.add(name);
+	}
+
 	@Override
 	public String getName() {
 		return "envjson";
@@ -36,17 +46,20 @@ public class EnvJsonLookupProvider extends AbstractJsonDocLookupProvider {
 
 	@Override
 	public void onRegistered() {
+		if (!isEnabled())
+			return;
+
 		synchronized (this) {
 			if (isEmpty()) {
 				for (String name : this.names) {
 					try {
 						String json = System.getenv(name);
 						if (json == null) {
-							throw new RuntimeException("environment variable not found: " + name);
+							throw new LookupProviderException(this, "environment variable not found: " + name);
 						}
 						JsonDoc doc = new JsonDoc(name, json);
 						add(doc);
-						log.info("JSON lookup from environment var registered: {}", doc.getName());
+						log.info("JSON lookup from environment variable registered: {}", doc.getName());
 					} catch (Exception e) {
 						throw new LookupProviderException(this,
 								"error on initialize JSON lookup from environment variable: " + name, e);
