@@ -12,6 +12,9 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class Json {
 	private static final ObjectMapper mapper = new ObjectMapper();
+	
+	private Json() {
+	}
 
 	public static JsonNode read(String json) throws JsonMappingException, JsonProcessingException {
 		return mapper.readTree(json);

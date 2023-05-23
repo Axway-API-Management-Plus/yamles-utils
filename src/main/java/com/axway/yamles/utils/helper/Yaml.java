@@ -13,6 +13,9 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 public class Yaml {
 	private static final ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+	
+	private Yaml() {
+	}
 
 	public static JsonNode read(String yaml) throws JsonMappingException, JsonProcessingException {
 		return mapper.readTree(yaml);
