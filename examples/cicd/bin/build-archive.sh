@@ -184,9 +184,26 @@ echo "INFO : project rules checked"
 # Configure project
 echo ""
 echo "============================================================"
+echo "== Prepare environments variables"
+echo "============================================================"
+case $OPT_ENV in
+  local)
+    ;;
+  test)
+    export DB_METRICS_USER="metrics_t"
+    export LOOKUP_JSON_TEST='{"db":{"metrics":{"password": "changeme_t"}}}'
+    ;;
+  prod)
+    export DB_METRICS_USER="metrics_p"
+    export LOOKUP_JSON_PROD='{"db":{"metrics":{"password": "changeme_p"}}}'
+    ;;
+esac
+
+echo ""
+echo "============================================================"
 echo "== Configure project - certificates"
 echo "============================================================"
-args=("merge" "certs" "--project=${TMP_PRJ}")
+args=("merge" "certs" "--project=${TMP_PRJ}" "--audit=${TARGET_TMP_DIR}/alias.audit")
 case $OPT_ENV in
   local)
     args+=( \
@@ -194,7 +211,7 @@ case $OPT_ENV in
       "--config=${CFG_DIR}/devs/local/certificates.yaml" \
 
       # Use local lookups for passphrases
-      "--lookup-yaml=${LOOKUP_DIR}/devs/local/lookup.yaml" \
+      "--lookup-providers=${CFG_DIR}/devs/local/lookup-providers.yaml" \
     )
     ;;
   test)
@@ -202,8 +219,8 @@ case $OPT_ENV in
       # Configure test certificates provided by operators
       "--config=${CFG_DIR}/ops/test/certificates.yaml" \
 
-      # Use KeePass DB from operators to lookup passphrases
-      "--kdb=${LOOKUP_DIR}/ops/all/ops-secrets.kdbx" "--kdb-pass=changeme" \
+      # Use ops-test lookups for secrets
+      "--lookup-providers=${CFG_DIR}/ops/test/lookup-providers.yaml" \
     )
     ;;
   prod)
@@ -211,8 +228,8 @@ case $OPT_ENV in
       # Configure production certificates provided by operators
       "--config=${CFG_DIR}/ops/prod/certificates.yaml" \
 
-      # Use KeePass DB from operators to lookup passphrases
-      "--kdb=${LOOKUP_DIR}/ops/all/ops-secrets.kdbx" "--kdb-pass=changeme" \
+      # Use ops-prod lookups for secrets
+      "--lookup-providers=${CFG_DIR}/ops/prod/lookup-providers.yaml" \
     )
     ;;
   *)
@@ -226,7 +243,7 @@ echo ""
 echo "============================================================"
 echo "== Configure project - values"
 echo "============================================================"
-args=("merge" "config" "--project=${TMP_PRJ}")
+args=("merge" "config" "--project=${TMP_PRJ}" "--audit=${TARGET_TMP_DIR}/field.audit")
 case $OPT_ENV in
   local)
     args+=( \
@@ -237,68 +254,42 @@ case $OPT_ENV in
       # in a separate file.
       "--config=${CFG_DIR}/devs/local/devs-values.yaml" \
 
-      # Use YAML file to lookup configurations and secrets
-      "--lookup-yaml=${LOOKUP_DIR}/devs/local/lookup.yaml" \
+      # Configure providers for value lookups
+      "--lookup-providers=${CFG_DIR}/devs/local/lookup-providers.yaml" \
     )
     ;;
   test)
-    export DB_METRICS_USER="metrics_t"
-    export LOOKUP_JSON_TEST='{"db":{"metrics":{"password": "changeme_t"}}}'
-
     args+=( \
       # Read values for which only developers are responsible for
       "--config=${CFG_DIR}/devs/test/devs-values.yaml" \
+
+      # Configure providers for value lookups
+      "--lookup-providers=${CFG_DIR}/devs/test/lookup-providers.yaml" \
 
       # Read values for which operators are responsible for
       # (must be after the developers to configuration to prevent overwrite)
       "--config=${CFG_DIR}/ops/all/values.yaml" \
       "--config=${CFG_DIR}/ops/test/values.yaml" \
 
-      # Use developers KeePass DB for values maintained by developers
-      "--kdb=${LOOKUP_DIR}/devs/all/devs-secrets.kdbx" "--kdb-pass=changeme-devs" \
-
-      # Use operators KeePass DB for values maintained by operators
-      # (must be after the developers to configuration to prevent overwrite)      
-      "--kdb=${LOOKUP_DIR}/ops/all/ops-secrets.kdbx" "--kdb-pass=changeme" \
-
-      # Use operators maintained YAML based lookup file
-      "--lookup-yaml=${LOOKUP_DIR}/ops/test/lookup.yaml" \
-
-      # Use operators maintained JSON based lookup file
-      "--lookup-json=${LOOKUP_DIR}/ops/test/lookup.json" \
-
-      # Use operators maintained JSON based lookup environment variable
-      "--lookup-envjson=LOOKUP_JSON_TEST" \
+      # Use ops-test lookups
+      "--lookup-providers=${CFG_DIR}/ops/test/lookup-providers.yaml" \
     )
     ;;
   prod)
-    export DB_METRICS_USER="metrics_p"
-    export LOOKUP_JSON_PROD='{"db":{"metrics":{"password": "changeme_p"}}}'
-
     args+=( \
       # Read values for which only developers are responsible for    
       "--config=${CFG_DIR}/devs/prod/devs-values.yaml" \
+
+      # Configure providers for value lookups
+      "--lookup-providers=${CFG_DIR}/devs/prod/lookup-providers.yaml" \
 
       # Read values for which operators are responsible for
       # (must be after the developers to configuration to prevent overwrite)
       "--config=${CFG_DIR}/ops/all/values.yaml" \
       "--config=${CFG_DIR}/ops/prod/values.yaml" \
 
-      # Use developers KeePass DB for values maintained by developers
-      "--kdb=${LOOKUP_DIR}/devs/all/devs-secrets.kdbx" "--kdb-pass=changeme-devs" \
-
-      # Use operators KeePass DB for values maintained by operators
-      # (must be after the developers to configuration to prevent overwrite)      
-      "--kdb=${LOOKUP_DIR}/ops/all/ops-secrets.kdbx" "--kdb-pass=changeme" \
-
-      # Use operators maintained YAML based lookup file
-      "--lookup-yaml=${LOOKUP_DIR}/ops/prod/lookup.yaml" \
-
-      # Use operators maintained JSON based lookup file
-      "--lookup-json=${LOOKUP_DIR}/ops/test/lookup.json" \
-
-      # Use operators maintained JSON based lookup environment variable
-      "--lookup-envjson=LOOKUP_JSON_PROD" \
+      # Use ops-prod lookups
+      "--lookup-providers=${CFG_DIR}/ops/prod/lookup-providers.yaml" \
     )
     ;;
   *)

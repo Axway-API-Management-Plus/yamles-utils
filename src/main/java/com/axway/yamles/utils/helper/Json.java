@@ -5,19 +5,25 @@ import java.io.IOException;
 import java.net.URL;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.exc.StreamReadException;
+import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class Json {
-	private static final ObjectMapper mapper = new ObjectMapper();
+	private static final ObjectMapper mapper = new ObjectMapper().findAndRegisterModules();
 	
 	private Json() {
 	}
 
 	public static JsonNode read(String json) throws JsonMappingException, JsonProcessingException {
 		return mapper.readTree(json);
+	}
+	
+	public static <T> T readValue(String json, Class<T> valueType) throws JsonMappingException, JsonProcessingException {
+		return mapper.readValue(json, valueType);
 	}
 
 	public static ObjectNode createObjectNode() {
@@ -30,6 +36,11 @@ public class Json {
 		} catch (IOException e) {
 			throw new RuntimeException("error on parsing JSON file: " + file.getAbsolutePath(), e);
 		}
+	}
+	
+	public static <T> T loadValue(File file, Class<T> valueType)
+			throws StreamReadException, DatabindException, IOException {
+		return mapper.readValue(file, valueType);
 	}
 
 	public static JsonNode load(URL url) {

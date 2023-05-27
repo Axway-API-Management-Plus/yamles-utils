@@ -1,29 +1,33 @@
 package com.axway.yamles.utils.spi.impl;
 
-import java.util.List;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.tools.picocli.CommandLine.Command;
 
-import com.axway.yamles.utils.helper.JsonDoc;
+import com.axway.yamles.utils.spi.ConfigParameter;
+import com.axway.yamles.utils.spi.ConfigParameter.Type;
+import com.axway.yamles.utils.spi.LookupDoc;
 import com.axway.yamles.utils.spi.LookupProviderException;
+import com.axway.yamles.utils.spi.LookupSource;
 
-import picocli.CommandLine.Option;
+import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
+import software.amazon.awssdk.services.secretsmanager.SecretsManagerClientBuilder;
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest;
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueResponse;
 
 @Command
-public class AwsSecretsManagerLookupProvider extends AbstractJsonDocLookupProvider {
+public class AwsSecretsManagerLookupProvider extends AbstractLookupDocLookupProvider {
+	public static final ConfigParameter CFG_PARAM_SECRET = new ConfigParameter("secret_name", true, "Secret name", Type.string);
+	public static final ConfigParameter CFG_PARAM_REGION = new ConfigParameter("region", false, "Region name", Type.string);
 
 	private static final Logger log = LogManager.getLogger(AwsSecretsManagerLookupProvider.class);
 
-	@Option(names = { "--lookup-aws-secret" }, description = "name of AWS secret containing keys", paramLabel = "NAME")
-	private List<String> secretNames;
-
 	public AwsSecretsManagerLookupProvider() {
-		super(log);
+		super("Secret key", log);
+		add(CFG_PARAM_SECRET, CFG_PARAM_REGION);
 	}
 
 	@Override
@@ -32,33 +36,38 @@ public class AwsSecretsManagerLookupProvider extends AbstractJsonDocLookupProvid
 	}
 
 	@Override
-	public boolean isEnabled() {
-		return this.secretNames != null && this.secretNames.size() > 0;
+	public String getSummary() {
+		return "Lookup values from AWS Secrets Manager.";
 	}
 
 	@Override
-	public void onRegistered() {
-		synchronized (this) {
-			if (!isEmpty())	return;
-			
-			SecretsManagerClient client = SecretsManagerClient.builder().build();
+	public String getDescription() {
+		return "The key represents the JSON Pointer to the property containing the value (e.g. '/user_password')";
+	}
 
-			for (String secretName : this.secretNames) {
-				GetSecretValueRequest getSecretValueRequest = GetSecretValueRequest.builder().secretId(secretName)
-						.build();
+	
+	@Override
+	public void addSource(LookupSource source) throws LookupProviderException {
+		String secretName = source.getRequiredParam(CFG_PARAM_SECRET.getName());
+		Optional<String> region = source.getParam(CFG_PARAM_REGION.getName());
 
-				GetSecretValueResponse getSecretValueResponse;
+		SecretsManagerClientBuilder builder = SecretsManagerClient.builder();
+		if (region.isPresent()) {
+			builder.region(Region.of(region.get()));
+		}
+		SecretsManagerClient client = builder.build();
 
-				try {
-					getSecretValueResponse = client.getSecretValue(getSecretValueRequest);
-					String secret = getSecretValueResponse.secretString();
-					JsonDoc doc = new JsonDoc(secretName, secret);
-					add(doc);
-					log.info("AWS Secrets Manager lookup registered: {}", doc.getName());					
-				} catch (Exception e) {
-					throw new LookupProviderException(this, "error on loading secret from AWS: " + secretName, e);
-				}
-			}
+		GetSecretValueRequest getSecretValueRequest = GetSecretValueRequest.builder().secretId(secretName).build();
+
+		GetSecretValueResponse getSecretValueResponse;
+
+		try {
+			getSecretValueResponse = client.getSecretValue(getSecretValueRequest);
+			String secret = getSecretValueResponse.secretString();
+			LookupDoc doc = LookupDoc.fromJsonString(source.getAlias(), secret, secretName);
+			add(doc);
+		} catch (Exception e) {
+			throw new LookupProviderException(this, "error on loading secret from AWS: " + secretName, e);
 		}
 	}
 }

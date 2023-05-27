@@ -6,18 +6,18 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.helper.YamlEs;
+import com.axway.yamles.utils.merge.AbstractLookupEnabledCommand;
 
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 @Command(name = "certs", description = "Merge certificates for YAML entiry store.", mixinStandardHelpOptions = true)
-public class MergeCertificatesCommand implements Callable<Integer> {
+public class MergeCertificatesCommand extends AbstractLookupEnabledCommand {
 	private static final Logger log = LogManager.getLogger(MergeCertificatesCommand.class);
 
 	@Option(names = {
@@ -34,6 +34,8 @@ public class MergeCertificatesCommand implements Callable<Integer> {
 
 	@Override
 	public Integer call() throws Exception {
+		initLookupProviders();
+		
 		log.info("merge certificates");
 		YamlEs es = new YamlEs(projectDir);
 

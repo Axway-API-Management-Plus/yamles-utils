@@ -1,0 +1,21 @@
+# Example configuration for lookup providers (dummy providers)
+lookups:
+  # First lookup provider (without parameters)
+  alias1:
+    provider: provider1
+  
+  # Second lookup provider
+  alias2:
+    provider: provider2
+    
+    # Parameters by value
+    config:
+      param1: value1
+
+    # Parameters retrieved from environment variables
+    config_env:
+      param2: name_of_env_var
+      
+    # Parameters retrieved from system properties
+    config_sys:
+      param3: name_of_sys_prop

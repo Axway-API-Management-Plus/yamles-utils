@@ -15,13 +15,24 @@ ifndef::imagesdir[:imagesdir: ./images]
 [sidebar]
 .tl;dr
 --
-YAMLES Utilities can be used for AMPLIFY API Gateway projects - which are based on the YAML Entity Store - to verify coding rules and to configure projects for target environments using various configuration sources.
+YAMLES Utilities can be used for AMPLIFY API Gateway projects - which are based on the YAML Entity Store - to verify coding rules, and to configure projects for target environments using various configuration sources.
 --
+
+The YAMLES Utilities provides the feature to verify a YAML based policy project according to defined rules (linting), and to configure the policy project for target environments.
+
+
 
 The utilities of this project can be used to build a CI/CD pipeline for automatic configuration and deployment of YAML Entity Store based projects (see <<YAML_Entity_Store>> for details).
 
-.CI/CD Pipeline Example
-image:pipeline.png[]
+== Use Cases
+
+The uses cases, described in this section, are just examples to illustrate the opportunities of the YAMLES Utils.
+They only give some ideas to build your own deployment pipeline.
+
+=== Classic Topology Deployment
+
+.Classic topology with separated concerns
+image:deployment-classic-topology.drw.png[]
 
 The picture above visualize an example CI/CD pipeline.
 The _YAML-ES Utilities_ tool provided by this project is used for linting and for the configuration of the stage specific project.
@@ -41,10 +52,18 @@ The generated, stage specific project is verified for not configured fields or b
 After successful verification the project will be deployed to the target environment.
 During to protect the configurations on the server, a passphrase is added during the deployment.
 
+=== Container Deployment (Policy Image)
+
+image:deployment-emt-policy-image.drw.png[]
+
+=== Container Deployment (Init Container)
+
+image:deployment-emt-init-container.drw.png[]
+
 
 == YAML Entity Store
-In newer versions of the API Gateway, policies can be stored as a YAML Entity Store instead of the classic XML based entity store.
-With the YAML Entity Store, the entities are stored in YAML files in a directory structure similar to the structure of the PolicyStudio project.
+In newer versions of the API Gateway, policies can be stored as a YAML Entity Store (YAML-ES) instead of the classic XML based entity store (XML-ES).
+With the YAML-ES, the entities are stored in YAML files in a directory structure similar to the structure of the Policy Studio project.
 
 .YAML Enity Store Directory (simplified)
 ```
@@ -64,7 +83,7 @@ With the YAML Entity Store, the entities are stored in YAML files in a directory
 └── values.yaml
 ```
 
-Within the folders entities are stored files within the following schema (see also link:https://docs.axway.com/bundle/axway-open-docs/page/docs/apim_yamles/apim_yamles_references/yamles_yaml_schema/index.html[YAML Schema]):
+Within the folders, entities are stored in files within the following schema (see also link:https://docs.axway.com/bundle/axway-open-docs/page/docs/apim_yamles/apim_yamles_references/yamles_yaml_schema/index.html[YAML Schema]):
 
 .Entity Schema
 [source, yaml]

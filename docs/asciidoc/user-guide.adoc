@@ -21,15 +21,13 @@ endif::[]
 ifndef::imagesdir[:imagesdir: ./images]
 
 
-:mvn-plugin-ver: {revnumber}
+:yamles-utils-ver: {revnumber}
 
 include::_intro.adoc[leveloffset=+1]
 
 include::_usage.adoc[leveloffset=+1]
 
 include::_reference.adoc[leveloffset=+1]
-
-include::_extend.adoc[leveloffset=+1]
 
 include::_faq.adoc[leveloffset=+1]
 

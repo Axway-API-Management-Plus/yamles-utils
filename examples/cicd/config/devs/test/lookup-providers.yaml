@@ -1,0 +1,6 @@
+lookups:
+  dev_kdb:
+    provider: keepass
+    config:
+      kdb: ../all/lookups/devs-secrets.kdbx
+      passphrase: changeme-devs

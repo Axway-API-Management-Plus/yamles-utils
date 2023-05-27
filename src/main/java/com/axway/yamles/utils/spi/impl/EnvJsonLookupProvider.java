@@ -1,37 +1,24 @@
 package com.axway.yamles.utils.spi.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.axway.yamles.utils.helper.JsonDoc;
+import com.axway.yamles.utils.helper.EnvironmentVariables;
+import com.axway.yamles.utils.spi.ConfigParameter;
+import com.axway.yamles.utils.spi.ConfigParameter.Type;
+import com.axway.yamles.utils.spi.LookupDoc;
 import com.axway.yamles.utils.spi.LookupProviderException;
+import com.axway.yamles.utils.spi.LookupSource;
 
-import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
-
-@Command
-public class EnvJsonLookupProvider extends AbstractJsonDocLookupProvider {
+public class EnvJsonLookupProvider extends AbstractLookupDocLookupProvider {
+	
+	public static final ConfigParameter CFG_PARAM_ENV = new ConfigParameter("env", true, "Name of enviornment varibale containing JSON document", Type.string);
 
 	private static final Logger log = LogManager.getLogger(EnvJsonLookupProvider.class);
 
-	@Option(names = {
-			"--lookup-envjson" }, description = "environment variable containing a JSON document", paramLabel = "NAME")
-	private List<String> names;
-
 	public EnvJsonLookupProvider() {
-		super(log);
-	}
-
-	protected void addVariable(String name) {
-		if (name == null || name.isEmpty())
-			return;
-		if (this.names == null) {
-			this.names = new ArrayList<>();
-		}
-		this.names.add(name);
+		super(DESCR_KEY_JSONPOINTER, log);
+		add(CFG_PARAM_ENV);
 	}
 
 	@Override
@@ -40,32 +27,33 @@ public class EnvJsonLookupProvider extends AbstractJsonDocLookupProvider {
 	}
 
 	@Override
-	public boolean isEnabled() {
-		return this.names != null && !this.names.isEmpty();
+	public String getSummary() {
+		return "Lookup values from JSON documents provided by environment variables.";
 	}
 
 	@Override
-	public void onRegistered() {
-		if (!isEnabled())
-			return;
+	public String getDescription() {
+		return "The key represents the JSON Pointer to the property containing the value (e.g. '/root/sub/key')";
+	}
 
-		synchronized (this) {
-			if (isEmpty()) {
-				for (String name : this.names) {
-					try {
-						String json = System.getenv(name);
-						if (json == null) {
-							throw new LookupProviderException(this, "environment variable not found: " + name);
-						}
-						JsonDoc doc = new JsonDoc(name, json);
-						add(doc);
-						log.info("JSON lookup from environment variable registered: {}", doc.getName());
-					} catch (Exception e) {
-						throw new LookupProviderException(this,
-								"error on initialize JSON lookup from environment variable: " + name, e);
-					}
-				}
+	@Override
+	public boolean isEnabled() {
+		return !isEmpty();
+	}
+	
+	@Override
+	public void addSource(LookupSource source) throws LookupProviderException {
+		String envvar = source.getRequiredParam(CFG_PARAM_ENV.getName());
+		try {
+			String json = EnvironmentVariables.get(envvar);
+			if (json == null) {
+				throw new LookupProviderException(this, "environment variable not found: " + envvar);
 			}
+			LookupDoc doc = LookupDoc.fromJsonString(source.getAlias(), json);
+			add(doc);
+		} catch (Exception e) {
+			throw new LookupProviderException(this,
+					"error on initialize JSON lookup from environment variable: " + envvar, e);
 		}
 	}
 }

@@ -27,7 +27,7 @@ Lint YAML entity store.
   -V, --version       Print version information and exit.
 ----
 
-The command requires the path to the project directory and a list of rules files.
+The command requires the path to the project directory and a list of files containing rules.
 
 .Example
 [source,shell]
@@ -249,7 +249,7 @@ rules:
 <3> ID of the rules for KPS data sources.
 <4> KPS settings for Cassandra data sources are stored in entities matching the file path `/Environment Configuration/Key Property Stores/.*/.+\.yaml` and which are of type `KPSCassandraDataSource`
 
-=== Database Connections
+==== Database Connections
 
 The following example checks the configuration of external database connections.
 

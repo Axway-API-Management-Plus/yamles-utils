@@ -9,15 +9,17 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-On configuring 
-
 == Environment Variables
 
 == System Properties
 
-== YAML File
+== YAML/JSON Files
 
 == KeePass DB
 
 == Hashicorp Vault
+
+== AWS Secrets Manager
+
+
 

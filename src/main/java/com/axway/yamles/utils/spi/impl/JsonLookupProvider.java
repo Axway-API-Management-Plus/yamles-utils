@@ -1,27 +1,25 @@
 package com.axway.yamles.utils.spi.impl;
 
 import java.io.File;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.axway.yamles.utils.helper.JsonDoc;
+import com.axway.yamles.utils.spi.ConfigParameter;
+import com.axway.yamles.utils.spi.ConfigParameter.Type;
+import com.axway.yamles.utils.spi.LookupDoc;
 import com.axway.yamles.utils.spi.LookupProviderException;
+import com.axway.yamles.utils.spi.LookupSource;
 
-import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
-
-@Command
-public class JsonLookupProvider extends AbstractJsonDocLookupProvider {
+public class JsonLookupProvider extends AbstractLookupDocLookupProvider {
 
 	private static final Logger log = LogManager.getLogger(JsonLookupProvider.class);
 
-	@Option(names = { "--lookup-json" }, description = "path to an JSON file", paramLabel = "FILE")
-	private List<File> jsonFiles;
-	
+	public static final ConfigParameter CFG_PARAM_FILE = new ConfigParameter("file", true, "Path to JSON file containing lookup values.", Type.file);
+
 	public JsonLookupProvider() {
-		super(log);
+		super(DESCR_KEY_JSONPOINTER, log);
+		add(CFG_PARAM_FILE);
 	}
 
 	@Override
@@ -30,25 +28,24 @@ public class JsonLookupProvider extends AbstractJsonDocLookupProvider {
 	}
 
 	@Override
-	public boolean isEnabled() {
-		return this.jsonFiles != null && !this.jsonFiles.isEmpty();
+	public String getSummary() {
+		return "Lookup values from JSON document files.";
 	}
 
 	@Override
-	public void onRegistered() {
-		synchronized (this) {
-			if (isEmpty()) {
-				for (File file : this.jsonFiles) {
-					try {
-						JsonDoc doc = new JsonDoc(file);
-						add(doc);
-						log.info("JSON lookup file registered: {}", doc.getName());
-					} catch (Exception e) {
-						throw new LookupProviderException(this,
-								"error on loading lookup JSON file: " + file.getAbsolutePath(), e);
-					}
-				}
-			}
+	public String getDescription() {
+		return "The key represents the JSON Pointer to the property containing the value (e.g. '/root/sub/key')";
+	}
+
+	@Override
+	public void addSource(LookupSource source) throws LookupProviderException {
+		File file = source.getFileFromRequiredParam(CFG_PARAM_FILE.getName());
+
+		try {
+			LookupDoc doc = LookupDoc.fromJsonFile(source.getAlias(), file);
+			add(doc);
+		} catch (Exception e) {
+			throw new LookupProviderException(this, "error on loading lookup JSON file: " + file.getAbsolutePath(), e);
 		}
 	}
 }

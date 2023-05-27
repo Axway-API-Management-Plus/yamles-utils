@@ -17,9 +17,11 @@ certificates: #<1>
     config: #<4>
       <provider configuration> #<5>
 ----
-<1> hhjhjh
-<2> Certificate alias
-
+<1> Indicator for certificate configuration.
+<2> Certificate alias. Certificates are referenced by the alias within the policy project.
+<3> Type of the source of the certificate (provider of the certificate).
+<4> Section to configure the provider.
+<5> Provider specific configuration to retrieve the certificate
 
 
 == Simple Certificate Provider
@@ -27,3 +29,5 @@ certificates: #<1>
 == Keystore File
 
 == Remover
+
+== AWS Certificate Manager

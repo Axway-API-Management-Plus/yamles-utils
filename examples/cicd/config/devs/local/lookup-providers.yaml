@@ -1,0 +1,5 @@
+lookups:
+  lookup:
+    provider: "yaml"
+    config:
+      file: lookups/lookup.yaml
