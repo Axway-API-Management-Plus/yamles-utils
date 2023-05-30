@@ -167,9 +167,8 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 	private Map<String, Kdb> kdbs = new HashMap<>();
 
 	public KeepassLookupProvider() {
-		super("path to entry");
-		add(ARG_WHAT, ARG_PNAME);
-		add(CFG_PARAM_FILE, CFG_PARAM_PASS, CFG_PARAM_KEY_FILE);
+		super("path to entry", new FunctionArgument[] { ARG_WHAT, ARG_PNAME },
+				new ConfigParameter[] { CFG_PARAM_FILE, CFG_PARAM_PASS, CFG_PARAM_KEY_FILE });
 	}
 
 	@Override
@@ -187,7 +186,6 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 		return "The key represents the entry in the KeePass DB.";
 	}
 
-	
 	@Override
 	public boolean isEnabled() {
 		return this.kdbs != null && !this.kdbs.isEmpty();
@@ -213,13 +211,13 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 	@Override
 	public Optional<String> lookup(String alias, Map<String, Object> args) {
 		Optional<String> result = Optional.empty();
-		
+
 		Kdb kdb = this.kdbs.get(alias);
 		if (kdb == null) {
 			log.error("Keepass DB alias not found: provider={}; alias={}", getName(), alias);
 			return result;
 		}
-		
+
 		EntryPath ep = new EntryPath(getStringArg(args, ARG_KEY.getName()));
 		What what = What.valueOf(getStringArg(args, ARG_WHAT.getName()));
 		String pname = null;
@@ -234,7 +232,8 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 			log.debug("search for KeePass key: {}", key);
 			result = kdb.getValue(key);
 			if (result.isPresent()) {
-				log.debug("found lookup key: provider={}; alias={}; source={}; key={}", getName(), kdb.alias, kdb.source, key);
+				log.debug("found lookup key: provider={}; alias={}; source={}; key={}", getName(), kdb.alias,
+						kdb.source, key);
 			}
 		} catch (Exception e) {
 			throw new LookupProviderException(this, "error on lookup key: alias=" + alias + "; key=" + key, e);

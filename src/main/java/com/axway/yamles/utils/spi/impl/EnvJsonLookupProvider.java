@@ -11,14 +11,14 @@ import com.axway.yamles.utils.spi.LookupProviderException;
 import com.axway.yamles.utils.spi.LookupSource;
 
 public class EnvJsonLookupProvider extends AbstractLookupDocLookupProvider {
-	
-	public static final ConfigParameter CFG_PARAM_ENV = new ConfigParameter("env", true, "Name of enviornment varibale containing JSON document", Type.string);
+
+	public static final ConfigParameter CFG_PARAM_ENV = new ConfigParameter("env", true,
+			"Name of enviornment varibale containing JSON document", Type.string);
 
 	private static final Logger log = LogManager.getLogger(EnvJsonLookupProvider.class);
 
 	public EnvJsonLookupProvider() {
-		super(DESCR_KEY_JSONPOINTER, log);
-		add(CFG_PARAM_ENV);
+		super(DESCR_KEY_JSONPOINTER, EMPTY_FUNC_ARGS, new ConfigParameter[] { CFG_PARAM_ENV }, log);
 	}
 
 	@Override
@@ -40,7 +40,7 @@ public class EnvJsonLookupProvider extends AbstractLookupDocLookupProvider {
 	public boolean isEnabled() {
 		return !isEmpty();
 	}
-	
+
 	@Override
 	public void addSource(LookupSource source) throws LookupProviderException {
 		String envvar = source.getRequiredParam(CFG_PARAM_ENV.getName());

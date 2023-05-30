@@ -1,20 +1,18 @@
 package com.axway.yamles.utils.spi;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 public interface CertificateProvider {
 
 	public String getName();
 
-	public default String getSummary() {
-		return "dummy summary";
-	}
+	public String getSummary();
+	public String getDescription();
 
-	public default String getDescription() {
-		return "dummy description";
-	}
-
+	public List<ConfigParameter> getConfigParameters();
+	
 	public CertificateReplacement getCertificate(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException;
 }

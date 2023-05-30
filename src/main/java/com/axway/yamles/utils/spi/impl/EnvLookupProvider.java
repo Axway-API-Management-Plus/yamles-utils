@@ -16,7 +16,7 @@ import com.axway.yamles.utils.spi.LookupSource;
 public class EnvLookupProvider extends AbstractLookupProvider {
 
 	public EnvLookupProvider() {
-		super("name of environment variable");
+		super("name of environment variable", EMPTY_FUNC_ARGS, EMPTY_CONFIG_PARAMS);
 	}
 
 	@Override

@@ -14,7 +14,7 @@ import com.axway.yamles.utils.spi.LookupSource;
 public class SysLookupProvider extends AbstractLookupProvider {
 	
 	public SysLookupProvider() {
-		super("name of system property");
+		super("name of system property", EMPTY_FUNC_ARGS, EMPTY_CONFIG_PARAMS);
 	}
 
 	@Override

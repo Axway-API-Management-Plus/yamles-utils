@@ -20,14 +20,15 @@ import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRespon
 
 @Command
 public class AwsSecretsManagerLookupProvider extends AbstractLookupDocLookupProvider {
-	public static final ConfigParameter CFG_PARAM_SECRET = new ConfigParameter("secret_name", true, "Secret name", Type.string);
-	public static final ConfigParameter CFG_PARAM_REGION = new ConfigParameter("region", false, "Region name", Type.string);
+	public static final ConfigParameter CFG_PARAM_SECRET = new ConfigParameter("secret_name", true, "Secret name",
+			Type.string);
+	public static final ConfigParameter CFG_PARAM_REGION = new ConfigParameter("region", false, "Region name",
+			Type.string);
 
 	private static final Logger log = LogManager.getLogger(AwsSecretsManagerLookupProvider.class);
 
 	public AwsSecretsManagerLookupProvider() {
-		super("Secret key", log);
-		add(CFG_PARAM_SECRET, CFG_PARAM_REGION);
+		super("Secret key", EMPTY_FUNC_ARGS, new ConfigParameter[] { CFG_PARAM_SECRET, CFG_PARAM_REGION }, log);
 	}
 
 	@Override
@@ -45,7 +46,6 @@ public class AwsSecretsManagerLookupProvider extends AbstractLookupDocLookupProv
 		return "The key represents the JSON Pointer to the property containing the value (e.g. '/user_password')";
 	}
 
-	
 	@Override
 	public void addSource(LookupSource source) throws LookupProviderException {
 		String secretName = source.getRequiredParam(CFG_PARAM_SECRET.getName());

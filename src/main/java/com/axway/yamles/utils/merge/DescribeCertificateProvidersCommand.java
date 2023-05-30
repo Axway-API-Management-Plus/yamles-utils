@@ -2,10 +2,12 @@ package com.axway.yamles.utils.merge;
 
 import java.io.PrintStream;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.Callable;
 
 import com.axway.yamles.utils.spi.CertificateManager;
 import com.axway.yamles.utils.spi.CertificateProvider;
+import com.axway.yamles.utils.spi.ConfigParameter;
 
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Help;
@@ -17,10 +19,9 @@ import picocli.CommandLine.Option;
 
 @Command(name = "cert-providers", description = "Describe the available certificate providers.")
 public class DescribeCertificateProvidersCommand implements Callable<Integer> {
-	
+
 	@Option(names = { "--full" }, description = "Display full description")
 	private boolean full = false;
-	
 
 	@Override
 	public Integer call() throws Exception {
@@ -46,15 +47,16 @@ public class DescribeCertificateProvidersCommand implements Callable<Integer> {
 
 			if (this.full) {
 				table.addRowValues("", "@|italic " + p.getDescription() + "|@");
-//				List<ConfigParameter> cps = p.getConfigParameters();
-//				if (!cps.isEmpty()) {
-//					table.addEmptyRow();					
-//					table.addRowValues("", "@|underline Configuration Parameters|@");
-//					
-//					cps.forEach((cp) -> {
-//						table.addRowValues("", "@|bold " + cp.getName() + " ["+ cp.getType() + "]:|@ " + cp.getDescription());
-//					});
-//				}
+				List<ConfigParameter> cps = p.getConfigParameters();
+				if (!cps.isEmpty()) {
+					table.addEmptyRow();
+					table.addRowValues("", "@|underline Configuration Parameters|@");
+
+					cps.forEach(cp -> {
+						table.addRowValues("",
+								(cp.isRequired() ? "*" : "") + "@|bold " + cp.getName() + ":|@ " + cp.getDescription() + " [" + cp.getType() + (cp.hasMustacheSupport() ? "; mustache supported" : "") + "]");
+					});
+				}
 			}
 			out.println(table);
 		});

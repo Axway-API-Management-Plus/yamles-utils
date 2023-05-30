@@ -38,18 +38,20 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class VaultLookupProvider extends AbstractLookupProvider {
+	private static final String DEFAULT_ADDR = "https://localhost:8200";
+
 	public static final FunctionArgument ARG_FIELD = new FunctionArgument("field", true, "");
 
-	public static final ConfigParameter CFG_PARAM_ADDR = new ConfigParameter("addr", false, "",
+	public static final ConfigParameter CFG_PARAM_ADDR = new ConfigParameter("addr", false,
+			"Address of Vault server [default: " + DEFAULT_ADDR + "]", ConfigParameter.Type.string);
+	public static final ConfigParameter CFG_PARAM_KV_BASE = new ConfigParameter("kv_base", true, "Path of the KV secret engine",
 			ConfigParameter.Type.string);
-	public static final ConfigParameter CFG_PARAM_KV_BASE = new ConfigParameter("kv_base", true, "",
-			ConfigParameter.Type.string);
-	public static final ConfigParameter CFG_PARAM_SKIP_VERIFY = new ConfigParameter("skip_verify", false, "",
-			ConfigParameter.Type.string);
-	public static final ConfigParameter CFG_PARAM_TOKEN = new ConfigParameter("token", false, "",
-			ConfigParameter.Type.string);
-	public static final ConfigParameter CFG_PARAM_TOKEN_FILE = new ConfigParameter("token_file", false, "",
-			ConfigParameter.Type.file);
+	public static final ConfigParameter CFG_PARAM_SKIP_VERIFY = new ConfigParameter("skip_verify", false,
+			"Skip server name verification", ConfigParameter.Type.bool);
+	public static final ConfigParameter CFG_PARAM_TOKEN = new ConfigParameter("token", false,
+			"Token to authorize access to Vault (if token file is not specified).", ConfigParameter.Type.string);
+	public static final ConfigParameter CFG_PARAM_TOKEN_FILE = new ConfigParameter("token_file", false,
+			"Path to token file (if token is not specified).", ConfigParameter.Type.file);
 
 	private static final Logger log = LogManager.getLogger(VaultLookupProvider.class);
 
@@ -90,7 +92,7 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 			this.alias = Objects.requireNonNull(alias);
 			this.token = Objects.requireNonNull(token);
 			this.basePath = Objects.requireNonNull(basePath);
-			this.addr = Objects.requireNonNull(addr).isPresent() ? addr.get() : "https://localhost:8200";
+			this.addr = Objects.requireNonNull(addr).isPresent() ? addr.get() : DEFAULT_ADDR;
 			this.skipVerify = skipVerify;
 		}
 
@@ -165,9 +167,8 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 	Map<String, VaultClient> clients = new HashMap<>();
 
 	public VaultLookupProvider() {
-		super("path to KV");
-		add(ARG_FIELD);
-		add(CFG_PARAM_TOKEN, CFG_PARAM_TOKEN_FILE, CFG_PARAM_ADDR, CFG_PARAM_KV_BASE);
+		super("path to KV", new FunctionArgument[] { ARG_FIELD },
+				new ConfigParameter[] { CFG_PARAM_TOKEN, CFG_PARAM_TOKEN_FILE, CFG_PARAM_ADDR, CFG_PARAM_KV_BASE });
 	}
 
 	@Override
@@ -179,7 +180,7 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 	public String getSummary() {
 		return "Lookup values from a Hashicorp Vault Key/Value store.";
 	}
-	
+
 	@Override
 	public String getDescription() {
 		return "The key represents the path to the KV entry.";

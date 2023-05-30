@@ -12,6 +12,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.spi.CertificateProviderException;
 import com.axway.yamles.utils.spi.CertificateReplacement;
+import com.axway.yamles.utils.spi.ConfigParameter;
+import com.axway.yamles.utils.spi.ConfigParameter.Type;
 
 import software.amazon.awssdk.services.acm.AcmClient;
 import software.amazon.awssdk.services.acm.AcmClientBuilder;
@@ -22,15 +24,31 @@ import software.amazon.awssdk.services.acm.model.ResourceNotFoundException;
 public class AwsCertificateManagerCertificateProvider extends AbstractCertificateProvider {
 
 	private static final Logger log = LogManager.getLogger(AwsCertificateManagerCertificateProvider.class);
-	
-	public static final String CFG_ARN = "arn";
-	public static final String CFG_CHAIN = "chain";
+
+	public static final ConfigParameter CFG_ARN = new ConfigParameter("arn", true,
+			"ARN of the certificate stored in the AWS Certificate Manager", Type.string, false);
+	public static final ConfigParameter CFG_CHAIN = new ConfigParameter("chain", false,
+			"include certificate chain", Type.bool, false);
 
 	private AcmClient client;
+
+	public AwsCertificateManagerCertificateProvider() {
+		super(CFG_ARN, CFG_CHAIN);
+	}
 
 	@Override
 	public String getName() {
 		return "aws_cm";
+	}
+
+	@Override
+	public String getSummary() {
+		return "Certificates from AWS Certificate Manager";
+	}
+
+	@Override
+	public String getDescription() {
+		return "Retrieves public certificates from AWS Certificate Manager. Currently, private keys are not supported.";
 	}
 
 	@Override
@@ -49,7 +67,7 @@ public class AwsCertificateManagerCertificateProvider extends AbstractCertificat
 			}
 		}
 
-		String arn = getRequiredConfig(config, CFG_ARN);
+		String arn = getConfig(config, CFG_ARN, "");
 		boolean addChain = getConfig(config, CFG_CHAIN, "false").equals("true");
 
 		GetCertificateResponse result = null;
@@ -64,19 +82,20 @@ public class AwsCertificateManagerCertificateProvider extends AbstractCertificat
 
 		try {
 			String cert = result.certificate();
-			
+
 			CertificateFactory cf = CertificateFactory.getInstance("X509");
 			Certificate c = cf.generateCertificate(new ByteArrayInputStream(cert.getBytes("ASCII")));
 			CertificateReplacement cr = new CertificateReplacement(aliasName, c);
-			
+
 			if (addChain) {
 				String chain = result.certificateChain();
 				if (chain != null) {
-					Collection<? extends Certificate> certs = cf.generateCertificates(new ByteArrayInputStream(chain.getBytes("ASCII")));
+					Collection<? extends Certificate> certs = cf
+							.generateCertificates(new ByteArrayInputStream(chain.getBytes("ASCII")));
 					cr.addChain(certs);
 				}
 			}
-			
+
 			return cr;
 		} catch (Exception e) {
 			throw new CertificateProviderException("error on parsing ACM certificate: " + aliasName, e);

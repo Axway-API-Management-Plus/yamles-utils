@@ -13,13 +13,12 @@ import com.axway.yamles.utils.spi.LookupSource;
 
 public class YamlLookupProvider extends AbstractLookupDocLookupProvider {
 	public static final ConfigParameter CFG_PARAM_FILE = new ConfigParameter("file", true,
-			"Path to YAML file containing lookup values.", Type.file);
+			"Path to YAML file containing lookup values.", Type.file, false);
 
 	private static final Logger log = LogManager.getLogger(YamlLookupProvider.class);
 
 	public YamlLookupProvider() {
-		super(DESCR_KEY_JSONPOINTER, log);
-		add(CFG_PARAM_FILE);
+		super(DESCR_KEY_JSONPOINTER, EMPTY_FUNC_ARGS, new ConfigParameter[] { CFG_PARAM_FILE }, log);
 	}
 
 	@Override

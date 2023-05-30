@@ -15,11 +15,11 @@ public class JsonLookupProvider extends AbstractLookupDocLookupProvider {
 
 	private static final Logger log = LogManager.getLogger(JsonLookupProvider.class);
 
-	public static final ConfigParameter CFG_PARAM_FILE = new ConfigParameter("file", true, "Path to JSON file containing lookup values.", Type.file);
+	public static final ConfigParameter CFG_PARAM_FILE = new ConfigParameter("file", true,
+			"Path to JSON file containing lookup values.", Type.file);
 
 	public JsonLookupProvider() {
-		super(DESCR_KEY_JSONPOINTER, log);
-		add(CFG_PARAM_FILE);
+		super(DESCR_KEY_JSONPOINTER, EMPTY_FUNC_ARGS, new ConfigParameter[] { CFG_PARAM_FILE }, log);
 	}
 
 	@Override

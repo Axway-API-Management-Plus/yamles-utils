@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.Logger;
 
+import com.axway.yamles.utils.spi.ConfigParameter;
+import com.axway.yamles.utils.spi.FunctionArgument;
 import com.axway.yamles.utils.spi.LookupDoc;
 import com.axway.yamles.utils.spi.LookupProviderException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -17,8 +19,8 @@ public abstract class AbstractLookupDocLookupProvider extends AbstractLookupProv
 	private final Logger log;
 	private final Map<String, LookupDoc> docs = new HashMap<>();
 
-	protected AbstractLookupDocLookupProvider(String keyDescription, Logger logger) {
-		super(keyDescription);
+	protected AbstractLookupDocLookupProvider(String keyDescription, FunctionArgument[] funcArgs, ConfigParameter[] configParams, Logger logger) {
+		super(keyDescription, funcArgs, configParams);
 		this.log = Objects.requireNonNull(logger);
 	}
 

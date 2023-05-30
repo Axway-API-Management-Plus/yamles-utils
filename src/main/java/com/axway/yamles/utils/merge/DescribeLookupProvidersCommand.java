@@ -55,7 +55,7 @@ public class DescribeLookupProvidersCommand implements Callable<Integer> {
 
 					cps.forEach(cp -> {
 						table.addRowValues("",
-								"@|bold " + cp.getName() + " [" + cp.getType() + "]:|@ " + cp.getDescription());
+								(cp.isRequired() ? "*" : "") + "@|bold " + cp.getName() + ":|@ " + cp.getDescription() + " [" + cp.getType() + (cp.hasMustacheSupport() ? "; mustache supported" : "") + "]");
 					});
 				}
 
