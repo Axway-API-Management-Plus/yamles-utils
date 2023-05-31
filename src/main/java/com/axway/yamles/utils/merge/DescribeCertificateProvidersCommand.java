@@ -17,7 +17,7 @@ import picocli.CommandLine.Help.Column.Overflow;
 import picocli.CommandLine.Help.TextTable;
 import picocli.CommandLine.Option;
 
-@Command(name = "cert-providers", description = "Describe the available certificate providers.")
+@Command(name = "cert-providers", description = "Describe the available certificate providers.", mixinStandardHelpOptions = true)
 public class DescribeCertificateProvidersCommand implements Callable<Integer> {
 
 	@Option(names = { "--full" }, description = "Display full description")

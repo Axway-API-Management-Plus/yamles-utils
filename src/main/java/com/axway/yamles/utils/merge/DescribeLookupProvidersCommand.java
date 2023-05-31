@@ -18,7 +18,7 @@ import picocli.CommandLine.Help.Column.Overflow;
 import picocli.CommandLine.Help.TextTable;
 import picocli.CommandLine.Option;
 
-@Command(name = "lookup-providers", description = "Describe the available lookup providers.")
+@Command(name = "lookup-providers", description = "Describe the available lookup providers.", mixinStandardHelpOptions = true)
 public class DescribeLookupProvidersCommand implements Callable<Integer> {
 
 	@Option(names = { "--full" }, description = "Display full description")

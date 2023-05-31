@@ -15,7 +15,7 @@ import picocli.CommandLine.Help.Column;
 import picocli.CommandLine.Help.Column.Overflow;
 import picocli.CommandLine.Help.TextTable;
 
-@Command(name = "functions", description = "Describe available functions.")
+@Command(name = "functions", description = "Describe available functions.", mixinStandardHelpOptions = true)
 public class DescribeFunctionsCommand extends AbstractLookupEnabledCommand {
 
 	@Override
