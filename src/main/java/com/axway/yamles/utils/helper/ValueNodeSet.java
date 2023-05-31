@@ -14,13 +14,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class ValueNodeSet {
 
-	private SortedSet<String> valueNodes = new TreeSet<>();
+	private SortedSet<NodeLocation> valueNodes = new TreeSet<>();
 
 	public ValueNodeSet(JsonNode rootNode) {
 		if (rootNode != null) {
 			if (!rootNode.isObject())
 				throw new IllegalArgumentException("root node is not of type object");
-			YamlLocation location = new YamlLocation();
+			NodeLocation location = NodeLocation.root();
 			scan(location, (ObjectNode) rootNode);
 		}
 	}
@@ -29,12 +29,12 @@ public class ValueNodeSet {
 		return this.valueNodes.isEmpty();
 	}
 
-	public Set<String> getValueNodes() {
+	public Set<NodeLocation> getValueNodes() {
 		return Collections.unmodifiableSet(this.valueNodes);
 	}
 
-	public List<String> detectMissing(ValueNodeSet required) {
-		List<String> missing = new ArrayList<>();
+	public List<NodeLocation> detectMissing(ValueNodeSet required) {
+		List<NodeLocation> missing = new ArrayList<>();
 
 		if (required == null || required.valueNodes.isEmpty()) {
 			return missing;
@@ -48,18 +48,17 @@ public class ValueNodeSet {
 		return missing;
 	}
 
-	private void scan(YamlLocation location, ObjectNode node) {
+	private void scan(NodeLocation location, ObjectNode node) {
 		Iterator<Entry<String, JsonNode>> fields = node.fields();
 		while (fields.hasNext()) {
 			Entry<String, JsonNode> field = fields.next();
 
-			location.push(field.getKey());
+			NodeLocation fieldLocation = location.child(field.getKey());
 			if (field.getValue().isObject()) {
-				scan(location, (ObjectNode) field.getValue());
+				scan(fieldLocation, (ObjectNode) field.getValue());
 			} else if (field.getValue().isArray() || field.getValue().isValueNode()) {
-				this.valueNodes.add(location.toString());
+				this.valueNodes.add(fieldLocation);
 			}
-			location.pop();
 		}
 	}
 }

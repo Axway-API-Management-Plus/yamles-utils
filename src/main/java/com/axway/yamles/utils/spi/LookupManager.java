@@ -12,6 +12,8 @@ import java.util.ServiceLoader;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.axway.yamles.utils.helper.Audit;
+
 import io.pebbletemplates.pebble.extension.AbstractExtension;
 import io.pebbletemplates.pebble.extension.Function;
 
@@ -59,7 +61,7 @@ public class LookupManager extends AbstractExtension {
 		if (existingFunc != null)
 			throw new LookupProviderConfigException(lf.getDefintionSource(),
 					"alias '" + lf.getAlias() + "' already defined in " + existingFunc.getDefintionSource());
-		log.info("lookup function registered: func={}; provider={}; source={}", lf.getName(),
+		Audit.AUDIT_LOG.info("lookup function registered: func={}; provider={}; source={}", lf.getName(),
 				lf.getProvider().getName(), lf.getDefintionSource());
 	}
 

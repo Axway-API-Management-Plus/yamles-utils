@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+import com.axway.yamles.utils.helper.Audit;
+
 import io.pebbletemplates.pebble.extension.Function;
 import io.pebbletemplates.pebble.template.EvaluationContext;
 import io.pebbletemplates.pebble.template.PebbleTemplate;
@@ -74,6 +76,8 @@ public class LookupFunction implements Function {
 		if (!value.isPresent()) {
 			throw new LookupFunctionException(this, "lookup key not found: " + argsToString(args));
 		}
+		
+		Audit.AUDIT_LOG.info("  lookup: alias={} args=[{}]", this.alias, argsToString(args));
 
 		return value.get();
 	}

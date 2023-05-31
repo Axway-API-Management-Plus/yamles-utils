@@ -9,8 +9,10 @@
 		<Root level="error">
 			<AppenderRef ref="Console" />
 		</Root>
-		<Logger name="com.axway.yamles.utils" level="info" additivity="false">
-			<AppenderRef ref="Console" />
+		<Logger name="com.axway.yamles.utils" level="error" additivity="false">
+ 			<AppenderRef ref="Console" />
+		</Logger>
+		<Logger name="com.axway.yamles.utils.audit" level="info" additivity="true">
 		</Logger>
 	</Loggers>
 </Configuration>

@@ -7,16 +7,13 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
+import com.axway.yamles.utils.helper.Audit;
 import com.axway.yamles.utils.helper.YamlEs;
-import com.axway.yamles.utils.spi.CertificateReplacement;
 import com.axway.yamles.utils.spi.CertificateManager;
 import com.axway.yamles.utils.spi.CertificateProvider;
+import com.axway.yamles.utils.spi.CertificateReplacement;
 
 class AliasSet {
-	private static final Logger log = LogManager.getLogger(AliasSet.class);
 
 	private final Set<Alias> aliases = new HashSet<>();
 
@@ -37,7 +34,7 @@ class AliasSet {
 			this.aliases.add(a);
 		});
 	}
-	
+
 	public Iterator<Alias> getAliases() {
 		return this.aliases.iterator();
 	}
@@ -45,6 +42,8 @@ class AliasSet {
 	public void writeAliases(YamlEs project) {
 		if (project == null)
 			throw new IllegalArgumentException("project is null");
+
+		Audit.AUDIT_LOG.info(Audit.HEADER_PREFIX + "Write Certificates");
 
 		this.aliases.forEach(a -> {
 			writeAlias(project, a);
@@ -61,21 +60,23 @@ class AliasSet {
 		}
 
 		try {
+			Audit.AUDIT_LOG.info("process alias: alias={}; config-source={}; provider={}", alias.getName(),
+					alias.getConfigSource().getAbsolutePath(), alias.getProvider());
 			CertificateReplacement cert = cp.getCertificate(alias.getConfigSource(), alias.getName(),
 					alias.getConfig());
 			if (cert.isEmpty()) {
 				project.removeCertificate(alias.getName());
-				log.info("certificate removed: alias={}", alias.getName());
+				Audit.AUDIT_LOG.info("  certificate removed: alias={}", alias.getName());
 			} else {
 				project.writeCertificate(alias.getName(), cert.getCert().get(), cert.getKey());
-				log.info("certificate created: alias={}; config-source={}; provider={}", alias.getName(), alias.getConfigSource().getAbsolutePath(), alias.getProvider());
-				
+				Audit.AUDIT_LOG.info("  certificate created: alias={}", alias.getName());
+
 				if (!cert.getChain().isEmpty()) {
 					int i = 0;
-					for(Certificate c : cert.getChain()) {
+					for (Certificate c : cert.getChain()) {
 						String chainAlias = alias.getName() + "_chain_" + i;
 						project.writeCertificate(chainAlias, c, Optional.empty());
-						log.info("chain certificate created: alias={}; config-source={}; provider={}", chainAlias, alias.getConfigSource().getAbsolutePath(), alias.getProvider());
+						Audit.AUDIT_LOG.info("  chain certificate created: alias={}", chainAlias);
 						i++;
 					}
 				}

@@ -1,11 +1,12 @@
 package com.axway.yamles.utils.helper;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+
+import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -33,8 +34,8 @@ public class ValueNodeSetTest {
 
 		assertFalse(vns.isEmpty());
 		assertEquals(2, vns.getValueNodes().size());
-		assertTrue(vns.getValueNodes().contains("/p1"));
-		assertTrue(vns.getValueNodes().contains("/p2"));
+		assertTrue(vns.getValueNodes().contains(NodeLocation.root().child("p1")));
+		assertTrue(vns.getValueNodes().contains(NodeLocation.root().child("p2")));
 	}
 
 	@Test
@@ -44,8 +45,8 @@ public class ValueNodeSetTest {
 
 		assertFalse(vns.isEmpty());
 		assertEquals(2, vns.getValueNodes().size());
-		assertTrue(vns.getValueNodes().contains("/obj1/p1"));
-		assertTrue(vns.getValueNodes().contains("/obj1/a1"));
+		assertTrue(vns.getValueNodes().contains(NodeLocation.root().child("obj1").child("p1")));
+		assertTrue(vns.getValueNodes().contains(NodeLocation.root().child("obj1").child("a1")));
 	}
 
 	@Test

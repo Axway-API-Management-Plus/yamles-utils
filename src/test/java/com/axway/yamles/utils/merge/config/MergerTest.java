@@ -26,7 +26,7 @@ class MergerTest {
 
 	@Test
 	void mergeEmptyWithSimpleObject() {
-		FieldAudit audit = new FieldAudit();		
+		FieldAudit audit = new FieldAudit();
 		ObjectNode target = Yaml.createObjectNode();
 		ConfigSource cs = ConfigSourceFactory.create("cs", "str1: \"value\"");
 		Merger merger = new Merger(audit, target, cs);
@@ -37,9 +37,9 @@ class MergerTest {
 
 		assertEquals(1, target.size());
 		assertEquals("value", target.get("str1").asText());
-		
+
 		assertEquals(1, audit.getFields().length);
-		assertEquals("/str1", audit.getFields()[0].getPath());
+		assertEquals("/str1", audit.getFields()[0].getLocation().toString());
 		assertEquals("cs", audit.getFields()[0].getSource());
 	}
 
@@ -64,18 +64,18 @@ class MergerTest {
 		assertEquals(2, target.size());
 		assertEquals("value1", target.get("str1").asText());
 		assertEquals("value2", target.get("str2").asText());
-		
+
 		// check audit
 		assertEquals(2, audit.getFields().length);
-		assertEquals("/str1", audit.getFields()[0].getPath());
+		assertEquals("/str1", audit.getFields()[0].getLocation().toString());
 		assertEquals("cs1", audit.getFields()[0].getSource());
-		assertEquals("/str2", audit.getFields()[1].getPath());
+		assertEquals("/str2", audit.getFields()[1].getLocation().toString());
 		assertEquals("cs2", audit.getFields()[1].getSource());
 	}
 
 	@Test
 	void mergeMultiMergeSimpleObjectOverwrite() {
-		FieldAudit audit = new FieldAudit();		
+		FieldAudit audit = new FieldAudit();
 		ObjectNode target = Yaml.createObjectNode();
 		assertTrue(target.isEmpty());
 
@@ -93,16 +93,16 @@ class MergerTest {
 		merger.merge();
 		assertEquals(1, target.size());
 		assertEquals("value_new", target.get("str").asText());
-		
+
 		// check audit
 		assertEquals(1, audit.getFields().length);
-		assertEquals("/str", audit.getFields()[0].getPath());
+		assertEquals("/str", audit.getFields()[0].getLocation().toString());
 		assertEquals("cs2", audit.getFields()[0].getSource());
 	}
 
 	@Test
 	void mergeMultiMergeObjectNoOverwrite() {
-		FieldAudit audit = new FieldAudit();		
+		FieldAudit audit = new FieldAudit();
 		ObjectNode target = Yaml.createObjectNode();
 		assertTrue(target.isEmpty());
 
@@ -125,21 +125,21 @@ class MergerTest {
 		merger = new Merger(audit, target, cs);
 		merger.merge();
 		assertEquals(2, target.size());
-		assertEquals("value1", target.get("obj1").get("str1").asText());		
+		assertEquals("value1", target.get("obj1").get("str1").asText());
 		assertEquals("value2", target.get("obj2").get("str2").asText());
-		
+
 		// check audit
 		assertEquals(2, audit.getFields().length);
-		assertEquals("/obj1/str1", audit.getFields()[0].getPath());
+		assertEquals("/obj1/str1", audit.getFields()[0].getLocation().toString());
 		assertEquals("cs1", audit.getFields()[0].getSource());
-		assertEquals("/obj2/str2", audit.getFields()[1].getPath());
+		assertEquals("/obj2/str2", audit.getFields()[1].getLocation().toString());
 		assertEquals("cs2", audit.getFields()[1].getSource());
-		
+
 	}
 
 	@Test
 	void mergeMultiMergeObjectAddAndOverwrite() {
-		FieldAudit audit = new FieldAudit();		
+		FieldAudit audit = new FieldAudit();
 		ObjectNode target = Yaml.createObjectNode();
 		assertTrue(target.isEmpty());
 
@@ -163,14 +163,14 @@ class MergerTest {
 		merger = new Merger(audit, target, cs);
 		merger.merge();
 		assertEquals(1, target.size());
-		assertEquals("value2", target.get("obj").get("str1").asText());		
+		assertEquals("value2", target.get("obj").get("str1").asText());
 		assertEquals("value2", target.get("obj").get("str2").asText());
-		
+
 		// check audit
 		assertEquals(2, audit.getFields().length);
-		assertEquals("/obj/str1", audit.getFields()[0].getPath());
+		assertEquals("/obj/str1", audit.getFields()[0].getLocation().toString());
 		assertEquals("cs2", audit.getFields()[0].getSource());
-		assertEquals("/obj/str2", audit.getFields()[1].getPath());
+		assertEquals("/obj/str2", audit.getFields()[1].getLocation().toString());
 		assertEquals("cs2", audit.getFields()[1].getSource());
 	}
 }

@@ -203,7 +203,7 @@ echo ""
 echo "============================================================"
 echo "== Configure project - certificates"
 echo "============================================================"
-args=("merge" "certs" "--project=${TMP_PRJ}" "--audit=${TARGET_TMP_DIR}/alias.audit")
+args=("--audit=${TARGET_TMP_DIR}/audit.log" "merge" "certs" "--project=${TMP_PRJ}")
 case $OPT_ENV in
   local)
     args+=( \
@@ -243,7 +243,7 @@ echo ""
 echo "============================================================"
 echo "== Configure project - values"
 echo "============================================================"
-args=("merge" "config" "--project=${TMP_PRJ}" "--audit=${TARGET_TMP_DIR}/field.audit")
+args=( "--audit=${TARGET_TMP_DIR}/audit.log" "merge" "config" "--project=${TMP_PRJ}")
 case $OPT_ENV in
   local)
     args+=( \

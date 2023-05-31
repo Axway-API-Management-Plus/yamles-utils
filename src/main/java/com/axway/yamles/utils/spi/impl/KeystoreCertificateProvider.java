@@ -10,7 +10,6 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.axway.yamles.utils.helper.Mustache;
 import com.axway.yamles.utils.spi.CertificateProviderException;
 import com.axway.yamles.utils.spi.CertificateReplacement;
 import com.axway.yamles.utils.spi.ConfigParameter;
@@ -23,7 +22,7 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 	public static final ConfigParameter CFG_PATH = new ConfigParameter("path", true, "Path to keystore file", Type.file,
 			false);
 	public static final ConfigParameter CFG_PASSPHRASE = new ConfigParameter("pass", false, "Passphrase for keystore",
-			Type.string, false);
+			Type.string, true);
 	public static final ConfigParameter CFG_ALIAS = new ConfigParameter("alias", false,
 			"Alias of the certificate within the keystore. If not specified, the alias of the Entity Store certificate is used.",
 			Type.string, false);
@@ -63,7 +62,6 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 		String passphrase = getConfig(config, CFG_PASSPHRASE, null);
 		char[] password = null;
 		if (passphrase != null) {
-			passphrase = Mustache.eval(passphrase);
 			password = passphrase.toCharArray();
 		}
 
