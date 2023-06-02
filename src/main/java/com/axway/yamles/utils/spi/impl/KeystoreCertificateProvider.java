@@ -53,24 +53,24 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 	public CertificateReplacement getCertificate(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
 
-		String path = getConfig(config, CFG_PATH, "");
+		String path = getConfig(CFG_PATH, config, "");
 		File keystoreFile = buildFile(configSource, path);
 		if (!keystoreFile.exists()) {
 			throw new CertificateProviderException("keystore file not found: " + keystoreFile.getAbsolutePath());
 		}
 
-		String passphrase = getConfig(config, CFG_PASSPHRASE, null);
+		String passphrase = getConfig(CFG_PASSPHRASE, config, null);
 		char[] password = null;
 		if (passphrase != null) {
 			password = passphrase.toCharArray();
 		}
 
-		String altAlias = getConfig(config, CFG_ALIAS, aliasName);
+		String altAlias = getConfig(CFG_ALIAS, config, aliasName);
 		if (altAlias != null) {
 			aliasName = altAlias;
 		}
 
-		String type = getConfig(config, CFG_TYPE, "");
+		String type = getConfig(CFG_TYPE, config, "");
 		if (type.isEmpty())
 			type = determineType(keystoreFile);
 

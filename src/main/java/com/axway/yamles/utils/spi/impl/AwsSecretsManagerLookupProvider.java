@@ -1,7 +1,5 @@
 package com.axway.yamles.utils.spi.impl;
 
-import java.util.Optional;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.tools.picocli.CommandLine.Command;
@@ -21,9 +19,9 @@ import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRespon
 @Command
 public class AwsSecretsManagerLookupProvider extends AbstractLookupDocLookupProvider {
 	public static final ConfigParameter CFG_PARAM_SECRET = new ConfigParameter("secret_name", true, "Secret name",
-			Type.string);
+			Type.string, false);
 	public static final ConfigParameter CFG_PARAM_REGION = new ConfigParameter("region", false, "Region name",
-			Type.string);
+			Type.string, false);
 
 	private static final Logger log = LogManager.getLogger(AwsSecretsManagerLookupProvider.class);
 
@@ -48,12 +46,12 @@ public class AwsSecretsManagerLookupProvider extends AbstractLookupDocLookupProv
 
 	@Override
 	public void addSource(LookupSource source) throws LookupProviderException {
-		String secretName = source.getRequiredParam(CFG_PARAM_SECRET.getName());
-		Optional<String> region = source.getParam(CFG_PARAM_REGION.getName());
+		String secretName = source.getConfig(CFG_PARAM_SECRET, "");
+		String region = source.getConfig(CFG_PARAM_REGION, "");
 
 		SecretsManagerClientBuilder builder = SecretsManagerClient.builder();
-		if (region.isPresent()) {
-			builder.region(Region.of(region.get()));
+		if (!region.isEmpty()) {
+			builder.region(Region.of(region));
 		}
 		SecretsManagerClient client = builder.build();
 

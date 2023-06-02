@@ -10,40 +10,40 @@ import com.axway.yamles.utils.helper.Yaml;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class LookupProviderConfig {
+public class LookupFunctionConfig {
 
 	private File configSource = null;
 	private final Map<String, LookupSource> sources;
 
-	public static LookupProviderConfig loadYAML(File file) {
+	public static LookupFunctionConfig loadYAML(File file) {
 		try {
-			LookupProviderConfig lpc = Yaml.loadValue(file, LookupProviderConfig.class);
+			LookupFunctionConfig lpc = Yaml.loadValue(file, LookupFunctionConfig.class);
 			lpc.setConfigSource(file);
 
 			return lpc;
 		} catch (Exception e) {
-			throw new LookupProviderConfigException(file.getAbsolutePath(), "error on loading lookup provider configuration", e);
+			throw new LookupFunctionConfigException(file.getAbsolutePath(), "error on loading lookup provider configuration", e);
 		}
 	}
 	
-	public static LookupProviderConfig fromYAML(String yaml) {
+	public static LookupFunctionConfig fromYAML(String yaml) {
 		try {
-			return Yaml.readValue(yaml, LookupProviderConfig.class);
+			return Yaml.readValue(yaml, LookupFunctionConfig.class);
 		} catch (Exception e) {
-			throw new LookupProviderConfigException("<string>", "error on loading lookup provider configuration", e);
+			throw new LookupFunctionConfigException("<string>", "error on loading lookup provider configuration", e);
 		}
 	}
 	
-	public static LookupProviderConfig fromJSON(String json) {
+	public static LookupFunctionConfig fromJSON(String json) {
 		try {
-			return Json.readValue(json, LookupProviderConfig.class);
+			return Json.readValue(json, LookupFunctionConfig.class);
 		} catch (Exception e) {
-			throw new LookupProviderConfigException("<string>", "error on loading lookup provider configuration", e);
+			throw new LookupFunctionConfigException("<string>", "error on loading lookup provider configuration", e);
 		}
 	}
 
 	@JsonCreator
-	protected LookupProviderConfig(@JsonProperty("lookups") Map<String, LookupSource> sources) {
+	protected LookupFunctionConfig(@JsonProperty("lookups") Map<String, LookupSource> sources) {
 		this.sources = Objects.requireNonNull(sources, "no sources defined");
 		this.sources.forEach((k, v) -> {
 			v.setAlias(k);

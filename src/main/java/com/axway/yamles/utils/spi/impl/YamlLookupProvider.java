@@ -38,7 +38,7 @@ public class YamlLookupProvider extends AbstractLookupDocLookupProvider {
 
 	@Override
 	public void addSource(LookupSource source) throws LookupProviderException {
-		File file = source.getFileFromRequiredParam(CFG_PARAM_FILE.getName());
+		File file = source.getFileFromConfig(CFG_PARAM_FILE).get();
 
 		try {
 			LookupDoc doc = LookupDoc.fromYamlFile(source.getAlias(), file);

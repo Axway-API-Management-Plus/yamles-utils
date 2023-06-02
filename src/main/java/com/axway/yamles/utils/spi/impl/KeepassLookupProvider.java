@@ -20,11 +20,11 @@ import com.axway.yamles.utils.spi.LookupSource;
 
 public class KeepassLookupProvider extends AbstractLookupProvider {
 	public static final ConfigParameter CFG_PARAM_FILE = new ConfigParameter("kdb", true, "Path to KeePass DB file",
-			ConfigParameter.Type.file);
+			ConfigParameter.Type.file, false);
 	public static final ConfigParameter CFG_PARAM_PASS = new ConfigParameter("passphrase", true,
-			"Passsphrase of KeePass DB", ConfigParameter.Type.string);
+			"Passsphrase of KeePass DB", ConfigParameter.Type.string, true);
 	public static final ConfigParameter CFG_PARAM_KEY_FILE = new ConfigParameter("key", false,
-			"Path to master key file", ConfigParameter.Type.file);
+			"Path to master key file", ConfigParameter.Type.file, false);
 
 	public static final FunctionArgument ARG_WHAT = new FunctionArgument("what", true,
 			"Field to be retrieved from the KeePass entry");
@@ -193,9 +193,9 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 
 	@Override
 	public void addSource(LookupSource source) throws LookupProviderException {
-		File dbFile = source.getFileFromRequiredParam(CFG_PARAM_FILE.getName());
-		String passphrase = source.getRequiredParam(CFG_PARAM_PASS.getName());
-		Optional<File> keyFile = source.getFileFromParam(CFG_PARAM_KEY_FILE.getName());
+		File dbFile = source.getFileFromConfig(CFG_PARAM_FILE).get();
+		String passphrase = source.getConfig(CFG_PARAM_PASS, "");
+		Optional<File> keyFile = source.getFileFromConfig(CFG_PARAM_KEY_FILE);
 
 		try {
 			Kdb kdb = new Kdb(source.getAlias(), dbFile, passphrase, keyFile);
@@ -218,12 +218,12 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 			return result;
 		}
 
-		EntryPath ep = new EntryPath(getStringArg(args, ARG_KEY.getName()));
-		What what = What.valueOf(getStringArg(args, ARG_WHAT.getName()));
+		EntryPath ep = new EntryPath(getArg(ARG_KEY, args, ""));
+		What what = What.valueOf(getArg(ARG_WHAT, args, ""));
 		String pname = null;
 
 		if (what.isPropertyNameRequired()) {
-			pname = getStringArg(args, ARG_PNAME.getName());
+			pname = getArg(ARG_PNAME, args, "");
 		}
 
 		Key key = new Key(ep, what, pname);

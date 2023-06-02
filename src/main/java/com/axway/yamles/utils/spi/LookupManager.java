@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.helper.Audit;
+import com.axway.yamles.utils.helper.Mustache;
 
 import io.pebbletemplates.pebble.extension.AbstractExtension;
 import io.pebbletemplates.pebble.extension.Function;
@@ -59,10 +60,10 @@ public class LookupManager extends AbstractExtension {
 	private void addFunction(LookupFunction lf) {
 		LookupFunction existingFunc = this.functions.put(lf.getName(), lf);
 		if (existingFunc != null)
-			throw new LookupProviderConfigException(lf.getDefintionSource(),
+			throw new LookupFunctionConfigException(lf.getDefintionSource(),
 					"alias '" + lf.getAlias() + "' already defined in " + existingFunc.getDefintionSource());
-		Audit.AUDIT_LOG.info("lookup function registered: func={}; provider={}; source={}", lf.getName(),
-				lf.getProvider().getName(), lf.getDefintionSource());
+		log.debug("lookup function added: func={}; provider={}; source={}", lf.getName(), lf.getProvider().getName(),
+				lf.getDefintionSource());
 	}
 
 	public Collection<LookupProvider> getProviders() {
@@ -73,17 +74,18 @@ public class LookupManager extends AbstractExtension {
 		return this.functions.values();
 	}
 
-	public void configureProviders(List<File> configFiles) {
+	public void configureFunctions(List<File> configFiles) {
 		if (configFiles == null || configFiles.isEmpty())
 			return;
 
 		for (File cf : configFiles) {
-			LookupProviderConfig lpc = LookupProviderConfig.loadYAML(cf);
+			LookupFunctionConfig lpc = LookupFunctionConfig.loadYAML(cf);
 
 			for (LookupSource ls : lpc.getSources().values()) {
+				Audit.AUDIT_LOG.info("register lookup source: alias={}", ls.getAlias());
 				LookupProvider lp = this.lookupProviders.get(ls.getProvider());
 				if (lp == null) {
-					throw new LookupProviderConfigException(lpc.getConfigSource(),
+					throw new LookupFunctionConfigException(lpc.getConfigSource(),
 							"unknown lookup provider: " + ls.getProvider());
 				}
 				lp.addSource(ls);
@@ -93,15 +95,20 @@ public class LookupManager extends AbstractExtension {
 				addFunction(lf);
 			}
 		}
+
+		// refresh Mustache processor to reflect new functions
+		Mustache.refresh();
 	}
 
 	@Override
 	public Map<String, Function> getFunctions() {
+		Audit.AUDIT_LOG.info(Audit.HEADER_PREFIX + "Init Mustache Functions");
 		Map<String, Function> func = new HashMap<>();
 		this.functions.forEach((name, lf) -> {
 			if (lf.isEnabled()) {
 				func.put(lf.getName(), lf);
-				log.debug("lookup function registered: {}", lf.getName());
+				Audit.AUDIT_LOG.info("lookup function registered: func={}; provider={}; source={}", lf.getName(),
+						lf.getProvider().getName(), lf.getDefintionSource());
 			}
 		});
 		return func;

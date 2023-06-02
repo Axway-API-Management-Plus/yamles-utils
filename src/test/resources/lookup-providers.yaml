@@ -8,14 +8,12 @@ lookups:
   alias2:
     provider: provider2
     
-    # Parameters by value
     config:
+      # Parameters by value    
       param1: value1
-
-    # Parameters retrieved from environment variables
-    config_env:
-      param2: name_of_env_var
       
-    # Parameters retrieved from system properties
-    config_sys:
-      param3: name_of_sys_prop
+      # Parameters retrieved from environment variables
+      param2: "{{ _env('NAME_OF_ENV_VAR') }}"
+      
+      # Parameters retrieved from system properties
+      param3: "{{ _sys('name_of_sys_prop') }}"

@@ -27,8 +27,8 @@ public class AwsCertificateManagerCertificateProvider extends AbstractCertificat
 
 	public static final ConfigParameter CFG_ARN = new ConfigParameter("arn", true,
 			"ARN of the certificate stored in the AWS Certificate Manager", Type.string, false);
-	public static final ConfigParameter CFG_CHAIN = new ConfigParameter("chain", false,
-			"include certificate chain", Type.bool, false);
+	public static final ConfigParameter CFG_CHAIN = new ConfigParameter("chain", false, "include certificate chain",
+			Type.bool, false);
 
 	private AcmClient client;
 
@@ -67,8 +67,8 @@ public class AwsCertificateManagerCertificateProvider extends AbstractCertificat
 			}
 		}
 
-		String arn = getConfig(config, CFG_ARN, "");
-		boolean addChain = getConfig(config, CFG_CHAIN, "false").equals("true");
+		String arn = getConfig(CFG_ARN, config, "");
+		boolean addChain = getConfig(CFG_CHAIN, config, "false").equals("true");
 
 		GetCertificateResponse result = null;
 		try {

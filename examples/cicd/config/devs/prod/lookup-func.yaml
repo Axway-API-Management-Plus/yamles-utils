@@ -3,4 +3,4 @@ lookups:
     provider: keepass
     config:
       kdb: ../all/lookups/devs-secrets.kdbx
-      passphrase: changeme-devs
+      passphrase: "{{ _env('KDB_PWD_DEV') }}"

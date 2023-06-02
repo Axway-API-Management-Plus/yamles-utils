@@ -45,8 +45,8 @@ public class EnvLookupProvider extends AbstractLookupProvider {
 
 	@Override
 	public Optional<String> lookup(String alias, Map<String, Object> args) {
-		String key = getStringArg(args, ARG_KEY.getName());
-		if (key == null || key.isEmpty()) {
+		String key = getArg(ARG_KEY, args, "");
+		if (key.isEmpty()) {
 			return Optional.empty();
 		}
 

@@ -12,7 +12,7 @@ import com.axway.yamles.utils.spi.LookupSource;
  * @author mlook
  */
 public class SysLookupProvider extends AbstractLookupProvider {
-	
+
 	public SysLookupProvider() {
 		super("name of system property", EMPTY_FUNC_ARGS, EMPTY_CONFIG_PARAMS);
 	}
@@ -21,12 +21,12 @@ public class SysLookupProvider extends AbstractLookupProvider {
 	public String getName() {
 		return "sys";
 	}
-	
+
 	@Override
 	public String getSummary() {
 		return "Lookup values from system properties.";
 	}
-	
+
 	@Override
 	public String getDescription() {
 		return "The key represents the name of the system property.";
@@ -41,10 +41,9 @@ public class SysLookupProvider extends AbstractLookupProvider {
 	public void addSource(LookupSource source) throws LookupProviderException {
 	}
 
-	
 	@Override
 	public Optional<String> lookup(String alias, Map<String, Object> args) {
-		String key = getStringArg(args, ARG_KEY.getName());
+		String key = getArg(ARG_KEY, args, "");
 		if (key == null || key.isEmpty()) {
 			return Optional.empty();
 		}

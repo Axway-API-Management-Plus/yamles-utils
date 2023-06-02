@@ -4,13 +4,13 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import com.axway.yamles.utils.helper.EnvironmentVariables;
+import com.axway.yamles.utils.helper.Mustache;
+import com.axway.yamles.utils.spi.ConfigParameter.Type;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -18,12 +18,9 @@ public class LookupSource {
 	private static final Pattern ALIAS_NAME = Pattern.compile("[_a-zA-Z][_a-zA-Z0-9]*");
 
 	private final String provider;
-	private final Map<String, String> paramsVal;
-	private final Map<String, String> paramsEnv;
-	private final Map<String, String> paramsSys;
+	private final Map<String, String> config;
 	private Optional<File> configSource = Optional.empty();
 	private String alias = null;
-	private Map<String, String> params = null;
 
 	/**
 	 * Checks for a valid alias name.
@@ -37,105 +34,55 @@ public class LookupSource {
 		return ALIAS_NAME.matcher(name).matches();
 	}
 
-	public LookupSource(String alias, String provider, Map<String, String> paramsVal, Map<String, String> paramsEnv,
-			Map<String, String> paramsSys) {
+	public LookupSource(String alias, String provider, Map<String, String> params) {
 		if (!isValidAlias(alias))
 			throw new IllegalArgumentException("invaliad alias: " + alias);
 		this.provider = Objects.requireNonNull(provider, "provider requried");
 		this.alias = alias;
-		this.paramsVal = (paramsVal != null) ? paramsVal : Collections.emptyMap();
-		this.paramsEnv = (paramsEnv != null) ? paramsEnv : Collections.emptyMap();
-		this.paramsSys = (paramsSys != null) ? paramsSys : Collections.emptyMap();
+		this.config = (params != null && !params.isEmpty()) ? Collections.unmodifiableMap(params)
+				: Collections.emptyMap();
 	}
 
 	@JsonCreator
-	LookupSource(@JsonProperty("provider") String provider, @JsonProperty("config") Map<String, String> paramsVal,
-			@JsonProperty("config_env") Map<String, String> paramsEnv,
-			@JsonProperty("config_sys") Map<String, String> paramsSys) {
+	LookupSource(@JsonProperty("provider") String provider, @JsonProperty("config") Map<String, String> params) {
 		this.provider = Objects.requireNonNull(provider, "provider property requried");
-		this.paramsVal = (paramsVal != null) ? paramsVal : Collections.emptyMap();
-		this.paramsEnv = (paramsEnv != null) ? paramsEnv : Collections.emptyMap();
-		this.paramsSys = (paramsSys != null) ? paramsSys : Collections.emptyMap();
+		this.config = (params != null && !params.isEmpty()) ? Collections.unmodifiableMap(params)
+				: Collections.emptyMap();
 	}
 
 	public String getProvider() {
 		return this.provider;
 	}
 
-	public synchronized Map<String, String> getParams() {
-		if (this.params != null)
-			return this.params;
-
-		Map<String, String> config = new HashMap<>();
-
-		// add parameters from value
-		this.paramsVal.forEach((key, value) -> {
-			config.put(key, value);
-		});
-
-		// add parameters from environment variable
-		this.paramsEnv.forEach((key, env) -> {
-			String value = EnvironmentVariables.get(env);
-			if (value == null) {
-				throw new LookupProviderConfigException(this.configSource,
-						"environment variable not found: alias=" + this.alias + "; parameter=" + key + "; env=" + env);
-			}
-			if (config.putIfAbsent(key, value) != null) {
-				throw new LookupProviderConfigException(this.configSource,
-						"duplicate parameter: alias=" + this.alias + "; parameter=" + key);
-			}
-		});
-
-		// add parameters from system property
-		this.paramsSys.forEach((key, sys) -> {
-			String value = System.getProperty(sys);
-			if (value == null) {
-				throw new LookupProviderConfigException(this.configSource,
-						"system property not found: alias=" + this.alias + "; parameter=" + key + "; sys=" + sys);
-			}
-			if (config.putIfAbsent(key, value) != null) {
-				throw new LookupProviderConfigException(this.configSource,
-						"duplicate parameter: alias=" + this.alias + "; parameter=" + key);
-			}
-		});
-
-		this.params = Collections.unmodifiableMap(config);
-
-		return this.params;
+	public Map<String, String> getConfig() {
+		return this.config;
 	}
-
-	public String getRequiredParam(String name) {
-		String value = getParams().get(name);
+	
+	public String getConfig(ConfigParameter param, String defaultValue) {
+		String value = this.config.get(param.getName());
 		if (value == null) {
-			throw new LookupProviderConfigException(this.configSource,
-					"required parameter not found: alias=" + this.alias + "; parameter=" + name);
+			if (param.isRequired()) {
+				throw new LookupFunctionConfigException(this.configSource,
+						"required parameter not found: alias=" + this.alias + "; parameter=" + param.getName());
+			}
+			value = defaultValue;
+		}
+		if (value != null) {
+			if (param.hasMustacheSupport()) {
+				value = Mustache.eval(value);
+			}
 		}
 		return value;
 	}
 
-	public Optional<String> getParam(String name) {
-		return Optional.ofNullable(getParams().get(name));
-	}
-
-	public Optional<File> getFileFromParam(String name) {
-		Optional<String> filePath = getParam(name);
-		if (!filePath.isPresent())
-			return Optional.empty();
-
-		Optional<File> baseDir = getBaseDirectory();
-		File file = null;
-		if (baseDir.isPresent()) {
-			Path basePath = Paths.get(baseDir.get().toURI());
-			file = basePath.resolve(filePath.get()).toFile();
-		} else {
-			file = new File(filePath.get());
+	public Optional<File> getFileFromConfig(ConfigParameter param) {
+		if (param.getType() != Type.file) {
+			throw new LookupFunctionConfigException(this.configSource,
+					"not a file parameter: alias=" + this.alias + "; parameter=" + param.getName());
 		}
-
-		return Optional.ofNullable(file);
-	}
-
-	public File getFileFromRequiredParam(String name) {
-		String filePath = getRequiredParam(name);
+		String filePath = getConfig(param, null);
+		if (filePath == null || filePath.isEmpty())
+			return Optional.empty();
 
 		Optional<File> baseDir = getBaseDirectory();
 		File file = null;
@@ -146,19 +93,7 @@ public class LookupSource {
 			file = new File(filePath);
 		}
 
-		return file;
-	}
-
-	Map<String, String> getRawValueParams() {
-		return Collections.unmodifiableMap(this.paramsVal);
-	}
-
-	Map<String, String> getRawEnvironmentParams() {
-		return Collections.unmodifiableMap(this.paramsEnv);
-	}
-
-	Map<String, String> getRawSysPropsParams() {
-		return Collections.unmodifiableMap(this.paramsSys);
+		return Optional.ofNullable(file);
 	}
 
 	public String getAlias() {

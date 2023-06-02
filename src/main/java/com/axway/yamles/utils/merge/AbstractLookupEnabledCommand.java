@@ -12,16 +12,16 @@ import picocli.CommandLine.Option;
 public abstract class AbstractLookupEnabledCommand implements Callable<Integer> {
 
 	@Option(names = {
-			"--lookup-providers" }, description = "Configure lookup providers from a YAML file.", paramLabel = "FILE", required = false)
-	private List<File> lookupProviderConfigs;
+			"--lookup-functions" }, description = "Configure lookup functions.", paramLabel = "FILE", required = false)
+	private List<File> lookupFunctionsConfigs;
 	
-	protected List<File> getLookupProviderConfigs() {
-		if (this.lookupProviderConfigs == null)
+	protected List<File> getLookupFunctionsConfigs() {
+		if (this.lookupFunctionsConfigs == null)
 			return Collections.emptyList();
-		return Collections.unmodifiableList(this.lookupProviderConfigs);
+		return Collections.unmodifiableList(this.lookupFunctionsConfigs);
 	}
 	
 	protected void initLookupProviders() {
-		LookupManager.getInstance().configureProviders(getLookupProviderConfigs());
+		LookupManager.getInstance().configureFunctions(getLookupFunctionsConfigs());
 	}
 }

@@ -16,10 +16,21 @@ public class Mustache {
 
 	private final PebbleEngine pe;
 
-	private static final Mustache instance = new Mustache();
+	private static Mustache instance;
 
 	public static Mustache getInstance() {
+		synchronized (Mustache.class) {
+			if (instance == null) {
+				instance = new Mustache();
+			}
+		}
 		return instance;
+	}
+	
+	public static void refresh() {
+		synchronized (Mustache.class) {
+			instance = null;
+		}
 	}
 
 	public static String eval(String template) {

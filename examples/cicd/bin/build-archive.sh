@@ -186,6 +186,9 @@ echo ""
 echo "============================================================"
 echo "== Prepare environments variables"
 echo "============================================================"
+export KDB_PWD_DEV="changeme-devs"
+export KDB_PWD_OPS="changeme"
+
 case $OPT_ENV in
   local)
     ;;
@@ -211,7 +214,7 @@ case $OPT_ENV in
       "--config=${CFG_DIR}/devs/local/certificates.yaml" \
 
       # Use local lookups for passphrases
-      "--lookup-providers=${CFG_DIR}/devs/local/lookup-providers.yaml" \
+      "--lookup-functions=${CFG_DIR}/devs/local/lookup-func.yaml" \
     )
     ;;
   test)
@@ -220,7 +223,7 @@ case $OPT_ENV in
       "--config=${CFG_DIR}/ops/test/certificates.yaml" \
 
       # Use ops-test lookups for secrets
-      "--lookup-providers=${CFG_DIR}/ops/test/lookup-providers.yaml" \
+      "--lookup-functions=${CFG_DIR}/ops/test/lookup-func.yaml" \
     )
     ;;
   prod)
@@ -229,7 +232,7 @@ case $OPT_ENV in
       "--config=${CFG_DIR}/ops/prod/certificates.yaml" \
 
       # Use ops-prod lookups for secrets
-      "--lookup-providers=${CFG_DIR}/ops/prod/lookup-providers.yaml" \
+      "--lookup-functions=${CFG_DIR}/ops/prod/lookup-func.yaml" \
     )
     ;;
   *)
@@ -254,8 +257,8 @@ case $OPT_ENV in
       # in a separate file.
       "--config=${CFG_DIR}/devs/local/devs-values.yaml" \
 
-      # Configure providers for value lookups
-      "--lookup-providers=${CFG_DIR}/devs/local/lookup-providers.yaml" \
+      # Configure lookup functions
+      "--lookup-functions=${CFG_DIR}/devs/local/lookup-func.yaml" \
     )
     ;;
   test)
@@ -263,16 +266,16 @@ case $OPT_ENV in
       # Read values for which only developers are responsible for
       "--config=${CFG_DIR}/devs/test/devs-values.yaml" \
 
-      # Configure providers for value lookups
-      "--lookup-providers=${CFG_DIR}/devs/test/lookup-providers.yaml" \
+      # Configure lookup functions (developers)
+      "--lookup-functions=${CFG_DIR}/devs/test/lookup-func.yaml" \
 
       # Read values for which operators are responsible for
       # (must be after the developers to configuration to prevent overwrite)
       "--config=${CFG_DIR}/ops/all/values.yaml" \
       "--config=${CFG_DIR}/ops/test/values.yaml" \
 
-      # Use ops-test lookups
-      "--lookup-providers=${CFG_DIR}/ops/test/lookup-providers.yaml" \
+      # Configure lookup functions (ops-test)
+      "--lookup-functions=${CFG_DIR}/ops/test/lookup-func.yaml" \
     )
     ;;
   prod)
@@ -280,16 +283,16 @@ case $OPT_ENV in
       # Read values for which only developers are responsible for    
       "--config=${CFG_DIR}/devs/prod/devs-values.yaml" \
 
-      # Configure providers for value lookups
-      "--lookup-providers=${CFG_DIR}/devs/prod/lookup-providers.yaml" \
+      # Configure lookup functions (developers)
+      "--lookup-functions=${CFG_DIR}/devs/prod/lookup-func.yaml" \
 
       # Read values for which operators are responsible for
       # (must be after the developers to configuration to prevent overwrite)
       "--config=${CFG_DIR}/ops/all/values.yaml" \
       "--config=${CFG_DIR}/ops/prod/values.yaml" \
 
-      # Use ops-prod lookups
-      "--lookup-providers=${CFG_DIR}/ops/prod/lookup-providers.yaml" \
+      # Configure lookup functions (ops-prod)
+      "--lookup-functions=${CFG_DIR}/ops/prod/lookup-func.yaml" \
     )
     ;;
   *)

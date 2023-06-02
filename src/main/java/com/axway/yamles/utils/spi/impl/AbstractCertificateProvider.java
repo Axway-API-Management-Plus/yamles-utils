@@ -18,7 +18,7 @@ public abstract class AbstractCertificateProvider implements CertificateProvider
 		this.configParams.add(param);
 	}
 
-	protected String getConfig(Map<String, String> config, ConfigParameter param, String defaultValue)
+	protected String getConfig(ConfigParameter param, Map<String, String> config, String defaultValue)
 			throws CertificateProviderException {
 		String value = config.get(param.getName());
 		if (value == null) {

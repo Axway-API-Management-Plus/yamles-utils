@@ -27,7 +27,7 @@ public class EnvJsonLookupProviderTest {
 		
 		Map<String, String> params = new HashMap<>();
 		params.put(EnvJsonLookupProvider.CFG_PARAM_ENV.getName(), "testJson");
-		LookupSource ls = new LookupSource("test", lp.getName(), params, null, null);
+		LookupSource ls = new LookupSource("test", lp.getName(), params);
 		
 		EnvironmentVariables.put("testJson", "{}");		
 		lp.addSource(ls);
@@ -42,7 +42,7 @@ public class EnvJsonLookupProviderTest {
 		
 		Map<String, String> params = new HashMap<>();
 		params.put(EnvJsonLookupProvider.CFG_PARAM_ENV.getName(), "_non_exiting_var_");
-		LookupSource ls = new LookupSource("test", lp.getName(), params, null, null);
+		LookupSource ls = new LookupSource("test", lp.getName(), params);
 		
 		assertThrows(LookupProviderException.class, () -> lp.addSource(ls));
 	}

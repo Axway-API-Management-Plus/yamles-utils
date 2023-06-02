@@ -3,7 +3,6 @@ package com.axway.yamles.utils.spi.impl;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 import com.axway.yamles.utils.spi.ConfigParameter;
 import com.axway.yamles.utils.spi.FunctionArgument;
@@ -42,17 +41,17 @@ public abstract class AbstractLookupProvider implements LookupProvider {
 		return this.configParams.getParams();
 	}
 
-	protected String getStringArg(Map<String, Object> args, String name) {
-		Object value = Objects.requireNonNull(args).get(name);
-		if (value == null)
-			throw new LookupProviderException(this, "argument not passed to function: " + name);
-		return value.toString();
-	}
+	protected String getArg(FunctionArgument arg, Map<String, Object> args, String defaultValue) {
+		Objects.requireNonNull(arg);
+		Objects.requireNonNull(args);
 
-	protected Optional<String> getOptionalStringArg(Map<String, Object> args, String name) {
-		Object value = Objects.requireNonNull(args).get(name);
-		if (value == null)
-			return Optional.empty();
-		return Optional.of(value.toString());
+		Object value = args.get(arg.getName());
+		if (value == null) {
+			if (arg.isRequired()) {
+				throw new LookupProviderException(this, "argument not passed to function: " + arg.getName());
+			}
+			value = defaultValue;
+		}
+		return value.toString();
 	}
 }

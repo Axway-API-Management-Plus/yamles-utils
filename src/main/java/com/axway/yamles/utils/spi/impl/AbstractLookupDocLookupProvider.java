@@ -38,7 +38,7 @@ public abstract class AbstractLookupDocLookupProvider extends AbstractLookupProv
 			return result;
 		}
 
-		String key = getStringArg(args, ARG_KEY.getName());
+		String key = getArg(ARG_KEY, args, null);
 
 		JsonNode value = doc.at(key);
 		if (value == null || value.isNull() || value.isMissingNode() || !value.isValueNode()) {

@@ -3,7 +3,7 @@ lookups:
     provider: keepass
     config:
       kdb: ../all/lookups/ops-secrets.kdbx
-      passphrase: changeme
+      passphrase: "{{ _env('KDB_PWD_OPS') }}"
 
   ops_yfile:
     provider: "yaml"

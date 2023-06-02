@@ -51,13 +51,13 @@ public class SimpleCertificateProvider extends AbstractCertificateProvider {
 			PrivateKey k = null;
 
 			CertificateFactory cf = CertificateFactory.getInstance("X509");
-			byte[] data = getDecodedConfig(config, CFG_CERT);
+			byte[] data = getDecodedConfig(CFG_CERT, config);
 			if (data == null) {
 				throw new CertificateProviderException("missing configuration: " + CFG_CERT);
 			}
 			c = cf.generateCertificate(new ByteArrayInputStream(data));
 
-			byte[] keyData = getDecodedConfig(config, CFG_KEY);
+			byte[] keyData = getDecodedConfig(CFG_KEY, config);
 			if (keyData != null) {
 				KeyFactory kf = KeyFactory.getInstance("RSA");
 				PKCS8EncodedKeySpec ks = new PKCS8EncodedKeySpec(keyData);
@@ -70,10 +70,10 @@ public class SimpleCertificateProvider extends AbstractCertificateProvider {
 		}
 	}
 
-	private byte[] getDecodedConfig(Map<String, String> config, ConfigParameter param)
+	private byte[] getDecodedConfig(ConfigParameter param, Map<String, String> config)
 			throws CertificateProviderException {
 		byte[] data = null;
-		String value = getConfig(config, param, null);
+		String value = getConfig(param, config, null);
 		if (value != null) {
 			data = Base64.getDecoder().decode(value);
 		}

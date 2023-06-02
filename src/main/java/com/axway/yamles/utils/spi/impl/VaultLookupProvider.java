@@ -43,15 +43,15 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 	public static final FunctionArgument ARG_FIELD = new FunctionArgument("field", true, "");
 
 	public static final ConfigParameter CFG_PARAM_ADDR = new ConfigParameter("addr", false,
-			"Address of Vault server [default: " + DEFAULT_ADDR + "]", ConfigParameter.Type.string);
-	public static final ConfigParameter CFG_PARAM_KV_BASE = new ConfigParameter("kv_base", true, "Path of the KV secret engine",
-			ConfigParameter.Type.string);
+			"Address of Vault server [default: " + DEFAULT_ADDR + "]", ConfigParameter.Type.string, false);
+	public static final ConfigParameter CFG_PARAM_KV_BASE = new ConfigParameter("kv_base", true,
+			"Path of the KV secret engine", ConfigParameter.Type.string, false);
 	public static final ConfigParameter CFG_PARAM_SKIP_VERIFY = new ConfigParameter("skip_verify", false,
-			"Skip server name verification", ConfigParameter.Type.bool);
+			"Skip server name verification", ConfigParameter.Type.bool, false);
 	public static final ConfigParameter CFG_PARAM_TOKEN = new ConfigParameter("token", false,
-			"Token to authorize access to Vault (if token file is not specified).", ConfigParameter.Type.string);
+			"Token to authorize access to Vault (if token file is not specified).", ConfigParameter.Type.string, true);
 	public static final ConfigParameter CFG_PARAM_TOKEN_FILE = new ConfigParameter("token_file", false,
-			"Path to token file (if token is not specified).", ConfigParameter.Type.file);
+			"Path to token file (if token is not specified).", ConfigParameter.Type.file, false);
 
 	private static final Logger log = LogManager.getLogger(VaultLookupProvider.class);
 
@@ -188,17 +188,20 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 
 	@Override
 	public void addSource(LookupSource source) throws LookupProviderException {
-		String kvBase = source.getRequiredParam(CFG_PARAM_KV_BASE.getName());
-		Optional<String> tokenStr = source.getParam(CFG_PARAM_TOKEN.getName());
-		Optional<String> addr = source.getParam(CFG_PARAM_ADDR.getName());
-		boolean skipVerify = source.getParam(CFG_PARAM_SKIP_VERIFY.getName()).orElse("false").equals("true");
+		String kvBase = source.getConfig(CFG_PARAM_KV_BASE, "");
+		Optional<String> tokenStr = Optional.ofNullable(source.getConfig(CFG_PARAM_TOKEN, null));
+		Optional<String> addr = Optional.ofNullable(source.getConfig(CFG_PARAM_ADDR, null));
+		boolean skipVerify = source.getConfig(CFG_PARAM_SKIP_VERIFY, "false").equals("true");
 
 		VaultToken token;
 		if (tokenStr.isPresent()) {
 			token = new VaultToken(tokenStr.get());
 		} else {
-			File tokenFile = source.getFileFromRequiredParam(CFG_PARAM_TOKEN_FILE.getName());
-			token = new VaultToken(tokenFile);
+			Optional<File> tokenFile = source.getFileFromConfig(CFG_PARAM_TOKEN_FILE);
+			if (!tokenFile.isPresent()) {
+				throw new LookupProviderException(this, "token file missing: alias=" + source.getAlias());
+			}
+			token = new VaultToken(tokenFile.get());
 		}
 
 		VaultClient client = new VaultClient(source.getAlias(), token, kvBase, addr, skipVerify);
@@ -221,8 +224,8 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 			log.error("Vault client alias not found: provider={}; alias={}", getName(), alias);
 			return result;
 		}
-		String path = getStringArg(args, ARG_KEY.getName());
-		String field = getStringArg(args, ARG_FIELD.getName());
+		String path = getArg(ARG_KEY, args, "");
+		String field = getArg(ARG_FIELD, args, "");
 
 		try {
 			if (log.isTraceEnabled()) {
