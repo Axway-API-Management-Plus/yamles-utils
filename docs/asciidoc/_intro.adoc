@@ -10,17 +10,9 @@ ifdef::env-github[]
 endif::[]
 ifndef::imagesdir[:imagesdir: ./images]
 
+
 == About YAMLES Utilities
-
-[sidebar]
-.tl;dr
---
-YAMLES Utilities can be used for AMPLIFY API Gateway projects - which are based on the YAML Entity Store - to verify coding rules, and to configure projects for target environments using various configuration sources.
---
-
-The YAMLES Utilities provides the feature to verify a YAML based policy project according to defined rules (linting), and to configure the policy project for target environments.
-
-
+The YAMLES Utilities provides the features to verify a YAML based policy project according to defined rules (linting), and to configure the policy project for target environments.
 
 The utilities of this project can be used to build a CI/CD pipeline for automatic configuration and deployment of YAML Entity Store based projects (see <<YAML_Entity_Store>> for details).
 

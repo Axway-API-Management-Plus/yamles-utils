@@ -23,6 +23,12 @@ ifndef::imagesdir[:imagesdir: ./images]
 
 :yamles-utils-ver: {revnumber}
 
+[sidebar]
+.tl;dr
+--
+YAMLES Utilities can be used for AMPLIFY API Gateway projects - which are based on the YAML Entity Store - to verify coding rules, and to configure projects for target environments using various configuration sources.
+--
+
 include::_intro.adoc[leveloffset=+1]
 
 include::_usage.adoc[leveloffset=+1]
