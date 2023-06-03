@@ -36,16 +36,15 @@ class YamlEsConfig {
 
 		this.audit.writeSummaryToAudit();
 	}
-	
-	
+
 	public boolean allFieldsConfigured(Optional<ValueNodeSet> required) {
 		boolean allConfigured = true;
-		
+
 		if (!Objects.requireNonNull(required).isPresent())
 			return allConfigured;
-		
+
 		Audit.AUDIT_LOG.info(Audit.HEADER_PREFIX + "Check Required Fields");
-		
+
 		ValueNodeSet req = required.get();
 
 		List<NodeLocation> values = getUnusedValues(req);
@@ -58,7 +57,7 @@ class YamlEsConfig {
 			Audit.AUDIT_LOG.error("missing field: {}", value);
 			allConfigured = false;
 		}
-		
+
 		return allConfigured;
 	}
 
@@ -71,7 +70,7 @@ class YamlEsConfig {
 		ValueNodeSet configValues = new ValueNodeSet(this.config);
 		return configValues.detectMissing(Objects.requireNonNull(required));
 	}
-	
+
 	private List<NodeLocation> getUnusedValues(ValueNodeSet required) {
 		ValueNodeSet configValues = new ValueNodeSet(this.config);
 		return Objects.requireNonNull(required).detectMissing(configValues);
@@ -82,34 +81,36 @@ class YamlEsConfig {
 		new Merger(this.audit, this.config, cs).merge();
 	}
 
-	protected void evalValues(NodeLocation currentLocation, ObjectNode node) {
+	protected void evalValues(NodeLocation objectLocation, ObjectNode node) {
 		Iterator<Entry<String, JsonNode>> fields = node.fields();
 		while (fields.hasNext()) {
 			Entry<String, JsonNode> field = fields.next();
 			JsonNode value = field.getValue();
+			NodeLocation fieldLocation = objectLocation.child(field.getKey());
 			if (value.isObject()) {
-				evalValues(currentLocation.child(field.getKey()), (ObjectNode) value);
+				evalValues(fieldLocation, (ObjectNode) value);
 			} else if (value.isArray()) {
-				evalValues(currentLocation.child(field.getKey()), (ArrayNode) value);
+				evalValues(fieldLocation, (ArrayNode) value);
 			} else if (value.isTextual()) {
 				String v = value.asText();
-				Audit.AUDIT_LOG.info("evaluate field: {}", currentLocation);
+				Audit.AUDIT_LOG.info("evaluate field: {}", fieldLocation);
 				v = Mustache.eval(v);
 				node.put(field.getKey(), v);
 			}
 		}
 	}
 
-	protected void evalValues(NodeLocation currentLocation, ArrayNode node) {
-		for(int i = 0; i < node.size(); i++) {
+	protected void evalValues(NodeLocation arrayLocation, ArrayNode node) {
+		for (int i = 0; i < node.size(); i++) {
 			JsonNode value = node.get(i);
+			NodeLocation fieldLocation = arrayLocation.child("[" + i + "]");
 			if (value.isObject()) {
-				evalValues(currentLocation.child("[" + i + "]"), (ObjectNode) value);
+				evalValues(fieldLocation.child("[" + i + "]"), (ObjectNode) value);
 			} else if (value.isArray()) {
-				evalValues(currentLocation.child("[" + i + "]"), (ArrayNode) value);
+				evalValues(fieldLocation.child("[" + i + "]"), (ArrayNode) value);
 			} else if (value.isTextual()) {
 				String v = value.asText();
-				Audit.AUDIT_LOG.info("evaluate field: {}", currentLocation);
+				Audit.AUDIT_LOG.info("evaluate field: {}", fieldLocation);
 				v = Mustache.eval(v);
 				node.set(i, v);
 			}
@@ -119,7 +120,7 @@ class YamlEsConfig {
 	public ObjectNode getConfig() {
 		return this.config;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.config.toString();
