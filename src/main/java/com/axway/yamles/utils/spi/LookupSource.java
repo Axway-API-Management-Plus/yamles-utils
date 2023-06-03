@@ -109,7 +109,7 @@ public class LookupSource {
 		this.alias = alias;
 	}
 
-	public Optional<File> getBaseDirectory() {
+	Optional<File> getBaseDirectory() {
 		if (!this.configSource.isPresent()) {
 			return Optional.empty();
 		}
@@ -121,6 +121,6 @@ public class LookupSource {
 		if (!file.isFile()) {
 			throw new IllegalArgumentException("configuration source is not a regular file: " + file.getAbsolutePath());
 		}
-		this.configSource = Optional.of(file);
+		this.configSource = Optional.of(file.getAbsoluteFile());
 	}
 }

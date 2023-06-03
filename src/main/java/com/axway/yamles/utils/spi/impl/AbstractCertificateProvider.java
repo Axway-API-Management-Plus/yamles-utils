@@ -43,6 +43,7 @@ public abstract class AbstractCertificateProvider implements CertificateProvider
 	protected File buildFile(File configSource, String filePath) {
 		File file = new File(filePath);
 		if (!file.isAbsolute()) {
+			configSource = configSource.getAbsoluteFile();
 			file = new File(configSource.getParentFile(), file.getPath());
 		}
 		return file;
