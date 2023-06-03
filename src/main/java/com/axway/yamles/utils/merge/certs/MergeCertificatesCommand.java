@@ -19,10 +19,10 @@ public class MergeCertificatesCommand extends AbstractLookupEnabledCommand {
 	private static final Logger log = LogManager.getLogger(MergeCertificatesCommand.class);
 
 	@Option(names = {
-			"--project" }, description = "Project directory (YAML entity store)", paramLabel = "DIR", required = true)
+			"--project" }, description = "Project directory (YAML entity store).", paramLabel = "DIR", required = true)
 	private File projectDir = null;
 
-	@Option(names = { "-c", "--config" }, description = "Certificate config file", paramLabel = "FILE", required = true)
+	@Option(names = { "-c", "--config" }, description = "Certificate configuration file.", paramLabel = "FILE", required = true)
 	private List<File> configs;
 
 	private final AliasSet aliases = new AliasSet();

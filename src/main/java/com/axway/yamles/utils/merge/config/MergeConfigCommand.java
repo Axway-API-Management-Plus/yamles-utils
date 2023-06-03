@@ -16,7 +16,7 @@ import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
-@Command(name = "config", description = "Merge configuration files for YAML entiry store.", mixinStandardHelpOptions = true)
+@Command(name = "config", description = "Merge configuration fragments for YAML entity store.", mixinStandardHelpOptions = true)
 public class MergeConfigCommand extends AbstractLookupEnabledCommand {
 	private static final Logger log = LogManager.getLogger(MergeConfigCommand.class);
 
@@ -25,13 +25,13 @@ public class MergeConfigCommand extends AbstractLookupEnabledCommand {
 				"--project" }, description = "Path to the YAML entity store project.", paramLabel = "DIR", required = true)
 		File projectDir;
 		@Option(names = {
-				"--ignore-missing-values" }, description = "Ignore missing configuration of values (only for projects)", required = false)
+				"--ignore-missing-values" }, description = "Ignore missing configuration of values (only for projects).", required = false)
 		private boolean ignoreMissingValues = false;
 	}
 
 	static class Target {
 		@Option(names = { "-o",
-				"--output" }, description = "File to write generated YAML configuration", paramLabel = "FILE")
+				"--output" }, description = "File to write generated YAML configuration.", paramLabel = "FILE")
 		File file = null;
 
 		@ArgGroup
@@ -42,10 +42,10 @@ public class MergeConfigCommand extends AbstractLookupEnabledCommand {
 	Target target;
 
 	@Option(names = { "-d",
-			"--dir" }, description = "Directory to scan for YAML configuration sources", paramLabel = "DIR", required = false)
+			"--dir" }, description = "Directory to scan for YAML configuration fragments.", paramLabel = "DIR", required = false)
 	private List<File> directories;
 
-	@Option(names = { "-c", "--config" }, description = "Configuration file", paramLabel = "FILE", required = false)
+	@Option(names = { "-c", "--config" }, description = "Configuration fragment.", paramLabel = "FILE", required = false)
 	private List<File> files;
 
 	@Override

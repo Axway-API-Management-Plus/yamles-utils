@@ -6,7 +6,10 @@ import java.util.Optional;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.Configurator;
+import org.apache.logging.log4j.core.config.LoggerConfig;
 
 import com.axway.yamles.utils.helper.Audit;
 import com.axway.yamles.utils.lint.LintCommand;
@@ -26,16 +29,29 @@ public class YamlEsUtils implements IExecutionExceptionHandler {
 
 	private static final Logger log = LogManager.getLogger(YamlEsUtils.class);
 
-	@Option(names = { "-v", "--verbose" }, description = "increase logging verbosity")
+	@Option(names = { "-v", "--verbose" }, description = "Increase logging verbosity.")
 	boolean[] verbosity;
 
-	@Option(names = { "-a", "--audit" }, description = "audit file", paramLabel = "FILE")
+	@Option(names = { "-q", "--quiet" }, description = "Disable log message to the console.")
+	boolean quiet = false;
+
+	@Option(names = { "-a", "--audit" }, description = "Audit file.", paramLabel = "FILE")
 	File audit;
 
 	private int executionStrategy(ParseResult parseResult) {
-		Optional<Level> level = determineLogLevel();
-		if (level.isPresent()) {
-			Configurator.setLevel("com.axway.yamles.utils", level.get());
+		final String loggerName = getClass().getPackage().getName();
+
+		if (this.quiet) {
+			LoggerContext context = LoggerContext.getContext(false);
+			Configuration configuration = context.getConfiguration();
+			LoggerConfig loggerConfig = configuration.getLoggerConfig(loggerName);
+		    loggerConfig.removeAppender("Console");
+			context.updateLoggers();
+		} else {
+			Optional<Level> level = determineLogLevel();
+			if (level.isPresent()) {
+				Configurator.setLevel(loggerName, level.get());
+			}
 		}
 		Audit.init(this.audit);
 		return new CommandLine.RunLast().execute(parseResult);

@@ -24,7 +24,7 @@ public class LintCommand implements Callable<Integer> {
 			"--project" }, description = "Path to the YAML entity store project.", paramLabel = "DIR", required = true)
 	private File projectDir;
 
-	@Option(names = { "-r", "--rules" }, description = "Rules file", paramLabel = "FILE", required = true)
+	@Option(names = { "-r", "--rules" }, description = "Rules file.", paramLabel = "FILE", required = true)
 	private List<File> rulesFiles;
 	
 	@ParentCommand
