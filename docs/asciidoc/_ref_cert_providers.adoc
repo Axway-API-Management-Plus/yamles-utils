@@ -1,4 +1,4 @@
-= Reference
+= Certificate Providers
 ifdef::env-github[]
 :outfilesuffix: .adoc
 :!toc-title:
@@ -9,6 +9,10 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-include::_ref_templates.adoc[leveloffset=+1]
+== Simple Certificate Provider
 
-include::_ref_cert_providers.adoc[leveloffset=+1]
+== Keystore File
+
+== Remover
+
+== AWS Certificate Manager

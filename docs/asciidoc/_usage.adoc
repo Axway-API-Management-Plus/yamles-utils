@@ -8,3 +8,9 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :warning-caption: :warning:
 endif::[]
+
+include::_ref_lint.adoc[leveloffset=+1]
+
+include::_ref_merge_conf.adoc[leveloffset=+1]
+
+include::_ref_merge_cert.adoc[leveloffset=+1]

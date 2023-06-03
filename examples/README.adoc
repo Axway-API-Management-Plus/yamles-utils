@@ -101,4 +101,4 @@ $ export AXWAY_HOME="...path to Axway installation (e.g., /opt/Axway-7.7)..."
 $ examples/cicd/bin/build-archive.sh -e test
 ----
 
-NOTE: On Windows, the script can be executed using the Git Bash (MinGW).
+NOTE: On Windows, the script can be executed using Git Bash (MinGW).

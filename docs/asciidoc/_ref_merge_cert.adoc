@@ -23,11 +23,3 @@ certificates: #<1>
 <4> Section to configure the provider.
 <5> Provider specific configuration to retrieve the certificate
 
-
-== Simple Certificate Provider
-
-== Keystore File
-
-== Remover
-
-== AWS Certificate Manager
