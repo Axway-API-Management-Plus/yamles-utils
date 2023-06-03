@@ -9,6 +9,6 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-include::_ref_templates.adoc[leveloffset=+1]
+include::_templates.adoc[leveloffset=+1]
 
-include::_ref_cert_providers.adoc[leveloffset=+1]
+include::_cert_providers.adoc[leveloffset=+1]

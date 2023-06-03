@@ -21,13 +21,13 @@ image:https://img.shields.io/github/v/release/Axway-API-Management-Plus/yamles-u
 
 IMPORTANT: The project is community supported and not supported by Axway Support. If you encounter any issues, please raise an GitHub issue on this project.
 
-== Introduction
-
 [sidebar]
 .tl;dr
 --
 Utilities to verify coding rules of YAML Entity Store based projects and to configure projects for target environments using various configuration sources.
 --
+
+== Introduction
 
 Since the 7.7 February'22 release of the Axway API Gateway, Policy Studio supports to edit policy projects in the YAML Entity Store (YAML-ES) format.
 This format enables fine grained storage of project entities, in easy to read and easy to compare YAML files.

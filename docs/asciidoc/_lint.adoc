@@ -37,7 +37,7 @@ $ yamlesutils.sh lint --project=src/apim --rules=rules/db.yaml --rules=rules/cas
 
 == Rules
 
-The rules are defined in YAML files having to following structure:
+The rules are defined in YAML files, having the following structure:
 
 .Structure of a rules definition file (YAML)
 [source,yaml]

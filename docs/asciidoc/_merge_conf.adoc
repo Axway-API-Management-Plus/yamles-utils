@@ -68,31 +68,28 @@ Merge configuration fragments for YAML entity store.
 |Option
 |Description
 
-|-c FILE
-
---config=FILE
+|`-c FILE` +
+`--config=FILE`
 |Configuration fragment to be merged. The fragments are files, containing a single YAML document.
 
 The parameter can be specified multiple times to merge multiple fragments.
 
-|-d DIR
-
---dir=DIR
+|`-d DIR` +
+`--dir=DIR`
 |Directory to scan for YAML configuration fragments.
 Each file within the directory having the extension `.yml` or `.yaml` are treated as configuration fragments.
 The files are added to merged in alphabetical ascending order.
 
-|-o FILE
-
---output=FILE
+|`-o FILE` +
+`--output=FILE`
 |Target file to write the merged YAML configuration.
 If `-` is specified, the merged configuration is written to `stdout`.
 
-|--project=DIR
+|`--project=DIR`
 |Path to the directory containing the YAML-ES project.
 If the project path is specified the `values.yaml` file within this directory will be overwritten.
 
-|--ignore-missing-values
+|`--ignore-missing-values`
 |If a project directory is specified, the current `values.yaml` file of this directory is loaded and all required fields are detected.
 
 Before writing the merged configuration, the merge command checks if all required fields are also provided by the merged configuration.
@@ -101,37 +98,10 @@ On missing fields, the merge command stop with an error message.
 With this option, missing fields are ignored and the merge command continue processing.
 Missing or unused fields are just reported.
 
-|--lookup-functions=FILE
+|`--lookup-functions=FILE`
 |YAML file to configure lookup functions.
 
 Multiple parameters can be specified to use multiple lookup configurations.
-|===
-
-
-Following global options can be applied before the command.
-
-.Example: Global Options
-[source, shell]
-----
-yamlesutils.sh --audit=audit.log \ #<1>
-  merge config -c fragment.yaml -o values.yaml #<2>
-----
-<1> Global option to activate audit log file.
-<2> Merge command and its options
-
-
-
-.Options for Merge Configuration
-[cols="2,6a", options="header"]
-|===
-|Option
-|Description
-
-|-a FILE
-
---audit=FILE
-|Path to a file to audit the various sources and functions used to merge the configuration fragments.
-If not specified the audit logs are only written to `stderr`.
 |===
 
 
@@ -221,7 +191,7 @@ The corresponding lookup function is prefixed by an underscore `_users()`.
 <3> Path to the JSON file.
 If the path is not absolute, the path is relative to the directory containing the lookup function configuration file (directory of `lookup-func.yaml`).
 
-To merge these fragments an additional parameter `--lookup-functions` must be specified to configure the required lookup function.
+To merge these fragments, an additional parameter `--lookup-functions` must be specified to configure the required lookup function.
 
 [source, shell]
 ----
