@@ -12,7 +12,7 @@ import picocli.CommandLine.Option;
 public abstract class AbstractLookupEnabledCommand implements Callable<Integer> {
 
 	@Option(names = {
-			"--lookup-functions" }, description = "configure lookup functions.", paramLabel = "FILE", required = false)
+			"--lookup-functions" }, description = "Configure lookup functions.", paramLabel = "FILE", required = false)
 	private List<File> lookupFunctionsConfigs;
 	
 	protected List<File> getLookupFunctionsConfigs() {
