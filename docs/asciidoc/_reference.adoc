@@ -11,7 +11,7 @@ endif::[]
 
 include::_ref_lint.adoc[leveloffset=+1]
 
-include::_ref_lookup.adoc[leveloffset=+1]
+include::_ref_templates.adoc[leveloffset=+1]
 
 include::_ref_merge_cert.adoc[leveloffset=+1]
 

@@ -1,0 +1,86 @@
+= Templates
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+== Mustache Templates
+
+The values of the merged environmentalized fields (`values.yaml`) support mustache templates.
+
+Templates are used to replace values in 
+
+link:https://pebbletemplates.io/[Pebble Templates]
+
+== Lookup Functions
+
+Lookup functions can be used inside <<Mustache Templates>>, and are used to retrieve values from key/value stores.
+All names of lookup functions start with an underscore.
+
+By default, following built-in lookup functions are provided:
+
+* `_env("env_name")`: Lookup values from an environment variable.
+* `_sys("prop_name")`: Lookup values from system properties.
+
+Other lookup functions can be dynamically configured via _lookup function configuration_ files.
+Within these files aliases for the lookup sources are defined.
+The lookup sources are configured via a parameterized lookup provider (see <<Lookup_Providers>> for details).
+For each alias a lookup function will be registered.
+The name of the function is derived from the alias name by adding an underscore.
+
+Aliases must be unique over all function configurations.
+As the `env` and `sys` alias is already used by the built-in functions, these aliases are not allowed for custom lookup functions.
+
+.Lookup Functions Configuration
+[source, yaml]
+----
+lookups: #<1>
+  dev_kdb: #<2>
+    provider: keepass #<3>
+    config: #<4>
+      kdb: "../all/lookups/devs-secrets.kdbx" #<5>
+      passphrase: "{{ _env('ENV_KDB_PASSPHRASE') }}" #<6>
+----
+<1> Root object for lookup definitions.
+<2> Alias of the lookup function.
+The name of lookup function is prefixed with a `_` (e.g. `_dev_kdb`). 
+Aliases must be unique within all applied lookup provider configurations.
+<3> Lookup provider used by the function.
+<4> Configuration parameters for the lookup provider.
+<5> Fixed configuration parameter.
+<6> Configuration parameters retrieved via lookup function (only built-in functions supported).
+
+[NOTE]
+====
+The YAML-ES utility provides list of available lookup functions with the following command.
+To list all functions as used for the merge command, the _lookup function configuration_ files can be specified in the same way as for the merge command.
+If the missing, only the built-in functions are listed.
+
+[source, shell]
+----
+$ yamlesutils merge [--lookup-functions=FILE]... describe functions
+----
+====
+
+== Lookup Providers
+Lookup values are provided by, so called, _Lookup Providers_.
+
+=== Environment Variables (built-in)
+
+=== System Properties (built-in)
+
+=== JSON from Environment Variables
+
+=== YAML/JSON Files
+
+=== KeePass DB
+
+=== Hashicorp Vault
+
+=== AWS Secrets Manager
+

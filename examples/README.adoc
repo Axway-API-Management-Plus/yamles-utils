@@ -8,10 +8,15 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :warning-caption: :warning:
 endif::[]
+ifndef::imagesdir[:imagesdir: ../docs/asciidoc/images]
 
 == Description
 
 The `examples` folder contains an example script to simulate a CI/CD pipeline (except the final deployment).
+
+.CI/CD Pipeline
+image:deployment-classic-topology.drw.png[]
+
 
 The sample project is an API Manager stored in the YAML entity store format (`examples/apim`).
 The API Manager project uses environmentalized fields to enable stage specific configurations.
@@ -56,28 +61,44 @@ Following data sources are covered by the demo:
 
 == Execute Demo
 
-Clone repository
-
+.Clone repository
 [source,shell]
 ----
 $ git clone https://github.com/Axway-API-Management-Plus/yamles-utils.git
 ----
 
-Build project
-
+.Build project
 [source,shell]
 ----
 $ cd yamles-utils
 $ ./mvnw clean package
 ----
 
-Execute demo script.
+.Show command line parameters
+[source,text]
+----
+$ examples/cicd/bin/build-archive.sh
+build-archive.sh  -  build and configure YAMLES archive
 
-NOTE: On Windows, the script can be executed using the Git Bash (MinGW).
+Usage:
+  build-archive.sh -e ENV [--debug]
 
+Options:
+  -e ENV
+      Target environment (local, test or prod).
+
+  --debug
+      Enable debug messages
+
+  Configure API Manager for target environment and build
+  deployment archive.
+----
+
+.Execute demo script
 [source,shell]
 ----
 $ export AXWAY_HOME="...path to Axway installation (e.g., /opt/Axway-7.7)..."
 $ examples/cicd/bin/build-archive.sh -e test
 ----
 
+NOTE: On Windows, the script can be executed using the Git Bash (MinGW).

@@ -1,0 +1,5 @@
+lookups:
+  users: #<1>
+    provider: json #<2>
+    config:
+      file: lookups/users.json #<3>
