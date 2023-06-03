@@ -6,10 +6,7 @@ import java.util.Optional;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.LoggerContext;
-import org.apache.logging.log4j.core.config.Configuration;
 import org.apache.logging.log4j.core.config.Configurator;
-import org.apache.logging.log4j.core.config.LoggerConfig;
 
 import com.axway.yamles.utils.helper.Audit;
 import com.axway.yamles.utils.lint.LintCommand;
@@ -41,19 +38,12 @@ public class YamlEsUtils implements IExecutionExceptionHandler {
 	private int executionStrategy(ParseResult parseResult) {
 		final String loggerName = getClass().getPackage().getName();
 
-		if (this.quiet) {
-			LoggerContext context = LoggerContext.getContext(false);
-			Configuration configuration = context.getConfiguration();
-			LoggerConfig loggerConfig = configuration.getLoggerConfig(loggerName);
-		    loggerConfig.removeAppender("Console");
-			context.updateLoggers();
-		} else {
-			Optional<Level> level = determineLogLevel();
-			if (level.isPresent()) {
-				Configurator.setLevel(loggerName, level.get());
-			}
+		Optional<Level> level = determineLogLevel();
+		if (level.isPresent()) {
+			Configurator.setLevel(loggerName, level.get());
 		}
-		Audit.init(this.audit);
+
+		Audit.init(this.audit, this.quiet);
 		return new CommandLine.RunLast().execute(parseResult);
 	}
 

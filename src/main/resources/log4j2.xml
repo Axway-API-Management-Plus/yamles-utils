@@ -12,7 +12,7 @@
 		<Logger name="com.axway.yamles.utils" level="error" additivity="false">
  			<AppenderRef ref="Console" />
 		</Logger>
-		<Logger name="com.axway.yamles.utils.audit" level="info" additivity="true">
+		<Logger name="com.axway.yamles.utils.audit" level="info" additivity="false">
 		</Logger>
 	</Loggers>
 </Configuration>
