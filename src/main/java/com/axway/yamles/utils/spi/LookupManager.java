@@ -102,7 +102,6 @@ public class LookupManager extends AbstractExtension {
 
 	@Override
 	public Map<String, Function> getFunctions() {
-		Audit.AUDIT_LOG.info(Audit.HEADER_PREFIX + "Init Mustache Functions");
 		Map<String, Function> func = new HashMap<>();
 		this.functions.forEach((name, lf) -> {
 			if (lf.isEnabled()) {
