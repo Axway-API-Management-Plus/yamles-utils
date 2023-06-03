@@ -9,4 +9,4 @@ CLASSPATH="$DIR_LIB/*:$DIR_PLUGINS/*"
 
 export CLASSPATH
 
-java "$CLASSMAIN" $*
+java ${JVM_OPTS:-} "$CLASSMAIN" $*

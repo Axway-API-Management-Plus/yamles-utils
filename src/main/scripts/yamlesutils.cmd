@@ -8,7 +8,7 @@ SET DIR_PLUGINS=%CMD_HOME%..\plugins
 SET CLASSMAIN=com.axway.yamles.utils.YamlEsUtils
 SET CLASSPATH=%DIR_LIB%\*;%DIR_PLUGINS%\*
 
-java %CLASSMAIN% %*
+java %JVM_OPTS% %CLASSMAIN% %*
 SET RC=%errorlevel%
 
 ENDLOCAL & SET RC=%RC%
