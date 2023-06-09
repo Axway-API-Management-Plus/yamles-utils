@@ -29,7 +29,7 @@ By default, following built-in lookup functions are provided:
 
 Other lookup functions can be dynamically configured via _lookup function configuration_ files.
 Within these files aliases for the lookup sources are defined.
-The lookup sources are configured via a parameterized lookup provider (see <<Lookup_Providers>> for details).
+The lookup sources are configured via a parameterized lookup provider (see <<Lookup Providers>> for details).
 For each alias a lookup function will be registered.
 The name of the function is derived from the alias name by adding an underscore.
 

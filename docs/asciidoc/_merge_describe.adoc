@@ -1,0 +1,73 @@
+= Built-In Documentation
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+ifndef::imagesdir[:imagesdir: ./images]
+
+The YAMLES utility provides a built-in documentation of the certificate providers, lookup providers, and the available lookup functions.
+
+[source, text]
+----
+yamlesutils.sh merge describe help
+Usage: yamlesutils merge describe [-hV] [COMMAND]
+Describe features of the YAML-ES Utilities used for merging.
+  -h, --help      Show this help message and exit.
+  -V, --version   Print version information and exit.
+Commands:
+  lookup-providers  Describe the available lookup providers.
+  cert-providers    Describe the available certificate providers.
+  functions         Describe available functions.
+  help              Display help information about the specified command.
+----
+
+== Lookup & Certificate Providers
+To get an overview of the certificate and lookup providers, invoke one of the following commands:
+
+[source, text]
+----
+yamlesutils.sh merge describe cert-providers
+yamlesutils.sh merge describe lookup-providers
+----
+
+To show the full description, use the `--full` option.
+
+[source, text]
+----
+yamlesutils.sh merge describe cert-providers --full
+yamlesutils.sh merge describe lookup-providers --full
+----
+
+== Lookup Functions
+
+To view the available built-in lookup functions, use the following command:
+
+[source, text]
+----
+yamlesutils.sh merge describe functions
+Available Lookup Functions
+
+_env [env+]         Lookup values from environment variables.
+
+                    Lookup Function Arguments:
+                    key: name of environment variable
+
+_sys [sys+]         Lookup values from system properties.
+
+                    Lookup Function Arguments:
+                    key: name of system property
+
++    built-in lookup providers
+----
+
+To show all functions which are available for the merge commands, specify the same `--lookup-functions` options as for the merge commands.
+
+[source, text]
+----
+yamlesutils.sh merge describe functions --lookup-functions=lookup-func.yaml
+----
