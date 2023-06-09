@@ -42,7 +42,7 @@ public class DescribeFunctionsCommand extends AbstractLookupEnabledCommand {
 			List<FunctionArgument> fas = f.getProvider().getFunctionArguments();
 			if (!fas.isEmpty()) {
 				table.addEmptyRow();
-				table.addRowValues("", "@|underline Lookup Function Arguments|@");
+				table.addRowValues("", "@|underline Lookup Function Arguments:|@");
 
 				fas.forEach(fa -> {
 					table.addRowValues("", "@|bold " + fa.getName() + ":|@ " + fa.getDescription());

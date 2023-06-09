@@ -51,7 +51,7 @@ public class DescribeLookupProvidersCommand implements Callable<Integer> {
 				List<ConfigParameter> cps = p.getConfigParameters();
 				if (!cps.isEmpty()) {
 					table.addEmptyRow();
-					table.addRowValues("", "@|underline Configuration Parameters|@");
+					table.addRowValues("", "@|underline Configuration Parameters:|@");
 
 					cps.forEach(cp -> {
 						table.addRowValues("",
@@ -62,7 +62,7 @@ public class DescribeLookupProvidersCommand implements Callable<Integer> {
 				List<FunctionArgument> fas = p.getFunctionArguments();
 				if (!fas.isEmpty()) {
 					table.addEmptyRow();
-					table.addRowValues("", "@|underline Lookup Function Arguments|@");
+					table.addRowValues("", "@|underline Lookup Function Arguments:|@");
 
 					fas.forEach(fa -> {
 						table.addRowValues("", "@|bold " + fa.getName() + ":|@ " + fa.getDescription());

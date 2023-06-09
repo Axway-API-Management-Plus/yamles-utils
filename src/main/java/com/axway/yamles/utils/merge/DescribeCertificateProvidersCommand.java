@@ -50,7 +50,7 @@ public class DescribeCertificateProvidersCommand implements Callable<Integer> {
 				List<ConfigParameter> cps = p.getConfigParameters();
 				if (!cps.isEmpty()) {
 					table.addEmptyRow();
-					table.addRowValues("", "@|underline Configuration Parameters|@");
+					table.addRowValues("", "@|underline Configuration Parameters:|@");
 
 					cps.forEach(cp -> {
 						table.addRowValues("",
