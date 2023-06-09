@@ -23,6 +23,8 @@ public interface LookupProvider {
 	public String getDescription();
 
 	public boolean isEnabled();
+	
+	public default boolean isBuiltIn() { return false; } 
 
 	/**
 	 * Adds a new source to the lookup provider.

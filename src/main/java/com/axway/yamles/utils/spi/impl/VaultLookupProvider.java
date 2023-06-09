@@ -40,7 +40,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class VaultLookupProvider extends AbstractLookupProvider {
 	private static final String DEFAULT_ADDR = "https://localhost:8200";
 
-	public static final FunctionArgument ARG_FIELD = new FunctionArgument("field", true, "");
+	public static final FunctionArgument ARG_FIELD = new FunctionArgument("field", true, "Field within the KV data");
 
 	public static final ConfigParameter CFG_PARAM_ADDR = new ConfigParameter("addr", false,
 			"Address of Vault server [default: " + DEFAULT_ADDR + "]", ConfigParameter.Type.string, false);

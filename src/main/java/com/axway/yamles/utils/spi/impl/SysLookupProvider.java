@@ -38,6 +38,11 @@ public class SysLookupProvider extends AbstractLookupProvider {
 	}
 
 	@Override
+	public boolean isBuiltIn() {
+		return true;
+	}
+	
+	@Override
 	public void addSource(LookupSource source) throws LookupProviderException {
 	}
 

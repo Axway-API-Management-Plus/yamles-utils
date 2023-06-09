@@ -41,7 +41,7 @@ public class LookupManager extends AbstractExtension {
 			addProvider(lp);
 
 			// add built-in functions
-			if (lp.isEnabled()) {
+			if (lp.isBuiltIn()) {
 				LookupFunction lf = new LookupFunction(lp.getName(), lp, Optional.of("<built-in>"));
 				addFunction(lf);
 			}

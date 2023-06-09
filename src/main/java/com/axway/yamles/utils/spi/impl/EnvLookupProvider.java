@@ -38,6 +38,11 @@ public class EnvLookupProvider extends AbstractLookupProvider {
 	public boolean isEnabled() {
 		return true;
 	}
+	
+	@Override
+	public boolean isBuiltIn() {
+		return true;
+	}
 
 	@Override
 	public void addSource(LookupSource source) throws LookupProviderException {
