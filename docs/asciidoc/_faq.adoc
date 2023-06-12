@@ -13,6 +13,51 @@ ifdef::env-github[]
 endif::[]
 
 
+== Security
+
+=== There is a CVE-2022-37767 for Pebble Templates, is _YAML-ES Utilities_ affected?
+
+According to CVE-2022-37767 any Java method could be executed by a Pebble template.
+
+In the example below, the `toString()` method of the String object can be invoked within a Pebble template.
+
+[source]
+----
+{% set value=\"Hello\".toString() %}{{ value }}
+----
+
+The _Pebble Templates_ engine within the _YAML-ES Utilities_ is configured to reject the invocation of a any Java method.
+Therefore, the example above will throw an exception.
+
+So, _YAML-ES Utilities_ is not affected by CVE-2022-37767.
+
+== Usage
+
+=== How do I add values with YAML style configuration to `values.yaml`?
+
+Within the `values.yaml` file of the YAML entity store, several options exists to https://docs.axway.com/bundle/axway-open-docs/page/docs/apim_yamles/yamles_environmentalization/index.html[configure] the API Gateway at runtime.
+
+The YAML style options also uses the `{{ ... }}` syntax, which is the same syntax as for the Mustache templates used by _YAML-ES Utilities_.
+
+If values in the configuration fragments, uses values in the YAML style, they are treated as Mustache templates and will be lead to a syntax error or will be replaced.
+
+To force the output of the YAML style, the values must be specified as Mustache template having a string literal.
+
+.Configuration Fragment
+[source, yaml]
+----
+account:
+  password: '{{ "{{env ACCOUNT_PASSWORD }}" }}'
+----
+
+.Generated `values.yaml`
+[source, yaml]
+----
+account:
+  password: {{env ACCOUNT_PASSWORD }}
+----
+
+
 == Contribution
 
 === I found a bug, what shall I do?

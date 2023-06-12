@@ -23,10 +23,22 @@ ifndef::imagesdir[:imagesdir: ./images]
 
 :yamles-utils-ver: {revnumber}
 
+[IMPORTANT]
+====
+The project is community supported and *not* supported by https://support.axway.com[Axway Support].
+If you encounter any issues, please raise an GitHub issue for this project.
+====
+
+[WARNING]
+====
+The project is in an early phase and not used in production yet.
+Please use the project for testing only.
+====
+
 [sidebar]
 .tl;dr
 --
-YAMLES Utilities can be used for AMPLIFY API Gateway projects - which are based on the YAML Entity Store - to verify coding rules, and to configure projects for target environments using various configuration sources.
+_YAML-ES Utilities_ can be used for AMPLIFY API Gateway projects - which are based on the YAML Entity Store - to verify coding rules, and to configure projects for target environments using various configuration sources.
 --
 
 include::_intro.adoc[leveloffset=+1]

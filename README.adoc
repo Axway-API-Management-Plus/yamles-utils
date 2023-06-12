@@ -99,7 +99,7 @@ The `examples` folder provides a demo of the previously described pipeline (exce
 
 == Features
 
-The YAMLES Utility provides the following features:
+The _YAML-ES Utilities_ provide the following features:
 
 * Linting.
 ** Lint API Gateway project against customized rules.
@@ -121,7 +121,10 @@ The YAMLES Utility provides the following features:
 
 == More to Read
 
-* link:docs/asciidoc/user-guide.adoc[User Guide]
+* https://axway-api-management-plus.github.io/yamles-utils/[User Guide]
+* https://docs.axway.com/bundle/axway-open-docs/page/docs/api_mgmt_overview/index.html[Amplify API Management]
+* https://docs.axway.com/bundle/axway-open-docs/page/docs/apim_yamles/index.html[YAML Configuration]
+* https://docs.axway.com/bundle/axway-open-docs/page/docs/apim_yamles/yamles_structure/index.html[YAML Entity Store Structure]
 
 == Contributing
 Please read https://github.com/Axway-API-Management-Plus/Common/blob/master/Contributing.md[Contributing] for details on our code of conduct, and the process for submitting pull requests to us.

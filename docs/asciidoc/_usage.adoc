@@ -11,15 +11,14 @@ endif::[]
 
 == General Usage
 
-The YAMLES utility provides a built-in help for all its commands.
+_YAML-ES Utilities_ provides a built-in help for all its commands.
 The help message can be displayed with the `help` command or with the option `--help` or `-h`.
 
 .Show help message
-[source, text]
 ----
 yamlesutils.sh help
 Usage: yamlesutils [-hqVv] [-a=FILE] [COMMAND]
-YAML Enity Store Utilities
+YAML Entity Store Utilities
   -a, --audit=FILE   Audit file.
   -h, --help         Show this help message and exit.
   -q, --quiet        Disable log message to the console.

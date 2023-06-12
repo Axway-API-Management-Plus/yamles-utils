@@ -10,9 +10,8 @@ ifdef::env-github[]
 endif::[]
 ifndef::imagesdir[:imagesdir: ./images]
 
-The YAMLES utility provides a built-in documentation of the certificate providers, lookup providers, and the available lookup functions.
+_YAML-ES Utilities_ provides a built-in documentation of the certificate providers, lookup providers, and the available lookup functions.
 
-[source, text]
 ----
 yamlesutils.sh merge describe help
 Usage: yamlesutils merge describe [-hV] [COMMAND]
@@ -29,7 +28,6 @@ Commands:
 == Lookup & Certificate Providers
 To get an overview of the certificate and lookup providers, invoke one of the following commands:
 
-[source, text]
 ----
 yamlesutils.sh merge describe cert-providers
 yamlesutils.sh merge describe lookup-providers
@@ -37,7 +35,6 @@ yamlesutils.sh merge describe lookup-providers
 
 To show the full description, use the `--full` option.
 
-[source, text]
 ----
 yamlesutils.sh merge describe cert-providers --full
 yamlesutils.sh merge describe lookup-providers --full
@@ -47,7 +44,6 @@ yamlesutils.sh merge describe lookup-providers --full
 
 To view the available built-in lookup functions, use the following command:
 
-[source, text]
 ----
 yamlesutils.sh merge describe functions
 Available Lookup Functions
@@ -67,7 +63,6 @@ _sys [sys+]         Lookup values from system properties.
 
 To show all functions which are available for the merge commands, specify the same `--lookup-functions` options as for the merge commands.
 
-[source, text]
 ----
 yamlesutils.sh merge describe functions --lookup-functions=lookup-func.yaml
 ----

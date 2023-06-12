@@ -8,19 +8,77 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :warning-caption: :warning:
 endif::[]
+ifndef::imagesdir[:imagesdir: ./images]
 
 == Mustache Templates
 
-The values of the merged environmentalized fields (`values.yaml`) support mustache templates.
+The values of configuration fragments are treated as _Mustache_ templates.
+After all configuration fragments are merged, the values will be evaluated by a template engine.
+Values containing `{{ ... }}` statements are handled as templates and are processed by the built-in template engine before the resulting `values.yaml` file is written.
 
-Templates are used to replace values in 
+NOTE: The name _Mustache_ is derived from the used `{` characters, which resemble a sideways moustache.
 
-link:https://pebbletemplates.io/[Pebble Templates]
+link:https://pebbletemplates.io/[Pebble Templates] is used as the internal template engine.
+All functions provided by this engine can also be used within the _Mustache_ templates.
+Additionally to the functions provided by the template engine, custom lookup functions can be defined to lookup values from external sources.
+
+Please consult the link:https://pebbletemplates.io/[Pebble documentation] for the syntax of templates and the capabilities provided by the Pebble.
+
+[IMPORTANT]
+====
+Each value of the configuration fragments or configuration parameters, are handled as a separate template.
+So it's not possible to use templates outside or across properties.
+
+.Invalid Configuration Fragment
+[source, yaml]
+----
+db:
+  user: "{{ _env('USER_NAME') }}" #<1>
+  {{ 'password: "changeme"' }} #<2>
+----
+<1> Templates within properties are allowed
+<2> Templates outside of properties are *not* supported
+====
+
+[NOTE]
+====
+For the _Pebble Templates_ engine a CVE-2022-37767 exists.
+According to the CVE any arbitrary Java method can be invoked by the templates.
+
+The _Pebble Templates_ engine within _YAML-ES Utilities_ is configured to prevent the call of Java method.
+No Java method can be called within the templates.
+So, the example below will throw an exception.
+
+[source]
+----
+{% set value=\"Hello\".toString() %}{{ value }}
+----
+
+Therefore, _YAML-ES Utilities_ is not vulnerable by CVE-2022-37767.
+
+As reported CVEs may be an issue in the context of an enterprise, even if the tool is not affected, the _Pebble Templates_ engine may be replaced in the future.
+====
 
 == Lookup Functions
 
 Lookup functions can be used inside <<Mustache Templates>>, and are used to retrieve values from key/value stores.
 All names of lookup functions start with an underscore.
+
+Arguments are passed as positional or named arguments.
+For positional arguments, the arguments must match the documented/expected order of the lookup function arguments of the according lookup provider.
+For named arguments, the order of the arguments doesn't matter.
+
+.Named Arguments
+[source]
+----
+{{ _function(key="test", option="opt") }}
+----
+
+.Positional Arguments
+[source]
+----
+{{ _function("test", "opt") }}
+----
 
 By default, following built-in lookup functions are provided:
 
@@ -57,7 +115,7 @@ Aliases must be unique within all applied lookup provider configurations.
 
 [NOTE]
 ====
-The YAML-ES utility provides list of available lookup functions with the following command.
+The _YAML-ES Utilities_ provide list of available lookup functions with the following command.
 To list all functions as used for the merge command, the _lookup function configuration_ files can be specified in the same way as for the merge command.
 If the missing, only the built-in functions are listed.
 
@@ -69,18 +127,464 @@ $ yamlesutils merge [--lookup-functions=FILE]... describe functions
 
 == Lookup Providers
 Lookup values are provided by, so called, _Lookup Providers_.
+An instance of a _Lookup Provider_ is configured for specific sources to provide a _lookup function_.
+
+[NOTE]
+====
+To get a list of all available _Lookup Providers_ and their documentation, use the following describe command:
+
+[source, shell]
+----
+$ yamlesutils merge describe lookup-providers --full
+----
+====
+
+Some lookup provider configurations require a path to a file.
+If the path represents a relative path, it is relative to the location of the lookup function definition file.
 
 === Environment Variables (built-in)
+[cols="2,6a"]
+|===
+|*Name*
+|`env`
+
+|*Built-In*
+|yes
+
+|*Synopsis*
+|Retrieves value from an environment variable.
+
+2+|*Configuration Parameters*
+2+|not required
+
+2+|*Lookup Function Arguments*
+|`key`
+|Name of environment variable.
+|===
+
+
+This built-in lookup provider retrieves values from environment variables.
+It is used by the built-in lookup function `_env`.
+Configuration of this lookup provider is not required.
+
+The lookup function requires a single key parameter which represents the name of the environment variable containing the value.
+
+.Example
+[source]
+----
+{{ _env("MY_SECRET") }} #<1>
+----
+<1> Retrieves the value from the environment variable `MY_SECRET`.
 
 === System Properties (built-in)
+[cols="2,6a"]
+|===
+|*Name*
+|`sys`
+
+|*Built-In*
+|yes
+
+|*Synopsis*
+|Retrieves value from a system property.
+
+2+|*Configuration Parameters*
+2+|not required
+
+2+|*Lookup Function Arguments*
+|`key`
+|Name of system property.
+|===
+
+This built-in lookup provider retrieves values from system properties passed to the _YAML-ES Utilities_.
+It is used by the built-in lookup function `_sys`.
+Configuration of this lookup provider is not required.
+
+The lookup function requires a single key parameter which represents the name of the system property containing the value.
+
+.Example
+[source]
+----
+{{ _sys("my.secret") }} #<1>
+----
+<1> Retrieves the value from the system property `my.secret`.
 
 === JSON from Environment Variables
 
+[cols="2,6a"]
+|===
+|*Name*
+|`envjson`
+
+|*Built-In*
+|no
+
+|*Synopsis*
+|Retrieves values from a JSON document, stored in an environment variable.
+
+2+|*Configuration Parameters*
+
+|`env`
+|Name of the environment variable storing the JSON document.
+
+2+|*Lookup Function Arguments*
+
+|`key`
+|JSON Pointer to key node (see https://datatracker.ietf.org/doc/html/rfc6901[RFC 6901]).
+|===
+
+Retrieves values from a JSON document, which is stored within an environment variable.
+The name of the environment variable containing the JSON document is configured by the alias in the lookup functions configuration.
+
+The according lookup function requires a key parameter which points to the value node within the JSON document.
+
+This feature can be used to pass the JSON output of a tool as a lookup source to the _YAML-ES Utilities_.
+
+*Example*
+
+This example uses a script to generate lookup values, and use them within a configuration template.
+
+.Generate Lookup Values `gen-values.sh`
+[source, shell]
+----
+#!/bin/sh
+cat <<EOF
+{
+  "accounts": {
+    "db": {
+      "user": "admin",
+      "password": "changeme"
+    }
+  }
+}
+EOF
+----
+
+.Lookup Function Definition `lookup-func.yaml`
+[source, yaml]
+----
+lookups:
+  accounts: #<1>
+    provider: envjson #<2>
+    config:
+      env: ACCOUNTS #<3>
+----
+<1> Define alias for the configured lookup functions.
+The name of the functions will be `_accounts` (alias prefixed with underscore).
+<2> Use this lookup provider.
+<3> Retrieve the JSON document from the environment variable `ACCOUNTS`.
+
+
+.Configuration Fragment `config.yaml`
+[source, yaml]
+----
+db:
+  user: "{{ _accounts('/accounts/db/user') }}" #<1>
+  pwd: "{{ _accounts('/accounts/db/password') }}" #<2>
+----
+<1> Lookup user name from JSON document by JSON Pointer.
+<2> Lookup password from JSON document by JSON Pointer.
+
+.Create configuration
+[source, shell]
+----
+ACCOUNTS=$(./gen-values.sh) #<1>
+yamlesutils.sh merge config \ #<2>
+  --lookup-functions=lookup-func.yaml \ #<3>
+  --config=config.yaml \ #<4>
+  --output=- #<5>
+----
+<1> Generate JSON document with lookup values and store it in the environment variable `ACCOUNTS`.
+<2> Create a configuration.
+<3> Lookup function definitions.
+<4> Configuration fragment.
+<5> Print result to `stdout`.
+
+.Result
+[source, yaml]
+----
+db:
+  user: admin
+  password: changeme
+----
+
 === YAML/JSON Files
+
+[cols="2,6a"]
+|===
+|*Name*
+|`json` or `yaml`
+
+|*Built-In*
+|no
+
+|*Synopsis*
+|Retrieves values from a JSON/YAML file.
+
+2+|*Configuration Parameters*
+
+|`file`
+|Path to the JSON/YAML file containing lookup values.
+
+2+|*Lookup Function Arguments*
+
+|`key`
+|JSON Pointer to key node (see https://datatracker.ietf.org/doc/html/rfc6901[RFC 6901]).
+|===
+
+*Example*
+
+In this example there is a JSON and a YAML file containing lookup values.
+
+.JSON Lookup Values `accounts.json`
+[source, json]
+----
+{
+  "accounts": {
+    "db": {
+      "user": "admin",
+      "password": "changeme"
+    }
+  }
+}
+----
+
+.YAML Lookup Values `accounts.yaml`
+[source, yaml]
+----
+accounts:
+  smtp:
+    email: "info@axway.com"
+    password: "changeme"
+----
+
+Lookup functions are configured to retrieve values from these files. 
+
+.Lookup Function Defintions `lookup-func.yaml`
+[source, yaml]
+----
+lookups:
+  accounts_json:
+    provider: json
+    config:
+      file: accounts.json
+  accounts_yaml:
+    provider: yaml
+    config:
+      file: accounts.yaml
+----
+
+A configuration fragment uses the lookup functions to retrieve the configuration values from the according files.
+
+.Configuration Fragment `config.yaml`
+[source, yaml]
+----
+db:
+  user: "{{ _accounts_json('/accounts/db/user') }}"
+  pwd: "{{ _accounts_json('/accounts/db/password') }}"
+mail:
+  user: "{{ _accounts_yaml('/accounts/smtpd/user') }}"
+  pwd: "{{ _accounts_yaml('/accounts/smtpd/password') }}"
+----
+
+_YAML-ES Utilities_ is used to create a final configuration.
+
+.Create configuration
+[source, shell]
+----
+yamlesutils.sh merge config \
+  --lookup-functions=lookup-func.yaml \
+  --config=config.yaml \
+  --output=-
+----
+
+.Result
+[source, yaml]
+----
+db:
+  user: admin
+  pwd: changeme
+mail:
+  user: info@axway.com
+  pwd: changeme
+----
 
 === KeePass DB
 
-=== Hashicorp Vault
+https://keepass.info/index.html[KeePass] is a popular password manager using a single encrypted file as a database.
+It can be used to securely store credentials, configurations and files.
+
+[cols="2,6a"]
+|===
+|*Name*
+|`keepass`
+
+|*Built-In*
+|no
+
+|*Synopsis*
+|Retrieves values from a KeePass database.
+
+2+|*Configuration Parameters*
+|`kdb`
+|Path to the KeePass DB file.
+|`passphrase`
+|Passphrase for KeePass DB.
+
+This parameter supports a _Mustache_ template, using built-in lookup functions.
+|`key`
+|Optional path to the master key file.
+
+2+|*Lookup Function Arguments*
+|`key`
+|Path to the entry within the DB.
+|`what`
+|Field to be retreived form the entry.
+Following values are allowed:
+
+* `user`: user name assigned to the entry
+* `password`: password assigned to the entry
+* `url`: URL assigned to the entry
+* `prop`: string field (property) assigned to the entry (use `pname` argument to specify the name of the property).
+* `binUTF8`: attachment encoded as UTF-8 (use `pname` argument to specify the name of the attachment).
+* `binISO8859`: attachment encoded as ISO 8859 (use `pname` argument to specify the name of the attachment).
+* `binB64`: attachment encoded as Base64 (use `pname` argument to specify the name of the attachment).
+|`pname`
+|Optional name of property (for fields supporting properties).
+|===
+
+*Example*
+
+image:keepass-entry.png[Keepass Entry]
+
+To use the Keepass DB, an according lookup function has to be defined.
+
+.Lookup Function Defintion `lookup-func.yaml`
+[source, yaml]
+----
+lookups:
+  kdb:
+    provider: keepass
+    config:
+      kdb: keepass.kdbx #<1>
+      passphrase: "{{ _env('PASSPHRASE') }}" #<2>
+----
+<1> Keepass DB file is located relative to the `lookup-func.yaml` file.
+<2> The `passphrase` parameter supports built-in lookup functions.
+
+Use the lookup function `_kdb` to retrieve the values from the entry.
+
+.Configuration Fragment
+[source, yaml]
+----
+config:
+  user: "{{ _kdb('/General/generic-user-general', 'user') }}" #<1>
+  pwd: "{{ _kdb('/General/generic-user-general', 'password') }}"
+  url: "{{ _kdb('/General/generic-user-general', 'url') }}"
+  user: "{{ _kdb('/General/generic-user-general', 'user') }}"
+  field: "{{ _kdb('/General/generic-user-general', 'prop', 'field') }}"
+  content: "{{ _kdb('/General/generic-user-general', 'binB64', 'text.txt') }}" #<2>
+----
+<1> Retrieves the user name from the entry `generic-user-general` within the _General_ group.
+<2> Retrieves the content of the `text.txt` attachment as an Base64 encoded string.
 
 === AWS Secrets Manager
+
+[cols="2,6a"]
+|===
+|*Name*
+|`aws_sm`
+
+|*Built-In*
+|no
+
+|*Synopsis*
+|Retrieves values from AWS Secrets Manager.
+
+2+|*Configuration Parameters*
+|`secret_name`
+|Name of the secret.
+|`region`
+|Optional region where the secret is located.
+If not specified, the default region is used.
+
+2+|*Lookup Function Arguments*
+|`key`
+|Secret key as JSON Pointer (e.g., `/user`).
+|===
+
+The lookup provider uses AWS SDK to access the secrets in the AWS Secrets Manager.
+
+The https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html[default credentials chain] used by the SDK are also used by this lookup provider.
+On systems directly running on EC2 instances, IAM roles can be used to authorize the request without specifying any credentials.
+For systems running on AWS EKS, a K8s service account can be bound to an IAM role to enable the access to the Secrets Manager without using additional credentials.
+But using environment variables (`AWS_SECRET_ACCESS_KEY`, `AWS_ACCESS_KEY_ID`), system properties (`aws.accessKeyId`, `aws.secretAccessKey`), or configuration file are also supported.
+
+*Example*
+
+In this example the secret `sandbox/anm` is stored in AWS Secrets Manager.
+
+image:aws-sm-secrets.png[AWS Secrets]
+
+The secret has two secret keys (`user` and `password`).
+
+image:aws-sm-secrets-values.png[AWS Secrets]
+
+The secret can also be represented as plain text, which is a JSON document storing the values with the secret key as property name.
+
+image:aws-sm-secrets-values-json.png[AWS Secrets]
+
+.Lookup Function Configuration `lookup-func.yaml`
+[source, yaml]
+----
+lookups:
+  anm:
+    provider: aws_sm
+    config:
+      secret_name: sandbox/anm
+----
+
+.Configuration Fragment `config.yaml`
+[source, yaml]
+----
+anm:
+  user: "{{ _anm('/user') }}"
+  pwd: "{{ _anm('/password') }}"
+----
+
+
+=== Hashicorp Vault
+
+[cols="2,6a"]
+|===
+|*Name*
+|`vault`
+
+|*Built-In*
+|no
+
+|*Synopsis*
+|Retrieves values from a Hashicorp Vault key/value store.
+
+2+|*Configuration Parameters*
+|`token`
+|Token to authorize access to Vault.
+It is required if the `token_file` parameter is not specified.
+
+This parameter supports a _Mustache_ template, using built-in lookup functions.
+|`token_file`
+|Path to token file.
+It is required if the `token` parameter is not specified.
+|`addr`
+|Address of the Vault server.
+If not specified, the default `https://localhost:8200` is used.
+|`kv_base`
+|Path to the KV secret engine (within Vault).
+
+2+|*Lookup Function Arguments*
+|`key`
+|Path to KV (within the secret engine).
+|`field`
+|Field within the KV data.
+|===
 

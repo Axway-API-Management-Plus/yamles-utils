@@ -11,16 +11,16 @@ endif::[]
 ifndef::imagesdir[:imagesdir: ./images]
 
 
-== About YAMLES Utilities
-The YAMLES Utilities provides the features to verify a YAML based policy project according to defined rules (linting), and to configure the policy project for target environments.
+== About _YAML-ES Utilities_
+_YAML-ES Utilities_ provide the features to verify a YAML based policy project according to defined rules (linting), and to configure the policy project for target environments.
 
 The utilities of this project can be used to build a CI/CD pipeline for automatic configuration and deployment of YAML Entity Store based projects (see <<YAML Entity Store>> for details).
 
-image:concept.drw.png[YAML ES Utils concept]
+image:concept.drw.png[YAML-ES Utilities concept]
 
 == Use Cases
 
-The uses cases, described in this section, are just examples to illustrate the opportunities of the YAMLES Utils.
+The uses cases, described in this section, are just examples to illustrate the opportunities of the _YAML-ES Utilities_.
 They only give some ideas to build your own deployment pipeline.
 
 === Classic Topology Deployment

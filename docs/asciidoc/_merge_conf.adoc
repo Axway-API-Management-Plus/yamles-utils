@@ -1,4 +1,4 @@
-= Merge Configuration Fragements
+= Merge Configuration Fragments
 ifdef::env-github[]
 :outfilesuffix: .adoc
 :!toc-title:
@@ -29,20 +29,19 @@ Each value of the YAML properties is handled as a separate template. So it's not
 ====
 
 .Example: Merge three fragments into a combined `values.yaml` file
-image:merge-fragments.drw.png[Merge Configuration Fragements]
+image:merge-fragments.drw.png[Merge Configuration Fragments]
 
 [NOTE]
 ====
 In the above example, the `_env` lookup function is used to retrieve the value from an environment variable.
-This function is provided as a built-in function by the YAML-ES utility.
+This function is provided as a built-in function by _YAML-ES Utilities_.
 Custom lookup functions can be defined to retrieve values from other lookup providers (e.g. KeePass DB or AWS Secret Manager).
 
 See <<Templates>> for more details about the evaluation of Mustache templates and the usage of lookup functions.
 ====
 
-To merge configuration fragments, use the `merge config` command of the YAML-ES utilities.
+To merge configuration fragments, use the `merge config` command of _YAML-ES Utilities_.
 
-[source, shell]
 ----
 yamlesutils.sh merge config --help
 Usage: yamlesutils merge config [-hV] [-c=FILE]... [-d=DIR]...
@@ -73,6 +72,9 @@ Merge configuration fragments for YAML entity store.
 |Configuration fragment to be merged. The fragments are files, containing a single YAML document.
 
 The parameter can be specified multiple times to merge multiple fragments.
+
+The fragments are processed in the order as specified on the command line.
+If a configuration parameter is configured by in multiple files, the last one wins.
 
 |`-d DIR` +
 `--dir=DIR`
@@ -168,7 +170,7 @@ The parameter specifies the JSON Path to the property within the external JSON f
 <2> The lookup value will be additionally encoded as Base64.
 
 The fields contain Mustache templates, using a custom lookup function `_users()` to retrieve values from an external source.
-To use the custom function, the a provider for this function must be defined.
+To use the custom function, a provider for this function must be defined.
 In this case we want to retrieve the values from a JSON file `users.json`.
 
 .lookups/users.json
@@ -185,7 +187,7 @@ The provider is defined in a separate file `lookup-func.yaml`.
 ----
 include::../../examples/basic/config/lookup-func.yaml[]
 ----
-<1> Defines an alias `users` for the lookup function configuration.
+<1> Defines the alias `users` for the lookup function configuration.
 The corresponding lookup function is prefixed by an underscore `_users()`.
 <2> Use the JSON lookup provider to retrieve values from a JSON file.
 <3> Path to the JSON file.
