@@ -4,6 +4,7 @@
 ifndef::revnumber[:revnumber: 0.0.0]
 :toc:
 :sectnums:
+:appendix-caption:
 :source-highlighter: prettify
 ifndef::env-github[]
 :icons: font
@@ -49,4 +50,9 @@ include::_reference.adoc[leveloffset=+1]
 
 include::_faq.adoc[leveloffset=+1]
 
-include::../../CHANGELOG.adoc[leveloffset=+1]
+[appendix]
+== Appendix
+
+include::../../examples/README.adoc[leveloffset=+2]
+
+include::../../CHANGELOG.adoc[leveloffset=+2]
