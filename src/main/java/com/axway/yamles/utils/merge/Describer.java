@@ -129,7 +129,7 @@ public class Describer {
 			table.addRowValues("", formatSectionTitle("Lookup Function Arguments"));
 
 			fas.forEach(fa -> {
-				table.addRowValues("", "@|bold " + fa.getName() + ":|@ " + fa.getDescription());
+				table.addRowValues("", "@|bold " + fa.getName() + "|@" + requiredTag(fa.isRequired()) + ": " + fa.getDescription());
 			});
 		}
 	}

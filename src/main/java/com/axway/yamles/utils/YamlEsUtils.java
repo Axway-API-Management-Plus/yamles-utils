@@ -19,7 +19,7 @@ import picocli.CommandLine.IExecutionExceptionHandler;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.ParseResult;
 
-@Command(name = "yamlesutils", description = "YAML Enity Store Utilities", subcommands = { HelpCommand.class,
+@Command(name = "yamlesutils", description = "YAML Entity Store Utilities", subcommands = { HelpCommand.class,
 		MergeCommand.class,
 		LintCommand.class }, mixinStandardHelpOptions = true, versionProvider = VersionProvider.class)
 public class YamlEsUtils implements IExecutionExceptionHandler {

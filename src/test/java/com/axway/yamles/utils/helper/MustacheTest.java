@@ -28,6 +28,7 @@ class MustacheTest {
 		assertEquals(PROP_VALUE, Mustache.eval("{{ _sys('" + PROP_KEY + "') }}"));
 		assertEquals(PROP_VALUE, Mustache.eval("{{ _sys(key='" + PROP_KEY + "') }}"));
 		assertEquals("Result: " + PROP_VALUE + "!", Mustache.eval("Result: {{ _sys('" + PROP_KEY + "') }}!"));
+		assertEquals(PROP_ML_VALUE, Mustache.eval("{{ _sys('" + PROP_ML_KEY + "') }}"));
 
 		assertThrows(Exception.class, () -> {
 			Mustache.eval("{{ _sys('non_existing_propery') }}");

@@ -31,7 +31,7 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 			false);
 
 	public KeystoreCertificateProvider() {
-		super(CFG_PATH, CFG_PASSPHRASE, CFG_ALIAS);
+		super(CFG_PATH, CFG_PASSPHRASE, CFG_ALIAS, CFG_TYPE);
 	}
 
 	@Override
