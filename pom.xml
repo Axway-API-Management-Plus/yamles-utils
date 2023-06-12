@@ -19,7 +19,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.axway-api-management-plus</groupId>
 	<artifactId>yamles-utils</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.1.0</version>
 	<packaging>jar</packaging>
 	<name>YAML Entity Store Utilities</name>
 	<description>Utilities for YAML Entity Store based API Gateway projects.</description>
@@ -53,7 +53,7 @@
 		<httpclient.version>5.2.1</httpclient.version>
 		<keepass.version>2.1.4</keepass.version>
 		<pebble.version>3.2.1</pebble.version>
-		<awssdk.version>2.20.78</awssdk.version>
+		<awssdk.version>2.20.83</awssdk.version>
 
 		<junit.jupiter.version>5.9.3</junit.jupiter.version>
 		<junit.platform.version>1.9.3</junit.platform.version>
