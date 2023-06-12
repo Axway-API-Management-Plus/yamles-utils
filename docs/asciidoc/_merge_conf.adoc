@@ -1,0 +1,229 @@
+= Merge Configuration Fragments
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+ifndef::imagesdir[:imagesdir: ./images]
+
+For the YAML entity store, environmentalized fields are configured in the `values.yaml` file of the project directory.
+To configure the project for other stages, the whole `values.yaml` file has to be replaced by a file containing the new values.
+Also, only static values are allowed.
+
+If you want to split the configuration into multiple files, e.g. due to separate responsibility, or, if you want to retrieve values dynamically from other sources, the `values.yaml` file has to be dynamically generated.
+
+The YAML-ES utilities enables to merge a `values.yaml` file from multiple fragments.
+The order of the fragments is considered. If a field is provided by multiple fragments, the value of the latest fragment is used.
+
+After all fragments are merged, the values of each field is evaluated as a _Mustache_ template.
+If the value contains expressions delimited by double curly brackets (e.g., `{{ expression }}`), the block will be replaced by the result of the expression.
+For example, expressions can be used to encode values as Base64 (required for encrypted fields), or to lookup values from external sources, etc.
+
+[IMPORTANT]
+====
+Each value of the YAML properties is handled as a separate template. So it's not possible to use templates outside or across properties.
+====
+
+.Example: Merge three fragments into a combined `values.yaml` file
+image:merge-fragments.drw.png[Merge Configuration Fragments]
+
+[NOTE]
+====
+In the above example, the `_env` lookup function is used to retrieve the value from an environment variable.
+This function is provided as a built-in function by _YAML-ES Utilities_.
+Custom lookup functions can be defined to retrieve values from other lookup providers (e.g. KeePass DB or AWS Secret Manager).
+
+See <<Templates>> for more details about the evaluation of Mustache templates and the usage of lookup functions.
+====
+
+To merge configuration fragments, use the `merge config` command of _YAML-ES Utilities_.
+
+----
+yamlesutils.sh merge config --help
+Usage: yamlesutils merge config [-hV] [-c=FILE]... [-d=DIR]...
+                                [--lookup-functions=FILE]... (-o=FILE |
+                                [--project=DIR | --ignore-missing-values])
+Merge configuration fragments for YAML entity store.
+  -c, --config=FILE   Configuration fragment.
+  -d, --dir=DIR       Directory to scan for YAML configuration fragments.
+  -h, --help          Show this help message and exit.
+      --ignore-missing-values
+                      Ignore missing configuration of values (only for
+                        projects).
+      --lookup-functions=FILE
+                      configure lookup functions.
+  -o, --output=FILE   File to write generated YAML configuration.
+      --project=DIR   Path to the YAML entity store project.
+  -V, --version       Print version information and exit.----
+----
+
+.Options for Merge Configuration
+[cols="2,6a", options="header"]
+|===
+|Option
+|Description
+
+|`-c FILE` +
+`--config=FILE`
+|Configuration fragment to be merged. The fragments are files, containing a single YAML document.
+
+The parameter can be specified multiple times to merge multiple fragments.
+
+The fragments are processed in the order as specified on the command line.
+If a configuration parameter is configured by in multiple files, the last one wins.
+
+|`-d DIR` +
+`--dir=DIR`
+|Directory to scan for YAML configuration fragments.
+Each file within the directory having the extension `.yml` or `.yaml` are treated as configuration fragments.
+The files are added to merged in alphabetical ascending order.
+
+|`-o FILE` +
+`--output=FILE`
+|Target file to write the merged YAML configuration.
+If `-` is specified, the merged configuration is written to `stdout`.
+
+|`--project=DIR`
+|Path to the directory containing the YAML-ES project.
+If the project path is specified the `values.yaml` file within this directory will be overwritten.
+
+|`--ignore-missing-values`
+|If a project directory is specified, the current `values.yaml` file of this directory is loaded and all required fields are detected.
+
+Before writing the merged configuration, the merge command checks if all required fields are also provided by the merged configuration.
+On missing fields, the merge command stop with an error message.
+
+With this option, missing fields are ignored and the merge command continue processing.
+Missing or unused fields are just reported.
+
+|`--lookup-functions=FILE`
+|YAML file to configure lookup functions.
+
+Multiple parameters can be specified to use multiple lookup configurations.
+|===
+
+
+== Basic Examples
+
+The following files, used for this example are also located in the `examples/basic/config` folder.
+
+There are two configuration fragments:
+
+.fragments/global.yaml
+[source, yaml]
+----
+include::../../examples/basic/config/fragments/global.yaml[]
+----
+
+.fragments/local.yaml
+[source, yaml]
+----
+include::../../examples/basic/config/fragments/local.yaml[]
+----
+
+To merge the fragments use the following command:
+
+.Simple merge of multiple fragments
+[source, shell]
+----
+yamlesutils.sh merge config \ #<1>
+  --config=fragments/global.yaml \ #<2>
+  --config=fragment/local.yaml \ #<3>
+  -o - #<4>
+----
+<1> Command to merge configuration fragments
+<2> The `global.yaml` fragment
+<3> The `local.yaml` fragment, which overwrites values from the `global.yaml`.
+<4> Print the result to `stdout`
+
+This will generate the following YAML document:
+
+.Result
+[source, yaml]
+----
+global:
+  greeting:
+    message: "Bonjour le monde" #<1> 
+    enabled: true #<2>
+local: #<3>
+  country: "fr"
+  application:
+    name: "Application Extraordinaire"
+----
+<1> Overwritten by `local.yaml`.
+<2> Provided by `global.yaml`.
+<3> Completely provided by `local.yaml`.
+
+Now we want to add an additional fragment:
+
+.fragments/users.yaml
+[source, yaml]
+----
+include::../../examples/basic/config/fragments/users.yaml[]
+----
+<1> Fields use Mustache templates to lookup values using the function `_users()`.
+The parameter specifies the JSON Path to the property within the external JSON file (see below).
+<2> The lookup value will be additionally encoded as Base64.
+
+The fields contain Mustache templates, using a custom lookup function `_users()` to retrieve values from an external source.
+To use the custom function, a provider for this function must be defined.
+In this case we want to retrieve the values from a JSON file `users.json`.
+
+.lookups/users.json
+[source, json]
+----
+include::../../examples/basic/config/lookups/users.json[]
+----
+
+The provider is defined in a separate file `lookup-func.yaml`.
+
+
+.lookup-func.yaml
+[source, yaml]
+----
+include::../../examples/basic/config/lookup-func.yaml[]
+----
+<1> Defines the alias `users` for the lookup function configuration.
+The corresponding lookup function is prefixed by an underscore `_users()`.
+<2> Use the JSON lookup provider to retrieve values from a JSON file.
+<3> Path to the JSON file.
+If the path is not absolute, the path is relative to the directory containing the lookup function configuration file (directory of `lookup-func.yaml`).
+
+To merge these fragments, an additional parameter `--lookup-functions` must be specified to configure the required lookup function.
+
+[source, shell]
+----
+yamlesutils.sh merge config \ #<1>
+  --lookup-functions=lookup-func.yaml \ #<2>
+  -c fragments/global.yaml -c fragments/local.yaml -c fragments/users.yaml \ #<3>
+  -o - #<4>
+----
+<1> Command to merge configuration fragments.
+<2> Path to the lookup function configuration file.
+<3> The configuration fragments to be merged.
+<4> Print the result to `stdout`
+
+.Result
+[source, yaml]
+----
+global:
+  greeting:
+    message: "Bonjour le monde"
+    enabled: true
+local:
+  country: "fr"
+  application:
+    name: "Application Extraordinaire"
+  accounts: #<1>
+    admin:
+      upn: "admin" #<2>
+      name: "Administrator" #<2>
+      pwd: "Y2hhbmdlbWU=" #<3>
+----
+<1> The YAML document is similar to the previous result. Except the addition `accounts` object, provided by the `users.yaml` fragment.
+<2> The templates specified in the fragment are resolved and the values are looked up from the external JSON file.
+<3> The value is additionally Base64 encoded.

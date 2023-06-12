@@ -1,0 +1,9 @@
+cassandra:
+  replication:
+    strategy: org.apache.cassandra.locator.SimpleStrategy
+    factor: 1
+  consistency:
+    read: ONE
+    write: ONE
+  security:
+    ssl_enabled: false

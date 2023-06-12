@@ -2,10 +2,9 @@
 External_Connections:
   Database_Connections:
     Masterdata:
-      url: '{{ keepass("/Database/prod/MasterData:url") }}'
-      username: '{{ keepass("/Database/prod/MasterData:user") }}'
-      password: "changeme"
-#      password: '{{ keepass("/Database/prod/MasterData:password") }}'
+      url: '{{ _dev_kdb("/Database/prod/MasterData", "url") }}'
+      username: '{{ _dev_kdb("/Database/prod/MasterData", "user") }}'
+      password: '{{ _dev_kdb("/Database/prod/MasterData", "password") | base64encode }}'
 
 Policies:
   Demo:

@@ -1,0 +1,6 @@
+local:
+  accounts:
+    admin:
+      upn: "{{ _users('/users/admin/id') }}" #<1>
+      name: "{{ _users('/users/admin/name') }}" #<1>
+      pwd: "{{ _users('/users/admin/password') | base64encode }}" #<2>

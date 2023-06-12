@@ -1,0 +1,116 @@
+= Merge Certificates
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+ifndef::imagesdir[:imagesdir: ./images]
+
+For the YAML entity store, certificates and private keys are configured in the `Environment Configuration/Certificate Store` directory of the project.
+For each alias configured in the Policy Studio project a corresponding YAML file exists within this folder.
+
+Without _YAML-ES Utilities_, the certificates have to managed manually via Policy Studio or by editing the files directly.
+This may be an error prone task, makes it difficult to keep the project independent from the target environment, and may cause to store credentials (e.g., private keys), in the Git repository by accident.
+
+_YAML-ES Utilities_ helps to retrieve certificates from various sources and to configure the certificates during deployment time of the API Gateway.
+
+The configuration of certificates is organized by, so called, _Certificate Configuration_ files.
+Each configuration defines certificate aliases and the according source to retrieve the certificate or private key.
+
+Certificates are provided by, so called, _<<Certificate Providers>>_.
+For each alias a certificate provider must be defined and configured accordingly.
+
+.Certificate Configuration
+[source,yaml]
+----
+certificates: #<1>
+  <alias-1>: #<2>
+    provider: <provider> #<3>
+    config: #<4>
+      <provider configuration> #<5>
+----
+<1> Indicator for certificate configuration.
+<2> Certificate alias. Certificates are referenced by the alias within the policy project.
+<3> Type of the source of the certificate (provider of the certificate).
+<4> Section to configure the provider.
+<5> Provider specific configuration to retrieve the certificate
+
+To configure the certificates of a project, the target project directory and a list of certificate configuration files must be specified (see help message below).
+Some parameters support <<Mustache Templates>> to lookup or transform values.
+If non built-in lookup functions are used, the lookup function have to be configured by a _Lookup Function Configuration_ file which is specified by the `--lookup-functions` parameter.
+
+----
+yamlesutils.sh merge certs --help
+Usage: yamlesutils merge certs [-hV] --project=DIR -c=FILE [-c=FILE]...
+                               [--lookup-functions=FILE]...
+Merge certificates for YAML entiry store.
+  -c, --config=FILE   Certificate configuration file.
+  -h, --help          Show this help message and exit.
+      --lookup-functions=FILE
+                      Configure lookup functions.
+      --project=DIR   Project directory (YAML entity store).
+  -V, --version       Print version information and exit.
+----
+
+.Options for Merge Certificates
+[cols="2,6a", options="header"]
+|===
+|Option
+|Description
+
+|`-c FILE` +
+`--config=FILE`
+|Certificates configuration file.
+
+The parameter can be specified multiple times to merge multiple certificate configurations.
+
+The configurations are processed in the order as specified on the command line.
+If an alias is defined by in multiple files, the last one wins.
+
+|`--project=DIR`
+|Path to the directory containing the YAML-ES project.
+
+[CAUTION]
+====
+To avoid any commits of confidential certificates into the repository, projects should be copied to a temporary folder before the certificate configuration is applied to the temporary folder.
+====
+
+|===
+
+== Basic Example
+
+In this example, a new public certificate has to be added to the project.
+
+.Certificate Configuration
+[source, yaml]
+----
+include::../../examples/basic/certs/certificates.yaml[]
+----
+<1> Alias of the new certificate within the policy project.
+<2> Certificate provider
+<3> Configuration of the certificate provider.
+Here, a simple PEM encoded public certificate, specified directly in the configuration file.
+
+The certificate can be add to the project, by using the following _YAML-ES Utilities_ command.
+
+[source, shell]
+----
+# Copy project to temporary folder
+PRJ_SRC=../../../apim
+TMP_PRJ="/tmp/prj"
+
+mkdir -p ${TMP_PRJ}
+cp -rt "${TMP_PRJ}" "${PRJ_SRC}/."
+
+# Configure certificates
+yamlesutils.sh merge certs \ #<1>
+  --project=${TMP_PRJ} \ #<2>
+  --config=certificates.yaml #<3>
+----
+<1> Merge certificates.
+<2> Path to policy project.
+<3> Certificate configuration file.

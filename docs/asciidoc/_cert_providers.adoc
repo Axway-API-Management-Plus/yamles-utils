@@ -1,0 +1,184 @@
+= Certificate Providers
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+The purpose of a certificate provider is to retrieve certificates or private keys from external sources.
+Various providers exists to support various certificate sources.
+
+[NOTE]
+====
+To get a list of all available _Certificate Providers_ and their documentation, use the following describe command:
+
+[source, shell]
+----
+$ yamlesutils merge describe cert-providers --full
+----
+====
+
+Some lookup provider configurations require a path to a file.
+If the path represents a relative path, it is relative to the location of the certificate configuration file.
+
+== Simple
+
+[cols="2,6a"]
+|===
+|*Name*
+|`simple`
+
+|*Synopsis*
+|Provides certificates directly from configuration file.
+
+2+|*Configuration Parameters*
+|`cert`
+|PEM encoded certificate (single line).
+
+This parameter supports a _Mustache_ template, to lookup the certificates via lookup functions.
+|`key`
+|Optional PEM encoded private key (single line).
+
+This parameter supports a _Mustache_ template, to lookup the certificates via lookup functions.
+|===
+
+*Example*
+
+.Certificate Configuration
+[source, yaml]
+----
+certificates:
+  cassandra-ca:
+    provider: simple
+    config:
+      cert: "MIID...uB" #<1>
+
+  apim-server:
+    provider: simple
+      cert: "MIIDt...xdI=" #<2>
+      key: "MIIEv...CL+X"
+----
+<1> Public certificate
+<2> Server certificate including private key.
+
+In combination with a lookup function, the `simple` provider can also be used to retrieve certificates from a KeePass DB or AWS Secrets Manager.
+
+== Keystore
+
+[cols="2,6a"]
+|===
+|*Name*
+|`keystore`
+
+|*Synopsis*
+|Provides certificates from a keystore file (PKCS#12 or JKS).
+
+2+|*Configuration Parameters*
+|`path`
+|Path to the keystore file.
+If a relative path is specified, the path is relative to the location of the _Certificate Configuration_ file.
+|`pass`
+|Optional passphrase to access the keystore.
+
+This parameter supports a _Mustache_ template, to lookup the certificates via lookup functions.
+|`alias`
+|Optional alias of the certificate within the keystore.
+If not specified, the alias of the entity store certificate is used.
+|`type`
+|Type of the keystore.
+If not specified, the type is determined from the file name extension.
+
+* `JKS`: Java Key Store
+* `P12`: PKCS#12 file
+|===
+
+
+*Example*
+
+.Certificate Configuration
+[source, yaml]
+----
+certificates:
+  example-server:
+    provider: keystore
+    config:
+      path: keystore.p12 #<1>
+      pass: "{{ _kdb('/Test/Sever Certificate', 'password') }}" #<2>
+      alias: server #<3>
+----
+<1> Path to the keystore.
+As the extension is `.p12` the keystore is assumed to be in the PKCS#12 format.
+<2> The passphrase for the keystore is retrieved from a lookup function.
+<3> Alias of the certificate within the keystore.
+
+== AWS Certificate Manager
+
+[cols="2,6a"]
+|===
+|*Name*
+|`aws_cm`
+
+|*Synopsis*
+|Provides certificates from the AWS Certificate Manager.
+
+2+|*Configuration Parameters*
+|`arn`
+|ARN of the certificate stored in the AWS Certificate Manager.
+|`chain`
+|Set to `true` to add the full certificate chain to policy project.
+|===
+
+The https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html[default credentials chain] used by the SDK are also used by this certificate provider.
+On systems directly running on EC2 instances, IAM roles can be used to authorize the request without specifying any credentials.
+For systems running on AWS EKS, a K8s service account can be bound to an IAM role to enable the access to the Secrets Manager without using additional credentials.
+But using environment variables (`AWS_SECRET_ACCESS_KEY`, `AWS_ACCESS_KEY_ID`), system properties (`aws.accessKeyId`, `aws.secretAccessKey`), or configuration file are also supported.
+
+*Example*
+
+In this example, the public certificate of CA, issued the Cassandra cluster certificate, is stored in the policy project under the alias `cassandra-ca`.
+For deployment, the certificate must be replaced by the public certificate stored in AWS Certificate Manager.
+The full certificate chain, has to be imported also. 
+
+.Certificate Configuration
+[source, yaml]
+----
+certificates:
+  cassandra-ca:
+    provider: aws_cm
+    config:
+      arn: "arn:aws:acm:us-west-1:000000000000:certificate/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+      chain: true
+----
+
+== Remover
+
+[cols="2,6a"]
+|===
+|*Name*
+|`remover`
+
+|*Synopsis*
+|Removes a certificates from the policy project.
+
+2+|*Configuration Parameters*
+2+|not required
+|===
+
+The is not really a certificate provider.
+Instead it removes certificates from the policy project.
+The certificates are specified by their alias.
+
+*Example*
+
+.Certificate Configuration
+[source, yaml]
+----
+certificates:
+  acme: #<1>
+    provider: remover
+----
+<1> Alias of the certificate within the policy project.

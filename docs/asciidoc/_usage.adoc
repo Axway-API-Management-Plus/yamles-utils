@@ -1,0 +1,75 @@
+= Usage
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+== General Usage
+
+_YAML-ES Utilities_ provides a built-in help for all its commands.
+The help message can be displayed with the `help` command or with the option `--help` or `-h`.
+
+.Show help message
+----
+yamlesutils.sh help
+Usage: yamlesutils [-hqVv] [-a=FILE] [COMMAND]
+YAML Entity Store Utilities
+  -a, --audit=FILE   Audit file.
+  -h, --help         Show this help message and exit.
+  -q, --quiet        Disable log message to the console.
+  -v, --verbose      Increase logging verbosity.
+  -V, --version      Print version information and exit.
+Commands:
+  help   Display help information about the specified command.
+  merge  Merge configuration from various sources.
+  lint   Lint YAML entity store.
+----
+
+There are some global options, which are available for all commands.
+These options have to be specified before the command.
+
+.Example: Global Options
+[source, shell]
+----
+yamlesutils.sh -q \ #<1>
+  merge config -c fragment.yaml -o values.yaml #<2>
+----
+<1> Global options are placed before the command.
+<2> Command to be executed.
+
+
+.Options for Merge Configuration
+[cols="2,6a", options="header"]
+|===
+|Option
+|Description
+
+|`-a FILE` +
+`--audit=FILE`
+|Path to a file to audit the various sources and functions used to merge the configuration fragments.
+If not specified, the audit messages are written to `stderr`, only.
+
+|`-q` +
+`--quiet`
+|Suppress audit messages to be logged to the console.
+Only errors are logged to the console.
+
+|`-v` +
+`--verbose`
+|Increase verbosity of standard messages.
+Specify multiple -v options to increase verbosity.
+|===
+
+
+include::_lint.adoc[leveloffset=+1]
+
+include::_merge_conf.adoc[leveloffset=+1]
+
+include::_merge_cert.adoc[leveloffset=+1]
+
+include::_merge_describe.adoc[leveloffset=+1]

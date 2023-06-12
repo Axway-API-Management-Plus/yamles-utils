@@ -9,11 +9,12 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
-== Version 0.0.4
+== Version 0.1.0
 [cols="1,2,<10a", options="header"]
 |===
 |ID|Type|Description
 |0
 |Enhancement
-|Initial release.
+|After a complete redesign, this version provides a stable configuration format.
+
 |===

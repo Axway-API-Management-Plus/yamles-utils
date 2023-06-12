@@ -12,10 +12,23 @@ rules:
       - '/Server Settings/Cassandra Settings.yaml'
 
     assertions:
+      # Three nodes should be configured to ensure quorum.
+      - path: '$.children[0].fields.host'
+        type: exists
+        message: Three Cassandra nodes must be configured to ensure quorum        
+      - path: '$.children[1].fields.host'
+        type: exists
+        message: Three Cassandra nodes must be configured to ensure quorum        
+      - path: '$.children[2].fields.host'
+        type: exists
+        message: Three Cassandra nodes must be configured to ensure quorum
+      - path: '$.children[3].fields.host'
+        type: not_exists
+        message: Three Cassandra nodes must be configured to ensure quorum        
+
       # Cassandra nodes should be configured by envSettings.props to support
       # datacenter aware node connections.
       #
-      # Three nodes should be configured to ensure quorum.
       - path: '$.children[0].fields.host'
         type: regex
         param: '^\$\{env\..+\}'

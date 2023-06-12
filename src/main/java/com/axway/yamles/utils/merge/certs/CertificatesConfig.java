@@ -12,8 +12,6 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 class CertificatesConfig {
 
-	public static final String PROP_CERTIFICATES = "certificates";
-
 	public static CertificatesConfig loadConfig(File file) {
 		try {
 			ObjectMapper om = new ObjectMapper(new YAMLFactory());

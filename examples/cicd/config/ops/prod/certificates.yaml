@@ -4,21 +4,21 @@ certificates:
     provider: keystore
     config:
       path: ../all/ops-keystore.jks
-      pass: "{{ keepass('/prod/ops-keystore:password') }}"
+      pass: "{{ _ops_kdb('/prod/ops-keystore', 'password') }}"
       alias: prod-axway-server
       
   example-root-ca:
     provider: keystore
     config:
       path: ../all/ops-keystore.jks
-      pass: "{{ keepass('/prod/ops-keystore:password') }}"
+      pass: "{{ _ops_kdb('/prod/ops-keystore', 'password') }}"
       alias: demo-axway-root-ca
 
   example-sub-ca:
     provider: keystore
     config:
       path: ../all/ops-keystore.jks
-      pass: "{{ keepass('/prod/ops-keystore:password') }}"
+      pass: "{{ _ops_kdb('/prod/ops-keystore', 'password') }}"
       alias: demo-axway-sub-ca
 
   # Remove test certificate

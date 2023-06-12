@@ -1,5 +1,6 @@
 package com.axway.yamles.utils.spi;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ServiceLoader;
@@ -28,5 +29,9 @@ public class CertificateManager {
 
 	public CertificateProvider getProvider(String name) {
 		return this.providers.get(name);
+	}
+	
+	public Collection<CertificateProvider> getProviders() {
+		return this.providers.values();
 	}
 }

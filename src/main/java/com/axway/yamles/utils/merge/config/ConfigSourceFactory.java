@@ -8,8 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 
 class ConfigSourceFactory {
-	public static ConfigSource create(String yaml) {
-		String name = "string";
+	public static ConfigSource create(String name, String yaml) {
 		try {
 			JsonNode config = Yaml.read(yaml);
 			return new ConfigSource(name, config);

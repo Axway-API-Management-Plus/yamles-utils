@@ -1,0 +1,21 @@
+lookups:
+  ops_kdb:
+    provider: keepass
+    config:
+      kdb: ../all/lookups/ops-secrets.kdbx
+      passphrase: "{{ _env('KDB_PWD_OPS') }}"
+
+  ops_yfile:
+    provider: "yaml"
+    config:
+      file: lookups/lookup.yaml
+
+  ops_jfile:
+    provider: json
+    config:
+      file: lookups/lookup.json
+
+  ops_jenv:
+    provider: envjson
+    config:
+      env: LOOKUP_JSON_TEST

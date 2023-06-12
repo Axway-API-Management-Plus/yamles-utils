@@ -7,14 +7,15 @@ import java.nio.file.Files;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import javax.net.ssl.SSLContext;
 
 import org.apache.hc.client5.http.classic.methods.HttpGet;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
-import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.apache.hc.client5.http.impl.io.BasicHttpClientConnectionManager;
 import org.apache.hc.client5.http.socket.ConnectionSocketFactory;
@@ -29,40 +30,71 @@ import org.apache.hc.core5.ssl.TrustStrategy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.axway.yamles.utils.spi.ConfigParameter;
+import com.axway.yamles.utils.spi.FunctionArgument;
 import com.axway.yamles.utils.spi.LookupProviderException;
+import com.axway.yamles.utils.spi.LookupSource;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import picocli.CommandLine.ArgGroup;
-import picocli.CommandLine.Command;
-import picocli.CommandLine.Option;
-
-@Command
 public class VaultLookupProvider extends AbstractLookupProvider {
+	private static final String DEFAULT_ADDR = "https://localhost:8200";
+
+	public static final FunctionArgument ARG_FIELD = new FunctionArgument("field", true, "Field within the KV data");
+
+	public static final ConfigParameter CFG_PARAM_ADDR = new ConfigParameter("addr", false,
+			"Address of Vault server [default: " + DEFAULT_ADDR + "]", ConfigParameter.Type.string, false);
+	public static final ConfigParameter CFG_PARAM_KV_BASE = new ConfigParameter("kv_base", true,
+			"Path of the KV secret engine", ConfigParameter.Type.string, false);
+	public static final ConfigParameter CFG_PARAM_SKIP_VERIFY = new ConfigParameter("skip_verify", false,
+			"Skip server name verification", ConfigParameter.Type.bool, false);
+	public static final ConfigParameter CFG_PARAM_TOKEN = new ConfigParameter("token", false,
+			"Token to authorize access to Vault (if token file is not specified).", ConfigParameter.Type.string, true);
+	public static final ConfigParameter CFG_PARAM_TOKEN_FILE = new ConfigParameter("token_file", false,
+			"Path to token file (if token is not specified).", ConfigParameter.Type.file, false);
+
 	private static final Logger log = LogManager.getLogger(VaultLookupProvider.class);
 
 	static class VaultToken {
-		@Option(names = "--vault-token", description = "Vault token")
-		String value;
+		private final static Charset TOKEN_CHARSET = Charset.forName("ISO-8859-1");
 
-		@Option(names = "--vault-token-file", description = "path to Vault token file")
-		File file;
+		private String value;
+		private File file;
+
+		VaultToken(String token) {
+			this.value = Objects.requireNonNull(token);
+			this.file = null;
+		}
+
+		VaultToken(File tokenFile) {
+			this.value = null;
+			this.file = Objects.requireNonNull(tokenFile);
+		}
+
+		String getToken() throws IOException {
+			String token = this.value;
+			if (this.file != null) {
+				byte[] b = Files.readAllBytes(this.file.toPath());
+				token = new String(b, TOKEN_CHARSET);
+			}
+			return token;
+		}
 	}
 
 	static class VaultClient {
-		private final static Charset TOKEN_CHARSET = Charset.forName("ISO-8859-1");
+		final String alias;
+		final VaultToken token;
+		final String basePath;
+		final String addr;
+		final boolean skipVerify;
 
-		@Option(names = "--vault-addr", description = "Vault address [default: ${DEFAULT-VALUE}]", required = true, order = 0, paramLabel = "URL", defaultValue = "https://localhost:8200")
-		String addr;
-
-		@ArgGroup(exclusive = true, multiplicity = "1")
-		VaultToken token;
-
-		@Option(names = "--vault-kv-base", description = "base path the key/values (e.g., /kv/data/dev)", required = true, order = 1)
-		String basePath;
-
-		@Option(names = "--vault-skip-verify", description = "skip server name verification", required = false, order = 2)
-		boolean skipVerify = false;
+		VaultClient(String alias, VaultToken token, String basePath, Optional<String> addr, boolean skipVerify) {
+			this.alias = Objects.requireNonNull(alias);
+			this.token = Objects.requireNonNull(token);
+			this.basePath = Objects.requireNonNull(basePath);
+			this.addr = Objects.requireNonNull(addr).isPresent() ? addr.get() : DEFAULT_ADDR;
+			this.skipVerify = skipVerify;
+		}
 
 		Optional<String> getSecret(String path, String field) throws Exception {
 			try (CloseableHttpClient client = createClient()) {
@@ -74,11 +106,12 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 				}
 
 				HttpGet request = new HttpGet(uri.build());
-				request.addHeader("X-Vault-Token", getToken());
+				request.addHeader("X-Vault-Token", this.token.getToken());
 
-				try (CloseableHttpResponse response = client.execute(request)) {
+				return client.execute(request, response -> {
+					Optional<String> result = Optional.empty();
 					if (response.getCode() == 404) {
-						return Optional.empty();
+						return result;
 					}
 					if (response.getCode() != 200) {
 						throw new IOException("error on accessing vault (status=" + response.getCode() + ")");
@@ -87,20 +120,12 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 					JsonNode node = om.readTree(response.getEntity().getContent());
 
 					JsonNode value = node.at("/data/data/" + field);
-					if (value.isMissingNode())
-						return Optional.empty();
-					return Optional.of(value.asText());
-				}
+					if (!value.isMissingNode()) {
+						result = Optional.of(value.asText());
+					}
+					return result;
+				});
 			}
-		}
-
-		private String getToken() throws IOException {
-			String token = this.token.value;
-			if (this.token.file != null) {
-				byte[] b = Files.readAllBytes(this.token.file.toPath());
-				token = new String(b, TOKEN_CHARSET);
-			}
-			return token;
 		}
 
 		private CloseableHttpClient createClient()
@@ -130,59 +155,93 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 		@Override
 		public String toString() {
 			StringBuilder str = new StringBuilder();
-			str.append(this.addr).append('|').append(this.basePath);
+			str.append("alias=").append(this.alias);
+			str.append("; ");
+			str.append("addr=").append(this.addr);
+			str.append("; ");
+			str.append("basePath=").append(this.basePath);
 			return str.toString();
 		}
 	}
 
-	@ArgGroup(exclusive = false, multiplicity = "0..*")
-	List<VaultClient> clients;
+	Map<String, VaultClient> clients = new HashMap<>();
+
+	public VaultLookupProvider() {
+		super("path to KV", new FunctionArgument[] { ARG_FIELD },
+				new ConfigParameter[] { CFG_PARAM_TOKEN, CFG_PARAM_TOKEN_FILE, CFG_PARAM_ADDR, CFG_PARAM_KV_BASE });
+	}
 
 	@Override
 	public String getName() {
 		return "vault";
 	}
-	
+
+	@Override
+	public String getSummary() {
+		return "Lookup values from a Hashicorp Vault Key/Value store.";
+	}
+
+	@Override
+	public String getDescription() {
+		return "The key represents the path to the KV entry.";
+	}
+
+	@Override
+	public void addSource(LookupSource source) throws LookupProviderException {
+		String kvBase = source.getConfig(CFG_PARAM_KV_BASE, "");
+		Optional<String> tokenStr = Optional.ofNullable(source.getConfig(CFG_PARAM_TOKEN, null));
+		Optional<String> addr = Optional.ofNullable(source.getConfig(CFG_PARAM_ADDR, null));
+		boolean skipVerify = source.getConfig(CFG_PARAM_SKIP_VERIFY, "false").equals("true");
+
+		VaultToken token;
+		if (tokenStr.isPresent()) {
+			token = new VaultToken(tokenStr.get());
+		} else {
+			Optional<File> tokenFile = source.getFileFromConfig(CFG_PARAM_TOKEN_FILE);
+			if (!tokenFile.isPresent()) {
+				throw new LookupProviderException(this, "token file missing: alias=" + source.getAlias());
+			}
+			token = new VaultToken(tokenFile.get());
+		}
+
+		VaultClient client = new VaultClient(source.getAlias(), token, kvBase, addr, skipVerify);
+		if (this.clients.put(client.alias, client) != null) {
+			throw new LookupProviderException(this, "Vault client alias already exists: alias=" + client.alias);
+		}
+	}
+
 	@Override
 	public boolean isEnabled() {
 		return this.clients != null && !this.clients.isEmpty();
 	}
 
 	@Override
-	public Optional<String> lookup(String key) {
-		if (!isEnabled()) 
-			return Optional.empty();
+	public Optional<String> lookup(String alias, Map<String, Object> args) {
+		Optional<String> result = Optional.empty();
+
+		VaultClient client = this.clients.get(alias);
+		if (client == null) {
+			log.error("Vault client alias not found: provider={}; alias={}", getName(), alias);
+			return result;
+		}
+		String path = getArg(ARG_KEY, args, "");
+		String field = getArg(ARG_FIELD, args, "");
 
 		try {
-			String[] parts = key.split(":");
-			if (parts.length != 2) {
-				throw new LookupProviderException(this, "invalid Vault key: '" + key + "'");
-			}
-			String path = parts[0];
-			String field = parts[1];
-
 			if (log.isTraceEnabled()) {
 				log.trace("vault lookup: path={}, field={}", path, field);
 			}
 
-			Optional<String> result = Optional.empty();
-
-			for (VaultClient client : this.clients) {
-				Optional<String> value = client.getSecret(path, field);
-				if (value.isPresent()) {
-					if (!result.isPresent()) {
-						log.debug("found lookup key '{}' in {}", key, client);
-					} else {
-						log.debug("overwrite lookup key '{}' by {}", key, client);
-					}
-					result = value;
-				}
+			Optional<String> value = client.getSecret(path, field);
+			if (value.isPresent()) {
+				log.debug("found lookup key: provider={}; alias={}; source={}; key={}; field={}", getName(),
+						client.alias, client.addr, path, field);
 			}
 
 			return result;
 		} catch (Exception e) {
 			log.error(e);
-			return Optional.empty();
+			return result;
 		}
 	}
 }

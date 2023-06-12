@@ -12,13 +12,14 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :warning-caption: :warning:
 endif::[]
-:project-ver: 0.0.4
+:project-ver: 0.1.0
 
 image:https://github.com/Axway-API-Management-Plus/yamles-utils/actions/workflows/maven-publish.yml/badge.svg[Workflow Status]
 image:https://img.shields.io/github/license/Axway-API-Management-Plus/yamles-utils?style=plastic[]
 image:https://img.shields.io/github/v/release/Axway-API-Management-Plus/yamles-utils?style=plastic[]
 
-== Introduction
+
+IMPORTANT: The project is community supported and not supported by Axway Support. If you encounter any issues, please raise an GitHub issue on this project.
 
 [sidebar]
 .tl;dr
@@ -26,8 +27,10 @@ image:https://img.shields.io/github/v/release/Axway-API-Management-Plus/yamles-u
 Utilities to verify coding rules of YAML Entity Store based projects and to configure projects for target environments using various configuration sources.
 --
 
+== Introduction
+
 Since the 7.7 February'22 release of the Axway API Gateway, Policy Studio supports to edit policy projects in the YAML Entity Store (YAML-ES) format.
-This format enables fine grained storage of project entities in easy to read and easy to compare YAML files.
+This format enables fine grained storage of project entities, in easy to read and easy to compare YAML files.
 
 The YAML Entity Store has many advantages compared to the legacy XML based Entity Store:
 
@@ -37,8 +40,15 @@ The YAML Entity Store has many advantages compared to the legacy XML based Entit
 * Storing in a SCM (e.g, Git) changes can be easily checked.
 * Environmentalized values configured in a single YAML file.
 
-With the experience of the link:https://github.com/Axway-API-Management-Plus/apigw-maven-plugin[Maven Plugin for API Gateway] project, storing configuration in one single file doesn't always met the requirements.
-This project is created to provide the flexibility of the Maven Plugin (for XML based ES only) to the YAML-ES based projects also (and even more).
+Beside these advantages, there are still some challenges.
+From the experience of the link:https://github.com/Axway-API-Management-Plus/apigw-maven-plugin[Maven Plugin for API Gateway] project, storing configuration in one single file, may not always met the requirements.
+On staging, self-signed certificates may have to be replaced by certificates provided by the in-house CA.
+Credentials are stored in a separate database and have to be configured on deployment time.
+For K8s deployments, the API Gateway may has to be configured via an init container on startup of the pod. And other scenarios you may think of.
+
+This project provides the flexibility, to collect configuration parameters, credentials, and certificates from various sources, and use them to configure the YAML-ES of API Gateway for runtime.
+
+image:docs/asciidoc/images/concept.drw.png[YAML ES Utils Concepts]
 
 == Use Cases
 
@@ -78,49 +88,43 @@ After successful verification the project will be deployed to the target environ
 During the deployment a passphrase is added to protect the configurations.
 
 .CI/CD Pipeline
-image:docs/manual/images/pipeline.png[]
+image:docs/asciidoc/images/deployment-classic-topology.drw.png[]
 
 The picture above visualize the CI/CD pipeline.
 The _YAML-ES Utilities_ tool provided by this project is used for linting and for the configuration of the stage specific project.
 
 ==== Example
 
-The `examples` folder provides a demo of the previously described pipeline (except the deployment task).
-
-The `examples/apim` folder contains a YAML entity store of an API Manager.
-
-The `examples/cicd` folder contains a sample script for configuring a project for different stages.
-
-Execute the following command in a Bash shell to generate a YAML-ES archive for the test environment.
-
-[source,shell]
-----
-examples/cicd/bin/build-archive.sh -e test
-----
-
+The `examples` folder provides a demo of the previously described pipeline (except the deployment task) - see link:examples/README.adoc[examples] for details.
 
 == Features
 
-The YAMLES Utility provides the following features:
+The _YAML-ES Utilities_ provide the following features:
 
 * Linting.
 ** Lint API Gateway project against customized rules.
-** Rules can be sourced from different locations.
+** Rules can be sourced from multiple locations.
 * Merge configuration from multiple files into a result `values.yaml` file.
 * Lookup values from multiple data sources.
 *** YAML files
-*** Environment variables
+*** JSON files
+*** Environment variables (plain text or JSON document)
 *** System properties
 *** Keepass DB
 *** Hashicorp Vault
+*** AWS Secrets Manager
 * Merge certificates from multiple sources into the API Gateway project.
 ** Keystore: Add/overwrite certificates from PKCS#12 or JKS key stores
 ** Simple: Add/overwrite certificates by simple Base64 encoded values (can be combined with value lookup, see above).
 ** Remover: Remove certificates from the project
+** AWS Certificate Manager
 
 == More to Read
 
-* link:manual/user-guide.adoc[User Guide]
+* https://axway-api-management-plus.github.io/yamles-utils/[User Guide]
+* https://docs.axway.com/bundle/axway-open-docs/page/docs/api_mgmt_overview/index.html[Amplify API Management]
+* https://docs.axway.com/bundle/axway-open-docs/page/docs/apim_yamles/index.html[YAML Configuration]
+* https://docs.axway.com/bundle/axway-open-docs/page/docs/apim_yamles/yamles_structure/index.html[YAML Entity Store Structure]
 
 == Contributing
 Please read https://github.com/Axway-API-Management-Plus/Common/blob/master/Contributing.md[Contributing] for details on our code of conduct, and the process for submitting pull requests to us.

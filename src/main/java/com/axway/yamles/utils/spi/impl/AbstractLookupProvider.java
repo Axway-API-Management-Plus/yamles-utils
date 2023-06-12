@@ -1,34 +1,57 @@
 package com.axway.yamles.utils.spi.impl;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+import java.util.Objects;
 
+import com.axway.yamles.utils.spi.ConfigParameter;
+import com.axway.yamles.utils.spi.FunctionArgument;
 import com.axway.yamles.utils.spi.LookupProvider;
 import com.axway.yamles.utils.spi.LookupProviderException;
-import com.mitchellbosecke.pebble.template.EvaluationContext;
-import com.mitchellbosecke.pebble.template.PebbleTemplate;
+import com.axway.yamles.utils.spi.ParameterSet;
 
 public abstract class AbstractLookupProvider implements LookupProvider {
+	public static final ConfigParameter[] EMPTY_CONFIG_PARAMS = new ConfigParameter[0];
+	public static final FunctionArgument[] EMPTY_FUNC_ARGS = new FunctionArgument[0];
 
-	@Override
-	public List<String> getArgumentNames() {
-		return Arrays.asList("key");
+	public final FunctionArgument ARG_KEY;
+
+	private final ParameterSet<FunctionArgument> funcArgs = new ParameterSet<FunctionArgument>();
+	private final ParameterSet<ConfigParameter> configParams = new ParameterSet<>();
+
+	protected AbstractLookupProvider(String keyDescription, FunctionArgument[] funcArgs,
+			ConfigParameter[] configParams) {
+		if (keyDescription == null || keyDescription.isEmpty()) {
+			throw new IllegalArgumentException("key description is null or empty");
+		}
+		this.ARG_KEY = new FunctionArgument("key", true, keyDescription);
+		this.funcArgs.add(this.ARG_KEY);
+		this.funcArgs.add(funcArgs);
+
+		this.configParams.add(configParams);
 	}
 
 	@Override
-	public Object execute(Map<String, Object> args, PebbleTemplate self, EvaluationContext context, int lineNumber) {
-		if (!isEnabled()) {
-			throw new LookupProviderException(this, "lookup provider disabled");
-		}
+	public List<FunctionArgument> getFunctionArguments() {
+		return this.funcArgs.getParams();
+	}
 
-		String key = (String) args.get("key");
-		Optional<String> value = lookup(key);
-		if (!value.isPresent()) {
-			throw new LookupProviderException(this, "lookup key not found: " + key);
-		}
+	@Override
+	public List<ConfigParameter> getConfigParameters() {
+		return this.configParams.getParams();
+	}
 
-		return value.get();
+	protected String getArg(FunctionArgument arg, Map<String, Object> args, String defaultValue) {
+		Objects.requireNonNull(arg);
+		Objects.requireNonNull(args);
+
+		Object value = args.get(arg.getName());
+		if (value == null) {
+			if (arg.isRequired()) {
+				throw new LookupProviderException(this, "argument not passed to function: " + arg.getName());
+			}
+			value = defaultValue;
+		}
+		return value.toString();
 	}
 }

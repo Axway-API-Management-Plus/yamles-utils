@@ -14,9 +14,11 @@ import org.junit.jupiter.api.Test;
 import com.axway.yamles.utils.helper.KeePassDB.EntryPath;
 
 public class KeePassDBTest {
+	
+	public static final String PATH = "/keepass.kdbx";
 
 	public static InputStream getTestKDBInputStream() {
-		InputStream in = KeePassDBTest.class.getResourceAsStream("/keepass.kdbx");
+		InputStream in = KeePassDBTest.class.getResourceAsStream(PATH);
 		if (in == null) {
 			throw new IllegalStateException("'/keepass.kdbx' not found in classpath");
 		}

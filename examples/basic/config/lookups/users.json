@@ -1,0 +1,9 @@
+{
+  "users": {
+    "admin": {
+      "id": "admin",
+      "name": "Administrator",
+      "password": "changeme"
+    }
+  }
+}

@@ -10,17 +10,29 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.axway.yamles.utils.helper.Mustache;
-import com.axway.yamles.utils.spi.CertificateReplacement;
 import com.axway.yamles.utils.spi.CertificateProviderException;
+import com.axway.yamles.utils.spi.CertificateReplacement;
+import com.axway.yamles.utils.spi.ConfigParameter;
+import com.axway.yamles.utils.spi.ConfigParameter.Type;
 
 public class KeystoreCertificateProvider extends AbstractCertificateProvider {
-	
+
 	private static final Logger log = LogManager.getLogger(KeystoreCertificateProvider.class);
 
-	public static final String CFG_PATH = "path";
-	public static final String CFG_PASSPHRASE = "pass";
-	public static final String CFG_ALIAS = "alias";
+	public static final ConfigParameter CFG_PATH = new ConfigParameter("path", true, "Path to keystore file", Type.file,
+			false);
+	public static final ConfigParameter CFG_PASSPHRASE = new ConfigParameter("pass", false, "Passphrase for keystore",
+			Type.string, true);
+	public static final ConfigParameter CFG_ALIAS = new ConfigParameter("alias", false,
+			"Alias of the certificate within the keystore. If not specified, the alias of the Entity Store certificate is used.",
+			Type.string, false);
+	public static final ConfigParameter CFG_TYPE = new ConfigParameter("type", false,
+			"Type of the keystore (JKS, P12): If not specified will be determined by the file extension.", Type.string,
+			false);
+
+	public KeystoreCertificateProvider() {
+		super(CFG_PATH, CFG_PASSPHRASE, CFG_ALIAS, CFG_TYPE);
+	}
 
 	@Override
 	public String getName() {
@@ -28,29 +40,40 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 	}
 
 	@Override
+	public String getSummary() {
+		return "Provides certificates from keystore file.";
+	}
+
+	@Override
+	public String getDescription() {
+		return "Provides certificates from keystore file (JKS or PKCS#12 format).";
+	}
+
+	@Override
 	public CertificateReplacement getCertificate(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
 
-		String path = getRequiredConfig(config, CFG_PATH);
+		String path = getConfig(CFG_PATH, config, "");
 		File keystoreFile = buildFile(configSource, path);
 		if (!keystoreFile.exists()) {
 			throw new CertificateProviderException("keystore file not found: " + keystoreFile.getAbsolutePath());
 		}
 
-		String passphrase = config.get(CFG_PASSPHRASE);
+		String passphrase = getConfig(CFG_PASSPHRASE, config, null);
 		char[] password = null;
 		if (passphrase != null) {
-			passphrase = Mustache.eval(passphrase);
 			password = passphrase.toCharArray();
 		}
 
-		String altAlias = config.get(CFG_ALIAS);
+		String altAlias = getConfig(CFG_ALIAS, config, aliasName);
 		if (altAlias != null) {
 			aliasName = altAlias;
 		}
 
-		String type = determineType(keystoreFile);
-		
+		String type = getConfig(CFG_TYPE, config, "");
+		if (type.isEmpty())
+			type = determineType(keystoreFile);
+
 		log.debug("searching for certificate alias '{}' in keystore '{}' of type '{}'", aliasName, path, type);
 
 		try {
@@ -61,7 +84,7 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 			if (cert == null) {
 				throw new CertificateProviderException("certificate not found for alias: " + aliasName);
 			}
-			
+
 			log.debug("certificate with alias '{}' found", aliasName);
 
 			Key key = ks.getKey(aliasName, password);

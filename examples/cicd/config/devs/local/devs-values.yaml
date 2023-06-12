@@ -2,9 +2,9 @@
 External_Connections:
   Database_Connections:
     Masterdata:
-      url: '{{ yaml("/db/masterdata/url") }}'
-      username: '{{ yaml("/db/masterdata/user") }}'
-      password: '{{ yaml("/db/masterdata/password") | base64encode }}'
+      url: '{{ _lookup("/db/masterdata/url") }}'
+      username: '{{ _lookup("/db/masterdata/user") }}'
+      password: '{{ _lookup("/db/masterdata/password") | base64encode }}'
 
 Policies:
   Demo:

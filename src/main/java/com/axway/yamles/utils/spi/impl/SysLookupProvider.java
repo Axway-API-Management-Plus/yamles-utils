@@ -1,16 +1,21 @@
 package com.axway.yamles.utils.spi.impl;
 
+import java.util.Map;
 import java.util.Optional;
 
-import picocli.CommandLine.Command;
+import com.axway.yamles.utils.spi.LookupProviderException;
+import com.axway.yamles.utils.spi.LookupSource;
 
 /**
  * Lookup provider for system properties.
  * 
  * @author mlook
  */
-@Command
 public class SysLookupProvider extends AbstractLookupProvider {
+
+	public SysLookupProvider() {
+		super("name of system property", EMPTY_FUNC_ARGS, EMPTY_CONFIG_PARAMS);
+	}
 
 	@Override
 	public String getName() {
@@ -18,13 +23,32 @@ public class SysLookupProvider extends AbstractLookupProvider {
 	}
 
 	@Override
+	public String getSummary() {
+		return "Lookup values from system properties.";
+	}
+
+	@Override
+	public String getDescription() {
+		return "The key represents the name of the system property.";
+	}
+
+	@Override
 	public boolean isEnabled() {
 		return true;
 	}
 
+	@Override
+	public boolean isBuiltIn() {
+		return true;
+	}
 	
 	@Override
-	public Optional<String> lookup(String key) {
+	public void addSource(LookupSource source) throws LookupProviderException {
+	}
+
+	@Override
+	public Optional<String> lookup(String alias, Map<String, Object> args) {
+		String key = getArg(ARG_KEY, args, "");
 		if (key == null || key.isEmpty()) {
 			return Optional.empty();
 		}

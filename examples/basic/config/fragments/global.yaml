@@ -1,0 +1,5 @@
+# Define some global defaults
+global:
+  greeting:
+    message: "Hello World!"
+    enabled: true

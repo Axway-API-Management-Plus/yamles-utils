@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import com.axway.yamles.utils.helper.Yaml;
+import com.axway.yamles.utils.helper.YamlEs;
 import com.axway.yamles.utils.lint.rules.Results.Finding;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -36,7 +36,7 @@ public class Rule extends AbstractRule {
 	}
 
 	public List<Finding> apply(ObjectNode yaml) {
-		if (this.fileType != null && !this.fileType.equals(Yaml.getEnityStoreType(yaml).orElse(""))) {
+		if (this.fileType != null && !this.fileType.equals(YamlEs.getEnityType(yaml).orElse(""))) {
 			return Collections.emptyList();
 		}
 

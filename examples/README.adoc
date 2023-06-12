@@ -1,0 +1,104 @@
+= Example CI/CD Pipeline
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+ifndef::imagesdir[:imagesdir: ../docs/asciidoc/images]
+
+== Description
+
+The `examples` folder contains an example script to simulate a CI/CD pipeline (except the final deployment).
+
+.CI/CD Pipeline
+image:deployment-classic-topology.drw.png[]
+
+
+The sample project is an API Manager stored in the YAML entity store format (`examples/apim`).
+The API Manager project uses environmentalized fields to enable stage specific configurations.
+
+In this scenario there a two teams.
+The developers are responsible to develop the API Manager and to deploy the project for testing purpose in their own topology.
+The operator team is responsible to deploy the project to their topology (for test and prod).
+Both teams use the same tooling and an equivalent pipeline setup.
+
+The difference between the two teams are the different responsibilities for configurations.
+For the developer topology, the developer team is fully responsible for all configurations as the infrastructure is completely managed by the developer team.
+
+For the topology managed by the operator team, the development team is responsible for configurations regarding the backend infrastructure.
+The operator team is responsible for the configurations regarding the infrastructure managed by the operator team.
+This includes server certificates, Cassandra settings and connections to the metrics database.
+
+The configuration can be retrieved from various sources, depending on the target environment.
+
+To ensure that coding guidelines are fulfilled, the project is linted with rules provided by the operator team.
+
+The example project is also used to demonstrate the usage of the different data sources, the full variation of the data sources may not makes sense for real projects.
+Following data sources are covered by the demo:
+
+* Merge `values.yaml` structure from multiple fragment `values.yaml`
+* Certificates
+** Java Keystore (JKS)
+** PKCS#12 file
+** simple configuration
+* Providers for value lookups
+** YAML file
+** JSON file
+** KeePass DB
+** plain text from environment variable
+** JSON document from environment variable
+
+== Prerequisites
+
+* Axway API Gateway 7.7 May'22 release or later
+** Package & Deployment Tools
+** PolicyStudio (recommended)
+** API Gateway/Manager topology (optional)
+
+== Execute Demo
+
+.Clone repository
+[source,shell]
+----
+$ git clone https://github.com/Axway-API-Management-Plus/yamles-utils.git
+----
+
+.Build project
+[source,shell]
+----
+$ cd yamles-utils
+$ ./mvnw clean package
+----
+
+.Show command line parameters
+[source,text]
+----
+$ examples/cicd/bin/build-archive.sh
+build-archive.sh  -  build and configure YAMLES archive
+
+Usage:
+  build-archive.sh -e ENV [--debug]
+
+Options:
+  -e ENV
+      Target environment (local, test or prod).
+
+  --debug
+      Enable debug messages
+
+  Configure API Manager for target environment and build
+  deployment archive.
+----
+
+.Execute demo script
+[source,shell]
+----
+$ export AXWAY_HOME="...path to Axway installation (e.g., /opt/Axway-7.7)..."
+$ examples/cicd/bin/build-archive.sh -e test
+----
+
+NOTE: On Windows, the script can be executed using Git Bash (MinGW).

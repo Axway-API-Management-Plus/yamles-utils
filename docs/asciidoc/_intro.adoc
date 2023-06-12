@@ -1,0 +1,143 @@
+= Introduction
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+ifndef::imagesdir[:imagesdir: ./images]
+
+
+== About _YAML-ES Utilities_
+_YAML-ES Utilities_ provide the features to verify a YAML based policy project according to defined rules (linting), and to configure the policy project for target environments.
+
+The utilities of this project can be used to build a CI/CD pipeline for automatic configuration and deployment of YAML Entity Store based projects (see <<YAML Entity Store>> for details).
+
+image:concept.drw.png[YAML-ES Utilities concept]
+
+== Use Cases
+
+The uses cases, described in this section, are just examples to illustrate the opportunities of the _YAML-ES Utilities_.
+They only give some ideas to build your own deployment pipeline.
+
+=== Classic Topology Deployment
+
+.Classic topology with separated concerns
+image:deployment-classic-topology.drw.png[]
+
+The picture above visualize an example CI/CD pipeline.
+The _YAML-ES Utilities_ tool provided by this project is used for linting and for the configuration of the stage specific project.
+To verify the configured project and to deploy the configured project to a gateway, the standard tools of the AMPLIFY API Gateway 7.7 distribution are used.
+
+Configurations with shared responsibility or staged dependent values are environmentalized.
+A linter checks the project against coding rules (defined by the Ops team) to ensure that all required fields are environmentalized and all required entities exists.
+
+With stage specific configurations (including certificates), a stage specific project is created.
+
+Configuration parameter are sourced from multiple locations.
+Configurations are retrieved from plain text files stored in the Git repository or from encrypted data sources.
+Each team has its own set of configuration parameter (depending on their responsibility). Hierarchies of configurations ensures that values configured the Ops team supersede values defined by the Dev team.
+
+The generated, stage specific project is verified for not configured fields or broken references.
+
+After successful verification the project will be deployed to the target environment.
+During to protect the configurations on the server, a passphrase is added during the deployment.
+
+=== Container Deployment (Policy Image)
+
+image:deployment-emt-policy-image.drw.png[]
+
+=== Container Deployment (Init Container)
+
+image:deployment-emt-init-container.drw.png[]
+
+
+== YAML Entity Store
+In newer versions of the API Gateway, policies can be stored as a YAML Entity Store (YAML-ES) instead of the classic XML based entity store (XML-ES).
+With the YAML-ES, the entities are stored in YAML files in a directory structure similar to the structure of the Policy Studio project.
+
+.YAML Enity Store Directory (simplified)
+```
+
+├── APIs
+...
+├── Environment\ Configuration
+├── External\ Connections
+...
+├── Policies
+├── Resources
+├── Server\ Settings
+│   ├── ...
+│   ├── Cassandra\ Settings.yaml
+...
+├── System
+└── values.yaml
+```
+
+Within the folders, entities are stored in files within the following schema (see also link:https://docs.axway.com/bundle/axway-open-docs/page/docs/apim_yamles/apim_yamles_references/yamles_yaml_schema/index.html[YAML Schema]):
+
+.Entity Schema
+[source, yaml]
+----
+type: string #<1>
+field: #<2>
+  fieldName: value1
+  fieldNameArray:
+    - item
+    - item
+children: #<3>
+  - type: string #<4>
+    ...
+----
+<1> Type name of the entity
+<2> Fields of entity as name/value pair(s)
+<3> Optional list of children entities.
+<4> Type of the children entity
+
+Below is an example of the Cassandra settings entity in the YAML format.
+
+./Server Settings/Cassandra Settings.yaml
+[source, yaml]
+----
+type: CassandraSettings #<1>
+fields: #<2>
+  name: Cassandra Settings
+  replication: '{{Server_Settings.Cassandra_Settings.replication}}' #<3>
+  replicationStrategy: '{{Server_Settings.Cassandra_Settings.replicationStrategy}}'
+  username: '{{Server_Settings.Cassandra_Settings.username}}'
+  password: '{{Server_Settings.Cassandra_Settings.password}}'
+children: #<4>
+  - type: CassandraServer
+    fields:
+      name: Node 1
+      host: ${env.cassandra.node1}
+----
+<1> Type `CassandraSettings` indicates the configuration of the Cassandra database.
+<2> Fields to configure the Cassandra database and keyspace.
+<3> Environmentalized field.
+<4> Children entities for each configured Cassandra node.
+
+Within the Cassandra settings some fields are environmentalized.
+The double brackets `{{ }}` indicate an environmentalized field, where the value within the brackets reference the corresponding value within the `values.yaml` file of the project.
+The reference is a JSON Path expression, where the parent and child nodes are separated by a single dot.
+
+.`values.yaml`
+[source, yaml]
+----
+Server_Settings:
+  Cassandra_Settings:
+    replicationStrategy: org.apache.cassandra.locator.SimpleStrategy
+    replication: 1
+    throttlingReplicationStrategy: org.apache.cassandra.locator.SimpleStrategy
+    throttlingReplication: 1
+    throttlingReadConsistencyLevel: ONE
+    throttlingWriteConsistencyLevel: ONE
+    username: ""
+    password: "" #<1>
+    useSSL: "false"
+...
+----
+<1> Cassandra password is referenced by `{{Server_Settings.Cassandra_Settings.password}}` within the Cassandra settings.

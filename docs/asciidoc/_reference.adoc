@@ -1,0 +1,14 @@
+= Reference
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+include::_templates.adoc[leveloffset=+1]
+
+include::_cert_providers.adoc[leveloffset=+1]

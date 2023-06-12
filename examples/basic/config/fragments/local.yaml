@@ -1,0 +1,11 @@
+# Overwrite some global defaults
+global:
+  greeting:
+    message: "Bonjour le monde"
+
+# Define local configurations
+local:
+  country: "fr"
+  application:
+    name: "Application Extraordinaire"
+
