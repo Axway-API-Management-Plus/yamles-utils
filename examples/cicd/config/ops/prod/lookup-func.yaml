@@ -19,3 +19,10 @@ lookups:
     provider: envjson
     config:
       env: LOOKUP_JSON_PROD
+
+  ops_kdb2:
+    provider: keepass
+    config:
+      kdb: ../all/lookups/ops-secrets.kdbx
+      # Use lookup function, define above, to get password
+      passphrase: "{{ _ops_jfile('/keepass/password') }}"
