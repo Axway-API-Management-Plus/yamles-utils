@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import com.axway.yamles.utils.spi.LookupProviderException;
+import com.axway.yamles.utils.spi.LookupFunctionException;
 
 import io.pebbletemplates.pebble.error.ClassAccessException;
 import io.pebbletemplates.pebble.error.PebbleException;
@@ -34,7 +34,7 @@ class MustacheTest {
 			Mustache.eval("{{ _sys('non_existing_propery') }}");
 		});
 
-		assertThrows(LookupProviderException.class, () -> {
+		assertThrows(LookupFunctionException.class, () -> {
 			Mustache.eval("{{ _sys() }}");
 		});
 

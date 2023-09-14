@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -32,6 +31,8 @@ import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.spi.ConfigParameter;
 import com.axway.yamles.utils.spi.FunctionArgument;
+import com.axway.yamles.utils.spi.LookupFunction;
+import com.axway.yamles.utils.spi.LookupFunctionException;
 import com.axway.yamles.utils.spi.LookupProviderException;
 import com.axway.yamles.utils.spi.LookupSource;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -40,6 +41,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class VaultLookupProvider extends AbstractLookupProvider {
 	private static final String DEFAULT_ADDR = "https://localhost:8200";
 
+	public static final FunctionArgument ARG_KEY = new FunctionArgument("key", true, "Path to KV");
 	public static final FunctionArgument ARG_FIELD = new FunctionArgument("field", true, "Field within the KV data");
 
 	public static final ConfigParameter CFG_PARAM_ADDR = new ConfigParameter("addr", false,
@@ -164,11 +166,45 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 		}
 	}
 
-	Map<String, VaultClient> clients = new HashMap<>();
+	protected static class LF extends LookupFunction {
+		private static final Logger log = LogManager.getLogger(LF.class);
+		private final VaultClient client;
+
+		public LF(String alias, VaultLookupProvider provider, Optional<String> source, VaultClient client) {
+			super(alias, provider, source);
+			this.client = Objects.requireNonNull(client, "client required");
+		}
+
+		@Override
+		public Optional<String> lookup(Map<String, Object> args) throws LookupFunctionException {
+			Optional<String> result = Optional.empty();
+
+			String path = getArg(ARG_KEY, args, "");
+			String field = getArg(ARG_FIELD, args, "");
+
+			try {
+				if (log.isTraceEnabled()) {
+					log.trace("vault lookup: path={}, field={}", path, field);
+				}
+
+				Optional<String> value = this.client.getSecret(path, field);
+				if (value.isPresent()) {
+					log.debug("found lookup key: provider={}; alias={}; source={}; key={}; field={}", getName(),
+							this.client.alias, this.client.addr, path, field);
+				}
+
+				return result;
+			} catch (Exception e) {
+				log.error(e);
+				return result;
+			}
+		}
+	}
 
 	public VaultLookupProvider() {
-		super("path to KV", new FunctionArgument[] { ARG_FIELD },
-				new ConfigParameter[] { CFG_PARAM_TOKEN, CFG_PARAM_TOKEN_FILE, CFG_PARAM_ADDR, CFG_PARAM_KV_BASE });
+		super();
+		add(ARG_KEY, ARG_FIELD);
+		add(CFG_PARAM_TOKEN, CFG_PARAM_TOKEN_FILE, CFG_PARAM_ADDR, CFG_PARAM_KV_BASE);
 	}
 
 	@Override
@@ -187,7 +223,7 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 	}
 
 	@Override
-	public void addSource(LookupSource source) throws LookupProviderException {
+	public LookupFunction buildFunction(LookupSource source) throws LookupProviderException {
 		String kvBase = source.getConfig(CFG_PARAM_KV_BASE, "");
 		Optional<String> tokenStr = Optional.ofNullable(source.getConfig(CFG_PARAM_TOKEN, null));
 		Optional<String> addr = Optional.ofNullable(source.getConfig(CFG_PARAM_ADDR, null));
@@ -205,43 +241,7 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 		}
 
 		VaultClient client = new VaultClient(source.getAlias(), token, kvBase, addr, skipVerify);
-		if (this.clients.put(client.alias, client) != null) {
-			throw new LookupProviderException(this, "Vault client alias already exists: alias=" + client.alias);
-		}
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return this.clients != null && !this.clients.isEmpty();
-	}
-
-	@Override
-	public Optional<String> lookup(String alias, Map<String, Object> args) {
-		Optional<String> result = Optional.empty();
-
-		VaultClient client = this.clients.get(alias);
-		if (client == null) {
-			log.error("Vault client alias not found: provider={}; alias={}", getName(), alias);
-			return result;
-		}
-		String path = getArg(ARG_KEY, args, "");
-		String field = getArg(ARG_FIELD, args, "");
-
-		try {
-			if (log.isTraceEnabled()) {
-				log.trace("vault lookup: path={}, field={}", path, field);
-			}
-
-			Optional<String> value = client.getSecret(path, field);
-			if (value.isPresent()) {
-				log.debug("found lookup key: provider={}; alias={}; source={}; key={}; field={}", getName(),
-						client.alias, client.addr, path, field);
-			}
-
-			return result;
-		} catch (Exception e) {
-			log.error(e);
-			return result;
-		}
+		
+		return new LF(source.getAlias(), this, source.getConfigSource(), client);
 	}
 }

@@ -3,7 +3,6 @@ package com.axway.yamles.utils.spi.impl;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.Base64;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -15,6 +14,8 @@ import com.axway.yamles.utils.helper.KeePassDB;
 import com.axway.yamles.utils.helper.KeePassDB.EntryPath;
 import com.axway.yamles.utils.spi.ConfigParameter;
 import com.axway.yamles.utils.spi.FunctionArgument;
+import com.axway.yamles.utils.spi.LookupFunction;
+import com.axway.yamles.utils.spi.LookupFunctionException;
 import com.axway.yamles.utils.spi.LookupProviderException;
 import com.axway.yamles.utils.spi.LookupSource;
 
@@ -26,6 +27,7 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 	public static final ConfigParameter CFG_PARAM_KEY_FILE = new ConfigParameter("key", false,
 			"Path to master key file", ConfigParameter.Type.file, false);
 
+	public static final FunctionArgument ARG_KEY = new FunctionArgument("key", true, "Path to entry");
 	public static final FunctionArgument ARG_WHAT = new FunctionArgument("what", true,
 			"Field to be retrieved from the KeePass entry");
 	public static final FunctionArgument ARG_PNAME = new FunctionArgument("pname", false,
@@ -113,19 +115,16 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 	}
 
 	static class Kdb {
-		private final String alias;
 		private final KeePassDB db;
 		private final String source;
 
 		Kdb(String alias, File dbFile, String passphrase, Optional<File> keyFile) throws Exception {
-			this.alias = Objects.requireNonNull(alias);
 			this.source = Objects.requireNonNull(dbFile).getAbsolutePath();
 			this.db = new KeePassDB(dbFile, Objects.requireNonNull(passphrase, "passphrase required"),
 					keyFile.isPresent() ? keyFile.get() : null);
 		}
 
 		Kdb(String alias, KeePassDB db) {
-			this.alias = Objects.requireNonNull(alias);
 			this.db = Objects.requireNonNull(db);
 			this.source = "<undefined>";
 		}
@@ -164,11 +163,46 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 		}
 	}
 
-	private Map<String, Kdb> kdbs = new HashMap<>();
+	static class LF extends LookupFunction {
+		private final Kdb kdb;
+
+		public LF(String alias, KeepassLookupProvider provider, Optional<String> source, Kdb kdb) {
+			super(alias, provider, source);
+			this.kdb = Objects.requireNonNull(kdb, "KeePass DB requried");
+		}
+
+		@Override
+		public Optional<String> lookup(Map<String, Object> args) throws LookupFunctionException {
+			Optional<String> result = Optional.empty();
+
+			EntryPath ep = new EntryPath(getArg(ARG_KEY, args, ""));
+			What what = What.valueOf(getArg(ARG_WHAT, args, ""));
+			String pname = null;
+
+			if (what.isPropertyNameRequired()) {
+				pname = getArg(ARG_PNAME, args, "");
+			}
+
+			Key key = new Key(ep, what, pname);
+
+			try {
+				log.debug("search for KeePass key: {}", key);
+				result = kdb.getValue(key);
+				if (result.isPresent()) {
+					log.debug("found lookup key: provider={}; alias={}; source={}; key={}", getProvider().getName(),
+							getAlias(), kdb.source, key);
+				}
+			} catch (Exception e) {
+				throw new LookupFunctionException(this, "error on lookup key: alias=" + getAlias() + "; key=" + key, e);
+			}
+			return result;
+		}
+	}
 
 	public KeepassLookupProvider() {
-		super("path to entry", new FunctionArgument[] { ARG_WHAT, ARG_PNAME },
-				new ConfigParameter[] { CFG_PARAM_FILE, CFG_PARAM_PASS, CFG_PARAM_KEY_FILE });
+		super();
+		add(ARG_KEY, ARG_WHAT, ARG_PNAME);
+		add(CFG_PARAM_FILE, CFG_PARAM_PASS, CFG_PARAM_KEY_FILE);
 	}
 
 	@Override
@@ -187,57 +221,16 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 	}
 
 	@Override
-	public boolean isEnabled() {
-		return this.kdbs != null && !this.kdbs.isEmpty();
-	}
-
-	@Override
-	public void addSource(LookupSource source) throws LookupProviderException {
+	public LookupFunction buildFunction(LookupSource source) throws LookupProviderException {
 		File dbFile = source.getFileFromConfig(CFG_PARAM_FILE).get();
 		String passphrase = source.getConfig(CFG_PARAM_PASS, "");
 		Optional<File> keyFile = source.getFileFromConfig(CFG_PARAM_KEY_FILE);
 
 		try {
 			Kdb kdb = new Kdb(source.getAlias(), dbFile, passphrase, keyFile);
-			if (this.kdbs.put(kdb.alias, kdb) != null) {
-				throw new LookupProviderException(this, "KeePass DB alias already exists: alias=" + kdb.alias);
-			}
+			return new LF(source.getAlias(), this, source.getConfigSource(), kdb);
 		} catch (Exception e) {
 			throw new LookupProviderException(this, "error on initializing KeePass DB: " + dbFile.getAbsolutePath(), e);
 		}
-		log.debug("KeePass lookup DB registered: {}", dbFile.getAbsolutePath());
-	}
-
-	@Override
-	public Optional<String> lookup(String alias, Map<String, Object> args) {
-		Optional<String> result = Optional.empty();
-
-		Kdb kdb = this.kdbs.get(alias);
-		if (kdb == null) {
-			log.error("Keepass DB alias not found: provider={}; alias={}", getName(), alias);
-			return result;
-		}
-
-		EntryPath ep = new EntryPath(getArg(ARG_KEY, args, ""));
-		What what = What.valueOf(getArg(ARG_WHAT, args, ""));
-		String pname = null;
-
-		if (what.isPropertyNameRequired()) {
-			pname = getArg(ARG_PNAME, args, "");
-		}
-
-		Key key = new Key(ep, what, pname);
-
-		try {
-			log.debug("search for KeePass key: {}", key);
-			result = kdb.getValue(key);
-			if (result.isPresent()) {
-				log.debug("found lookup key: provider={}; alias={}; source={}; key={}", getName(), kdb.alias,
-						kdb.source, key);
-			}
-		} catch (Exception e) {
-			throw new LookupProviderException(this, "error on lookup key: alias=" + alias + "; key=" + key, e);
-		}
-		return result;
 	}
 }

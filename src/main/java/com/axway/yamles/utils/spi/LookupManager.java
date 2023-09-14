@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.ServiceLoader;
 
 import org.apache.logging.log4j.LogManager;
@@ -42,8 +41,7 @@ public class LookupManager extends AbstractExtension {
 
 			// add built-in functions
 			if (lp.isBuiltIn()) {
-				LookupFunction lf = new LookupFunction(lp.getName(), lp, Optional.of("<built-in>"));
-				addFunction(lf);
+				addFunction(lp.buildFunction(null));
 			}
 		}
 	}
@@ -88,10 +86,7 @@ public class LookupManager extends AbstractExtension {
 					throw new LookupFunctionConfigException(lpc.getConfigSource(),
 							"unknown lookup provider: " + ls.getProvider());
 				}
-				lp.addSource(ls);
-
-				LookupFunction lf = new LookupFunction(ls.getAlias(), lp,
-						Optional.of(lpc.getConfigSource().getAbsolutePath()));
+				LookupFunction lf = lp.buildFunction(ls);
 				addFunction(lf);
 			}
 		}
@@ -104,11 +99,9 @@ public class LookupManager extends AbstractExtension {
 	public Map<String, Function> getFunctions() {
 		Map<String, Function> func = new HashMap<>();
 		this.functions.forEach((name, lf) -> {
-			if (lf.isEnabled()) {
-				func.put(lf.getName(), lf);
-				Audit.AUDIT_LOG.info("lookup function registered: func={}; provider={}; source={}", lf.getName(),
-						lf.getProvider().getName(), lf.getDefintionSource());
-			}
+			func.put(lf.getName(), lf);
+			Audit.AUDIT_LOG.info("lookup function registered: func={}; provider={}; source={}", lf.getName(),
+					lf.getProvider().getName(), lf.getDefintionSource());
 		});
 		return func;
 	}

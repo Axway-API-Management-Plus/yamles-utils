@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import com.axway.yamles.utils.spi.ConfigParameter;
 import com.axway.yamles.utils.spi.ConfigParameter.Type;
 import com.axway.yamles.utils.spi.LookupDoc;
+import com.axway.yamles.utils.spi.LookupFunction;
 import com.axway.yamles.utils.spi.LookupProviderException;
 import com.axway.yamles.utils.spi.LookupSource;
 
@@ -19,7 +20,8 @@ public class JsonLookupProvider extends AbstractLookupDocLookupProvider {
 			"Path to JSON file containing lookup values.", Type.file, false);
 
 	public JsonLookupProvider() {
-		super(DESCR_KEY_JSONPOINTER, EMPTY_FUNC_ARGS, new ConfigParameter[] { CFG_PARAM_FILE }, log);
+		super();
+		add(CFG_PARAM_FILE);
 	}
 
 	@Override
@@ -38,12 +40,13 @@ public class JsonLookupProvider extends AbstractLookupDocLookupProvider {
 	}
 
 	@Override
-	public void addSource(LookupSource source) throws LookupProviderException {
+	public LookupFunction buildFunction(LookupSource source) throws LookupProviderException {
 		File file = source.getFileFromConfig(CFG_PARAM_FILE).get();
 
 		try {
 			LookupDoc doc = LookupDoc.fromJsonFile(source.getAlias(), file);
-			add(doc);
+			LookupFunction func = new LF(source.getAlias(), this, source.getConfigSource(), doc, log);
+			return func;
 		} catch (Exception e) {
 			throw new LookupProviderException(this, "error on loading lookup JSON file: " + file.getAbsolutePath(), e);
 		}

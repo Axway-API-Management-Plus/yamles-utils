@@ -1,33 +1,27 @@
 package com.axway.yamles.utils.spi.impl;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 
 import com.axway.yamles.utils.spi.ConfigParameter;
 import com.axway.yamles.utils.spi.FunctionArgument;
 import com.axway.yamles.utils.spi.LookupProvider;
-import com.axway.yamles.utils.spi.LookupProviderException;
 import com.axway.yamles.utils.spi.ParameterSet;
 
 public abstract class AbstractLookupProvider implements LookupProvider {
 	public static final ConfigParameter[] EMPTY_CONFIG_PARAMS = new ConfigParameter[0];
 	public static final FunctionArgument[] EMPTY_FUNC_ARGS = new FunctionArgument[0];
 
-	public final FunctionArgument ARG_KEY;
-
-	private final ParameterSet<FunctionArgument> funcArgs = new ParameterSet<FunctionArgument>();
+	private final ParameterSet<FunctionArgument> funcArgs = new ParameterSet<>();
 	private final ParameterSet<ConfigParameter> configParams = new ParameterSet<>();
 
-	protected AbstractLookupProvider(String keyDescription, FunctionArgument[] funcArgs,
-			ConfigParameter[] configParams) {
-		if (keyDescription == null || keyDescription.isEmpty()) {
-			throw new IllegalArgumentException("key description is null or empty");
-		}
-		this.ARG_KEY = new FunctionArgument("key", true, keyDescription);
-		this.funcArgs.add(this.ARG_KEY);
-		this.funcArgs.add(funcArgs);
+	protected AbstractLookupProvider() {
+	}
 
+	protected void add(FunctionArgument... funcArgs) {
+		this.funcArgs.add(funcArgs);
+	}
+
+	protected void add(ConfigParameter... configParams) {
 		this.configParams.add(configParams);
 	}
 
@@ -39,19 +33,5 @@ public abstract class AbstractLookupProvider implements LookupProvider {
 	@Override
 	public List<ConfigParameter> getConfigParameters() {
 		return this.configParams.getParams();
-	}
-
-	protected String getArg(FunctionArgument arg, Map<String, Object> args, String defaultValue) {
-		Objects.requireNonNull(arg);
-		Objects.requireNonNull(args);
-
-		Object value = args.get(arg.getName());
-		if (value == null) {
-			if (arg.isRequired()) {
-				throw new LookupProviderException(this, "argument not passed to function: " + arg.getName());
-			}
-			value = defaultValue;
-		}
-		return value.toString();
 	}
 }
