@@ -64,7 +64,7 @@ public class AwsSecretsManagerJsonLookupProvider extends AbstractLookupDocLookup
 		try {
 			getSecretValueResponse = client.getSecretValue(getSecretValueRequest);
 			String secret = getSecretValueResponse.secretString();
-			LookupDoc doc = LookupDoc.fromJsonString(source.getAlias(), secret, secretName);
+			LookupDoc doc = LookupDoc.fromJsonString(secret, secretName);
 			return new LF(source.getAlias(), this, source.getConfigSource(), doc, log);
 		} catch (Exception e) {
 			throw new LookupProviderException(this, "error on loading secret from AWS: " + secretName, e);

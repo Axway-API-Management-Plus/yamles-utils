@@ -43,7 +43,7 @@ public class YamlLookupProvider extends AbstractLookupDocLookupProvider {
 		File file = source.getFileFromConfig(CFG_PARAM_FILE).get();
 
 		try {
-			LookupDoc doc = LookupDoc.fromYamlFile(source.getAlias(), file);
+			LookupDoc doc = LookupDoc.fromYamlFile(file);
 			LookupFunction func = new LF(source.getAlias(), this, source.getConfigSource(), doc, log);
 			return func;
 		} catch (Exception e) {

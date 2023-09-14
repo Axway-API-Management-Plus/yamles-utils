@@ -44,7 +44,7 @@ public class JsonLookupProvider extends AbstractLookupDocLookupProvider {
 		File file = source.getFileFromConfig(CFG_PARAM_FILE).get();
 
 		try {
-			LookupDoc doc = LookupDoc.fromJsonFile(source.getAlias(), file);
+			LookupDoc doc = LookupDoc.fromJsonFile(file);
 			LookupFunction func = new LF(source.getAlias(), this, source.getConfigSource(), doc, log);
 			return func;
 		} catch (Exception e) {
