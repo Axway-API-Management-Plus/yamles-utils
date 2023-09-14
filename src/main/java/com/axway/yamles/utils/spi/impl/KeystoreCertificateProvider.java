@@ -1,10 +1,14 @@
 package com.axway.yamles.utils.spi.impl;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.security.Key;
 import java.security.KeyStore;
 import java.security.cert.Certificate;
+import java.util.Base64;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -16,22 +20,26 @@ import com.axway.yamles.utils.spi.ConfigParameter;
 import com.axway.yamles.utils.spi.ConfigParameter.Type;
 
 public class KeystoreCertificateProvider extends AbstractCertificateProvider {
+	
+	private static final String TYPE_JKS = "JKS";
+	private static final String TYPE_P12 = "PKCS12";
 
 	private static final Logger log = LogManager.getLogger(KeystoreCertificateProvider.class);
 
-	public static final ConfigParameter CFG_PATH = new ConfigParameter("path", true, "Path to keystore file", Type.file,
+	public static final ConfigParameter CFG_PATH = new ConfigParameter("path", false, "Path to keystore file", Type.file,
 			false);
+	public static final ConfigParameter CFG_DATA = new ConfigParameter("data", false, "Base64 encoded keystore",
+			Type.string, true);
 	public static final ConfigParameter CFG_PASSPHRASE = new ConfigParameter("pass", false, "Passphrase for keystore",
 			Type.string, true);
 	public static final ConfigParameter CFG_ALIAS = new ConfigParameter("alias", false,
 			"Alias of the certificate within the keystore. If not specified, the alias of the Entity Store certificate is used.",
 			Type.string, false);
 	public static final ConfigParameter CFG_TYPE = new ConfigParameter("type", false,
-			"Type of the keystore (JKS, P12): If not specified will be determined by the file extension.", Type.string,
-			false);
+			"Type of the keystore (JKS, PKCS12). If not specified, PKCS12 is assumed.", Type.string, false);
 
 	public KeystoreCertificateProvider() {
-		super(CFG_PATH, CFG_PASSPHRASE, CFG_ALIAS, CFG_TYPE);
+		super(CFG_PATH, CFG_DATA, CFG_PASSPHRASE, CFG_ALIAS, CFG_TYPE);
 	}
 
 	@Override
@@ -41,22 +49,51 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 
 	@Override
 	public String getSummary() {
-		return "Provides certificates from keystore file.";
+		return "Provides certificates from a keystore.";
 	}
 
 	@Override
 	public String getDescription() {
-		return "Provides certificates from keystore file (JKS or PKCS#12 format).";
+		return "Provides certificates from keystore (JKS or PKCS#12 format). The keystore can be provided as a file or as Base64 encoded data.";
 	}
 
 	@Override
 	public CertificateReplacement getCertificate(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
 
+		String type = getConfig(CFG_TYPE, config, TYPE_P12);
+		if (!TYPE_JKS.equals(type) && !TYPE_P12.equals(type)) {
+			throw new CertificateProviderException("invalid type '" + type + "'; must be " + TYPE_JKS + " or " + TYPE_P12);
+		}
+
 		String path = getConfig(CFG_PATH, config, "");
-		File keystoreFile = buildFile(configSource, path);
-		if (!keystoreFile.exists()) {
-			throw new CertificateProviderException("keystore file not found: " + keystoreFile.getAbsolutePath());
+		String data = getConfig(CFG_DATA, config, "");
+		String source = "data";
+
+		InputStream dataStream = null;
+		if (!path.isEmpty()) {
+			if (!data.isEmpty()) {
+				throw new CertificateProviderException("'" + CFG_PATH.getName() + "' and '" + CFG_DATA.getName()
+						+ "' configuration are mutually exclusive");
+			}
+
+			File keystoreFile = buildFile(configSource, path);
+			try {
+				dataStream = new FileInputStream(keystoreFile);
+				source = keystoreFile.getAbsolutePath();
+			} catch (FileNotFoundException e) {
+				throw new CertificateProviderException("keystore file not found: " + keystoreFile.getAbsolutePath());
+			}
+		} else {
+			if (data.isEmpty()) {
+				throw new CertificateProviderException(
+						"'" + CFG_PATH.getName() + "' or '" + CFG_DATA.getName() + "' configuration is required");
+			}
+			try {
+				dataStream = new ByteArrayInputStream(Base64.getDecoder().decode(data));
+			} catch (IllegalArgumentException e) {
+				throw new CertificateProviderException("data is not a valid Base64 scheme");
+			}
 		}
 
 		String passphrase = getConfig(CFG_PASSPHRASE, config, null);
@@ -70,15 +107,11 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 			aliasName = altAlias;
 		}
 
-		String type = getConfig(CFG_TYPE, config, "");
-		if (type.isEmpty())
-			type = determineType(keystoreFile);
-
 		log.debug("searching for certificate alias '{}' in keystore '{}' of type '{}'", aliasName, path, type);
 
 		try {
 			KeyStore ks = KeyStore.getInstance(type);
-			ks.load(new FileInputStream(keystoreFile), password);
+			ks.load(dataStream, password);
 
 			Certificate cert = ks.getCertificate(aliasName);
 			if (cert == null) {
@@ -93,26 +126,7 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 			return new CertificateReplacement(aliasName, cert, key);
 
 		} catch (Exception e) {
-			throw new CertificateProviderException("error on loading keystore: " + keystoreFile.getAbsolutePath(), e);
+			throw new CertificateProviderException("error on loading keystore: " + source, e);
 		}
-	}
-
-	private String determineType(File keystoreFile) throws CertificateProviderException {
-		String type = "JKS";
-
-		String name = keystoreFile.getName();
-		int extIdx = name.lastIndexOf(".");
-		if (extIdx > 0) {
-			String ext = name.substring(extIdx + 1);
-			if ("P12".equalsIgnoreCase(ext)) {
-				type = "PKCS12";
-			} else if ("JKS".equalsIgnoreCase(ext)) {
-				type = "JKS";
-			} else {
-				throw new CertificateProviderException("unsupported keystore type: " + ext);
-			}
-		}
-
-		return type;
 	}
 }
