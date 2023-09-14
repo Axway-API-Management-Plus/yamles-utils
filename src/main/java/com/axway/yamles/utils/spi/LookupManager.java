@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
+import java.util.TreeMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,9 +23,9 @@ public class LookupManager extends AbstractExtension {
 
 	private static final LookupManager instance = new LookupManager();
 
-	private final Map<String, LookupProvider> lookupProviders;
+	private final Map<String, LookupProvider> lookupProviders = new TreeMap<>();
 
-	private final Map<String, LookupFunction> functions = new HashMap<>();
+	private final Map<String, LookupFunction> functions = new TreeMap<>();
 
 	public static LookupManager getInstance() {
 		return instance;
@@ -32,7 +33,6 @@ public class LookupManager extends AbstractExtension {
 
 	private LookupManager() {
 		ServiceLoader<LookupProvider> sl = ServiceLoader.load(LookupProvider.class);
-		this.lookupProviders = new HashMap<>();
 
 		Iterator<LookupProvider> iter = sl.iterator();
 		while (iter.hasNext()) {

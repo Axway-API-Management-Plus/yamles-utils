@@ -1,9 +1,9 @@
 package com.axway.yamles.utils.spi;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.ServiceLoader;
+import java.util.TreeMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -13,7 +13,7 @@ public class CertificateManager {
 	
 	private static final CertificateManager instance = new CertificateManager();
 	
-	private final Map<String, CertificateProvider> providers = new HashMap<>();
+	private final Map<String, CertificateProvider> providers = new TreeMap<>();
 	
 	public static CertificateManager getInstance() {
 		return instance;
