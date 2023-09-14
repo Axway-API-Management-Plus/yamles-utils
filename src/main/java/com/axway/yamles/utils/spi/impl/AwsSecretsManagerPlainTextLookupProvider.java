@@ -36,8 +36,12 @@ public class AwsSecretsManagerPlainTextLookupProvider extends AbstractLookupProv
 			this.client = Objects.requireNonNull(client, "Secrets Manager client required");
 		}
 
+		public String getFullSecretName(String secretName) {
+			return this.prefix + secretName;
+		}
+
 		public Optional<String> getPlaintext(String secretName) {
-			secretName = this.prefix + secretName;
+			secretName = getFullSecretName(secretName);
 
 			Optional<String> result = Optional.empty();
 
@@ -69,7 +73,8 @@ public class AwsSecretsManagerPlainTextLookupProvider extends AbstractLookupProv
 			try {
 				result = this.client.getPlaintext(secretName);
 			} catch (Exception e) {
-				throw new LookupFunctionException(this, "error on loading secret from AWS: " + secretName, e);
+				throw new LookupFunctionException(this,
+						"error on loading secret from AWS: " + this.client.getFullSecretName(secretName), e);
 			}
 			return result;
 		}
@@ -88,7 +93,7 @@ public class AwsSecretsManagerPlainTextLookupProvider extends AbstractLookupProv
 
 	@Override
 	public String getSummary() {
-		return "Lookup plain text secrets from AWS Secrets Manager.";
+		return "Lookup plaintext secrets from AWS Secrets Manager.";
 	}
 
 	@Override
