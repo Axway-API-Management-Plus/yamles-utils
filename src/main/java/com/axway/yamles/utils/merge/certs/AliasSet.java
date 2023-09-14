@@ -1,6 +1,7 @@
 package com.axway.yamles.utils.merge.certs;
 
 import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -14,7 +15,6 @@ import com.axway.yamles.utils.spi.CertificateProvider;
 import com.axway.yamles.utils.spi.CertificateReplacement;
 
 class AliasSet {
-
 	private final Set<Alias> aliases = new HashSet<>();
 
 	public AliasSet() {
@@ -68,6 +68,7 @@ class AliasSet {
 				project.removeCertificate(alias.getName());
 				Audit.AUDIT_LOG.info("  certificate removed: alias={}", alias.getName());
 			} else {
+				auditCertificate(alias.getName(), cert.getCert().get());
 				project.writeCertificate(alias.getName(), cert.getCert().get(), cert.getKey());
 				Audit.AUDIT_LOG.info("  certificate created: alias={}", alias.getName());
 
@@ -75,6 +76,7 @@ class AliasSet {
 					int i = 0;
 					for (Certificate c : cert.getChain()) {
 						String chainAlias = alias.getName() + "_chain_" + i;
+						auditCertificate(chainAlias, c);
 						project.writeCertificate(chainAlias, c, Optional.empty());
 						Audit.AUDIT_LOG.info("  chain certificate created: alias={}", chainAlias);
 						i++;
@@ -84,6 +86,14 @@ class AliasSet {
 		} catch (Exception e) {
 			throw new CertificatesConfigException(alias.getConfigSource(),
 					"certificate failed for alias '" + alias.getName() + "'", e);
+		}
+	}
+
+	private void auditCertificate(String alias, Certificate cert) {
+		if (cert instanceof X509Certificate) {
+			X509Certificate x509 = (X509Certificate) cert;
+			Audit.AUDIT_LOG.info("  X509: alias={}; dn={}; exp={}", alias, x509.getSubjectX500Principal().getName(),
+					x509.getNotAfter());
 		}
 	}
 }

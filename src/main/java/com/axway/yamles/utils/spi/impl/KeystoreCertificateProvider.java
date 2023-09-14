@@ -20,14 +20,14 @@ import com.axway.yamles.utils.spi.ConfigParameter;
 import com.axway.yamles.utils.spi.ConfigParameter.Type;
 
 public class KeystoreCertificateProvider extends AbstractCertificateProvider {
-	
+
 	private static final String TYPE_JKS = "JKS";
 	private static final String TYPE_P12 = "PKCS12";
 
 	private static final Logger log = LogManager.getLogger(KeystoreCertificateProvider.class);
 
-	public static final ConfigParameter CFG_PATH = new ConfigParameter("path", false, "Path to keystore file", Type.file,
-			false);
+	public static final ConfigParameter CFG_PATH = new ConfigParameter("path", false, "Path to keystore file",
+			Type.file, false);
 	public static final ConfigParameter CFG_DATA = new ConfigParameter("data", false, "Base64 encoded keystore",
 			Type.string, true);
 	public static final ConfigParameter CFG_PASSPHRASE = new ConfigParameter("pass", false, "Passphrase for keystore",
@@ -37,9 +37,13 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 			Type.string, false);
 	public static final ConfigParameter CFG_TYPE = new ConfigParameter("type", false,
 			"Type of the keystore (JKS, PKCS12). If not specified, PKCS12 is assumed.", Type.string, false);
+	public static final ConfigParameter CFG_CHAIN = new ConfigParameter("chain", false, "Include certificate chain.",
+			Type.bool, false);
+	public static final ConfigParameter CFG_NOKEY = new ConfigParameter("nokey", false, "Supporess to add private key.",
+			Type.bool, false);
 
 	public KeystoreCertificateProvider() {
-		super(CFG_PATH, CFG_DATA, CFG_PASSPHRASE, CFG_ALIAS, CFG_TYPE);
+		super(CFG_PATH, CFG_DATA, CFG_PASSPHRASE, CFG_TYPE, CFG_ALIAS, CFG_CHAIN, CFG_NOKEY);
 	}
 
 	@Override
@@ -63,7 +67,8 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 
 		String type = getConfig(CFG_TYPE, config, TYPE_P12);
 		if (!TYPE_JKS.equals(type) && !TYPE_P12.equals(type)) {
-			throw new CertificateProviderException("invalid type '" + type + "'; must be " + TYPE_JKS + " or " + TYPE_P12);
+			throw new CertificateProviderException(
+					"invalid type '" + type + "'; must be " + TYPE_JKS + " or " + TYPE_P12);
 		}
 
 		String path = getConfig(CFG_PATH, config, "");
@@ -107,6 +112,8 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 			aliasName = altAlias;
 		}
 
+		boolean addChain = getConfig(CFG_CHAIN, config, "false").equals("true");
+
 		log.debug("searching for certificate alias '{}' in keystore '{}' of type '{}'", aliasName, path, type);
 
 		try {
@@ -120,11 +127,28 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 
 			log.debug("certificate with alias '{}' found", aliasName);
 
+			boolean nokey = getConfig(CFG_NOKEY, config, "false").equals("true");
 			Key key = ks.getKey(aliasName, password);
-			log.debug("key with alias '{}' {}found", aliasName, (key == null) ? "not " : "");
+			log.debug("key for alias '{}' {}found", aliasName, (key == null) ? "not " : "");
+			if (!nokey && key != null) {
+				key = null;
+				log.debug("key for alias '{}' suppressed", aliasName);
+			}
 
-			return new CertificateReplacement(aliasName, cert, key);
+			CertificateReplacement cr = new CertificateReplacement(aliasName, cert, key);
 
+			if (addChain) {
+				Certificate[] chain = ks.getCertificateChain(aliasName);
+				if (chain != null) {
+					for (Certificate chainCert : chain) {
+						if (chainCert == cert)
+							continue;
+						cr.addChain(chainCert);
+					}
+				}
+			}
+
+			return cr;
 		} catch (Exception e) {
 			throw new CertificateProviderException("error on loading keystore: " + source, e);
 		}

@@ -95,12 +95,18 @@ This parameter supports a _Mustache_ template, to lookup the certificates via lo
 |`alias`
 |Optional alias of the certificate within the keystore.
 If not specified, the alias of the entity store certificate is used.
+The `alias` parameter is ignored.
+|`nokey`
+|If `true`, the private key is not added to the project.
+For certificates having no private key, this parameter has no effect.
 |`type`
 |Type of the keystore.
 If not specified, `PKCS12`is assumed.
 
 * `JKS`: Java Key Store
 * `PKCS12`: PKCS#12
+|`chain`
+|Set to `true` to add the full certificate chain of the certificate to policy project.
 |===
 
 
