@@ -46,7 +46,7 @@ public class EnvJsonLookupProvider extends AbstractLookupDocLookupProvider {
 			if (json == null) {
 				throw new LookupProviderException(this, "environment variable not found: " + envvar);
 			}
-			LookupDoc doc = LookupDoc.fromJsonString(source.getAlias(), json);
+			LookupDoc doc = LookupDoc.fromJsonString(json);
 			LookupFunction func = new LF(source.getAlias(), this, source.getConfigSource(), doc, log);
 			return func;
 		} catch (Exception e) {
