@@ -60,7 +60,6 @@ public abstract class AbstractLookupDocLookupProvider extends AbstractLookupProv
 			throw new LookupProviderException(this,
 					"lookup document already registered: provider=" + getName() + "; alias=" + doc.getAlias());
 		}
-		;
 		log.debug("lookup document registered: provider={}; alias={}; source={}", getName(), doc.getAlias(),
 				doc.getSourceID());
 	}

@@ -5,4 +5,5 @@ com.axway.yamles.utils.spi.impl.EnvJsonLookupProvider
 com.axway.yamles.utils.spi.impl.SysLookupProvider
 com.axway.yamles.utils.spi.impl.VaultLookupProvider
 com.axway.yamles.utils.spi.impl.KeepassLookupProvider
-com.axway.yamles.utils.spi.impl.AwsSecretsManagerLookupProvider
+com.axway.yamles.utils.spi.impl.AwsSecretsManagerJsonLookupProvider
+com.axway.yamles.utils.spi.impl.AwsSecretsManagerPlainTextLookupProvider

@@ -17,31 +17,31 @@ import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueReques
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueResponse;
 
 @Command
-public class AwsSecretsManagerLookupProvider extends AbstractLookupDocLookupProvider {
+public class AwsSecretsManagerJsonLookupProvider extends AbstractLookupDocLookupProvider {
 	public static final ConfigParameter CFG_PARAM_SECRET = new ConfigParameter("secret_name", true, "Secret name",
 			Type.string, false);
 	public static final ConfigParameter CFG_PARAM_REGION = new ConfigParameter("region", false, "Region name",
 			Type.string, false);
 
-	private static final Logger log = LogManager.getLogger(AwsSecretsManagerLookupProvider.class);
+	private static final Logger log = LogManager.getLogger(AwsSecretsManagerJsonLookupProvider.class);
 
-	public AwsSecretsManagerLookupProvider() {
+	public AwsSecretsManagerJsonLookupProvider() {
 		super("Secret key", EMPTY_FUNC_ARGS, new ConfigParameter[] { CFG_PARAM_SECRET, CFG_PARAM_REGION }, log);
 	}
 
 	@Override
 	public String getName() {
-		return "aws_sm";
+		return "aws_sm_json";
 	}
 
 	@Override
 	public String getSummary() {
-		return "Lookup values from AWS Secrets Manager.";
+		return "Lookup values from AWS Secrets Manager (secrets in JSON format).";
 	}
 
 	@Override
 	public String getDescription() {
-		return "The key represents the JSON Pointer to the property containing the value (e.g. '/user_password')";
+		return "The key represents the JSON Pointer to the property containing the value (e.g. '/user_password').";
 	}
 
 	@Override
