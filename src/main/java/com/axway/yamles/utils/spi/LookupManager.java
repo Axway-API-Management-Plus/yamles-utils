@@ -38,21 +38,21 @@ public class LookupManager extends AbstractExtension {
 		while (iter.hasNext()) {
 			LookupProvider lp = iter.next();
 			addProvider(lp);
-
-			// add built-in functions
-			if (lp.isBuiltIn()) {
-				addFunction(lp.buildFunction(null));
-			}
 		}
 	}
 
-	public void addProvider(LookupProvider lp) {
+	protected void addProvider(LookupProvider lp) {
 		LookupProvider registered = this.lookupProviders.putIfAbsent(lp.getName(), lp);
 		if (registered != null) {
 			throw new IllegalStateException("duplicate lookup provider name '" + lp.getName() + "'; used by "
 					+ lp.getClass().getCanonicalName() + " and " + registered.getClass().getCanonicalName());
 		}
 		log.debug("lookup provider registered: provider={}", lp.getName());
+
+		// add built-in functions
+		if (lp.isBuiltIn()) {
+			addFunction(lp.buildFunction(null));
+		}
 	}
 
 	private void addFunction(LookupFunction lf) {
@@ -60,8 +60,11 @@ public class LookupManager extends AbstractExtension {
 		if (existingFunc != null)
 			throw new LookupFunctionConfigException(lf.getDefintionSource(),
 					"alias '" + lf.getAlias() + "' already defined in " + existingFunc.getDefintionSource());
-		log.debug("lookup function added: func={}; provider={}; source={}", lf.getName(), lf.getProvider().getName(),
-				lf.getDefintionSource());
+		Audit.AUDIT_LOG.info("lookup function registered: func={}; provider={}; source={}", lf.getName(),
+				lf.getProvider().getName(), lf.getDefintionSource());
+
+		// refresh Mustache processor to reflect new function
+		Mustache.refresh();
 	}
 
 	public Collection<LookupProvider> getProviders() {
@@ -90,9 +93,6 @@ public class LookupManager extends AbstractExtension {
 				addFunction(lf);
 			}
 		}
-
-		// refresh Mustache processor to reflect new functions
-		Mustache.refresh();
 	}
 
 	@Override
@@ -100,8 +100,6 @@ public class LookupManager extends AbstractExtension {
 		Map<String, Function> func = new HashMap<>();
 		this.functions.forEach((name, lf) -> {
 			func.put(lf.getName(), lf);
-			Audit.AUDIT_LOG.info("lookup function registered: func={}; provider={}; source={}", lf.getName(),
-					lf.getProvider().getName(), lf.getDefintionSource());
 		});
 		return func;
 	}
