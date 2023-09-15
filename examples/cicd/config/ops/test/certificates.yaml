@@ -6,6 +6,7 @@ certificates:
       path: ../all/ops-keystore.jks
       pass: "{{ _ops_kdb('/test/ops-keystore', 'password') }}"
       alias: test-axway-server
+      chain: true
       
   example-root-ca:
     provider: keystore

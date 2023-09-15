@@ -490,16 +490,27 @@ config:
 
 === AWS Secrets Manager
 
+The AWS Secrets Manager lookup providers uses AWS SDK to access the secrets in the AWS Secrets Manager.
+
+The https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html[default credentials chain] used by the SDK are also used by this lookup provider.
+On systems directly running on EC2 instances, IAM roles can be used to authorize the request without specifying any credentials.
+For systems running on AWS EKS, a K8s service account can be bound to an IAM role to enable the access to the Secrets Manager without using additional credentials.
+But using environment variables (`AWS_SECRET_ACCESS_KEY`, `AWS_ACCESS_KEY_ID`), system properties (`aws.accessKeyId`, `aws.secretAccessKey`), or configuration file, are also supported.
+
+==== JSON Document Secrets
+
+For secrets containing a JSON document, e.g. key/value pair, this lookup provider supports to read specific keys from the secret.
+
 [cols="2,6a"]
 |===
 |*Name*
-|`aws_sm`
+|`aws_sm_json`
 
 |*Built-In*
 |no
 
 |*Synopsis*
-|Retrieves values from AWS Secrets Manager.
+|Retrieves values from JSON secrets on AWS Secrets Manager.
 
 2+|*Configuration Parameters*
 |`secret_name`
@@ -513,16 +524,9 @@ If not specified, the default region is used.
 |Secret key as JSON Pointer (e.g., `/user`).
 |===
 
-The lookup provider uses AWS SDK to access the secrets in the AWS Secrets Manager.
-
-The https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html[default credentials chain] used by the SDK are also used by this lookup provider.
-On systems directly running on EC2 instances, IAM roles can be used to authorize the request without specifying any credentials.
-For systems running on AWS EKS, a K8s service account can be bound to an IAM role to enable the access to the Secrets Manager without using additional credentials.
-But using environment variables (`AWS_SECRET_ACCESS_KEY`, `AWS_ACCESS_KEY_ID`), system properties (`aws.accessKeyId`, `aws.secretAccessKey`), or configuration file are also supported.
-
 *Example*
 
-In this example the secret `sandbox/anm` is stored in AWS Secrets Manager.
+In this example the secret `sandbox/anm` is stored in AWS Secrets Manager. The secret is stored using key/value pairs.
 
 image:aws-sm-secrets.png[AWS Secrets]
 
@@ -530,7 +534,7 @@ The secret has two secret keys (`user` and `password`).
 
 image:aws-sm-secrets-values.png[AWS Secrets]
 
-The secret can also be represented as plain text, which is a JSON document storing the values with the secret key as property name.
+In plaintext the secret is represented as a JSON document, storing the values with the secret key as property name.
 
 image:aws-sm-secrets-values-json.png[AWS Secrets]
 
@@ -539,7 +543,7 @@ image:aws-sm-secrets-values-json.png[AWS Secrets]
 ----
 lookups:
   anm:
-    provider: aws_sm
+    provider: aws_sm_json
     config:
       secret_name: sandbox/anm
 ----
@@ -550,6 +554,70 @@ lookups:
 anm:
   user: "{{ _anm('/user') }}"
   pwd: "{{ _anm('/password') }}"
+----
+
+NOTE: The secret is not limited to key/value pair. Any kind of JSON document is supported by this lookup provider.
+
+==== Plaintext Secrets
+
+[cols="2,6a"]
+|===
+|*Name*
+|`aws_sm_plain`
+
+|*Built-In*
+|no
+
+|*Synopsis*
+|Retrieves value from plain text secret on AWS Secrets Manager.
+
+2+|*Configuration Parameters*
+|`prefix`
+|Prefix to be be added before every secret name (see `key`).
+|`region`
+|Optional region where the secret is located.
+If not specified, the default region is used.
+
+2+|*Lookup Function Arguments*
+|`key`
+|Secret name.
+
+The resulting secret name is build by the concatenation of `prefix` and `key`.
+|===
+
+*Example*
+
+In this example the secret `sandbox/certs/root-ca` is stored in AWS Secrets Manager. The secret is supposed to contain a public root CA certificate in PEM format.
+
+image:aws-sm-secrets-root-ca.png[AWS Secrets]
+
+The PEM certificate is stored as plaintext.
+
+image:aws-sm-secrets-values-root-ca.png[AWS Secrets]
+
+A lookup function is defined to lookup certificates from secrets prefixed with `sandbox/certs`.
+
+.Lookup Function Configuration `lookup-func.yaml`
+[source, yaml]
+----
+lookups:
+  certs:
+    provider: aws_sm_plain
+    config:
+      region: "us-west-1"
+      prefix: "sandbox/certs"
+----
+
+The lookup function can be used in simple certificate providers.
+
+.Usage in certificate configuration
+[source, yaml]
+----
+certificates:
+  root-ca:
+    provider: simple
+    config:
+      cert: "{{ _certs('/root-ca') }}"
 ----
 
 

@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.ServiceLoader;
+import java.util.TreeMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,9 +23,9 @@ public class LookupManager extends AbstractExtension {
 
 	private static final LookupManager instance = new LookupManager();
 
-	private final Map<String, LookupProvider> lookupProviders;
+	private final Map<String, LookupProvider> lookupProviders = new TreeMap<>();
 
-	private final Map<String, LookupFunction> functions = new HashMap<>();
+	private final Map<String, LookupFunction> functions = new TreeMap<>();
 
 	public static LookupManager getInstance() {
 		return instance;
@@ -33,28 +33,26 @@ public class LookupManager extends AbstractExtension {
 
 	private LookupManager() {
 		ServiceLoader<LookupProvider> sl = ServiceLoader.load(LookupProvider.class);
-		this.lookupProviders = new HashMap<>();
 
 		Iterator<LookupProvider> iter = sl.iterator();
 		while (iter.hasNext()) {
 			LookupProvider lp = iter.next();
 			addProvider(lp);
-
-			// add built-in functions
-			if (lp.isBuiltIn()) {
-				LookupFunction lf = new LookupFunction(lp.getName(), lp, Optional.of("<built-in>"));
-				addFunction(lf);
-			}
 		}
 	}
 
-	public void addProvider(LookupProvider lp) {
+	protected void addProvider(LookupProvider lp) {
 		LookupProvider registered = this.lookupProviders.putIfAbsent(lp.getName(), lp);
 		if (registered != null) {
 			throw new IllegalStateException("duplicate lookup provider name '" + lp.getName() + "'; used by "
 					+ lp.getClass().getCanonicalName() + " and " + registered.getClass().getCanonicalName());
 		}
 		log.debug("lookup provider registered: provider={}", lp.getName());
+
+		// add built-in functions
+		if (lp.isBuiltIn()) {
+			addFunction(lp.buildFunction(null));
+		}
 	}
 
 	private void addFunction(LookupFunction lf) {
@@ -62,8 +60,11 @@ public class LookupManager extends AbstractExtension {
 		if (existingFunc != null)
 			throw new LookupFunctionConfigException(lf.getDefintionSource(),
 					"alias '" + lf.getAlias() + "' already defined in " + existingFunc.getDefintionSource());
-		log.debug("lookup function added: func={}; provider={}; source={}", lf.getName(), lf.getProvider().getName(),
-				lf.getDefintionSource());
+		Audit.AUDIT_LOG.info("lookup function registered: func={}; provider={}; source={}", lf.getName(),
+				lf.getProvider().getName(), lf.getDefintionSource());
+
+		// refresh Mustache processor to reflect new function
+		Mustache.refresh();
 	}
 
 	public Collection<LookupProvider> getProviders() {
@@ -88,27 +89,17 @@ public class LookupManager extends AbstractExtension {
 					throw new LookupFunctionConfigException(lpc.getConfigSource(),
 							"unknown lookup provider: " + ls.getProvider());
 				}
-				lp.addSource(ls);
-
-				LookupFunction lf = new LookupFunction(ls.getAlias(), lp,
-						Optional.of(lpc.getConfigSource().getAbsolutePath()));
+				LookupFunction lf = lp.buildFunction(ls);
 				addFunction(lf);
 			}
 		}
-
-		// refresh Mustache processor to reflect new functions
-		Mustache.refresh();
 	}
 
 	@Override
 	public Map<String, Function> getFunctions() {
 		Map<String, Function> func = new HashMap<>();
 		this.functions.forEach((name, lf) -> {
-			if (lf.isEnabled()) {
-				func.put(lf.getName(), lf);
-				Audit.AUDIT_LOG.info("lookup function registered: func={}; provider={}; source={}", lf.getName(),
-						lf.getProvider().getName(), lf.getDefintionSource());
-			}
+			func.put(lf.getName(), lf);
 		});
 		return func;
 	}

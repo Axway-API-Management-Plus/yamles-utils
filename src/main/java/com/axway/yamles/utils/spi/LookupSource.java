@@ -57,7 +57,7 @@ public class LookupSource {
 	public Map<String, String> getConfig() {
 		return this.config;
 	}
-	
+
 	public String getConfig(ConfigParameter param, String defaultValue) {
 		String value = this.config.get(param.getName());
 		if (value == null) {
@@ -114,6 +114,11 @@ public class LookupSource {
 			return Optional.empty();
 		}
 		return Optional.of(this.configSource.get().getParentFile());
+	}
+
+	public Optional<String> getConfigSource() {
+		return this.configSource.isPresent() ? Optional.of(this.configSource.get().getAbsolutePath())
+				: Optional.empty();
 	}
 
 	void setConfigSource(File file) {

@@ -7,6 +7,7 @@ import org.apache.logging.log4j.core.tools.picocli.CommandLine.Command;
 import com.axway.yamles.utils.spi.ConfigParameter;
 import com.axway.yamles.utils.spi.ConfigParameter.Type;
 import com.axway.yamles.utils.spi.LookupDoc;
+import com.axway.yamles.utils.spi.LookupFunction;
 import com.axway.yamles.utils.spi.LookupProviderException;
 import com.axway.yamles.utils.spi.LookupSource;
 
@@ -17,35 +18,36 @@ import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueReques
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueResponse;
 
 @Command
-public class AwsSecretsManagerLookupProvider extends AbstractLookupDocLookupProvider {
+public class AwsSecretsManagerJsonLookupProvider extends AbstractLookupDocLookupProvider {
 	public static final ConfigParameter CFG_PARAM_SECRET = new ConfigParameter("secret_name", true, "Secret name",
 			Type.string, false);
 	public static final ConfigParameter CFG_PARAM_REGION = new ConfigParameter("region", false, "Region name",
 			Type.string, false);
 
-	private static final Logger log = LogManager.getLogger(AwsSecretsManagerLookupProvider.class);
+	private static final Logger log = LogManager.getLogger(AwsSecretsManagerJsonLookupProvider.class);
 
-	public AwsSecretsManagerLookupProvider() {
-		super("Secret key", EMPTY_FUNC_ARGS, new ConfigParameter[] { CFG_PARAM_SECRET, CFG_PARAM_REGION }, log);
+	public AwsSecretsManagerJsonLookupProvider() {
+		super();
+		add(CFG_PARAM_SECRET, CFG_PARAM_REGION);
 	}
 
 	@Override
 	public String getName() {
-		return "aws_sm";
+		return "aws_sm_json";
 	}
 
 	@Override
 	public String getSummary() {
-		return "Lookup values from AWS Secrets Manager.";
+		return "Lookup values from AWS Secrets Manager (secrets in JSON format).";
 	}
 
 	@Override
 	public String getDescription() {
-		return "The key represents the JSON Pointer to the property containing the value (e.g. '/user_password')";
+		return "The key represents the JSON Pointer to the property containing the value (e.g. '/user_password').";
 	}
 
 	@Override
-	public void addSource(LookupSource source) throws LookupProviderException {
+	public LookupFunction buildFunction(LookupSource source) throws LookupProviderException {
 		String secretName = source.getConfig(CFG_PARAM_SECRET, "");
 		String region = source.getConfig(CFG_PARAM_REGION, "");
 
@@ -62,8 +64,8 @@ public class AwsSecretsManagerLookupProvider extends AbstractLookupDocLookupProv
 		try {
 			getSecretValueResponse = client.getSecretValue(getSecretValueRequest);
 			String secret = getSecretValueResponse.secretString();
-			LookupDoc doc = LookupDoc.fromJsonString(source.getAlias(), secret, secretName);
-			add(doc);
+			LookupDoc doc = LookupDoc.fromJsonString(secret, secretName);
+			return new LF(source.getAlias(), this, source.getConfigSource(), doc, log);
 		} catch (Exception e) {
 			throw new LookupProviderException(this, "error on loading secret from AWS: " + secretName, e);
 		}

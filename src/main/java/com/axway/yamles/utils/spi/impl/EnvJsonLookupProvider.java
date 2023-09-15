@@ -7,6 +7,7 @@ import com.axway.yamles.utils.helper.EnvironmentVariables;
 import com.axway.yamles.utils.spi.ConfigParameter;
 import com.axway.yamles.utils.spi.ConfigParameter.Type;
 import com.axway.yamles.utils.spi.LookupDoc;
+import com.axway.yamles.utils.spi.LookupFunction;
 import com.axway.yamles.utils.spi.LookupProviderException;
 import com.axway.yamles.utils.spi.LookupSource;
 
@@ -18,7 +19,8 @@ public class EnvJsonLookupProvider extends AbstractLookupDocLookupProvider {
 	private static final Logger log = LogManager.getLogger(EnvJsonLookupProvider.class);
 
 	public EnvJsonLookupProvider() {
-		super(DESCR_KEY_JSONPOINTER, EMPTY_FUNC_ARGS, new ConfigParameter[] { CFG_PARAM_ENV }, log);
+		super();
+		add(CFG_PARAM_ENV);
 	}
 
 	@Override
@@ -37,20 +39,16 @@ public class EnvJsonLookupProvider extends AbstractLookupDocLookupProvider {
 	}
 
 	@Override
-	public boolean isEnabled() {
-		return !isEmpty();
-	}
-
-	@Override
-	public void addSource(LookupSource source) throws LookupProviderException {
+	public LookupFunction buildFunction(LookupSource source) throws LookupProviderException {
 		String envvar = source.getConfig(CFG_PARAM_ENV, "");
 		try {
 			String json = EnvironmentVariables.get(envvar);
 			if (json == null) {
 				throw new LookupProviderException(this, "environment variable not found: " + envvar);
 			}
-			LookupDoc doc = LookupDoc.fromJsonString(source.getAlias(), json);
-			add(doc);
+			LookupDoc doc = LookupDoc.fromJsonString(json);
+			LookupFunction func = new LF(source.getAlias(), this, source.getConfigSource(), doc, log);
+			return func;
 		} catch (Exception e) {
 			throw new LookupProviderException(this,
 					"error on initialize JSON lookup from environment variable: " + envvar, e);

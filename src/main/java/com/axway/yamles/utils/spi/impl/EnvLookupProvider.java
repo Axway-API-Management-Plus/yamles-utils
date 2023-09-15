@@ -4,8 +4,10 @@ import java.util.Map;
 import java.util.Optional;
 
 import com.axway.yamles.utils.helper.EnvironmentVariables;
+import com.axway.yamles.utils.spi.FunctionArgument;
+import com.axway.yamles.utils.spi.LookupFunction;
+import com.axway.yamles.utils.spi.LookupFunctionException;
 import com.axway.yamles.utils.spi.LookupProviderException;
-import com.axway.yamles.utils.spi.LookupSource;
 
 /**
  * Lookup provider for environment variables.
@@ -13,10 +15,32 @@ import com.axway.yamles.utils.spi.LookupSource;
  * 
  * @author mlook
  */
-public class EnvLookupProvider extends AbstractLookupProvider {
+public class EnvLookupProvider extends AbstractBuiltinLookupProvider {
+	protected static FunctionArgument ARG_KEY = new FunctionArgument("key", true, "Name of environment variable");
+	
+	protected static class LF extends LookupFunction {
+		public LF(String alias, AbstractBuiltinLookupProvider provider) {
+			super(alias, provider, AbstractBuiltinLookupProvider.SOURCE);
+		}
+
+		@Override
+		public Optional<String> lookup(Map<String, Object> args) throws LookupFunctionException {
+			String key = getArg(ARG_KEY, args, "");
+			if (key.isEmpty()) {
+				return Optional.empty();
+			}
+
+			String value = EnvironmentVariables.get(key);
+			if (value == null) {
+				return Optional.empty();
+			}
+			return Optional.of(value);
+		}
+	}
 
 	public EnvLookupProvider() {
-		super("name of environment variable", EMPTY_FUNC_ARGS, EMPTY_CONFIG_PARAMS);
+		super();
+		add(ARG_KEY);
 	}
 
 	@Override
@@ -35,30 +59,7 @@ public class EnvLookupProvider extends AbstractLookupProvider {
 	}
 
 	@Override
-	public boolean isEnabled() {
-		return true;
-	}
-	
-	@Override
-	public boolean isBuiltIn() {
-		return true;
-	}
-
-	@Override
-	public void addSource(LookupSource source) throws LookupProviderException {
-	}
-
-	@Override
-	public Optional<String> lookup(String alias, Map<String, Object> args) {
-		String key = getArg(ARG_KEY, args, "");
-		if (key.isEmpty()) {
-			return Optional.empty();
-		}
-
-		String value = EnvironmentVariables.get(key);
-		if (value == null) {
-			return Optional.empty();
-		}
-		return Optional.of(value);
+	protected LookupFunction buildFunction() throws LookupProviderException {
+		return new LF(getName(), this);
 	}
 }

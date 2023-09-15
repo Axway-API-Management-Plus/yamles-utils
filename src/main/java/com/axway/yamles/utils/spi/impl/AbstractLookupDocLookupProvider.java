@@ -1,71 +1,53 @@
 package com.axway.yamles.utils.spi.impl;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
 import org.apache.logging.log4j.Logger;
 
-import com.axway.yamles.utils.spi.ConfigParameter;
 import com.axway.yamles.utils.spi.FunctionArgument;
 import com.axway.yamles.utils.spi.LookupDoc;
-import com.axway.yamles.utils.spi.LookupProviderException;
+import com.axway.yamles.utils.spi.LookupFunction;
+import com.axway.yamles.utils.spi.LookupFunctionException;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public abstract class AbstractLookupDocLookupProvider extends AbstractLookupProvider {
-	public static final String DESCR_KEY_JSONPOINTER = "JSON Pointer to key node (see RFC6901)";
+	public static final FunctionArgument ARG_KEY = new FunctionArgument("key", true,
+			"JSON Pointer to key node (see RFC6901)");
 
-	private final Logger log;
-	private final Map<String, LookupDoc> docs = new HashMap<>();
+	protected static class LF extends LookupFunction {
+		private final LookupDoc doc;
+		private final Logger log;
 
-	protected AbstractLookupDocLookupProvider(String keyDescription, FunctionArgument[] funcArgs, ConfigParameter[] configParams, Logger logger) {
-		super(keyDescription, funcArgs, configParams);
-		this.log = Objects.requireNonNull(logger);
-	}
+		public LF(String alias, AbstractLookupDocLookupProvider provider, Optional<String> source, LookupDoc doc, Logger log) {
+			super(alias, provider, source);
+			this.doc = Objects.requireNonNull(doc, "document required");
+			this.log = Objects.requireNonNull(log, "logger required");
+		}
 
-	@Override
-	public boolean isEnabled() {
-		return !this.docs.isEmpty();
-	}
+		@Override
+		public Optional<String> lookup(Map<String, Object> args) throws LookupFunctionException {
+			Optional<String> result = Optional.empty();
 
-	@Override
-	public Optional<String> lookup(String alias, Map<String, Object> args) {
-		Optional<String> result = Optional.empty();
-		LookupDoc doc = this.docs.get(alias);
-		if (doc == null) {
-			log.error("alias not found by provider: provider={}; alias={}", getName(), alias);
+			String key = getArg(AbstractLookupDocLookupProvider.ARG_KEY, args, "");
+
+			JsonNode value = doc.at(key);
+			if (value == null || value.isNull() || value.isMissingNode() || !value.isValueNode()) {
+				log.error("key is not a value node: provider={}; alias={}; key={}", getName(), getAlias(), key);
+				return result;
+			}
+
+			log.debug("found lookup key: provider={}; alias={}; source={}; key={}", getProvider().getName(), getAlias(),
+					doc.getSourceID(), key);
+
+			result = Optional.of(value.asText());
 			return result;
 		}
-
-		String key = getArg(ARG_KEY, args, null);
-
-		JsonNode value = doc.at(key);
-		if (value == null || value.isNull() || value.isMissingNode() || !value.isValueNode()) {
-			log.error("key is not a value node: provider={}; alias={}; key={}", getName(), alias, key);
-			return result;
-		}
-
-		log.debug("found lookup key: provider={}; alias={}; source={}; key={}", getName(), doc.getAlias(),
-				doc.getSourceID(), key);
-
-		result = Optional.of(value.asText());
-
-		return result;
 	}
 
-	protected void add(LookupDoc doc) {
-		Objects.requireNonNull(doc);
-		if (this.docs.put(doc.getAlias(), doc) != null) {
-			throw new LookupProviderException(this,
-					"lookup document already registered: provider=" + getName() + "; alias=" + doc.getAlias());
-		}
-		;
-		log.debug("lookup document registered: provider={}; alias={}; source={}", getName(), doc.getAlias(),
-				doc.getSourceID());
-	}
-
-	protected boolean isEmpty() {
-		return this.docs.isEmpty();
+	protected AbstractLookupDocLookupProvider() {
+		super();
+		add(ARG_KEY);
 	}
 }

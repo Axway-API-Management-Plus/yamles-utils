@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import com.axway.yamles.utils.spi.ConfigParameter;
 import com.axway.yamles.utils.spi.ConfigParameter.Type;
 import com.axway.yamles.utils.spi.LookupDoc;
+import com.axway.yamles.utils.spi.LookupFunction;
 import com.axway.yamles.utils.spi.LookupProviderException;
 import com.axway.yamles.utils.spi.LookupSource;
 
@@ -18,7 +19,8 @@ public class YamlLookupProvider extends AbstractLookupDocLookupProvider {
 	private static final Logger log = LogManager.getLogger(YamlLookupProvider.class);
 
 	public YamlLookupProvider() {
-		super(DESCR_KEY_JSONPOINTER, EMPTY_FUNC_ARGS, new ConfigParameter[] { CFG_PARAM_FILE }, log);
+		super();
+		add(CFG_PARAM_FILE);
 	}
 
 	@Override
@@ -37,14 +39,15 @@ public class YamlLookupProvider extends AbstractLookupDocLookupProvider {
 	}
 
 	@Override
-	public void addSource(LookupSource source) throws LookupProviderException {
+	public LookupFunction buildFunction(LookupSource source) throws LookupProviderException {
 		File file = source.getFileFromConfig(CFG_PARAM_FILE).get();
 
 		try {
-			LookupDoc doc = LookupDoc.fromYamlFile(source.getAlias(), file);
-			add(doc);
+			LookupDoc doc = LookupDoc.fromYamlFile(file);
+			LookupFunction func = new LF(source.getAlias(), this, source.getConfigSource(), doc, log);
+			return func;
 		} catch (Exception e) {
-			throw new LookupProviderException(this, "error on loading lookup JSON file: " + file.getAbsolutePath(), e);
+			throw new LookupProviderException(this, "error on loading lookup YAML file: " + file.getAbsolutePath(), e);
 		}
 	}
 }

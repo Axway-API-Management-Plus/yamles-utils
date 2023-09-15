@@ -3,18 +3,42 @@ package com.axway.yamles.utils.spi.impl;
 import java.util.Map;
 import java.util.Optional;
 
+import com.axway.yamles.utils.spi.FunctionArgument;
+import com.axway.yamles.utils.spi.LookupFunction;
+import com.axway.yamles.utils.spi.LookupFunctionException;
 import com.axway.yamles.utils.spi.LookupProviderException;
-import com.axway.yamles.utils.spi.LookupSource;
 
 /**
  * Lookup provider for system properties.
  * 
  * @author mlook
  */
-public class SysLookupProvider extends AbstractLookupProvider {
+public class SysLookupProvider extends AbstractBuiltinLookupProvider {
+	protected static class LF extends LookupFunction {
+		public LF(String alias, SysLookupProvider provider) {
+			super(alias, provider, AbstractBuiltinLookupProvider.SOURCE);
+		}
+
+		@Override
+		public Optional<String> lookup(Map<String, Object> args) throws LookupFunctionException {
+			String key = getArg(ARG_KEY, args, "");
+			if (key == null || key.isEmpty()) {
+				return Optional.empty();
+			}
+
+			String value = System.getProperty(key);
+			if (value == null) {
+				return Optional.empty();
+			}
+			return Optional.of(value);
+		}
+	}
+
+	protected static FunctionArgument ARG_KEY = new FunctionArgument("key", true, "Name of system property");
 
 	public SysLookupProvider() {
-		super("name of system property", EMPTY_FUNC_ARGS, EMPTY_CONFIG_PARAMS);
+		super();
+		add(ARG_KEY);
 	}
 
 	@Override
@@ -33,30 +57,7 @@ public class SysLookupProvider extends AbstractLookupProvider {
 	}
 
 	@Override
-	public boolean isEnabled() {
-		return true;
-	}
-
-	@Override
-	public boolean isBuiltIn() {
-		return true;
-	}
-	
-	@Override
-	public void addSource(LookupSource source) throws LookupProviderException {
-	}
-
-	@Override
-	public Optional<String> lookup(String alias, Map<String, Object> args) {
-		String key = getArg(ARG_KEY, args, "");
-		if (key == null || key.isEmpty()) {
-			return Optional.empty();
-		}
-
-		String value = System.getProperty(key);
-		if (value == null) {
-			return Optional.empty();
-		}
-		return Optional.of(value);
+	protected LookupFunction buildFunction() throws LookupProviderException {
+		return new LF(getName(), this);
 	}
 }

@@ -12,6 +12,11 @@ public final class ParameterSet<T extends Parameter> {
 	}
 
 	@SafeVarargs
+	public ParameterSet(T... params) {
+		add(params);
+	}
+
+	@SafeVarargs
 	public final ParameterSet<T> add(T... params) {
 		if (params == null)
 			return this;

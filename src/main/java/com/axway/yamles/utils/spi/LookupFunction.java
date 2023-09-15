@@ -17,13 +17,20 @@ import io.pebbletemplates.pebble.template.PebbleTemplate;
  * 
  * @author mlook
  */
-public class LookupFunction implements Function {
+public abstract class LookupFunction implements Function {
 	public static final String FUNCTION_PREFIX = "_";
 
 	private final String alias;
 	private final LookupProvider provider;
 	private final Optional<String> definitionSource;
 
+	/**
+	 * Constructs a new lookup function.
+	 * 
+	 * @param alias    alias name of the lookup function
+	 * @param provider provider constructed the function
+	 * @param source   source where the lookup function is defined
+	 */
 	public LookupFunction(String alias, LookupProvider provider, Optional<String> source) {
 		this.alias = Objects.requireNonNull(alias);
 		this.provider = Objects.requireNonNull(provider);
@@ -36,10 +43,6 @@ public class LookupFunction implements Function {
 
 	public String getName() {
 		return FUNCTION_PREFIX + this.alias;
-	}
-
-	public boolean isEnabled() {
-		return this.provider.isEnabled();
 	}
 
 	public String getDefintionSource() {
@@ -67,19 +70,31 @@ public class LookupFunction implements Function {
 
 	@Override
 	public Object execute(Map<String, Object> args, PebbleTemplate self, EvaluationContext context, int lineNumber) {
-		if (!this.provider.isEnabled()) {
-			throw new LookupFunctionException(this, "lookup provider disabled: " + this.provider.getName());
-		}
-
-		Optional<String> value = provider.lookup(this.alias, args);
+		Optional<String> value = lookup(args);
 
 		if (!value.isPresent()) {
 			throw new LookupFunctionException(this, "lookup key not found: " + argsToString(args));
 		}
-		
+
 		Audit.AUDIT_LOG.info("  lookup: alias={} args=[{}]", this.alias, argsToString(args));
 
 		return value.get();
+	}
+
+	abstract public Optional<String> lookup(Map<String, Object> args) throws LookupFunctionException;
+
+	protected String getArg(FunctionArgument arg, Map<String, Object> args, String defaultValue) {
+		Objects.requireNonNull(arg);
+		Objects.requireNonNull(args);
+
+		Object value = args.get(arg.getName());
+		if (value == null) {
+			if (arg.isRequired()) {
+				throw new LookupFunctionException(this, "argument not passed to function: " + arg.getName());
+			}
+			value = defaultValue;
+		}
+		return value.toString();
 	}
 
 	protected static String argsToString(Map<String, Object> args) {

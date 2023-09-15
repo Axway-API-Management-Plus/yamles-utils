@@ -1,8 +1,6 @@
 package com.axway.yamles.utils.spi;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 /**
  * Provides a Pebble function to lookup values from data sources.
@@ -22,20 +20,11 @@ public interface LookupProvider {
 	
 	public String getDescription();
 
-	public boolean isEnabled();
+	// public boolean isEnabled();
 	
 	public default boolean isBuiltIn() { return false; } 
 
-	/**
-	 * Adds a new source to the lookup provider.
-	 * 
-	 * @param baseDir base directory used for relative file location
-	 * @param source  lookup source
-	 * @throws LookupProviderException if error occurred on adding the lookup source
-	 */
-	public void addSource(LookupSource source) throws LookupProviderException;
-
-	public Optional<String> lookup(String alias, Map<String, Object> args);
+	public LookupFunction buildFunction(LookupSource source) throws LookupProviderException;
 
 	public List<FunctionArgument> getFunctionArguments();
 
