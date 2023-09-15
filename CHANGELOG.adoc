@@ -9,6 +9,41 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+== Version 0.2.0
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|0
+|Enhancement
+|Add support for plaintext secrets on AWS Secrets Manager (lookup provider: `aws_sm_plain`)
+
+|0
+|Breaking Change
+|Lookup provider for JSON secrets on AWS Secrets Manager is renamed from `aws_sm` to `aws_sm_json`.
+In case of usage, rename the provider in the according lookup configuration.
+
+|0
+|Enhancement
+|Keystore certificate provider enhanced:
+
+* Base64 encoded keystore data (config parameter `data`).
+  In combination with the new plaintext support for AWS Secrets Manager, keystores can be stored in AWS SM as a Base64 encoded string.
+* optional add certificate chain
+* optional suppress private key
+
+|0
+|Refactoring
+|Refactor lookup providers.
+Now, lookup providers build specific lookup functions instead of handling lookups by them self.
+
+|0
+|Enhancement
+|Support usage of built-in and non-built-in lookup functions in lookup provider configuration.
+Lookup function must be defined before usage.
+
+|===
+
+
 == Version 0.1.0
 [cols="1,2,<10a", options="header"]
 |===
