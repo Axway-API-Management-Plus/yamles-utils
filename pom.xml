@@ -19,7 +19,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.axway-api-management-plus</groupId>
 	<artifactId>yamles-utils</artifactId>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<packaging>jar</packaging>
 	<name>YAML Entity Store Utilities</name>
 	<description>Utilities for YAML Entity Store based API Gateway projects.</description>
