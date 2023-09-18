@@ -67,6 +67,35 @@ certificates:
 
 In combination with a lookup function, the `simple` provider can also be used to retrieve certificates from a KeePass DB or AWS Secrets Manager.
 
+== Certificate File
+
+[cols="2,6a"]
+|===
+|*Name*
+|`file`
+
+|*Synopsis*
+|Provides a certificate from a DER or PEM encoded certificate file.
+
+2+|*Configuration Parameters*
+|`path`
+|Path to certificate file.
+
+If a relative path is specified, the path is relative to the location of the _Certificate Configuration_ file.
+|===
+
+*Example*
+
+.Certificate Configuration
+[source, yaml]
+----
+certificates:
+  root-ca:
+    provider: file
+    config:
+      path: "certs/root-ca.crt"
+----
+
 == Keystore
 
 [cols="2,6a"]
@@ -80,6 +109,7 @@ In combination with a lookup function, the `simple` provider can also be used to
 2+|*Configuration Parameters*
 |`path`
 |Path to the keystore file.
+
 If a relative path is specified, the path is relative to the location of the _Certificate Configuration_ file.
 |`data`
 |Base64 encoded keystore.
