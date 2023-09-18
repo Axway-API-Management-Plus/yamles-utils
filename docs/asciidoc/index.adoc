@@ -3,6 +3,7 @@
 :Email: mlook@axway.com
 ifndef::revnumber[:revnumber: 0.0.0]
 :toc:
+:toclevels: 4
 :sectnums:
 :appendix-caption:
 :source-highlighter: prettify
