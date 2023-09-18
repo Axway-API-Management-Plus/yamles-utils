@@ -2,3 +2,4 @@ com.axway.yamles.utils.spi.impl.KeystoreCertificateProvider
 com.axway.yamles.utils.spi.impl.SimpleCertificateProvider
 com.axway.yamles.utils.spi.impl.RemoverCertificateProvider
 com.axway.yamles.utils.spi.impl.AwsCertificateManagerCertificateProvider
+com.axway.yamles.utils.spi.impl.FileCertificateProvider

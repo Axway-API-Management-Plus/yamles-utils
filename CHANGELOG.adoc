@@ -9,6 +9,17 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+== Version 0.3.0
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|0
+|Enhancement
+|Add public certificates from files in DER (*.crt) or PEM (*.pem) format.
+
+|===
+
+
 == Version 0.2.0
 [cols="1,2,<10a", options="header"]
 |===
