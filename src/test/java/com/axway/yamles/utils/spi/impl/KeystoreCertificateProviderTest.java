@@ -42,4 +42,21 @@ public class KeystoreCertificateProviderTest {
 		assertEquals("server", cr.getAlias());
 		assertTrue(cr.getCert().isPresent());
 	}
+	
+	@Test
+	void testKeystoreFromPath() throws Exception {
+		ClassLoader classLoader = this.getClass().getClassLoader();
+        File file = new File(classLoader.getResource("keystore.p12").getFile());
+        
+		Map<String, String> config = new HashMap<>();
+		config.put("type", "PKCS12");
+		config.put("pass", "changeme");
+		config.put("path", file.getAbsolutePath());
+
+		KeystoreCertificateProvider cp = new KeystoreCertificateProvider();
+		CertificateReplacement cr = cp.getCertificate(new File("cert-config.yaml"), "server", config);
+		
+		assertEquals("server", cr.getAlias());
+		assertTrue(cr.getCert().isPresent());
+	}
 }
