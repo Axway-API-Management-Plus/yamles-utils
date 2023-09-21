@@ -3,13 +3,14 @@ package com.axway.yamles.utils.helper;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.axway.yamles.utils.spi.LookupManager;
 import io.pebbletemplates.pebble.PebbleEngine;
 import io.pebbletemplates.pebble.attributes.methodaccess.MethodAccessValidator;
+import io.pebbletemplates.pebble.extension.Extension;
 import io.pebbletemplates.pebble.template.PebbleTemplate;
 
 public class Mustache {
@@ -47,7 +48,7 @@ public class Mustache {
 
 	private static final Logger log = LogManager.getLogger(Mustache.class);
 
-	private final PebbleEngine pe;
+	private PebbleEngine pe = null;
 
 	private static Mustache instance;
 
@@ -60,10 +61,16 @@ public class Mustache {
 		return instance;
 	}
 
-	public static void refresh() {
-		synchronized (Mustache.class) {
-			instance = null;
-		}
+	public void refresh(Extension extension) {
+		Objects.requireNonNull(extension, "Pebble extension required");
+
+		this.pe = new PebbleEngine.Builder() //
+				.extension(extension) //
+				.autoEscaping(false) //
+				.strictVariables(true) //
+				.methodAccessValidator(new DisabledMethodAceess()) //
+				.build();
+		log.debug("Pebble template engine initialized");
 	}
 
 	public static String eval(String template) {
@@ -75,16 +82,12 @@ public class Mustache {
 	}
 
 	private Mustache() {
-		this.pe = new PebbleEngine.Builder() //
-				.extension(LookupManager.getInstance()) //
-				.autoEscaping(false) //				
-				.strictVariables(true) //
-				.methodAccessValidator(new DisabledMethodAceess()) //
-				.build();
-		log.debug("Pebble template engine initialized");
 	}
 
 	public String evaluate(String template) throws IOException {
+		if (pe == null) {
+			throw new IllegalStateException("Pebble engine not initialized");
+		}
 		PebbleTemplate pt = pe.getLiteralTemplate(template);
 		StringWriter result = new StringWriter();
 		pt.evaluate(result);

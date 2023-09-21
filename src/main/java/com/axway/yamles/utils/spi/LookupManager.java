@@ -64,7 +64,7 @@ public class LookupManager extends AbstractExtension {
 				lf.getProvider().getName(), lf.getDefintionSource());
 
 		// refresh Mustache processor to reflect new function
-		Mustache.refresh();
+		Mustache.getInstance().refresh(this);
 	}
 
 	public Collection<LookupProvider> getProviders() {
