@@ -7,12 +7,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.io.File;
 import java.net.URL;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.axway.yamles.utils.helper.EnvironmentVariables;
 import com.axway.yamles.utils.spi.ConfigParameter.Type;
 
 public class LookupFunctionConfigTest {
+	
+	@BeforeAll
+	static void initLookupManager() {
+		LookupManager.getInstance();
+	}
+
 	
 	@Test
 	void loadValidLookupProviderConfig() throws Exception {

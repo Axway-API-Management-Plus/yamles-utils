@@ -8,11 +8,19 @@ import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.axway.yamles.utils.spi.CertificateReplacement;
+import com.axway.yamles.utils.spi.LookupManager;
 
 public class FileCertificateProviderTest {
+	
+	@BeforeAll
+	static void initLookupManager() {
+		LookupManager.getInstance();
+	}
+
 
 	@Test
 	void certifciateFromFileDER() throws Exception {

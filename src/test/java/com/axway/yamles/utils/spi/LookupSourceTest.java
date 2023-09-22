@@ -7,12 +7,19 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.axway.yamles.utils.helper.EnvironmentVariables;
 import com.axway.yamles.utils.spi.ConfigParameter.Type;
 
 public class LookupSourceTest {
+	
+	@BeforeAll
+	static void initLookupManager() {
+		LookupManager.getInstance();
+	}
+
 
 	@Test
 	void construct_without_parameters_and_without_setting_alias() {

@@ -4,15 +4,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Base64;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.axway.yamles.utils.helper.KeePassDB.EntryPath;
 import com.axway.yamles.utils.helper.KeePassDBTest;
+import com.axway.yamles.utils.spi.LookupManager;
 import com.axway.yamles.utils.spi.impl.KeepassLookupProvider.Kdb;
 import com.axway.yamles.utils.spi.impl.KeepassLookupProvider.Key;
 import com.axway.yamles.utils.spi.impl.KeepassLookupProvider.What;
 
 class KeepassLookupProviderTest {
+	
+	@BeforeAll
+	static void initLookupManager() {
+		LookupManager.getInstance();
+	}
+	
 
 	private static Key key(String path, What what) {
 		return key(path, what, null);
