@@ -5,13 +5,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.axway.yamles.utils.helper.EnvironmentVariables;
 import com.axway.yamles.utils.helper.Yaml;
+import com.axway.yamles.utils.spi.LookupManager;
 import com.fasterxml.jackson.databind.JsonNode;
 
 class YamlEsConfigTest {
+	@BeforeAll
+	static void initLookupManager() {
+		LookupManager.getInstance();
+	}
+	
 
 	@Test
 	void testToStringInitial() {
