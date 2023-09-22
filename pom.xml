@@ -19,7 +19,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.axway-api-management-plus</groupId>
 	<artifactId>yamles-utils</artifactId>
-	<version>0.3.0</version>
+	<version>0.4.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>YAML Entity Store Utilities</name>
 	<description>Utilities for YAML Entity Store based API Gateway projects.</description>
@@ -48,6 +48,7 @@
 		<!-- Library versions -->
 		<jackson.version>2.15.2</jackson.version>
 		<jsonpath.version>2.8.0</jsonpath.version>
+		<apache-commons-io>2.13.0</apache-commons-io>
 		<log4j.version>2.20.0</log4j.version>
 		<picoli.version>4.7.5</picoli.version>
 		<httpclient.version>5.2.1</httpclient.version>
@@ -85,6 +86,11 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${apache-commons-io}</version>
+		</dependency>
 		<dependency>
 			<groupId>io.pebbletemplates</groupId>
 			<artifactId>pebble</artifactId>

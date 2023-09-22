@@ -33,3 +33,39 @@ jobs:
       run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
       env:
         GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Get project version
+      run: |
+        echo "::set-output name=version::$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )"
+
+    - name: Temp. save artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: zip-archive
+        path: $GITHUB_WORKSPACE/target/yamles-utils-*.zip
+        retention-days: 1
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: zip-archive
+          path: target/
+
+      - name: Login to Github registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v5
+        with:
+              context: .
+              push: true
+              tags: ghcr.io/$GITHUB_REPOSITORY_OWNER/yamles-utils:${{needs.build.outputs.version}}
