@@ -16,6 +16,9 @@ jobs:
       contents: read
       packages: write
 
+    outputs:
+      PROJECT_VERSION: ${{ steps.project-version.outputs.PROJECT_VERSION }}
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up JDK 11
@@ -32,8 +35,9 @@ jobs:
         GITHUB_TOKEN: ${{ github.token }}
 
     - name: Save project version
+      id: project-version
       run: |
-        echo "version=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )" >> $GITHUB_OUTPUT
+        echo "PROJECT_VERSION=$( mvn help:evaluate -Dexpression=project.version -q -DforceStdout )" >> $GITHUB_OUTPUT
 
     - name: Temp. save artifact
       uses: actions/upload-artifact@v3
@@ -66,4 +70,4 @@ jobs:
         with:
               context: .
               push: true
-              tags: ghcr.io/$GITHUB_REPOSITORY_OWNER/yamles-utils:${{needs.build.outputs.version}}
+              tags: ghcr.io/$GITHUB_REPOSITORY_OWNER/yamles-utils:${{ needs.build.outputs.PROJECT_VERSION }}
