@@ -360,7 +360,7 @@ accounts:
 
 Lookup functions are configured to retrieve values from these files. 
 
-.Lookup Function Defintions `lookup-func.yaml`
+.Lookup Function Definitions `lookup-func.yaml`
 [source, yaml]
 ----
 lookups:
@@ -408,6 +408,71 @@ mail:
   user: info@axway.com
   pwd: changeme
 ----
+
+=== File Content
+
+[cols="2,6a"]
+|===
+|*Name*
+|`file`
+
+|*Built-In*
+|no
+
+|*Synopsis*
+|Retrieves the content of a file as a string.
+
+For binary content (`encoding: binary`), the content is returned as a Base64 encoded string.
+
+2+|*Configuration Parameters*
+
+|`base`
+|Base directory for relative files.
+If missing, the directory containing the lookup definition file is used.
+
+2+|*Lookup Function Arguments*
+
+|`key`
+|File path. 
+
+|`encoding`
+|Character encoding of the content.
+If missing, `UTF-8` is assumed.
+
+For binary content, use `binary`.
+|===
+
+*Example*
+
+In this example there is a file containing a greeting message.
+
+.`/opt/text/greeting.txt`
+[source, text]
+----
+Hello World!
+----
+
+Lookup function is configured to retrieve values from file content.
+
+.Lookup Function Definitions `lookup-func.yaml`
+[source, yaml]
+----
+lookups:
+  contents:
+    provider: file
+    config:
+      base: "/opt/text"
+----
+
+A configuration fragment uses the lookup function to retrieve the content of the `greeting.txt` file.
+
+.Configuration Fragment `config.yaml`
+[source, yaml]
+----
+greeting: "{{ _contents('greeting.txt') }}" #<1>
+----
+<1> As the file path is not absolute, the path is relative to the specified base path.
+So the final path is `/opt/text/greeting.txt`.
 
 === KeePass DB
 

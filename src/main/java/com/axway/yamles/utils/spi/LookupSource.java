@@ -96,6 +96,35 @@ public class LookupSource {
 		return Optional.ofNullable(file);
 	}
 
+	public Optional<File> getBaseDirFromConfig(ConfigParameter param) {
+		if (param.getType() != Type.file) {
+			throw new LookupFunctionConfigException(this.configSource,
+					"not a file parameter: alias=" + this.alias + "; parameter=" + param.getName());
+		}
+
+		Optional<File> baseDir = getBaseDirectory();
+
+		String base = getConfig(param, null);
+		if (base == null || base.isEmpty())
+			return baseDir;
+
+		File resolvedBaseDir = null;
+
+		if (baseDir.isPresent()) {
+			Path basePath = Paths.get(baseDir.get().toURI());
+			resolvedBaseDir = basePath.resolve(base).toFile();
+		} else {
+			resolvedBaseDir = new File(base);
+		}
+
+		if (!resolvedBaseDir.isDirectory()) {
+			throw new LookupFunctionConfigException(this.configSource, "base directory not exists: alias=" + this.alias
+					+ "; parameter=" + param.getName() + "; baseDir=" + resolvedBaseDir.getAbsolutePath());
+		}
+
+		return Optional.of(resolvedBaseDir);
+	}
+
 	public String getAlias() {
 		if (this.alias == null) {
 			throw new IllegalStateException("alias is not set for lookup source");
@@ -121,7 +150,7 @@ public class LookupSource {
 				: Optional.empty();
 	}
 
-	void setConfigSource(File file) {
+	public void setConfigSource(File file) {
 		Objects.requireNonNull(file, "configuration file is null");
 		if (!file.isFile()) {
 			throw new IllegalArgumentException("configuration source is not a regular file: " + file.getAbsolutePath());

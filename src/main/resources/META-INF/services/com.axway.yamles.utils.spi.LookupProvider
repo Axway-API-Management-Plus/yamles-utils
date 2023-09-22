@@ -7,3 +7,4 @@ com.axway.yamles.utils.spi.impl.VaultLookupProvider
 com.axway.yamles.utils.spi.impl.KeepassLookupProvider
 com.axway.yamles.utils.spi.impl.AwsSecretsManagerJsonLookupProvider
 com.axway.yamles.utils.spi.impl.AwsSecretsManagerPlainTextLookupProvider
+com.axway.yamles.utils.spi.impl.FileContentLookupProvider
