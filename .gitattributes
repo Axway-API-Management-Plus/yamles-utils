@@ -1,3 +1,6 @@
 examples/apim/** text eol=lf
 examples/*.cmd   text eol=crlf
 examples/*.sh    text eol=lf
+
+mvnw     text eol=lf
+mvnw.cmd text eol=crlf
