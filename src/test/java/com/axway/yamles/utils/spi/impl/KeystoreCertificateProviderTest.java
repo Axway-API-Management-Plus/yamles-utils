@@ -12,12 +12,19 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.axway.yamles.utils.spi.CertificateReplacement;
+import com.axway.yamles.utils.spi.LookupManager;
 
 public class KeystoreCertificateProviderTest {
+	@BeforeAll
+	static void initLookupManager() {
+		LookupManager.getInstance();
+	}
 	
+
 	@Test
 	void testKeystoreFromData() throws Exception {
 		

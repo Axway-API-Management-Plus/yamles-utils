@@ -3,9 +3,11 @@ package com.axway.yamles.utils.helper;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.axway.yamles.utils.spi.LookupFunctionException;
+import com.axway.yamles.utils.spi.LookupManager;
 
 import io.pebbletemplates.pebble.error.ClassAccessException;
 import io.pebbletemplates.pebble.error.PebbleException;
@@ -16,6 +18,11 @@ class MustacheTest {
 
 	private static final String PROP_ML_KEY = "mustache.test.ml";
 	private static final String PROP_ML_VALUE = "\"Escaped\nMulti Line\tText\"";
+
+	@BeforeAll
+	static void initLookupManager() {
+		LookupManager.getInstance();
+	}
 
 	@Test
 	void eval() {
