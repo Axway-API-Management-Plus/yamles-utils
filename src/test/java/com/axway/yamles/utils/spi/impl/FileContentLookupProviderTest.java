@@ -8,12 +8,20 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.axway.yamles.utils.spi.LookupFunction;
+import com.axway.yamles.utils.spi.LookupManager;
 import com.axway.yamles.utils.spi.LookupSource;
 
 public class FileContentLookupProviderTest {
+	
+	@BeforeAll
+	static void initLookupManager() {
+		LookupManager.getInstance();
+	}
+
 
 	@Test
 	void testTextContent() throws Exception {

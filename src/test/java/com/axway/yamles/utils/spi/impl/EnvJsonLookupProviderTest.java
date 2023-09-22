@@ -6,14 +6,22 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.axway.yamles.utils.helper.EnvironmentVariables;
 import com.axway.yamles.utils.spi.LookupFunction;
+import com.axway.yamles.utils.spi.LookupManager;
 import com.axway.yamles.utils.spi.LookupProviderException;
 import com.axway.yamles.utils.spi.LookupSource;
 
 public class EnvJsonLookupProviderTest {
+	
+	@BeforeAll
+	static void initLookupManager() {
+		LookupManager.getInstance();
+	}
+
 
 	@Test
 	void buildAndTestLookupFunction() {
