@@ -48,6 +48,7 @@ public class KeystoreCertificateProviderTest {
 		
 		assertEquals("server", cr.getAlias());
 		assertTrue(cr.getCert().isPresent());
+		assertTrue(cr.getKey().isPresent());
 	}
 	
 	@Test
@@ -65,5 +66,6 @@ public class KeystoreCertificateProviderTest {
 		
 		assertEquals("server", cr.getAlias());
 		assertTrue(cr.getCert().isPresent());
+		assertTrue(cr.getKey().isPresent());		
 	}
 }

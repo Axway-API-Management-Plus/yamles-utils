@@ -9,6 +9,17 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+== Version 0.4.3
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|0
+|Fix
+|Due to a bug private keys are not retrieved from a keystore.
+This is fixed now.
+|===
+
+
 == Version 0.4.2
 [cols="1,2,<10a", options="header"]
 |===

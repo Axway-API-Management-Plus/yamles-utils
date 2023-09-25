@@ -130,7 +130,7 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 			boolean nokey = getConfig(CFG_NOKEY, config, "false").equals("true");
 			Key key = ks.getKey(aliasName, password);
 			log.debug("key for alias '{}' {}found", aliasName, (key == null) ? "not " : "");
-			if (!nokey && key != null) {
+			if (key != null && nokey) {
 				key = null;
 				log.debug("key for alias '{}' suppressed", aliasName);
 			}
