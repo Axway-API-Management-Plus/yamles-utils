@@ -9,6 +9,24 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+== Version 0.4.2
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|0
+|Fix
+|Add STS component for AWS to enable service account authentication in EKS.
+|===
+
+== Version 0.4.1
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|0
+|Fix
+|Fix line endings for Maven wrapper.
+|===
+
 == Version 0.4.0
 [cols="1,2,<10a", options="header"]
 |===

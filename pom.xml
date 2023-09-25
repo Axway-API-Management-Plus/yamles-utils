@@ -19,7 +19,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.axway-api-management-plus</groupId>
 	<artifactId>yamles-utils</artifactId>
-	<version>0.4.0</version>
+	<version>0.4.2</version>
 	<packaging>jar</packaging>
 	<name>YAML Entity Store Utilities</name>
 	<description>Utilities for YAML Entity Store based API Gateway projects.</description>
@@ -54,7 +54,7 @@
 		<httpclient.version>5.2.1</httpclient.version>
 		<keepass.version>2.2.1</keepass.version>
 		<pebble.version>3.2.1</pebble.version>
-		<awssdk.version>2.20.147</awssdk.version>
+		<awssdk.version>2.20.153</awssdk.version>
 
 		<junit.jupiter.version>5.10.0</junit.jupiter.version>
 		<junit.platform.version>1.10.0</junit.platform.version>
@@ -170,6 +170,10 @@
 			<groupId>software.amazon.awssdk</groupId>
 			<artifactId>secretsmanager</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>sts</artifactId>
+		</dependency>
 	</dependencies>
 	<build>
 		<resources>
@@ -212,8 +216,6 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.2</version>
 				<configuration>
-					<forkCount>1</forkCount>
-        			<reuseForks>false</reuseForks>					
 					<failIfNoTests>true</failIfNoTests>
 					<workingDirectory>./target</workingDirectory>
 				</configuration>
