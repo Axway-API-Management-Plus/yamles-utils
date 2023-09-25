@@ -44,7 +44,7 @@ public class LookupFunctionConfig {
 
 	@JsonCreator
 	protected LookupFunctionConfig(@JsonProperty("lookups") Map<String, LookupSource> sources) {
-		this.sources = Objects.requireNonNull(sources, "no sources defined");
+		this.sources = (sources != null) ? sources : Collections.emptyMap();
 		this.sources.forEach((k, v) -> {
 			v.setAlias(k);
 		});

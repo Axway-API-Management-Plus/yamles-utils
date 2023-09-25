@@ -46,7 +46,7 @@ class CertificatesConfig {
 
 	@JsonCreator
 	public CertificatesConfig(@JsonProperty("certificates") Map<String, Alias> aliases) {
-		this.aliases = Objects.requireNonNull(aliases, "no aliases defined");
+		this.aliases = (aliases != null) ? aliases : Collections.emptyMap();
 		this.aliases.forEach((k, v) -> {
 			v.setName(k);
 		});
