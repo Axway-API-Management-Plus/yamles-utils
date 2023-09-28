@@ -3,7 +3,6 @@ package com.axway.yamles.utils.helper;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.Method;
-import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -56,20 +55,23 @@ public class Mustache {
 		synchronized (Mustache.class) {
 			if (instance == null) {
 				instance = new Mustache();
+				instance.refresh(null);
 			}
 		}
 		return instance;
 	}
 
 	public void refresh(Extension extension) {
-		Objects.requireNonNull(extension, "Pebble extension required");
-
-		this.pe = new PebbleEngine.Builder() //
-				.extension(extension) //
+		PebbleEngine.Builder peb = new PebbleEngine.Builder() //
 				.autoEscaping(false) //
 				.strictVariables(true) //
-				.methodAccessValidator(new DisabledMethodAceess()) //
-				.build();
+				.methodAccessValidator(new DisabledMethodAceess());
+
+		if (extension != null) {
+			peb.extension(extension);
+		}
+
+		this.pe = peb.build();
 		log.debug("Pebble template engine initialized");
 	}
 

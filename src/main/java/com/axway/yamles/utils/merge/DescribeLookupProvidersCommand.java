@@ -2,8 +2,6 @@ package com.axway.yamles.utils.merge;
 
 import java.util.concurrent.Callable;
 
-import com.axway.yamles.utils.spi.LookupManager;
-
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 

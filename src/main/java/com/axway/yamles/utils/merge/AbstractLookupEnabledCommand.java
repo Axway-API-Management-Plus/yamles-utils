@@ -5,8 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import com.axway.yamles.utils.spi.LookupManager;
-
 import picocli.CommandLine.Option;
 
 public abstract class AbstractLookupEnabledCommand implements Callable<Integer> {
