@@ -9,7 +9,7 @@ import java.io.StringWriter;
 import org.junit.jupiter.api.Test;
 
 import com.axway.yamles.utils.helper.Mustache.DisabledMethodAceess;
-import com.axway.yamles.utils.spi.LookupManager;
+import com.axway.yamles.utils.merge.LookupManager;
 
 import io.pebbletemplates.pebble.PebbleEngine;
 import io.pebbletemplates.pebble.error.ClassAccessException;

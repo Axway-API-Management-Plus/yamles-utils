@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import com.axway.yamles.utils.helper.EnvironmentVariables;
 import com.axway.yamles.utils.helper.Yaml;
-import com.axway.yamles.utils.spi.LookupManager;
+import com.axway.yamles.utils.merge.LookupManager;
 import com.fasterxml.jackson.databind.JsonNode;
 
 class YamlEsConfigTest {

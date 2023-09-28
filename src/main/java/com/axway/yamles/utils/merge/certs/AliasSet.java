@@ -10,9 +10,9 @@ import java.util.Set;
 
 import com.axway.yamles.utils.helper.Audit;
 import com.axway.yamles.utils.helper.YamlEs;
-import com.axway.yamles.utils.spi.CertificateManager;
-import com.axway.yamles.utils.spi.CertificateProvider;
-import com.axway.yamles.utils.spi.CertificateReplacement;
+import com.axway.yamles.utils.merge.CertificateManager;
+import com.axway.yamles.utils.plugins.CertificateProvider;
+import com.axway.yamles.utils.plugins.CertificateReplacement;
 
 class AliasSet {
 	private final Set<Alias> aliases = new HashSet<>();

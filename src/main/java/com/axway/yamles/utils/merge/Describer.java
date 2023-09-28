@@ -5,11 +5,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-import com.axway.yamles.utils.spi.CertificateProvider;
-import com.axway.yamles.utils.spi.ConfigParameter;
-import com.axway.yamles.utils.spi.FunctionArgument;
-import com.axway.yamles.utils.spi.LookupFunction;
-import com.axway.yamles.utils.spi.LookupProvider;
+import com.axway.yamles.utils.plugins.CertificateProvider;
+import com.axway.yamles.utils.plugins.ConfigParameter;
+import com.axway.yamles.utils.plugins.FunctionArgument;
+import com.axway.yamles.utils.plugins.LookupFunction;
+import com.axway.yamles.utils.plugins.LookupProvider;
 
 import picocli.CommandLine.Help;
 import picocli.CommandLine.Help.Ansi;

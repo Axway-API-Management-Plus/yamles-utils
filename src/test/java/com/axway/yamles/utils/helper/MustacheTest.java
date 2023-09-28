@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.axway.yamles.utils.spi.LookupFunctionException;
-import com.axway.yamles.utils.spi.LookupManager;
+import com.axway.yamles.utils.merge.LookupManager;
+import com.axway.yamles.utils.plugins.LookupFunctionException;
 
 import io.pebbletemplates.pebble.error.ClassAccessException;
 import io.pebbletemplates.pebble.error.PebbleException;
@@ -54,6 +54,7 @@ class MustacheTest {
 		});
 
 		System.getProperties().remove(PROP_KEY);
+		System.getProperties().remove(PROP_ML_KEY);
 	}
 
 	@Test

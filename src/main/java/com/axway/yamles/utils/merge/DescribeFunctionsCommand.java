@@ -1,7 +1,5 @@
 package com.axway.yamles.utils.merge;
 
-import com.axway.yamles.utils.spi.LookupManager;
-
 import picocli.CommandLine.Command;
 
 @Command(name = "functions", description = "Describe available functions.", mixinStandardHelpOptions = true)

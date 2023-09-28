@@ -1,0 +1,5 @@
+com.axway.yamles.utils.plugins.core.KeystoreCertificateProvider
+com.axway.yamles.utils.plugins.core.SimpleCertificateProvider
+com.axway.yamles.utils.plugins.core.RemoverCertificateProvider
+com.axway.yamles.utils.plugins.core.FileCertificateProvider
+com.axway.yamles.utils.plugins.aws.AwsCertificateManagerCertificateProvider
