@@ -12,10 +12,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.helper.Audit;
-import com.axway.yamles.utils.helper.Mustache;
 import com.axway.yamles.utils.helper.NodeLocation;
 import com.axway.yamles.utils.helper.ValueNodeSet;
 import com.axway.yamles.utils.helper.Yaml;
+import com.axway.yamles.utils.plugins.Evaluator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -94,7 +94,7 @@ class YamlEsConfig {
 			} else if (value.isTextual()) {
 				String v = value.asText();
 				Audit.AUDIT_LOG.info("evaluate field: {}", fieldLocation);
-				v = Mustache.eval(v);
+				v = Evaluator.eval(v);
 				node.put(field.getKey(), v);
 			}
 		}
@@ -111,7 +111,7 @@ class YamlEsConfig {
 			} else if (value.isTextual()) {
 				String v = value.asText();
 				Audit.AUDIT_LOG.info("evaluate field: {}", fieldLocation);
-				v = Mustache.eval(v);
+				v = Evaluator.eval(v);
 				node.set(i, v);
 			}
 		}

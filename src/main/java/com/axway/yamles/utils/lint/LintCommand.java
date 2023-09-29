@@ -9,7 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.YamlEsUtils;
-import com.axway.yamles.utils.helper.YamlEs;
+import com.axway.yamles.utils.es.YamlEs;
 import com.axway.yamles.utils.lint.rules.Results;
 
 import picocli.CommandLine.Command;

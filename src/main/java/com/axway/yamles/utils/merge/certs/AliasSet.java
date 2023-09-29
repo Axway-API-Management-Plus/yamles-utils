@@ -8,8 +8,8 @@ import java.util.Iterator;
 import java.util.Optional;
 import java.util.Set;
 
+import com.axway.yamles.utils.es.YamlEs;
 import com.axway.yamles.utils.helper.Audit;
-import com.axway.yamles.utils.helper.YamlEs;
 import com.axway.yamles.utils.merge.CertificateManager;
 import com.axway.yamles.utils.plugins.CertificateProvider;
 import com.axway.yamles.utils.plugins.CertificateReplacement;

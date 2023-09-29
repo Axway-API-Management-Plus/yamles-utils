@@ -1,72 +1,21 @@
-package com.axway.yamles.utils.helper;
+package com.axway.yamles.utils.es;
 
 import java.io.File;
 import java.io.IOException;
 import java.security.Key;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.axway.yamles.utils.helper.ValueNodeSet;
+import com.axway.yamles.utils.helper.Yaml;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class YamlEs {
-
-	public static final class CertFiles {
-		private final String alias;
-		private final File yamlFile;
-		private final File certFile;
-		private final File keyFile;
-
-		public CertFiles(YamlEs project, String alias) {
-			this.alias = alias;
-			File certStore = project.getCertStoreDir();
-			this.yamlFile = new File(certStore, alias + ".yaml");
-			this.certFile = new File(certStore, alias + "-cert.pem");
-			this.keyFile = new File(certStore, alias + "-key.pem");
-		}
-
-		public void write(Certificate cert, Optional<Key> key) throws IOException, CertificateEncodingException {
-			Objects.requireNonNull(cert);
-
-			removeFiles();
-
-			ObjectNode yaml = buildYaml(key);
-			Yaml.write(this.yamlFile, yaml);
-
-			PemFile.write(this.certFile, cert.getEncoded());
-			if (key.isPresent()) {
-				PemFile.write(this.keyFile, key.get().getEncoded());
-			}
-		}
-
-		public void removeFiles() {
-			this.yamlFile.delete();
-			this.certFile.delete();
-			this.keyFile.delete();
-		}
-
-		private ObjectNode buildYaml(Optional<Key> key) {
-			ObjectNode yaml = Yaml.createObjectNode();
-
-			yaml.put("type", "Certificate");
-			ObjectNode fields = yaml.putObject("fields");
-			fields.put("dname", this.alias);
-			fields.put("issuer", "/null");
-			fields.put("engine", "RAW");
-			fields.put("certificateRealm", "");
-			fields.put("content", "{{file '" + this.certFile.getName() + "'}}");
-			if (key.isPresent()) {
-				fields.put("key", "{{file '" + this.keyFile.getName() + "'}}");
-			}
-
-			return yaml;
-		}
-	}
 
 	private static final Logger log = LogManager.getLogger(YamlEs.class);
 

@@ -1,4 +1,4 @@
-package com.axway.yamles.utils.helper;
+package com.axway.yamles.utils.merge;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import com.axway.yamles.utils.merge.LookupManager;
+import com.axway.yamles.utils.merge.Mustache;
 import com.axway.yamles.utils.plugins.LookupFunctionException;
 
 import io.pebbletemplates.pebble.error.ClassAccessException;
@@ -29,28 +30,30 @@ class MustacheTest {
 		System.getProperties().setProperty(PROP_KEY, PROP_VALUE);
 		System.getProperties().setProperty(PROP_ML_KEY, PROP_ML_VALUE);
 
-		assertEquals("Hello", Mustache.eval("Hello"));
-		assertEquals("Hello", Mustache.eval("{{ \"Hello\" }}"));
-		assertEquals("{{Hello}} World", Mustache.eval("{{ '{{Hello}}' }} World"));
-		assertEquals(PROP_VALUE, Mustache.eval("{{ _sys('" + PROP_KEY + "') }}"));
-		assertEquals(PROP_VALUE, Mustache.eval("{{ _sys(key='" + PROP_KEY + "') }}"));
-		assertEquals("Result: " + PROP_VALUE + "!", Mustache.eval("Result: {{ _sys('" + PROP_KEY + "') }}!"));
-		assertEquals(PROP_ML_VALUE, Mustache.eval("{{ _sys('" + PROP_ML_KEY + "') }}"));
+		Mustache m = Mustache.getInstance();
+
+		assertEquals("Hello", m.evaluate("Hello"));
+		assertEquals("Hello", m.evaluate("{{ \"Hello\" }}"));
+		assertEquals("{{Hello}} World", m.evaluate("{{ '{{Hello}}' }} World"));
+		assertEquals(PROP_VALUE, m.evaluate("{{ _sys('" + PROP_KEY + "') }}"));
+		assertEquals(PROP_VALUE, m.evaluate("{{ _sys(key='" + PROP_KEY + "') }}"));
+		assertEquals("Result: " + PROP_VALUE + "!", m.evaluate("Result: {{ _sys('" + PROP_KEY + "') }}!"));
+		assertEquals(PROP_ML_VALUE, m.evaluate("{{ _sys('" + PROP_ML_KEY + "') }}"));
 
 		assertThrows(Exception.class, () -> {
-			Mustache.eval("{{ _sys('non_existing_propery') }}");
+			m.evaluate("{{ _sys('non_existing_propery') }}");
 		});
 
 		assertThrows(LookupFunctionException.class, () -> {
-			Mustache.eval("{{ _sys() }}");
+			m.evaluate("{{ _sys() }}");
 		});
 
 		assertThrows(PebbleException.class, () -> {
-			Mustache.eval("{{ _sys(lookup='key') }}");
+			m.evaluate("{{ _sys(lookup='key') }}");
 		});
 
 		assertThrows(PebbleException.class, () -> {
-			Mustache.eval("{{hello}}");
+			m.evaluate("{{hello}}");
 		});
 
 		System.getProperties().remove(PROP_KEY);
@@ -59,7 +62,7 @@ class MustacheTest {
 
 	@Test
 	void fixed_CVE_2022_37767() throws Exception {
-		assertThrows(ClassAccessException.class,
-				() -> Mustache.eval(CVE_2022_37767_Test.TEMPLATE_INVOKE_TOSTRING_METHOD));
+		Mustache m = Mustache.getInstance();
+		assertThrows(ClassAccessException.class, () -> m.evaluate(CVE_2022_37767_Test.TEMPLATE_INVOKE_TOSTRING_METHOD));
 	}
 }

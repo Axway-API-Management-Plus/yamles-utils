@@ -14,7 +14,6 @@ import org.junit.jupiter.api.Test;
 import com.axway.yamles.utils.merge.LookupManager;
 import com.axway.yamles.utils.plugins.LookupFunction;
 import com.axway.yamles.utils.plugins.LookupSource;
-import com.axway.yamles.utils.plugins.core.FileContentLookupProvider;
 
 public class FileContentLookupProviderTest {
 	

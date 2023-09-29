@@ -6,12 +6,11 @@ import org.apache.logging.log4j.Logger;
 import com.axway.yamles.utils.helper.EnvironmentVariables;
 import com.axway.yamles.utils.plugins.AbstractLookupDocLookupProvider;
 import com.axway.yamles.utils.plugins.ConfigParameter;
+import com.axway.yamles.utils.plugins.ConfigParameter.Type;
 import com.axway.yamles.utils.plugins.LookupDoc;
 import com.axway.yamles.utils.plugins.LookupFunction;
 import com.axway.yamles.utils.plugins.LookupProviderException;
 import com.axway.yamles.utils.plugins.LookupSource;
-import com.axway.yamles.utils.plugins.AbstractLookupDocLookupProvider.LF;
-import com.axway.yamles.utils.plugins.ConfigParameter.Type;
 
 public class EnvJsonLookupProvider extends AbstractLookupDocLookupProvider {
 

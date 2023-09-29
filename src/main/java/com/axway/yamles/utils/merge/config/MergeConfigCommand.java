@@ -7,9 +7,9 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.axway.yamles.utils.es.YamlEs;
 import com.axway.yamles.utils.helper.Audit;
 import com.axway.yamles.utils.helper.Yaml;
-import com.axway.yamles.utils.helper.YamlEs;
 import com.axway.yamles.utils.merge.AbstractLookupEnabledCommand;
 
 import picocli.CommandLine.ArgGroup;

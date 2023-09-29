@@ -9,7 +9,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Pattern;
 
-import com.axway.yamles.utils.helper.Mustache;
 import com.axway.yamles.utils.plugins.ConfigParameter.Type;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -69,7 +68,7 @@ public class LookupSource {
 		}
 		if (value != null) {
 			if (param.hasMustacheSupport()) {
-				value = Mustache.eval(value);
+				value = Evaluator.eval(value);
 			}
 		}
 		return value;

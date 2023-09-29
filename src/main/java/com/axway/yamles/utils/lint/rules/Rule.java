@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import com.axway.yamles.utils.helper.YamlEs;
+import com.axway.yamles.utils.es.YamlEs;
 import com.axway.yamles.utils.lint.rules.Results.Finding;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

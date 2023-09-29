@@ -1,4 +1,4 @@
-package com.axway.yamles.utils.helper;
+package com.axway.yamles.utils.merge;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -8,8 +8,8 @@ import java.io.StringWriter;
 
 import org.junit.jupiter.api.Test;
 
-import com.axway.yamles.utils.helper.Mustache.DisabledMethodAceess;
 import com.axway.yamles.utils.merge.LookupManager;
+import com.axway.yamles.utils.merge.Mustache.DisabledMethodAceess;
 
 import io.pebbletemplates.pebble.PebbleEngine;
 import io.pebbletemplates.pebble.error.ClassAccessException;
