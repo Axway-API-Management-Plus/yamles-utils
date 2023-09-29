@@ -4,8 +4,6 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-import com.axway.yamles.utils.helper.Mustache;
-
 public abstract class AbstractCertificateProvider implements CertificateProvider {
 
 	private final ParameterSet<ConfigParameter> configParams = new ParameterSet<>();
@@ -25,7 +23,7 @@ public abstract class AbstractCertificateProvider implements CertificateProvider
 		}
 		if (value != null) {
 			if (param.hasMustacheSupport()) {
-				value = Mustache.eval(value);
+				value = Evaluator.eval(value);
 			}
 		}
 		return value;

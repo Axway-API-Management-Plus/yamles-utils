@@ -2,7 +2,6 @@ package com.axway.yamles.utils.merge;
 
 import java.io.File;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.helper.Audit;
-import com.axway.yamles.utils.helper.Mustache;
 import com.axway.yamles.utils.plugins.LookupFunction;
 import com.axway.yamles.utils.plugins.LookupFunctionConfig;
 import com.axway.yamles.utils.plugins.LookupFunctionConfigException;
@@ -21,7 +19,6 @@ import com.axway.yamles.utils.plugins.LookupProvider;
 import com.axway.yamles.utils.plugins.LookupSource;
 
 import io.pebbletemplates.pebble.extension.AbstractExtension;
-import io.pebbletemplates.pebble.extension.Function;
 
 public class LookupManager extends AbstractExtension {
 	private static final Logger log = LogManager.getLogger(LookupManager.class);
@@ -29,8 +26,6 @@ public class LookupManager extends AbstractExtension {
 	private static final LookupManager instance = new LookupManager();
 
 	private final Map<String, LookupProvider> lookupProviders = new TreeMap<>();
-
-	private final Map<String, LookupFunction> functions = new TreeMap<>();
 
 	public static LookupManager getInstance() {
 		return instance;
@@ -61,15 +56,7 @@ public class LookupManager extends AbstractExtension {
 	}
 
 	private void addFunction(LookupFunction lf) {
-		LookupFunction existingFunc = this.functions.put(lf.getName(), lf);
-		if (existingFunc != null)
-			throw new LookupFunctionConfigException(lf.getDefintionSource(),
-					"alias '" + lf.getAlias() + "' already defined in " + existingFunc.getDefintionSource());
-		Audit.AUDIT_LOG.info("lookup function registered: func={}; provider={}; source={}", lf.getName(),
-				lf.getProvider().getName(), lf.getDefintionSource());
-
-		// refresh Mustache processor to reflect new function
-		Mustache.getInstance().refresh(this);
+		Mustache.getInstance().addFunction(lf);
 	}
 
 	public Collection<LookupProvider> getProviders() {
@@ -77,7 +64,7 @@ public class LookupManager extends AbstractExtension {
 	}
 
 	public Collection<LookupFunction> getLookupFunctions() {
-		return this.functions.values();
+		return Mustache.getInstance().getLookupFunctions();
 	}
 
 	public void configureFunctions(List<File> configFiles) {
@@ -98,14 +85,5 @@ public class LookupManager extends AbstractExtension {
 				addFunction(lf);
 			}
 		}
-	}
-
-	@Override
-	public Map<String, Function> getFunctions() {
-		Map<String, Function> func = new HashMap<>();
-		this.functions.forEach((name, lf) -> {
-			func.put(lf.getName(), lf);
-		});
-		return func;
 	}
 }
