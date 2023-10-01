@@ -1,6 +1,8 @@
 package com.axway.yamles.utils.plugins.core;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import com.axway.yamles.utils.plugins.AbstractCertificateProvider;
@@ -29,9 +31,9 @@ public class RemoverCertificateProvider extends AbstractCertificateProvider {
 	}
 
 	@Override
-	public CertificateReplacement getCertificate(File configSource, String aliasName, Map<String, String> config)
+	public List<CertificateReplacement> getCertificate(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
-		return new CertificateReplacement(aliasName);
+		return Arrays.asList(new CertificateReplacement(aliasName));
 	}
 
 }

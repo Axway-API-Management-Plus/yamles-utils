@@ -10,7 +10,9 @@ import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
 import java.util.Map;
 
 import com.axway.yamles.utils.plugins.AbstractCertificateProvider;
@@ -45,7 +47,7 @@ public class SimpleCertificateProvider extends AbstractCertificateProvider {
 	}
 
 	@Override
-	public CertificateReplacement getCertificate(File configSource, String aliasName, Map<String, String> config)
+	public List<CertificateReplacement> getCertificate(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
 		try {
 			Certificate c = null;
@@ -65,7 +67,7 @@ public class SimpleCertificateProvider extends AbstractCertificateProvider {
 				k = kf.generatePrivate(ks);
 			}
 
-			return new CertificateReplacement(aliasName, c, k);
+			return Arrays.asList(new CertificateReplacement(aliasName, c, k));
 		} catch (CertificateException | NoSuchAlgorithmException | InvalidKeySpecException e) {
 			throw new CertificateProviderException("error on creating certificate", e);
 		}
