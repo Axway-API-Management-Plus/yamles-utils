@@ -4,7 +4,9 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -53,7 +55,7 @@ public class AwsCertificateManagerCertificateProvider extends AbstractCertificat
 	}
 
 	@Override
-	public CertificateReplacement getCertificate(File configSource, String aliasName, Map<String, String> config)
+	public List<CertificateReplacement> getCertificate(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
 
 		synchronized (this) {
@@ -97,7 +99,7 @@ public class AwsCertificateManagerCertificateProvider extends AbstractCertificat
 				}
 			}
 
-			return cr;
+			return Arrays.asList(cr);
 		} catch (Exception e) {
 			throw new CertificateProviderException("error on parsing ACM certificate: " + aliasName, e);
 		}

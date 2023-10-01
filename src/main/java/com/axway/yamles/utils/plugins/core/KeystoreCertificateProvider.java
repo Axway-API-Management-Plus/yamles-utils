@@ -8,7 +8,9 @@ import java.io.InputStream;
 import java.security.Key;
 import java.security.KeyStore;
 import java.security.cert.Certificate;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -63,7 +65,7 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 	}
 
 	@Override
-	public CertificateReplacement getCertificate(File configSource, String aliasName, Map<String, String> config)
+	public List<CertificateReplacement> getCertificate(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
 
 		String type = getConfig(CFG_TYPE, config, TYPE_P12);
@@ -149,7 +151,7 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 				}
 			}
 
-			return cr;
+			return Arrays.asList(cr);
 		} catch (Exception e) {
 			throw new CertificateProviderException("error on loading keystore: " + source, e);
 		}

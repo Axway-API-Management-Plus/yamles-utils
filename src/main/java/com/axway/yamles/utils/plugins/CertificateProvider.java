@@ -13,6 +13,6 @@ public interface CertificateProvider {
 
 	public List<ConfigParameter> getConfigParameters();
 	
-	public CertificateReplacement getCertificate(File configSource, String aliasName, Map<String, String> config)
+	public List<CertificateReplacement> getCertificate(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException;
 }
