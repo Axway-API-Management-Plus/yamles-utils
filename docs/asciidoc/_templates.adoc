@@ -623,7 +623,7 @@ anm:
 
 NOTE: The secret is not limited to key/value pair. Any kind of JSON document is supported by this lookup provider.
 
-==== Plaintext Secrets
+==== Plaintext/Binary Secrets
 
 [cols="2,6a"]
 |===
@@ -634,7 +634,8 @@ NOTE: The secret is not limited to key/value pair. Any kind of JSON document is 
 |no
 
 |*Synopsis*
-|Retrieves value from plain text secret on AWS Secrets Manager.
+|Retrieves value from plain text or binary secret on AWS Secrets Manager.
+The values of binary secrets are represented as Bas64 encoded strings.
 
 2+|*Configuration Parameters*
 |`prefix`

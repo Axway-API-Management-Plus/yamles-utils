@@ -1,5 +1,6 @@
 package com.axway.yamles.utils.plugins.aws;
 
+import java.util.Base64;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
@@ -13,6 +14,7 @@ import com.axway.yamles.utils.plugins.LookupProviderException;
 import com.axway.yamles.utils.plugins.LookupSource;
 import com.axway.yamles.utils.plugins.ConfigParameter.Type;
 
+import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
 import software.amazon.awssdk.services.secretsmanager.SecretsManagerClientBuilder;
@@ -50,8 +52,13 @@ public class AwsSecretsManagerPlainTextLookupProvider extends AbstractLookupProv
 			GetSecretValueResponse getSecretValueResponse;
 
 			getSecretValueResponse = client.getSecretValue(getSecretValueRequest);
-			result = Optional.ofNullable(getSecretValueResponse.secretString());
 
+			SdkBytes binary = getSecretValueResponse.secretBinary();
+			if (binary != null) {
+				result = Optional.of(Base64.getEncoder().encodeToString(binary.asByteArray()));
+			} else {
+				result = Optional.ofNullable(getSecretValueResponse.secretString());
+			}
 			return result;
 		}
 	}
