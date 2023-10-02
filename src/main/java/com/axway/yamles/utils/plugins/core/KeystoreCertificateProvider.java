@@ -8,10 +8,12 @@ import java.io.InputStream;
 import java.security.Key;
 import java.security.KeyStore;
 import java.security.cert.Certificate;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -36,13 +38,13 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 	public static final ConfigParameter CFG_PASSPHRASE = new ConfigParameter("pass", false, "Passphrase for keystore",
 			Type.string, true);
 	public static final ConfigParameter CFG_ALIAS = new ConfigParameter("alias", false,
-			"Alias of the certificate within the keystore. If not specified, the alias of the Entity Store certificate is used.",
+			"Regular expression matching the alias of the certificate within the keystore. If not specified, the alias name of the Entity Store certificate is used.",
 			Type.string, false);
 	public static final ConfigParameter CFG_TYPE = new ConfigParameter("type", false,
 			"Type of the keystore (JKS, PKCS12). If not specified, PKCS12 is assumed.", Type.string, false);
 	public static final ConfigParameter CFG_CHAIN = new ConfigParameter("chain", false, "Include certificate chain.",
 			Type.bool, false);
-	public static final ConfigParameter CFG_NOKEY = new ConfigParameter("nokey", false, "Supporess to add private key.",
+	public static final ConfigParameter CFG_NOKEY = new ConfigParameter("nokey", false, "Suppress to add private key.",
 			Type.bool, false);
 
 	public KeystoreCertificateProvider() {
@@ -65,7 +67,7 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 	}
 
 	@Override
-	public List<CertificateReplacement> getCertificate(File configSource, String aliasName, Map<String, String> config)
+	public List<CertificateReplacement> getCertificates(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
 
 		String type = getConfig(CFG_TYPE, config, TYPE_P12);
@@ -110,48 +112,58 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 			password = passphrase.toCharArray();
 		}
 
-		String altAlias = getConfig(CFG_ALIAS, config, aliasName);
-		if (altAlias != null) {
-			aliasName = altAlias;
-		}
-
+		String aliasExpr = getConfig(CFG_ALIAS, config, aliasName);
 		boolean addChain = getConfig(CFG_CHAIN, config, "false").equals("true");
+		boolean nokey = getConfig(CFG_NOKEY, config, "false").equals("true");		
 
-		log.debug("searching for certificate alias '{}' in keystore '{}' of type '{}'", aliasName, path, type);
+		log.debug("searching for certificates '{}' in keystore '{}' of type '{}'", aliasExpr, path, type);
 
 		try {
 			KeyStore ks = KeyStore.getInstance(type);
 			ks.load(dataStream, password);
 
-			Certificate cert = ks.getCertificate(aliasName);
-			if (cert == null) {
-				throw new CertificateProviderException("certificate not found for alias: " + aliasName);
-			}
+			List<CertificateReplacement> crs = new ArrayList<>();
 
-			log.debug("certificate with alias '{}' found", aliasName);
+			Enumeration<String> aliases = ks.aliases();
+			while (aliases.hasMoreElements()) {
+				String alias = aliases.nextElement();
 
-			boolean nokey = getConfig(CFG_NOKEY, config, "false").equals("true");
-			Key key = ks.getKey(aliasName, password);
-			log.debug("key for alias '{}' {}found", aliasName, (key == null) ? "not " : "");
-			if (key != null && nokey) {
-				key = null;
-				log.debug("key for alias '{}' suppressed", aliasName);
-			}
+				if (!alias.matches(aliasExpr)) {
+					log.debug("certificate with alias {} doesn't match and will be ignored", alias);
+					continue;
+				}
 
-			CertificateReplacement cr = new CertificateReplacement(aliasName, cert, key);
+				Certificate cert = ks.getCertificate(alias);
+				log.debug("certificate with alias '{}' found", alias);
 
-			if (addChain) {
-				Certificate[] chain = ks.getCertificateChain(aliasName);
-				if (chain != null) {
-					for (Certificate chainCert : chain) {
-						if (chainCert == cert)
-							continue;
-						cr.addChain(chainCert);
+				Key key = ks.getKey(alias, password);
+				log.debug("key for alias '{}' {}found", alias, (key == null) ? "not " : "");
+				if (key != null && nokey) {
+					key = null;
+					log.debug("key for alias '{}' suppressed", alias);
+				}
+
+				CertificateReplacement cr = new CertificateReplacement(Optional.of(alias), cert, key);
+
+				if (addChain) {
+					Certificate[] chain = ks.getCertificateChain(alias);
+					if (chain != null) {
+						for (Certificate chainCert : chain) {
+							if (chainCert == cert)
+								continue;
+							cr.addChain(chainCert);
+						}
 					}
 				}
+				crs.add(cr);
 			}
 
-			return Arrays.asList(cr);
+			if (crs.isEmpty()) {
+				throw new CertificateProviderException("certificates not found for alias: " + aliasName);
+			}
+
+			return crs;
+
 		} catch (Exception e) {
 			throw new CertificateProviderException("error on loading keystore: " + source, e);
 		}

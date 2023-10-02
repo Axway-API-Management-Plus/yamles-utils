@@ -31,9 +31,9 @@ public class RemoverCertificateProvider extends AbstractCertificateProvider {
 	}
 
 	@Override
-	public List<CertificateReplacement> getCertificate(File configSource, String aliasName, Map<String, String> config)
+	public List<CertificateReplacement> getCertificates(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
-		return Arrays.asList(new CertificateReplacement(aliasName));
+		return Arrays.asList(new CertificateReplacement());
 	}
 
 }

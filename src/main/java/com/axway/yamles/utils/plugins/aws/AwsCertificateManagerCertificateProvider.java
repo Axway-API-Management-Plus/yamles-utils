@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -55,7 +56,7 @@ public class AwsCertificateManagerCertificateProvider extends AbstractCertificat
 	}
 
 	@Override
-	public List<CertificateReplacement> getCertificate(File configSource, String aliasName, Map<String, String> config)
+	public List<CertificateReplacement> getCertificates(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
 
 		synchronized (this) {
@@ -88,7 +89,7 @@ public class AwsCertificateManagerCertificateProvider extends AbstractCertificat
 
 			CertificateFactory cf = CertificateFactory.getInstance("X509");
 			Certificate c = cf.generateCertificate(new ByteArrayInputStream(cert.getBytes("ASCII")));
-			CertificateReplacement cr = new CertificateReplacement(aliasName, c);
+			CertificateReplacement cr = new CertificateReplacement(Optional.empty(), c);
 
 			if (addChain) {
 				String chain = result.certificateChain();
