@@ -4,13 +4,16 @@ certificates:
     provider: keystore
     config:
       path: ../all/ops-keystore.jks
+      type: "JKS"
       pass: "{{ _ops_kdb('/prod/ops-keystore', 'password') }}"
       alias: prod-axway-server
+      chain: true
       
   example-root-ca:
     provider: keystore
     config:
       path: ../all/ops-keystore.jks
+      type: "JKS"      
       pass: "{{ _ops_kdb('/prod/ops-keystore', 'password') }}"
       alias: demo-axway-root-ca
 
@@ -18,8 +21,18 @@ certificates:
     provider: keystore
     config:
       path: ../all/ops-keystore.jks
+      type: "JKS"      
       pass: "{{ _ops_kdb('/prod/ops-keystore', 'password') }}"
       alias: demo-axway-sub-ca
+
+  trust-ca:
+    provider: keystore
+    config:
+      path: ../all/ops-truststore.p12
+      type: "PKCS12"
+      pass: "{{ _ops_kdb('/test/ops-keystore', 'password') }}"
+      alias: ".*"
+      nokey: true
 
   # Remove test certificate
   acme:

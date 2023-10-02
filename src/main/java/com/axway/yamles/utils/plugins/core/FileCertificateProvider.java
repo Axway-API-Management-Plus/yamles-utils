@@ -10,6 +10,7 @@ import java.security.cert.CertificateFactory;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.axway.yamles.utils.plugins.AbstractCertificateProvider;
 import com.axway.yamles.utils.plugins.CertificateProviderException;
@@ -42,7 +43,7 @@ public class FileCertificateProvider extends AbstractCertificateProvider {
 	}
 
 	@Override
-	public List<CertificateReplacement> getCertificate(File configSource, String aliasName, Map<String, String> config)
+	public List<CertificateReplacement> getCertificates(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
 
 		String path = getConfig(CFG_PATH, config, "");
@@ -56,7 +57,7 @@ public class FileCertificateProvider extends AbstractCertificateProvider {
 
 			CertificateFactory cf = CertificateFactory.getInstance("X509");
 			Certificate c = cf.generateCertificate(in);
-			return Arrays.asList(new  CertificateReplacement(aliasName, c, null));
+			return Arrays.asList(new  CertificateReplacement(Optional.empty(), c, null));
 		} catch (CertificateException e) {
 			throw new CertificateProviderException("error on creating certificate", e);
 		} catch (FileNotFoundException e) {

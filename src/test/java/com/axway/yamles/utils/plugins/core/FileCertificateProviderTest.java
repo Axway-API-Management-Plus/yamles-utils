@@ -31,10 +31,9 @@ public class FileCertificateProviderTest {
 		config.put("path", file.getAbsolutePath());
 
 		FileCertificateProvider cp = new FileCertificateProvider();
-		List<CertificateReplacement> crs = cp.getCertificate(new File("cert-config.yaml"), "root-ca", config);
+		List<CertificateReplacement> crs = cp.getCertificates(new File("cert-config.yaml"), "root-ca", config);
 
 		assertEquals(1, crs.size());
-		assertEquals("root-ca", crs.get(0).getAlias());
 		assertTrue(crs.get(0).getCert().isPresent());
 		assertTrue(crs.get(0).getCert().get() instanceof X509Certificate);
 		assertEquals("CN=root-ca, O=Axway, L=Berlin, C=DE",
@@ -50,10 +49,9 @@ public class FileCertificateProviderTest {
 		config.put("path", file.getAbsolutePath());
 
 		FileCertificateProvider cp = new FileCertificateProvider();
-		List<CertificateReplacement> crs = cp.getCertificate(new File("cert-config.yaml"), "root-ca", config);
+		List<CertificateReplacement> crs = cp.getCertificates(new File("cert-config.yaml"), "root-ca", config);
 
 		assertEquals(1, crs.size());
-		assertEquals("root-ca", crs.get(0).getAlias());
 		assertTrue(crs.get(0).getCert().isPresent());
 		assertTrue(crs.get(0).getCert().get() instanceof X509Certificate);
 		assertEquals("CN=root-ca, O=Axway, L=Berlin, C=DE",

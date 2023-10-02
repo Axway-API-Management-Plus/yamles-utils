@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import com.axway.yamles.utils.plugins.AbstractCertificateProvider;
 import com.axway.yamles.utils.plugins.CertificateProviderException;
@@ -47,7 +48,7 @@ public class SimpleCertificateProvider extends AbstractCertificateProvider {
 	}
 
 	@Override
-	public List<CertificateReplacement> getCertificate(File configSource, String aliasName, Map<String, String> config)
+	public List<CertificateReplacement> getCertificates(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
 		try {
 			Certificate c = null;
@@ -67,7 +68,7 @@ public class SimpleCertificateProvider extends AbstractCertificateProvider {
 				k = kf.generatePrivate(ks);
 			}
 
-			return Arrays.asList(new CertificateReplacement(aliasName, c, k));
+			return Arrays.asList(new CertificateReplacement(Optional.empty(), c, k));
 		} catch (CertificateException | NoSuchAlgorithmException | InvalidKeySpecException e) {
 			throw new CertificateProviderException("error on creating certificate", e);
 		}

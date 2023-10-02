@@ -8,31 +8,70 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Replacement certificate and private key for a target certificate in the
+ * YAML-ES.
+ */
 public class CertificateReplacement {
 
-	private final String alias;
+	/**
+	 * Alias name of the certificate in the certificate source.
+	 * 
+	 * <p>
+	 * If empty, alias is not supported by certificate source.
+	 * </p>
+	 */
+	private final Optional<String> alias;
+
+	/**
+	 * Replacement certificate.
+	 * 
+	 * <p>
+	 * If empty, target certificate will be replaced by nothing (removed).
+	 * </p>
+	 */
 	private final Optional<Certificate> cert;
+
+	/**
+	 * Replacement private key.
+	 * 
+	 * <p>
+	 * If empty, target private key will be replaced by nothing (removed).
+	 * </p>
+	 */
 	private final Optional<Key> key;
+
+	/**
+	 * List of according chain certificates.
+	 */
 	private final List<Certificate> chain = new ArrayList<>();
 
-	public CertificateReplacement(String alias) {
-		this.alias = Objects.requireNonNull(alias, "alias must not be null");
+	/**
+	 * Creates an empty certificate replacement.
+	 * 
+	 * <p>
+	 * Empty certificate replacement is used to delete the a certificate from the
+	 * YAML-ES certificate store (replace existing certificate by nothing).
+	 * </p>
+	 */
+	public CertificateReplacement() {
+		this.alias = Optional.empty();
 		this.cert = Optional.empty();
 		this.key = Optional.empty();
 
 	}
 
-	public CertificateReplacement(String alias, Certificate cert) {
+	public CertificateReplacement(Optional<String> alias, Certificate cert) {
 		this(alias, cert, null);
 	}
 
-	public CertificateReplacement(String alias, Certificate cert, Key key) {
+	public CertificateReplacement(Optional<String> alias, Certificate cert, Key key) {
 		this.alias = Objects.requireNonNull(alias, "alias must not be null");
 		this.cert = Optional.of(Objects.requireNonNull(cert, "certificate must not be null"));
 		this.key = (key != null) ? Optional.of(key) : Optional.empty();
 	}
 
-	public String getAlias() {
+	public Optional<String> getAlias() {
 		return this.alias;
 	}
 
@@ -56,6 +95,15 @@ public class CertificateReplacement {
 		this.chain.addAll(certs);
 	}
 
+	/**
+	 * Returns the list of associated certificate authorities.
+	 * 
+	 * <p>
+	 * The chain is ordered with the root certificate at the last position.
+	 * </p>
+	 * 
+	 * @return certificate chain
+	 */
 	public List<Certificate> getChain() {
 		return this.chain;
 	}
