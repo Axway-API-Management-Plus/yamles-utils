@@ -7,7 +7,7 @@ public class DescribeFunctionsCommand extends AbstractLookupEnabledCommand {
 
 	@Override
 	public Integer call() throws Exception {
-		initLookupProviders();
+		super.call();
 
 		new Describer(System.out, "Available Lookup Functions")
 				.lookupFunctions(LookupManager.getInstance().getLookupFunctions());
