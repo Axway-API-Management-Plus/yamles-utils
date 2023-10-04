@@ -8,13 +8,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.axway.yamles.utils.YamlEsUtils;
 import com.axway.yamles.utils.es.YamlEs;
 import com.axway.yamles.utils.lint.rules.Results;
 
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
-import picocli.CommandLine.ParentCommand;
 
 @Command(name = "lint", description = "Lint YAML entity store.", mixinStandardHelpOptions = true)
 public class LintCommand implements Callable<Integer> {
@@ -26,9 +24,6 @@ public class LintCommand implements Callable<Integer> {
 
 	@Option(names = { "-r", "--rules" }, description = "Rules file.", paramLabel = "FILE", required = true)
 	private List<File> rulesFiles;
-	
-	@ParentCommand
-	YamlEsUtils utils;
 
 	@Override
 	public Integer call() throws Exception {
