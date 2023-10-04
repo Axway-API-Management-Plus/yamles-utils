@@ -9,6 +9,34 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+== Version 0.5.0
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/8[#8]
+|Enhancement
+|Add multiple certificates from keystore.
+
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/12[#12]
+|Enhancement
+|Lookup provider for AWS Secrets Manager (`aws_sm_plain`) supports binary secrets.
+
+The values of binary secrets are returned as a Base64 encoded string.
+
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/14[#14]
+|Enhancement
+|Combine feature of `lint`, `merge certs` and `merge config` command into one single `config` command.
+
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/15[#15]
+|Enhancement
+|Check certificate expiration.
+
+|0
+|Refactoring
+|Various refactoring to improve code quality and to prepare for future plugin support.
+|===
+
+
 == Version 0.4.3
 [cols="1,2,<10a", options="header"]
 |===
