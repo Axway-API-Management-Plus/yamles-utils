@@ -25,6 +25,16 @@ public class MergeCertificatesCommand extends AbstractLookupEnabledCommand {
 
 	@Option(names = { "-c", "--config" }, description = "Certificate configuration file.", paramLabel = "FILE", required = true)
 	private List<File> configs;
+	
+	@Option(names = { "--expiration-warning"}, description = "Audit warning in case of certificate expires within the next days.", paramLabel = "DAYS", required = false)
+	private int expirationWarningDays = 30;
+	
+	@Option(names = { "--expiration-error"}, description = "Audit error in case of certificate expires within the next days.", paramLabel = "DAYS", required = false)
+	private int expirationErrorDays = 10;
+	
+	@Option(names = { "--expiration-fail" }, description = "Fail in case of certificate expires within the next days (-1 to to disable failure).", paramLabel = "DAYS", required = false)
+	private int expirationFailDays = -1;
+	
 
 	private final AliasSet aliases = new AliasSet();
 	
@@ -32,10 +42,13 @@ public class MergeCertificatesCommand extends AbstractLookupEnabledCommand {
 		super();
 	}
 	
-	public MergeCertificatesCommand(File projectDir, List<File> lookupConfigs, List<File> certConfigs) {
+	public MergeCertificatesCommand(File projectDir, List<File> lookupConfigs, List<File> certConfigs, int expirationWarningDays, int expirationErrorDays, int expirationFailDays) {
 		super(lookupConfigs);
 		this.projectDir = Objects.requireNonNull(projectDir, "project directory required");
 		this.configs = Objects.requireNonNull(certConfigs, "certificate configurations required");
+		this.expirationWarningDays = expirationWarningDays;
+		this.expirationErrorDays = expirationErrorDays;
+		this.expirationFailDays = expirationFailDays;
 	}
 
 	@Override
@@ -43,6 +56,10 @@ public class MergeCertificatesCommand extends AbstractLookupEnabledCommand {
 		super.call();
 
 		Audit.AUDIT_LOG.info(Audit.HEADER_PREFIX + "Command: Configure Certificates");
+		
+		this.aliases.setExpirationWarning(this.expirationWarningDays);
+		this.aliases.setExpirationError(this.expirationErrorDays);
+		this.aliases.setExpirationFail(expirationFailDays);
 		
 		YamlEs es = new YamlEs(projectDir);
 
