@@ -3,6 +3,7 @@ package com.axway.yamles.utils.merge.certs;
 import java.io.File;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,11 +27,22 @@ public class MergeCertificatesCommand extends AbstractLookupEnabledCommand {
 	private List<File> configs;
 
 	private final AliasSet aliases = new AliasSet();
+	
+	MergeCertificatesCommand() {
+		super();
+	}
+	
+	public MergeCertificatesCommand(File projectDir, List<File> lookupConfigs, List<File> certConfigs) {
+		super(lookupConfigs);
+		this.projectDir = Objects.requireNonNull(projectDir, "project directory required");
+		this.configs = Objects.requireNonNull(certConfigs, "certificate configurations required");
+	}
 
 	@Override
 	public Integer call() throws Exception {
+		super.call();
+
 		Audit.AUDIT_LOG.info(Audit.HEADER_PREFIX + "Command: Configure Certificates");
-		initLookupProviders();
 		
 		YamlEs es = new YamlEs(projectDir);
 

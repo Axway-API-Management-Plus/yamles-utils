@@ -1,0 +1,69 @@
+= Configure YAML Entity Store
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+ifndef::imagesdir[:imagesdir: ./images]
+
+The `config` command combines the features of the `lint`, `merge certs` and `merge config` commands into one single command.
+
+.Options for Configure Command
+[cols="2,6a", options="header"]
+|===
+|Option
+|Description
+
+|`--project=DIR`
+|Path to the directory containing the YAML-ES project.
+
+|`--lookup-functions=FILE`
+|YAML file to configure lookup functions.
+
+Multiple parameters can be specified to use multiple lookup configurations.
+
+|`--rules=FILE`
+| Path to file containing linting rules.
+
+Multiple files are allowed.
+If missing, the linting feature is not executed.
+
+|`--config=FILE`
+|Configuration fragment to be merged. The fragments are files, containing a single YAML document.
+
+The parameter can be specified multiple times to merge multiple fragments.
+
+The fragments are processed in the order as specified on the command line.
+If a configuration parameter is configured by in multiple files, the last one wins.
+
+If the parameter is missing, the `values.yaml` file will not be configured.
+
+|`--ignore-missing-values`
+|If a project directory is specified, the current `values.yaml` file of this directory is loaded and all required fields are detected.
+
+Before writing the merged configuration, the merge command checks if all required fields are also provided by the merged configuration.
+On missing fields, the merge command stop with an error message.
+
+With this option, missing fields are ignored and the merge command continue processing.
+Missing or unused fields are just reported.
+
+|`--certs=FILE`
+|Certificates configuration file.
+
+The parameter can be specified multiple times to merge multiple certificate configurations.
+If missing, no certificates will be configured.
+
+The configurations are processed in the order as specified on the command line.
+If an alias is defined by in multiple files, the last one wins.
+
+
+[CAUTION]
+====
+To avoid any commits of confidential certificates into the repository, projects should be copied to a temporary folder before the certificate configuration is applied to the temporary folder.
+====
+
+|===

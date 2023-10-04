@@ -6,14 +6,11 @@ import java.util.Map.Entry;
 import java.util.Objects;
 
 import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
+import com.axway.yamles.utils.helper.Audit;
 import com.axway.yamles.utils.helper.ListMap;
 
 public class Results {
-	
-	private static final Logger log = LogManager.getLogger(Results.class);
 
 	public static class Finding {
 		private final Rule rule;
@@ -27,7 +24,8 @@ public class Results {
 		@Override
 		public String toString() {
 			StringBuilder str = new StringBuilder();
-			str.append("rule '").append(this.rule.getId()).append("' failed - ").append(this.assertion);;
+			str.append("rule '").append(this.rule.getId()).append("' failed - ").append(this.assertion);
+			;
 			return str.toString();
 		}
 	}
@@ -52,12 +50,12 @@ public class Results {
 		}
 		return false;
 	}
-	
-	public void log(Level level) {
+
+	public void auditFindings() {
 		this.fileFindings.getMap().forEach((file, findings) -> {
 			if (findings.size() > 0) {
 				findings.forEach(finding -> {
-					log.log(level,  "{} in {}", finding, file);					
+					Audit.AUDIT_LOG.log(Level.ERROR, "{} in {}", finding, file);
 				});
 			}
 		});

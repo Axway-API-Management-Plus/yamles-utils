@@ -20,8 +20,8 @@ import picocli.CommandLine.Option;
 import picocli.CommandLine.ParseResult;
 
 @Command(name = "yamlesutils", description = "YAML Entity Store Utilities", subcommands = { HelpCommand.class,
-		MergeCommand.class,
-		LintCommand.class }, mixinStandardHelpOptions = true, versionProvider = VersionProvider.class)
+		MergeCommand.class, LintCommand.class,
+		ConfigCommand.class }, mixinStandardHelpOptions = true, versionProvider = VersionProvider.class)
 public class YamlEsUtils implements IExecutionExceptionHandler {
 
 	private static final Logger log = LogManager.getLogger(YamlEsUtils.class);

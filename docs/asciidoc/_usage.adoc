@@ -72,4 +72,6 @@ include::_merge_conf.adoc[leveloffset=+1]
 
 include::_merge_cert.adoc[leveloffset=+1]
 
+include::_config.adoc[leveloffset=+1]
+
 include::_merge_describe.adoc[leveloffset=+1]

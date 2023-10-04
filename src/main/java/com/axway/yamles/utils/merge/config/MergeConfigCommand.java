@@ -3,6 +3,7 @@ package com.axway.yamles.utils.merge.config;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -45,14 +46,28 @@ public class MergeConfigCommand extends AbstractLookupEnabledCommand {
 			"--dir" }, description = "Directory to scan for YAML configuration fragments.", paramLabel = "DIR", required = false)
 	private List<File> directories;
 
-	@Option(names = { "-c", "--config" }, description = "Configuration fragment.", paramLabel = "FILE", required = false)
+	@Option(names = { "-c",
+			"--config" }, description = "Configuration fragment.", paramLabel = "FILE", required = false)
 	private List<File> files;
+
+	MergeConfigCommand() {
+		super();
+	}
+
+	public MergeConfigCommand(File projectDir, List<File> lookupConfigs, List<File> fragmentConfigs,
+			boolean ignoreMissingValues) {
+		super(lookupConfigs);
+		this.target = new Target();
+		this.target.project = new Project();
+		this.target.project.projectDir = Objects.requireNonNull(projectDir, "project directory required");
+		this.target.project.ignoreMissingValues = ignoreMissingValues;
+		this.files = Objects.requireNonNull(fragmentConfigs, "fragment configurations required");
+	}
 
 	@Override
 	public Integer call() throws Exception {
+		super.call();
 		Audit.AUDIT_LOG.info(Audit.HEADER_PREFIX + "Command: Configure Environmentalized Fields");
-
-		initLookupProviders();
 
 		// Load configuration sources
 		ConfigSourceScanner scanner = new ConfigSourceScanner();
