@@ -25,6 +25,17 @@ public class ConfigCommand extends AbstractLookupEnabledCommand {
 			"--certs" }, description = "Certificate configuration file.", paramLabel = "FILE", required = false)
 	private List<File> certConfigs;
 
+	@Option(names = {
+			"--expiration-warning" }, description = "Audit warning in case of certificate expires within the next days.", paramLabel = "DAYS", required = false)
+	private int expirationWarningDays = 30;
+
+	@Option(names = {
+			"--expiration-error" }, description = "Audit error in case of certificate expires within the next days.", paramLabel = "DAYS", required = false)
+	private int expirationErrorDays = 10;
+
+	@Option(names = { "--expiration-fail" }, description = "Fail in case of certificate expires within the next days (-1 to to disable failure).", paramLabel = "DAYS", required = false)
+	private int expirationFailDays = -1;
+
 	@Option(names = { "--config" }, description = "Configuration fragment.", paramLabel = "FILE", required = false)
 	private List<File> fragmentConfig;
 
@@ -50,7 +61,8 @@ public class ConfigCommand extends AbstractLookupEnabledCommand {
 		}
 
 		if (this.certConfigs != null && !this.certConfigs.isEmpty()) {
-			result = new MergeCertificatesCommand(projectDir, getLookupFunctionsConfigs(), certConfigs).call();
+			result = new MergeCertificatesCommand(projectDir, getLookupFunctionsConfigs(), certConfigs,
+					this.expirationWarningDays, this.expirationErrorDays, this.expirationFailDays).call();
 		}
 
 		return result;

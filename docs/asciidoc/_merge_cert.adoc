@@ -79,6 +79,21 @@ If an alias is defined by in multiple files, the last one wins.
 To avoid any commits of confidential certificates into the repository, projects should be copied to a temporary folder before the certificate configuration is applied to the temporary folder.
 ====
 
+|`--expiration-warning=DAYS`
+|If the certificate expires within the defined number of days, a warning message will be logged into the audit log.
+
+Set to `0` to disable warnings.
+
+|`--expiration-error=DAYS`
+|If the certificate expires within the defined number of days, an error message will be logged into the audit log.
+
+Set to `0` to disable errors.
+
+|`--expiration-fail=DAYS`
+|If the certificate expires within the defined number of days, the command fails.
+
+Set to `-1` to disable failure.
+
 |===
 
 == Basic Example

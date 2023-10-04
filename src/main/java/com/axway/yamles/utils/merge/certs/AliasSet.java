@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
 import java.security.cert.X509Certificate;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -20,7 +22,40 @@ import com.axway.yamles.utils.plugins.CertificateReplacement;
 class AliasSet {
 	private final Set<Alias> aliases = new HashSet<>();
 
+	private Optional<Calendar> expirationWarning = Optional.empty();
+	private Optional<Calendar> expirationError = Optional.empty();
+	private Optional<Calendar> expirationFail = Optional.of(Calendar.getInstance());
+
 	public AliasSet() {
+	}
+
+	public void setExpirationWarning(int daysBeforeExpiration) {
+		if (daysBeforeExpiration <= 0) {
+			this.expirationWarning = Optional.empty();
+		} else {
+			this.expirationWarning = Optional.of(Calendar.getInstance());
+			this.expirationWarning.get().add(Calendar.DATE, daysBeforeExpiration);
+		}
+	}
+
+	public void setExpirationError(int daysBeforeExpiration) {
+		if (daysBeforeExpiration <= 0) {
+			this.expirationError = Optional.empty();
+		} else {
+			this.expirationError = Optional.of(Calendar.getInstance());
+			this.expirationError.get().add(Calendar.DATE, daysBeforeExpiration);
+		}
+	}
+
+	public void setExpirationFail(int daysBeforeExpiration) {
+		if (daysBeforeExpiration < 0) {
+			this.expirationFail = Optional.empty();
+		} else {
+			this.expirationFail = Optional.of(Calendar.getInstance());
+			if (daysBeforeExpiration >= 0) {
+				this.expirationFail.get().add(Calendar.DATE, daysBeforeExpiration);
+			}
+		}
 	}
 
 	public void clear() {
@@ -136,8 +171,32 @@ class AliasSet {
 	private void auditCertificate(String alias, Certificate cert) {
 		if (cert instanceof X509Certificate) {
 			X509Certificate x509 = (X509Certificate) cert;
-			Audit.AUDIT_LOG.info("  X509: alias={}; dn={}; exp={}", alias, x509.getSubjectX500Principal().getName(),
-					x509.getNotAfter());
+			Date expDate = x509.getNotAfter();
+			String dn = x509.getSubjectX500Principal().getName();
+			Audit.AUDIT_LOG.info("  X509: alias={}; dn={}; exp={}", alias, dn, expDate);
+
+			auditExpiration(alias, dn, expDate);
+		}
+	}
+
+	private void auditExpiration(String alias, String dn, Date expirationDate) {
+		if (this.expirationFail.isPresent()) {
+			if (expirationDate.before(this.expirationFail.get().getTime())) {
+				Audit.AUDIT_LOG.fatal("  certificate '{}' expires at {}", alias, expirationDate);
+				throw new CertificateExpiredException(alias, dn, expirationDate);
+			}
+		}
+		if (this.expirationError.isPresent()) {
+			if (expirationDate.before(this.expirationError.get().getTime())) {
+				Audit.AUDIT_LOG.error("  certificate '{}' expires at {}", alias, expirationDate);
+				return;
+			}
+		}
+		if (this.expirationWarning.isPresent()) {
+			if (expirationDate.before(this.expirationWarning.get().getTime())) {
+				Audit.AUDIT_LOG.warn("  certificate '{}' expires at {}", alias, expirationDate);
+				return;
+			}
 		}
 	}
 }
