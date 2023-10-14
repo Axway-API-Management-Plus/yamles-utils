@@ -3,6 +3,8 @@ package com.axway.yamles.utils.plugins.core;
 import java.util.Map;
 import java.util.Optional;
 
+import org.pf4j.Extension;
+
 import com.axway.yamles.utils.plugins.AbstractBuiltinLookupProvider;
 import com.axway.yamles.utils.plugins.FunctionArgument;
 import com.axway.yamles.utils.plugins.LookupFunction;
@@ -14,6 +16,7 @@ import com.axway.yamles.utils.plugins.LookupProviderException;
  * 
  * @author mlook
  */
+@Extension
 public class SysLookupProvider extends AbstractBuiltinLookupProvider {
 	protected static class LF extends LookupFunction {
 		public LF(String alias, SysLookupProvider provider) {

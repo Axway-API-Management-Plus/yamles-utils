@@ -12,12 +12,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.pf4j.Extension;
+
 import com.axway.yamles.utils.plugins.AbstractCertificateProvider;
 import com.axway.yamles.utils.plugins.CertificateProviderException;
 import com.axway.yamles.utils.plugins.CertificateReplacement;
 import com.axway.yamles.utils.plugins.ConfigParameter;
 import com.axway.yamles.utils.plugins.ConfigParameter.Type;
 
+@Extension
 public class FileCertificateProvider extends AbstractCertificateProvider {
 
 	public static final ConfigParameter CFG_PATH = new ConfigParameter("path", false, "Path to certificate file",

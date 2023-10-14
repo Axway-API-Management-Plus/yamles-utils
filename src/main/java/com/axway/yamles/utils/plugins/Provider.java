@@ -1,6 +1,8 @@
 package com.axway.yamles.utils.plugins;
 
-public interface Provider {
+import org.pf4j.ExtensionPoint;
+
+public interface Provider extends ExtensionPoint {
 	
 	public void onInit(ExecutionMode mode);
 	

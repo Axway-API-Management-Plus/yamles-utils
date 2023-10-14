@@ -28,6 +28,7 @@ import org.apache.hc.core5.ssl.SSLContexts;
 import org.apache.hc.core5.ssl.TrustStrategy;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.pf4j.Extension;
 
 import com.axway.yamles.utils.plugins.AbstractLookupProvider;
 import com.axway.yamles.utils.plugins.ConfigParameter;
@@ -39,6 +40,7 @@ import com.axway.yamles.utils.plugins.LookupSource;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@Extension
 public class VaultLookupProvider extends AbstractLookupProvider {
 	private static final String DEFAULT_ADDR = "https://localhost:8200";
 

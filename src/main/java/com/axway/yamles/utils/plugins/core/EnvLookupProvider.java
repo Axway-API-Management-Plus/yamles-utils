@@ -3,6 +3,8 @@ package com.axway.yamles.utils.plugins.core;
 import java.util.Map;
 import java.util.Optional;
 
+import org.pf4j.Extension;
+
 import com.axway.yamles.utils.helper.EnvironmentVariables;
 import com.axway.yamles.utils.plugins.AbstractBuiltinLookupProvider;
 import com.axway.yamles.utils.plugins.FunctionArgument;
@@ -16,6 +18,7 @@ import com.axway.yamles.utils.plugins.LookupProviderException;
  * 
  * @author mlook
  */
+@Extension
 public class EnvLookupProvider extends AbstractBuiltinLookupProvider {
 	protected static FunctionArgument ARG_KEY = new FunctionArgument("key", true, "Name of environment variable");
 

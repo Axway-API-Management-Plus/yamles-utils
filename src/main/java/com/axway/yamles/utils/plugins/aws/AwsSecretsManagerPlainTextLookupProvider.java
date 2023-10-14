@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.pf4j.Extension;
+
 import com.axway.yamles.utils.plugins.AbstractLookupProvider;
 import com.axway.yamles.utils.plugins.ConfigParameter;
 import com.axway.yamles.utils.plugins.ConfigParameter.Type;
@@ -21,6 +23,7 @@ import software.amazon.awssdk.services.secretsmanager.SecretsManagerClientBuilde
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest;
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueResponse;
 
+@Extension
 public class AwsSecretsManagerPlainTextLookupProvider extends AbstractLookupProvider {
 	public static final FunctionArgument ARG_KEY = new FunctionArgument("key", true, "Secret name");
 
