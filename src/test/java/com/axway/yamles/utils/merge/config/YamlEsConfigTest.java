@@ -10,15 +10,15 @@ import org.junit.jupiter.api.Test;
 
 import com.axway.yamles.utils.helper.EnvironmentVariables;
 import com.axway.yamles.utils.helper.Yaml;
-import com.axway.yamles.utils.merge.LookupManager;
+import com.axway.yamles.utils.merge.ProviderManager;
+import com.axway.yamles.utils.plugins.ExecutionMode;
 import com.fasterxml.jackson.databind.JsonNode;
 
 class YamlEsConfigTest {
 	@BeforeAll
 	static void initLookupManager() {
-		LookupManager.getInstance();
+		ProviderManager.initialize(ExecutionMode.CONFIG).configureBuiltInFunction();
 	}
-	
 
 	@Test
 	void testToStringInitial() {
@@ -56,8 +56,8 @@ class YamlEsConfigTest {
 				+ "yaml-style-fix: \"{{ '{{env TEST }}' }}\"\n" //
 				+ "yaml-style: '{{ _env(\"" + ENV_YAML_STYLE_NAME + "\") }}'\n";
 
-		ConfigSource cs = new ConfigSource("test", Yaml.read(yamlConfigSource));
-		List<ConfigSource> csl = new ArrayList<>();
+		FragmentSource cs = new FragmentSource("test", Yaml.read(yamlConfigSource));
+		List<FragmentSource> csl = new ArrayList<>();
 		csl.add(cs);
 
 		// merge config sources and evaluate values

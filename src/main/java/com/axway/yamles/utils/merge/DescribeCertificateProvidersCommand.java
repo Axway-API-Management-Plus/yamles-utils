@@ -2,6 +2,9 @@ package com.axway.yamles.utils.merge;
 
 import java.util.concurrent.Callable;
 
+import com.axway.yamles.utils.helper.Audit;
+import com.axway.yamles.utils.plugins.ExecutionMode;
+
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
@@ -13,9 +16,9 @@ public class DescribeCertificateProvidersCommand implements Callable<Integer> {
 
 	@Override
 	public Integer call() throws Exception {
-		new Describer(System.out, "Available Certificate Providers")
-				.cerificateProvider(CertificateManager.getInstance().getProviders(), this.full);
-
+		Audit.errorsOnly();		
+		ProviderManager.initialize(ExecutionMode.SYNTAX_CHECK);
+		new Describer(System.out, "Available Certificate Providers").cerificateProvider(this.full);
 		return 0;
 	}
 

@@ -6,7 +6,6 @@ import java.util.Objects;
 import java.util.concurrent.Callable;
 
 import com.axway.yamles.utils.es.YamlEs;
-import com.axway.yamles.utils.helper.Audit;
 import com.axway.yamles.utils.lint.rules.Results;
 
 import picocli.CommandLine.Command;
@@ -32,7 +31,6 @@ public class LintCommand implements Callable<Integer> {
 
 	@Override
 	public Integer call() throws Exception {
-		Audit.AUDIT_LOG.info(Audit.HEADER_PREFIX + "Command: Lint project");
 		YamlEs project = new YamlEs(this.projectDir);
 
 		Linter linter = new Linter(project, rulesFiles);

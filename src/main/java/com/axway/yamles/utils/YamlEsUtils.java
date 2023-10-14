@@ -29,7 +29,7 @@ public class YamlEsUtils implements IExecutionExceptionHandler {
 	@Option(names = { "-v", "--verbose" }, description = "Increase logging verbosity.")
 	boolean[] verbosity;
 
-	@Option(names = { "-q", "--quiet" }, description = "Disable log message to the console.")
+	@Option(names = { "-q", "--quiet" }, description = "Disable info log message to the console.")
 	boolean quiet = false;
 
 	@Option(names = { "-a", "--audit" }, description = "Audit file.", paramLabel = "FILE")
@@ -67,6 +67,7 @@ public class YamlEsUtils implements IExecutionExceptionHandler {
 		int exitCode = cl //
 				.setExecutionStrategy(app::executionStrategy) //
 				.setExecutionExceptionHandler(app) //
+				.setCaseInsensitiveEnumValuesAllowed(false) //
 				.execute(args);
 		log.info("finished with exit code: {}", exitCode);
 		System.exit(exitCode);

@@ -18,13 +18,7 @@ The `lint` command of `yamlesutils` is used to verify the project.
 
 [source]
 ----
-$ yamlesutils.sh lint --help
-Usage: yamlesutils lint [-hV] --project=DIR -r=FILE [-r=FILE]...
-Lint YAML entity store.
-  -h, --help          Show this help message and exit.
-      --project=DIR   Path to the YAML entity store project.
-  -r, --rules=FILE    Rules file
-  -V, --version       Print version information and exit.
+yamlesutils lint --project=DIR -r=FILE [-r=FILE]...
 ----
 
 The command requires the path to the project directory and a list of files containing rules.

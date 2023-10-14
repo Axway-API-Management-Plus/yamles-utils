@@ -7,19 +7,19 @@ import com.axway.yamles.utils.helper.Yaml;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 
-class ConfigSourceFactory {
-	public static ConfigSource create(String name, String yaml) {
+class FragmentSourceFactory {
+	public static FragmentSource create(String name, String yaml) {
 		try {
 			JsonNode config = Yaml.read(yaml);
-			return new ConfigSource(name, config);
+			return new FragmentSource(name, config);
 		} catch (JsonProcessingException e) {
-			throw new ConfigSourceException(name, e);
+			throw new FragmentSourceException(name, e);
 		}
 	}
 
-	public static ConfigSource load(File file) {
+	public static FragmentSource load(File file) {
 		String name = Objects.requireNonNull(file).getAbsolutePath();
 		JsonNode config = Yaml.load(file);
-		return new ConfigSource(name, config);
+		return new FragmentSource(name, config);
 	}
 }

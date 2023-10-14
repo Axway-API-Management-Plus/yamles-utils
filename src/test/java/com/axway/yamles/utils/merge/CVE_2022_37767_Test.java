@@ -8,7 +8,6 @@ import java.io.StringWriter;
 
 import org.junit.jupiter.api.Test;
 
-import com.axway.yamles.utils.merge.LookupManager;
 import com.axway.yamles.utils.merge.Mustache.DisabledMethodAceess;
 
 import io.pebbletemplates.pebble.PebbleEngine;
@@ -22,7 +21,6 @@ public class CVE_2022_37767_Test {
 	@Test
 	void reproduce_CVE_2022_37767() throws Exception {
 		PebbleEngine pe = new PebbleEngine.Builder() //
-				.extension(LookupManager.getInstance()) //
 				.autoEscaping(false) //
 				.strictVariables(true) //
 				// .methodAccessValidator(null) //
@@ -35,7 +33,6 @@ public class CVE_2022_37767_Test {
 	@Test
 	void fixed_CVE_2022_37767() throws Exception {
 		PebbleEngine pe = new PebbleEngine.Builder() //
-				.extension(LookupManager.getInstance()) //
 				.autoEscaping(false) //
 				.strictVariables(true) //
 				.methodAccessValidator(new DisabledMethodAceess()) //

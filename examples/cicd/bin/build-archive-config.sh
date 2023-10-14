@@ -12,11 +12,14 @@ helpAndExit() {
   echo "${CMD_NAME}  -  build and configure YAMLES archive"
   echo ""
   echo "Usage:"
-  echo "  ${CMD_NAME} -e ENV [--debug]"
+  echo "  ${CMD_NAME} -e ENV [--mode MODE] [--debug]"
   echo ""
   echo "Options:"
   echo "  -e ENV"
   echo "      Target environment (local, test or prod)."
+  echo ""
+  echo "  --mode MODE"
+  echo "      Execution mode (CONFIG, DRY_RUN, SYNTAX_CHECK)"
   echo ""
   echo "  --debug"
   echo "      Enable debug messages"
@@ -29,6 +32,7 @@ helpAndExit() {
 
 parseArgs() {
   DEBUG=0
+  MODE="CONFIG"
   while [[ $# -gt 0 ]]
   do
     option="$1"
@@ -51,6 +55,17 @@ parseArgs() {
           esac
         else
           echo "ERROR: missing environment"
+          exit 1
+        fi
+        ;;
+
+      --mode)
+        if [[ $# -gt 1 ]]
+        then
+          MODE="$2"
+          shift 2
+        else
+          echo "ERROR: missing mode"
           exit 1
         fi
         ;;
@@ -155,7 +170,7 @@ echo "yamlesutils: ${YAMLES_UTILS}"
 # Add debug option
 if [ ${DEBUG} -gt 0 ]
 then
-  YAMLES_UTILS="${YAMLES_UTILS} -v"
+  YAMLES_UTILS="${YAMLES_UTILS} -vv"
 fi
 
 # Prepare for configuration
@@ -199,7 +214,7 @@ echo "============================================================"
 echo "== Configure project"
 echo "============================================================"
 args=("--audit=${TARGET_TMP_DIR}/audit.log" \
-      "config" "--project=${TMP_PRJ}" \
+      "config" "--mode=${MODE}" "--project=${TMP_PRJ}" \
       "--rules" "${RULES_DIR}/cassandra.rules.yaml" \
       "--rules" "${RULES_DIR}/db.rules.yaml" \
      )
@@ -259,39 +274,39 @@ case $OPT_ENV in
   local)
     args+=( \
       # Configure general settings
-      "--config=${CFG_DIR}/devs/local/values.yaml" \
+      "--fragment=${CFG_DIR}/devs/local/values.yaml" \
 
       # Configure values for which only developers are responsible for
       # in a separate file.
-      "--config=${CFG_DIR}/devs/local/devs-values.yaml" \
+      "--fragment=${CFG_DIR}/devs/local/devs-values.yaml" \
     )
     ;;
   test)
     args+=( \
       # Read values for which only developers are responsible for
-      "--config=${CFG_DIR}/devs/test/devs-values.yaml" \
+      "--fragment=${CFG_DIR}/devs/test/devs-values.yaml" \
 
       # Configure lookup functions (developers)
       "--lookup-functions=${CFG_DIR}/devs/test/lookup-func.yaml" \
 
       # Read values for which operators are responsible for
       # (must be after the developers to configuration to prevent overwrite)
-      "--config=${CFG_DIR}/ops/all/values.yaml" \
-      "--config=${CFG_DIR}/ops/test/values.yaml" \
+      "--fragment=${CFG_DIR}/ops/all/values.yaml" \
+      "--fragment=${CFG_DIR}/ops/test/values.yaml" \
     )
     ;;
   prod)
     args+=( \
       # Read values for which only developers are responsible for    
-      "--config=${CFG_DIR}/devs/prod/devs-values.yaml" \
+      "--fragment=${CFG_DIR}/devs/prod/devs-values.yaml" \
 
       # Configure lookup functions (developers)
       "--lookup-functions=${CFG_DIR}/devs/prod/lookup-func.yaml" \
 
       # Read values for which operators are responsible for
       # (must be after the developers to configuration to prevent overwrite)
-      "--config=${CFG_DIR}/ops/all/values.yaml" \
-      "--config=${CFG_DIR}/ops/prod/values.yaml" \
+      "--fragment=${CFG_DIR}/ops/all/values.yaml" \
+      "--fragment=${CFG_DIR}/ops/prod/values.yaml" \
     )
     ;;
   *)
@@ -299,33 +314,39 @@ case $OPT_ENV in
     exit 1
 esac
 
+if [ ${DEBUG} -gt 0 ]
+then
+  echo "Arguments: ${args[@]}"
+fi
 ${YAMLES_UTILS} "${args[@]}"
 
+if [ "${MODE}" == "CONFIG" ]
+then
+  # Build archive
+  echo ""
+  echo "============================================================"
+  echo "== Build archive"
+  echo "============================================================"
+  rm "${TMP_PRJ}/META-INF/manifest.mf"
+  tar -C "${TMP_PRJ}" -zcf ${TARGET_ARCHIVE} "."
 
-# Build archive
-echo ""
-echo "============================================================"
-echo "== Build archive"
-echo "============================================================"
-rm "${TMP_PRJ}/META-INF/manifest.mf"
-tar -C "${TMP_PRJ}" -zcf ${TARGET_ARCHIVE} "."
+  # Validate archive
+  echo ""
+  echo "============================================================"
+  echo "== Validate configured project"
+  echo "============================================================"
+  ${YAMLES} validate -s "${TARGET_ARCHIVE}"
 
-# Validate archive
-echo ""
-echo "============================================================"
-echo "== Validate configured project"
-echo "============================================================"
-${YAMLES} validate -s "${TARGET_ARCHIVE}"
-
-echo ""
-echo "============================================================"
-echo "== Finished"
-echo "============================================================"
-echo ""
-echo "Use the following command to deploy the configured archive to"
-echo "the API Gateway."
-echo ""
-echo "  ${AXWAY_BIN}/managedomain --deploy \\"
-echo "    --archive_filename ${TARGET_ARCHIVE} \\"
-echo "    --group APIM \\"
-echo "    --username admin --password changeme"
+  echo ""
+  echo "============================================================"
+  echo "== Finished"
+  echo "============================================================"
+  echo ""
+  echo "Use the following command to deploy the configured archive to"
+  echo "the API Gateway."
+  echo ""
+  echo "  ${AXWAY_BIN}/managedomain --deploy \\"
+  echo "    --archive_filename ${TARGET_ARCHIVE} \\"
+  echo "    --group APIM \\"
+  echo "    --username admin --password changeme"
+fi

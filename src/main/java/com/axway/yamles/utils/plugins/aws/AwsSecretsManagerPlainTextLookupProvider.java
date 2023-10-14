@@ -7,12 +7,12 @@ import java.util.Optional;
 
 import com.axway.yamles.utils.plugins.AbstractLookupProvider;
 import com.axway.yamles.utils.plugins.ConfigParameter;
+import com.axway.yamles.utils.plugins.ConfigParameter.Type;
 import com.axway.yamles.utils.plugins.FunctionArgument;
 import com.axway.yamles.utils.plugins.LookupFunction;
 import com.axway.yamles.utils.plugins.LookupFunctionException;
 import com.axway.yamles.utils.plugins.LookupProviderException;
 import com.axway.yamles.utils.plugins.LookupSource;
-import com.axway.yamles.utils.plugins.ConfigParameter.Type;
 
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.regions.Region;
@@ -111,8 +111,13 @@ public class AwsSecretsManagerPlainTextLookupProvider extends AbstractLookupProv
 
 	@Override
 	public LookupFunction buildFunction(LookupSource source) throws LookupProviderException {
+		// get configuration parameters
 		String region = source.getConfig(CFG_PARAM_REGION, "");
 		String prefix = source.getConfig(CFG_PARAM_PREFIX, "");
+
+		Optional<LookupFunction> clf = checkOnlyLookupFunction(source);
+		if (clf.isPresent())
+			return clf.get();
 
 		SecretsManagerClientBuilder builder = SecretsManagerClient.builder();
 		if (!region.isEmpty()) {

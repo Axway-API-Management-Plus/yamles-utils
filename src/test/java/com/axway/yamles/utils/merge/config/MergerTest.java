@@ -14,7 +14,7 @@ class MergerTest {
 	void mergeEmpty() {
 		FieldAudit audit = new FieldAudit();
 		ObjectNode target = Yaml.createObjectNode();
-		ConfigSource cs = ConfigSourceFactory.create("cs", "---");
+		FragmentSource cs = FragmentSourceFactory.create("cs", "---");
 		Merger merger = new Merger(audit, target, cs);
 
 		assertTrue(target.isEmpty());
@@ -28,7 +28,7 @@ class MergerTest {
 	void mergeEmptyWithSimpleObject() {
 		FieldAudit audit = new FieldAudit();
 		ObjectNode target = Yaml.createObjectNode();
-		ConfigSource cs = ConfigSourceFactory.create("cs", "str1: \"value\"");
+		FragmentSource cs = FragmentSourceFactory.create("cs", "str1: \"value\"");
 		Merger merger = new Merger(audit, target, cs);
 
 		assertTrue(target.isEmpty());
@@ -49,16 +49,16 @@ class MergerTest {
 		ObjectNode target = Yaml.createObjectNode();
 		assertTrue(target.isEmpty());
 
-		ConfigSource cs;
+		FragmentSource cs;
 		Merger merger;
 
-		cs = ConfigSourceFactory.create("cs1", "str1: \"value1\"");
+		cs = FragmentSourceFactory.create("cs1", "str1: \"value1\"");
 		merger = new Merger(audit, target, cs);
 		merger.merge();
 		assertEquals(1, target.size());
 		assertEquals("value1", target.get("str1").asText());
 
-		cs = ConfigSourceFactory.create("cs2", "str2: \"value2\"");
+		cs = FragmentSourceFactory.create("cs2", "str2: \"value2\"");
 		merger = new Merger(audit, target, cs);
 		merger.merge();
 		assertEquals(2, target.size());
@@ -79,16 +79,16 @@ class MergerTest {
 		ObjectNode target = Yaml.createObjectNode();
 		assertTrue(target.isEmpty());
 
-		ConfigSource cs;
+		FragmentSource cs;
 		Merger merger;
 
-		cs = ConfigSourceFactory.create("cs1", "str: \"value\"");
+		cs = FragmentSourceFactory.create("cs1", "str: \"value\"");
 		merger = new Merger(audit, target, cs);
 		merger.merge();
 		assertEquals(1, target.size());
 		assertEquals("value", target.get("str").asText());
 
-		cs = ConfigSourceFactory.create("cs2", "str: \"value_new\"");
+		cs = FragmentSourceFactory.create("cs2", "str: \"value_new\"");
 		merger = new Merger(audit, target, cs);
 		merger.merge();
 		assertEquals(1, target.size());
@@ -106,10 +106,10 @@ class MergerTest {
 		ObjectNode target = Yaml.createObjectNode();
 		assertTrue(target.isEmpty());
 
-		ConfigSource cs;
+		FragmentSource cs;
 		Merger merger;
 
-		cs = ConfigSourceFactory.create("cs1", "---\n" //
+		cs = FragmentSourceFactory.create("cs1", "---\n" //
 				+ "obj1:\n" //
 				+ "  str1: \"value1\"" //
 		);
@@ -118,7 +118,7 @@ class MergerTest {
 		assertEquals(1, target.size());
 		assertEquals("value1", target.get("obj1").get("str1").asText());
 
-		cs = ConfigSourceFactory.create("cs2", "---\n" //
+		cs = FragmentSourceFactory.create("cs2", "---\n" //
 				+ "obj2:\n" //
 				+ "  str2: \"value2\"\n" //
 		);
@@ -143,10 +143,10 @@ class MergerTest {
 		ObjectNode target = Yaml.createObjectNode();
 		assertTrue(target.isEmpty());
 
-		ConfigSource cs;
+		FragmentSource cs;
 		Merger merger;
 
-		cs = ConfigSourceFactory.create("cs1", "---\n" //
+		cs = FragmentSourceFactory.create("cs1", "---\n" //
 				+ "obj:\n" //
 				+ "  str1: \"value1\"\n" //
 		);
@@ -155,7 +155,7 @@ class MergerTest {
 		assertEquals(1, target.size());
 		assertEquals("value1", target.get("obj").get("str1").asText());
 
-		cs = ConfigSourceFactory.create("cs2", "---\n" //
+		cs = FragmentSourceFactory.create("cs2", "---\n" //
 				+ "obj:\n" //
 				+ "  str1: \"value2\"\n" //
 				+ "  str2: \"value2\"\n" //

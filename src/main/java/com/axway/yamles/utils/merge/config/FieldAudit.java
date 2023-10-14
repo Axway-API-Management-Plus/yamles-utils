@@ -60,7 +60,7 @@ public class FieldAudit {
 		this.fieldAudit.clear();
 	}
 
-	protected void put(NodeLocation location, ConfigSource source) {
+	protected void put(NodeLocation location, FragmentSource source) {
 		Objects.requireNonNull(location, "YAML location is missing");
 		String sourceName = Objects.requireNonNull(source, "source is missing").getName();
 

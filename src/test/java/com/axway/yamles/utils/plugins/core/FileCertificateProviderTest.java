@@ -9,18 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.axway.yamles.utils.merge.LookupManager;
 import com.axway.yamles.utils.plugins.CertificateReplacement;
 
 public class FileCertificateProviderTest {
-
-	@BeforeAll
-	static void initLookupManager() {
-		LookupManager.getInstance();
-	}
 
 	@Test
 	void certifciateFromFileDER() throws Exception {

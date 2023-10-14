@@ -7,18 +7,7 @@ import java.util.List;
  * 
  * @author mlook
  */
-public interface LookupProvider {
-
-	/**
-	 * Returns the name of the lookup provider.
-	 * 
-	 * @return name of lookup provider
-	 */
-	public String getName();
-	
-	public String getSummary();
-	
-	public String getDescription();
+public interface LookupProvider extends Provider {
 	
 	public default boolean isBuiltIn() { return false; } 
 

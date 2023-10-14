@@ -28,10 +28,10 @@ class YamlEsConfig {
 	public YamlEsConfig() {
 	}
 
-	public void merge(List<ConfigSource> sources) throws MergeException {
+	public void merge(List<FragmentSource> sources) throws MergeException {
 		this.audit.clear();
 
-		Audit.AUDIT_LOG.info(Audit.HEADER_PREFIX + "Merge Configuration Sources");
+		Audit.AUDIT_LOG.info(Audit.SUB_HEADER_PREFIX + "Merge Fragement Sources");
 		sources.forEach((cs) -> merge(audit, cs));
 
 		this.audit.writeSummaryToAudit();
@@ -76,7 +76,7 @@ class YamlEsConfig {
 		return Objects.requireNonNull(required).detectMissing(configValues);
 	}
 
-	protected void merge(FieldAudit audit, ConfigSource cs) throws MergeException {
+	protected void merge(FieldAudit audit, FragmentSource cs) throws MergeException {
 		log.info("merge configuration: {}", cs.getName());
 		new Merger(this.audit, this.config, cs).merge();
 	}

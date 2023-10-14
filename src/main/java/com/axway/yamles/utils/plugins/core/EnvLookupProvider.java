@@ -18,7 +18,7 @@ import com.axway.yamles.utils.plugins.LookupProviderException;
  */
 public class EnvLookupProvider extends AbstractBuiltinLookupProvider {
 	protected static FunctionArgument ARG_KEY = new FunctionArgument("key", true, "Name of environment variable");
-	
+
 	protected static class LF extends LookupFunction {
 		public LF(String alias, AbstractBuiltinLookupProvider provider) {
 			super(alias, provider, AbstractBuiltinLookupProvider.SOURCE);

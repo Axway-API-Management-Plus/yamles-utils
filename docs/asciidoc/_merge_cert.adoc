@@ -44,32 +44,36 @@ Some parameters support <<Mustache Templates>> to lookup or transform values.
 If non built-in lookup functions are used, the lookup function have to be configured by a _Lookup Function Configuration_ file which is specified by the `--lookup-functions` parameter.
 
 ----
-yamlesutils.sh merge certs --help
-Usage: yamlesutils merge certs [-hV] --project=DIR -c=FILE [-c=FILE]...
-                               [--lookup-functions=FILE]...
-Merge certificates for YAML entiry store.
-  -c, --config=FILE   Certificate configuration file.
-  -h, --help          Show this help message and exit.
-      --lookup-functions=FILE
-                      Configure lookup functions.
-      --project=DIR   Project directory (YAML entity store).
-  -V, --version       Print version information and exit.
+yamlesutils merge [-m MODE] certs --project=DIR
+    -c=FILE [-c=FILE]... [--lookup-functions=FILE]...
+    [--expiration-warning=DAYS] [----expiration-error=DAYS]
+    [--expiration-fail=DAYS]
 ----
 
 .Options for Merge Certificates
-[cols="2,6a", options="header"]
+[cols="3,6a", options="header"]
 |===
 |Option
 |Description
 
+|`-m MODE` +
+`--mode=MODE`
+|Execution mode
+
+* `CONFIG`: Build and write configuration (default).
+* `DRY_RUN`: Build configuration, but don't write to disk.
+* `SYNTAX_CHECK`: Check syntax of configuration files only.
+Lookups are evaluated to empty strings; no connections to external systems (e.g. AWS Secrets Manager) are established.
+
 |`-c FILE` +
+`--certs=FILE` +
 `--config=FILE`
 |Certificates configuration file.
 
 The parameter can be specified multiple times to merge multiple certificate configurations.
 
 The configurations are processed in the order as specified on the command line.
-If an alias is defined by in multiple files, the last one wins.
+If an alias is defined by multiple files, the last one wins.
 
 |`--project=DIR`
 |Path to the directory containing the YAML-ES project.
@@ -94,6 +98,11 @@ Set to `0` to disable errors.
 
 Set to `-1` to disable failure.
 
+|`-l FILE` +
+`--lookup-functions=FILE`
+|YAML file to configure lookup functions.
+
+Multiple parameters can be specified to use multiple lookup configurations.
 |===
 
 == Basic Example

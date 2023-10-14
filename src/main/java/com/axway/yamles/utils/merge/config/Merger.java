@@ -11,10 +11,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 class Merger {
 
 	private final ObjectNode target;
-	private final ConfigSource source;
+	private final FragmentSource source;
 	private final FieldAudit audit;
 
-	public Merger(FieldAudit audit, ObjectNode target, ConfigSource source) {
+	public Merger(FieldAudit audit, ObjectNode target, FragmentSource source) {
 		this.audit = Objects.requireNonNull(audit);
 		this.target = Objects.requireNonNull(target);
 		this.source = Objects.requireNonNull(source);

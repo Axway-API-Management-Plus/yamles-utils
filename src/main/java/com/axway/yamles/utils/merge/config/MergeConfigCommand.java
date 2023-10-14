@@ -3,24 +3,21 @@ package com.axway.yamles.utils.merge.config;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.es.YamlEs;
 import com.axway.yamles.utils.helper.Audit;
-import com.axway.yamles.utils.helper.Yaml;
 import com.axway.yamles.utils.merge.AbstractLookupEnabledCommand;
+import com.axway.yamles.utils.merge.MergeCommand;
+import com.axway.yamles.utils.merge.ProviderManager;
+import com.axway.yamles.utils.plugins.ExecutionMode;
 
 import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
+import picocli.CommandLine.ParentCommand;
 
 @Command(name = "config", description = "Merge configuration fragments for YAML entity store.", mixinStandardHelpOptions = true)
 public class MergeConfigCommand extends AbstractLookupEnabledCommand {
-	private static final Logger log = LogManager.getLogger(MergeConfigCommand.class);
-
 	static class Project {
 		@Option(names = {
 				"--project" }, description = "Path to the YAML entity store project.", paramLabel = "DIR", required = true)
@@ -46,70 +43,46 @@ public class MergeConfigCommand extends AbstractLookupEnabledCommand {
 			"--dir" }, description = "Directory to scan for YAML configuration fragments.", paramLabel = "DIR", required = false)
 	private List<File> directories;
 
-	@Option(names = { "-c",
-			"--config" }, description = "Configuration fragment.", paramLabel = "FILE", required = false)
+	@Option(names = { "-f", "-c", "--config",
+			"--fragment" }, description = "Configuration fragment for values.yaml file.", paramLabel = "FILE", required = false)
 	private List<File> files;
+
+	@ParentCommand
+	private MergeCommand parentCommand;
 
 	MergeConfigCommand() {
 		super();
 	}
 
-	public MergeConfigCommand(File projectDir, List<File> lookupConfigs, List<File> fragmentConfigs,
-			boolean ignoreMissingValues) {
-		super(lookupConfigs);
-		this.target = new Target();
-		this.target.project = new Project();
-		this.target.project.projectDir = Objects.requireNonNull(projectDir, "project directory required");
-		this.target.project.ignoreMissingValues = ignoreMissingValues;
-		this.files = Objects.requireNonNull(fragmentConfigs, "fragment configurations required");
-	}
-
 	@Override
 	public Integer call() throws Exception {
-		super.call();
+		initializeProviderManager(this.parentCommand.getMode());
 		Audit.AUDIT_LOG.info(Audit.HEADER_PREFIX + "Command: Configure Environmentalized Fields");
 
 		// Load configuration sources
-		ConfigSourceScanner scanner = new ConfigSourceScanner();
+		FragmentSourceScanner scanner = new FragmentSourceScanner();
 		scanner.addDirectories(this.directories);
 		scanner.scan();
 
-		YamlEs es = null;
-		File out;
-		if (this.target.project != null) {
-			es = new YamlEs(this.target.project.projectDir);
-			out = es.getValuesFile();
-		} else {
-			out = this.target.file;
-		}
-
-		List<ConfigSource> csl = new ArrayList<>();
+		List<FragmentSource> csl = new ArrayList<>();
 		csl.addAll(scanner.getSources());
 		if (this.files != null) {
 			for (File f : this.files) {
-				ConfigSource cs = ConfigSourceFactory.load(f);
+				FragmentSource cs = FragmentSourceFactory.load(f);
 				csl.add(cs);
 			}
 		}
 
-		YamlEsConfig esConfig = new YamlEsConfig();
-		esConfig.merge(csl);
+		ExecutionMode mode = ProviderManager.getInstance().getConfigMode();
 
-		if (es != null && es.getRequiredValues().isPresent()) {
-			if (!esConfig.allFieldsConfigured(es.getRequiredValues())) {
-				if (this.target.project != null && !this.target.project.ignoreMissingValues) {
-					throw new RuntimeException("Some required values are not configured. Check log for details!");
-				}
-			}
-		}
+		FieldConfigurator vc = new FieldConfigurator(mode);
+		vc.setConfigFragments(csl);
 
-		esConfig.evalValues();
-
-		if (out.getName().equals("-")) {
-			System.out.println(esConfig.toYaml());
+		if (this.target.project != null) {
+			YamlEs es = new YamlEs(this.target.project.projectDir);
+			vc.apply(es, this.target.project.ignoreMissingValues);
 		} else {
-			Yaml.write(out, esConfig.getConfig());
-			log.info("configuration written to {}", out.getAbsoluteFile());
+			vc.apply(this.target.file);
 		}
 
 		return 0;

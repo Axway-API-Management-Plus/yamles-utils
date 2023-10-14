@@ -1,15 +1,11 @@
 package com.axway.yamles.utils.merge;
 
 import java.io.PrintStream;
-import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 
-import com.axway.yamles.utils.plugins.CertificateProvider;
 import com.axway.yamles.utils.plugins.ConfigParameter;
 import com.axway.yamles.utils.plugins.FunctionArgument;
-import com.axway.yamles.utils.plugins.LookupFunction;
-import com.axway.yamles.utils.plugins.LookupProvider;
 
 import picocli.CommandLine.Help;
 import picocli.CommandLine.Help.Ansi;
@@ -47,8 +43,8 @@ public class Describer {
 		out.println();
 	}
 
-	public void lookupProviders(Collection<LookupProvider> providers, boolean full) {
-		providers.forEach(p -> {
+	public void lookupProviders(boolean full) {
+		ProviderManager.getInstance().getLookupProviders().forEach(p -> {
 			TextTable table = TextTable.forColumns(scheme, COL_1, COL_2);
 			table.addRowValues("@|bold " + p.getName() + "|@" + builtInTag(p.isBuiltIn()), p.getSummary());
 
@@ -62,8 +58,8 @@ public class Describer {
 		legend();
 	}
 
-	public void lookupFunctions(Collection<LookupFunction> functions) {
-		functions.forEach(f -> {
+	public void lookupFunctions() {
+		ProviderManager.getInstance().getLookupFunctions().forEach(f -> {
 			TextTable table = TextTable.forColumns(scheme, FUNC_COL_1, FUNC_COL_2);
 			table.addRowValues("@|bold " + f.getName() + " [" + f.getProvider().getName()
 					+ builtInTag(f.getProvider().isBuiltIn()) + "]|@", f.getProvider().getSummary());
@@ -76,8 +72,8 @@ public class Describer {
 		legend();
 	}
 
-	public void cerificateProvider(Collection<CertificateProvider> providers, boolean full) {
-		providers.forEach((p) -> {
+	public void cerificateProvider(boolean full) {
+		ProviderManager.getInstance().getCertificateProviders().forEach((p) -> {
 			TextTable table;
 
 			table = TextTable.forColumns(scheme, COL_1, COL_2);
@@ -129,7 +125,8 @@ public class Describer {
 			table.addRowValues("", formatSectionTitle("Lookup Function Arguments"));
 
 			fas.forEach(fa -> {
-				table.addRowValues("", "@|bold " + fa.getName() + "|@" + requiredTag(fa.isRequired()) + ": " + fa.getDescription());
+				table.addRowValues("",
+						"@|bold " + fa.getName() + "|@" + requiredTag(fa.isRequired()) + ": " + fa.getDescription());
 			});
 		}
 	}

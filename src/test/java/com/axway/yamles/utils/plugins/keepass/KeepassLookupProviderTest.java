@@ -4,22 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Base64;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.axway.yamles.utils.merge.LookupManager;
 import com.axway.yamles.utils.plugins.keepass.KeePassDB.EntryPath;
 import com.axway.yamles.utils.plugins.keepass.KeepassLookupProvider.Kdb;
 import com.axway.yamles.utils.plugins.keepass.KeepassLookupProvider.Key;
 import com.axway.yamles.utils.plugins.keepass.KeepassLookupProvider.What;
 
 class KeepassLookupProviderTest {
-	
-	@BeforeAll
-	static void initLookupManager() {
-		LookupManager.getInstance();
-	}
-	
 
 	private static Key key(String path, What what) {
 		return key(path, what, null);

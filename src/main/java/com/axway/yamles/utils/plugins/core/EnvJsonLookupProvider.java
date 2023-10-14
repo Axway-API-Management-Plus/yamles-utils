@@ -1,5 +1,7 @@
 package com.axway.yamles.utils.plugins.core;
 
+import java.util.Optional;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,6 +44,11 @@ public class EnvJsonLookupProvider extends AbstractLookupDocLookupProvider {
 	@Override
 	public LookupFunction buildFunction(LookupSource source) throws LookupProviderException {
 		String envvar = source.getConfig(CFG_PARAM_ENV, "");
+		
+		Optional<LookupFunction> clf = checkOnlyLookupFunction(source);
+		if (clf.isPresent())
+			return clf.get();
+
 		try {
 			String json = EnvironmentVariables.get(envvar);
 			if (json == null) {

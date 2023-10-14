@@ -225,6 +225,10 @@ public class KeepassLookupProvider extends AbstractLookupProvider {
 		File dbFile = source.getFileFromConfig(CFG_PARAM_FILE).get();
 		String passphrase = source.getConfig(CFG_PARAM_PASS, "");
 		Optional<File> keyFile = source.getFileFromConfig(CFG_PARAM_KEY_FILE);
+		
+		Optional<LookupFunction> clf = checkOnlyLookupFunction(source);
+		if (clf.isPresent())
+			return clf.get();
 
 		try {
 			Kdb kdb = new Kdb(source.getAlias(), dbFile, passphrase, keyFile);
