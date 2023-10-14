@@ -6,11 +6,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.ServiceLoader;
 import java.util.TreeMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.pf4j.DefaultPluginManager;
+import org.pf4j.PluginManager;
 
 import com.axway.yamles.utils.helper.Audit;
 import com.axway.yamles.utils.plugins.CertificateProvider;
@@ -49,15 +50,17 @@ public class ProviderManager {
 		this.mode = Objects.requireNonNull(mode, "config mode required");
 		
 		Audit.AUDIT_LOG.info(Audit.HEADER_PREFIX + "Initialize Providers (execution mode: {})", mode);
-
-		ServiceLoader<LookupProvider> lps = ServiceLoader.load(LookupProvider.class);
+		
+		PluginManager pm = new DefaultPluginManager();
+		
+		List<LookupProvider> lps = pm.getExtensions(LookupProvider.class);
 		lps.forEach(p -> {
 			log.debug("loaded lookup provider: {}", p.getName());
 			p.onInit(this.mode);
 			addProvider(p);
 		});
 
-		ServiceLoader<CertificateProvider> cps = ServiceLoader.load(CertificateProvider.class);
+		List<CertificateProvider> cps = pm.getExtensions(CertificateProvider.class);
 		cps.forEach(p -> {
 			log.debug("loaded certificate provider: {}", p.getName());
 			p.onInit(this.mode);

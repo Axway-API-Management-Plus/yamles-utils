@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import org.pf4j.Extension;
+
 import com.axway.yamles.utils.plugins.AbstractCertificateProvider;
 import com.axway.yamles.utils.plugins.CertificateProviderException;
 import com.axway.yamles.utils.plugins.CertificateReplacement;
@@ -24,6 +26,7 @@ import com.axway.yamles.utils.plugins.ConfigParameter;
 import com.axway.yamles.utils.plugins.ConfigParameter.Type;
 import com.axway.yamles.utils.plugins.ExecutionMode;
 
+@Extension
 public class SimpleCertificateProvider extends AbstractCertificateProvider {
 	public static final ConfigParameter CFG_CERT = new ConfigParameter("cert", true,
 			"PEM encoded certificate (single line)", Type.string, true);

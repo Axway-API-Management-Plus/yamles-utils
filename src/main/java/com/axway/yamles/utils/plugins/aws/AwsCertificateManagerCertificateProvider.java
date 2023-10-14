@@ -13,6 +13,7 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.pf4j.Extension;
 
 import com.axway.yamles.utils.plugins.AbstractCertificateProvider;
 import com.axway.yamles.utils.plugins.CertificateProviderException;
@@ -27,6 +28,7 @@ import software.amazon.awssdk.services.acm.model.GetCertificateRequest;
 import software.amazon.awssdk.services.acm.model.GetCertificateResponse;
 import software.amazon.awssdk.services.acm.model.ResourceNotFoundException;
 
+@Extension
 public class AwsCertificateManagerCertificateProvider extends AbstractCertificateProvider {
 
 	private static final Logger log = LogManager.getLogger(AwsCertificateManagerCertificateProvider.class);

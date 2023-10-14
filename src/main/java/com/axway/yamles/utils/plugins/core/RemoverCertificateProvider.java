@@ -6,11 +6,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.pf4j.Extension;
+
 import com.axway.yamles.utils.plugins.AbstractCertificateProvider;
 import com.axway.yamles.utils.plugins.CertificateProviderException;
 import com.axway.yamles.utils.plugins.CertificateReplacement;
 import com.axway.yamles.utils.plugins.ExecutionMode;
 
+@Extension
 public class RemoverCertificateProvider extends AbstractCertificateProvider {
 
 	public RemoverCertificateProvider() {

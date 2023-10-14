@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.apache.commons.io.FileUtils;
+import org.pf4j.Extension;
 
 import com.axway.yamles.utils.plugins.AbstractLookupProvider;
 import com.axway.yamles.utils.plugins.ConfigParameter;
@@ -19,6 +20,7 @@ import com.axway.yamles.utils.plugins.LookupProviderException;
 import com.axway.yamles.utils.plugins.LookupSource;
 import com.axway.yamles.utils.plugins.ConfigParameter.Type;
 
+@Extension
 public class FileContentLookupProvider extends AbstractLookupProvider {
 	private static final String ENCODE_DEFAULT = "UTF-8";
 	private static final String ENCODE_BIN = "binary";

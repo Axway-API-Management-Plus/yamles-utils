@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.pf4j.Extension;
 
 import com.axway.yamles.utils.plugins.AbstractLookupDocLookupProvider;
 import com.axway.yamles.utils.plugins.ConfigParameter;
@@ -19,6 +20,7 @@ import software.amazon.awssdk.services.secretsmanager.SecretsManagerClientBuilde
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest;
 import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueResponse;
 
+@Extension
 public class AwsSecretsManagerJsonLookupProvider extends AbstractLookupDocLookupProvider {
 	public static final ConfigParameter CFG_PARAM_SECRET = new ConfigParameter("secret_name", true, "Secret name",
 			Type.string, false);

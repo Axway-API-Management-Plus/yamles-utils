@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.pf4j.Extension;
 
 import com.axway.yamles.utils.helper.EnvironmentVariables;
 import com.axway.yamles.utils.plugins.AbstractLookupDocLookupProvider;
@@ -14,6 +15,7 @@ import com.axway.yamles.utils.plugins.LookupFunction;
 import com.axway.yamles.utils.plugins.LookupProviderException;
 import com.axway.yamles.utils.plugins.LookupSource;
 
+@Extension
 public class EnvJsonLookupProvider extends AbstractLookupDocLookupProvider {
 
 	public static final ConfigParameter CFG_PARAM_ENV = new ConfigParameter("env", true,

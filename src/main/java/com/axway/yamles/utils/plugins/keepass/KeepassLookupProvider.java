@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.pf4j.Extension;
 
 import com.axway.yamles.utils.plugins.AbstractLookupProvider;
 import com.axway.yamles.utils.plugins.ConfigParameter;
@@ -19,6 +20,7 @@ import com.axway.yamles.utils.plugins.LookupProviderException;
 import com.axway.yamles.utils.plugins.LookupSource;
 import com.axway.yamles.utils.plugins.keepass.KeePassDB.EntryPath;
 
+@Extension
 public class KeepassLookupProvider extends AbstractLookupProvider {
 	public static final ConfigParameter CFG_PARAM_FILE = new ConfigParameter("kdb", true, "Path to KeePass DB file",
 			ConfigParameter.Type.file, false);
