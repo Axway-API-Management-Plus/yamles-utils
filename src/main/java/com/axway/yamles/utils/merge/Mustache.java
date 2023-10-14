@@ -119,6 +119,13 @@ public class Mustache extends AbstractExtension implements TemplateEngine {
 
 	private static Mustache instance;
 
+	private static PebbleEngine.Builder basicPebbleEngineBuilder() {
+		return new PebbleEngine.Builder() //
+				.autoEscaping(false) //
+				.strictVariables(true) //
+				.methodAccessValidator(new DisabledMethodAceess());
+	}
+
 	public static Mustache getInstance() {
 		synchronized (Mustache.class) {
 			if (instance == null) {
@@ -130,17 +137,8 @@ public class Mustache extends AbstractExtension implements TemplateEngine {
 		return instance;
 	}
 
-	private void refresh() {
-		this.pe = new PebbleEngine.Builder() //
-				.autoEscaping(false) //
-				.strictVariables(true) //
-				.methodAccessValidator(new DisabledMethodAceess()) //
-				.extension(this) //
-				.build();
-		log.debug("Pebble template engine initialized");
-	}
-
-	private Mustache() {
+	Mustache() {
+		this.pe = basicPebbleEngineBuilder().build();
 	}
 
 	@Override
@@ -174,12 +172,25 @@ public class Mustache extends AbstractExtension implements TemplateEngine {
 				lf.getProvider().getName(), lf.getDefintionSource());
 		refresh();
 	}
+	
+	public void clearFunctions() {
+		this.functions.clear();
+		log.debug("Pebble functions cleared");
+		refresh();
+	}
 
 	public Collection<LookupFunction> getLookupFunctions() {
 		List<LookupFunction> lfs = new ArrayList<>();
-		this.functions.forEach( (name, func) -> {
+		this.functions.forEach((name, func) -> {
 			lfs.add(((LookupFunctionWrapper) func).getFunction());
 		});
 		return lfs;
+	}
+
+	private final void refresh() {
+		this.pe = basicPebbleEngineBuilder() //
+				.extension(this) //
+				.build();
+		log.debug("Pebble template engine initialized");
 	}
 }

@@ -1,5 +1,6 @@
 package com.axway.yamles.utils.merge.certs;
 
+import java.io.File;
 import java.io.IOException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
@@ -8,61 +9,88 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.axway.yamles.utils.es.YamlEs;
 import com.axway.yamles.utils.helper.Audit;
-import com.axway.yamles.utils.merge.CertificateManager;
+import com.axway.yamles.utils.merge.ProviderManager;
 import com.axway.yamles.utils.plugins.CertificateProvider;
 import com.axway.yamles.utils.plugins.CertificateReplacement;
+import com.axway.yamles.utils.plugins.ExecutionMode;
 
-class AliasSet {
+public class CertificatesConfigurator {
+	private static final Logger log = LogManager.getLogger(CertificatesConfigurator.class);
+
+	public static final int EXPIRATION_CHECK_DISABLED = -1;
+
+	public static final int DEFAULT_EXP_WARNING_DAYS = 30;
+	public static final int DEFAULT_EXP_ERROR_DAYS = 10;
+	public static final int DEFAULT_EXP_FAIL_DAYS = EXPIRATION_CHECK_DISABLED;
+
+	private final ExecutionMode mode;
+
+	private final Optional<Calendar> expirationWarning;
+	private final Optional<Calendar> expirationError;
+	private final Optional<Calendar> expirationFail;
+
 	private final Set<Alias> aliases = new HashSet<>();
 
-	private Optional<Calendar> expirationWarning = Optional.empty();
-	private Optional<Calendar> expirationError = Optional.empty();
-	private Optional<Calendar> expirationFail = Optional.of(Calendar.getInstance());
-
-	public AliasSet() {
-	}
-
-	public void setExpirationWarning(int daysBeforeExpiration) {
-		if (daysBeforeExpiration <= 0) {
-			this.expirationWarning = Optional.empty();
-		} else {
-			this.expirationWarning = Optional.of(Calendar.getInstance());
-			this.expirationWarning.get().add(Calendar.DATE, daysBeforeExpiration);
-		}
-	}
-
-	public void setExpirationError(int daysBeforeExpiration) {
-		if (daysBeforeExpiration <= 0) {
-			this.expirationError = Optional.empty();
-		} else {
-			this.expirationError = Optional.of(Calendar.getInstance());
-			this.expirationError.get().add(Calendar.DATE, daysBeforeExpiration);
-		}
-	}
-
-	public void setExpirationFail(int daysBeforeExpiration) {
-		if (daysBeforeExpiration < 0) {
-			this.expirationFail = Optional.empty();
-		} else {
-			this.expirationFail = Optional.of(Calendar.getInstance());
-			if (daysBeforeExpiration >= 0) {
-				this.expirationFail.get().add(Calendar.DATE, daysBeforeExpiration);
+	private static Optional<Calendar> calculateExpiration(int daysBefore) {
+		Optional<Calendar> calendar = Optional.empty();
+		if (daysBefore > EXPIRATION_CHECK_DISABLED) {
+			calendar = Optional.of(Calendar.getInstance());
+			if (daysBefore > 0) {
+				calendar.get().add(Calendar.DATE, daysBefore);
 			}
 		}
+		return calendar;
 	}
 
-	public void clear() {
+	public CertificatesConfigurator(ExecutionMode mode, int expirationWarningDays, int expirationErrorDays,
+			int expirationFailDays) {
+		this.mode = Objects.requireNonNull(mode, "configuration mode required");
+		this.expirationWarning = calculateExpiration(expirationWarningDays);
+		this.expirationError = calculateExpiration(expirationErrorDays);
+		this.expirationFail = calculateExpiration(expirationFailDays);
+	}
+
+	public void setCertificateConfigs(List<File> configFiles) {
 		this.aliases.clear();
+		if (configFiles == null)
+			return;
+
+		configFiles.forEach(f -> {
+			loadAliases(f);
+		});
 	}
 
-	public void addOrReplace(Collection<Alias> ca) {
+	public void apply(YamlEs es) {
+		Audit.AUDIT_LOG.info(Audit.HEADER_PREFIX + "Certificate Configuration");
+		writeAuditToLog();
+		writeAliases(es);
+	}
+
+	private void loadAliases(File file) {
+		log.info("load certificate config: {}", file.getAbsoluteFile());
+		CertificatesConfig cc = CertificatesConfig.loadConfig(file);
+		addOrReplace(cc.getAliases().values());
+	}
+
+	private void writeAuditToLog() {
+		Audit.AUDIT_LOG.info(Audit.SUB_HEADER_PREFIX + "Defined Certificate Aliases");
+		this.aliases.forEach(alias -> {
+			Audit.AUDIT_LOG.info("{} (provider={}; source={})", alias.getName(), alias.getProvider(),
+					alias.getConfigSource().getAbsolutePath());
+		});
+	}
+
+	private void addOrReplace(Collection<Alias> ca) {
 		if (aliases == null)
 			return;
 		ca.forEach((a) -> {
@@ -73,15 +101,11 @@ class AliasSet {
 		});
 	}
 
-	public Iterator<Alias> getAliases() {
-		return this.aliases.iterator();
-	}
-
-	public void writeAliases(YamlEs project) {
+	private void writeAliases(YamlEs project) {
 		if (project == null)
 			throw new IllegalArgumentException("project is null");
 
-		Audit.AUDIT_LOG.info(Audit.HEADER_PREFIX + "Write Certificates");
+		Audit.AUDIT_LOG.info(Audit.SUB_HEADER_PREFIX + "Process Certificates");
 
 		this.aliases.forEach(a -> {
 			writeAlias(project, a);
@@ -89,9 +113,9 @@ class AliasSet {
 	}
 
 	private void writeAlias(YamlEs project, Alias alias) {
-		CertificateManager cm = CertificateManager.getInstance();
+		ProviderManager pm = ProviderManager.getInstance();
 
-		CertificateProvider cp = cm.getProvider(alias.getProvider());
+		CertificateProvider cp = pm.getCertificateProvider(alias.getProvider());
 		if (cp == null) {
 			throw new CertificatesConfigException(alias.getConfigSource(),
 					"unsupported certificate provider for alias '" + alias.getName() + "': " + alias.getProvider());
@@ -151,9 +175,14 @@ class AliasSet {
 			Audit.AUDIT_LOG.info("  certificate removed: alias={}", aliasName);
 		} else {
 			auditCertificate(aliasName, cert.getCert().get());
-			project.writeCertificate(aliasName, cert.getCert().get(), cert.getKey());
-			Audit.AUDIT_LOG.info("  certificate{} created: alias={}", (cert.getKey().isPresent() ? " and key" : ""),
-					aliasName);
+			if (this.mode == ExecutionMode.CONFIG) {
+				project.writeCertificate(aliasName, cert.getCert().get(), cert.getKey());
+				Audit.AUDIT_LOG.info("  certificate{} created: alias={}", (cert.getKey().isPresent() ? " and key" : ""),
+						aliasName);
+			} else {
+				Audit.AUDIT_LOG.info("  certificate{} skipped (due to execution mode {}): alias={}", (cert.getKey().isPresent() ? " and key" : ""), this.mode,
+						aliasName);
+			}
 
 			if (!cert.getChain().isEmpty()) {
 				int i = cert.getChain().size();
@@ -161,8 +190,12 @@ class AliasSet {
 					i--;
 					String chainAlias = aliasName + "_chain_" + i;
 					auditCertificate(chainAlias, c);
-					project.writeCertificate(chainAlias, c, Optional.empty());
-					Audit.AUDIT_LOG.info("  chain certificate created: alias={}", chainAlias);
+					if (this.mode == ExecutionMode.CONFIG) {
+						project.writeCertificate(chainAlias, c, Optional.empty());
+						Audit.AUDIT_LOG.info("  chain certificate created: alias={}", chainAlias);						
+					} else {
+						Audit.AUDIT_LOG.info("  chain certificate skipped (due to execution mode {}): alias={}", this.mode, chainAlias);
+					}
 				}
 			}
 		}

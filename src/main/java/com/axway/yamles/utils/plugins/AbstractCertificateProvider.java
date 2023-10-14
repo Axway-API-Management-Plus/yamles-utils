@@ -4,14 +4,14 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractCertificateProvider implements CertificateProvider {
-
+public abstract class AbstractCertificateProvider extends AbstractProvider implements CertificateProvider {
+	
 	private final ParameterSet<ConfigParameter> configParams = new ParameterSet<>();
 
 	protected AbstractCertificateProvider(ConfigParameter... param) {
 		this.configParams.add(param);
 	}
-
+	
 	protected String getConfig(ConfigParameter param, Map<String, String> config, String defaultValue)
 			throws CertificateProviderException {
 		String value = config.get(param.getName());

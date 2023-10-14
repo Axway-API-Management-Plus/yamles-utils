@@ -3,9 +3,14 @@ package com.axway.yamles.utils.plugins;
 import java.util.Objects;
 
 public class Evaluator {
+	private static final TemplateEngine DEFAULT = new TemplateEngine() {
+	};
 
-	private static Evaluator evaluator = new Evaluator(new TemplateEngine() {
-	});
+	private static Evaluator evaluator = new Evaluator(DEFAULT);
+
+	public static void setDefaultTemplateEngine() {
+		setTemplateEngine(DEFAULT);
+	}
 
 	public static void setTemplateEngine(TemplateEngine engine) {
 		Objects.requireNonNull(engine, "template engine required");

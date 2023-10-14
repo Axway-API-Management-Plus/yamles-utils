@@ -9,6 +9,33 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+== Version 0.6.0
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/17[#17]
+|Enhancement
+|Support dry run and syntax check.
+
+New parameter `-m MODE` or `--mode=MODE` added to specific the execution mode:
+
+* `CONFIG`: Build and write configuration (default).
+* `DRY_RUN`: Build configuration, but don't write to disk.
+* `SYNTAX_CHECK`: Check syntax of configuration files only.
+Lookups are evaluated to empty strings; no connections to external systems (e.g. AWS Secrets Manager) are established.
+
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/18[#18]
+|Enhancement
+|New parameter `-f` and `--fragment`.
+
+The parameter `--config=FILE` may be misleading.
+The file is a fragment of the resulting `values.yaml` file.
+
+New parameters `-f FILE` and `--fragment=FILE` are added as an alias of the `--config` parameter of the `merge config` and `config` command.
+
+The `--config` and `-c` parameters are deprecated and may be removed in future releases.
+|===
+
 == Version 0.5.0
 [cols="1,2,<10a", options="header"]
 |===

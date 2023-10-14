@@ -1,6 +1,6 @@
 package com.axway.yamles.utils.merge.config;
 
-class ConfigSourceException extends RuntimeException {
+class FragmentSourceException extends RuntimeException {
 	
 	/**
 	 * 
@@ -8,22 +8,22 @@ class ConfigSourceException extends RuntimeException {
 	private static final long serialVersionUID = 2312085919780990091L;
 	private final String name;
 	
-	public ConfigSourceException(String name, String msg) {
+	public FragmentSourceException(String name, String msg) {
 		super(msg);
 		this.name = name;
 	}
 	
-	public ConfigSourceException(String name, Throwable cause) {
+	public FragmentSourceException(String name, Throwable cause) {
 		super(cause);
 		this.name = name;
 	}
 	
-	public ConfigSourceException(ConfigSource source, Throwable cause) {
+	public FragmentSourceException(FragmentSource source, Throwable cause) {
 		super(cause);
 		this.name = source.getName();
 	}
 	
-	public ConfigSourceException(ConfigSource source, String msg) {
+	public FragmentSourceException(FragmentSource source, String msg) {
 		super(msg);
 		this.name = source.getName();
 	}

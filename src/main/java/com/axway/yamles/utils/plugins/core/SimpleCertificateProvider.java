@@ -12,6 +12,7 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import com.axway.yamles.utils.plugins.CertificateProviderException;
 import com.axway.yamles.utils.plugins.CertificateReplacement;
 import com.axway.yamles.utils.plugins.ConfigParameter;
 import com.axway.yamles.utils.plugins.ConfigParameter.Type;
+import com.axway.yamles.utils.plugins.ExecutionMode;
 
 public class SimpleCertificateProvider extends AbstractCertificateProvider {
 	public static final ConfigParameter CFG_CERT = new ConfigParameter("cert", true,
@@ -51,17 +53,25 @@ public class SimpleCertificateProvider extends AbstractCertificateProvider {
 	public List<CertificateReplacement> getCertificates(File configSource, String aliasName, Map<String, String> config)
 			throws CertificateProviderException {
 		try {
+			String strData = getConfig(CFG_CERT, config, null);
+			if (strData == null) {
+				throw new CertificateProviderException("missing configuration: " + CFG_CERT);
+			}
+			String strKey = getConfig(CFG_KEY, config, null);
+			if (getMode() == ExecutionMode.SYNTAX_CHECK) {
+				return Collections.emptyList();
+			}
+
+			byte[] data = Base64.getDecoder().decode(strData);
+			byte[] keyData = (strKey != null) ? Base64.getDecoder().decode(strKey) : null;
+
 			Certificate c = null;
 			PrivateKey k = null;
 
 			CertificateFactory cf = CertificateFactory.getInstance("X509");
-			byte[] data = getDecodedConfig(CFG_CERT, config);
-			if (data == null) {
-				throw new CertificateProviderException("missing configuration: " + CFG_CERT);
-			}
+
 			c = cf.generateCertificate(new ByteArrayInputStream(data));
 
-			byte[] keyData = getDecodedConfig(CFG_KEY, config);
 			if (keyData != null) {
 				KeyFactory kf = KeyFactory.getInstance("RSA");
 				PKCS8EncodedKeySpec ks = new PKCS8EncodedKeySpec(keyData);
@@ -72,15 +82,5 @@ public class SimpleCertificateProvider extends AbstractCertificateProvider {
 		} catch (CertificateException | NoSuchAlgorithmException | InvalidKeySpecException e) {
 			throw new CertificateProviderException("error on creating certificate", e);
 		}
-	}
-
-	private byte[] getDecodedConfig(ConfigParameter param, Map<String, String> config)
-			throws CertificateProviderException {
-		byte[] data = null;
-		String value = getConfig(param, config, null);
-		if (value != null) {
-			data = Base64.getDecoder().decode(value);
-		}
-		return data;
 	}
 }

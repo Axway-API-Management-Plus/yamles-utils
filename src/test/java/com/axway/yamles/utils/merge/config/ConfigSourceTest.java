@@ -17,7 +17,7 @@ class ConfigSourceTest {
 		ObjectMapper om = new ObjectMapper();
 		ObjectNode config = om.createObjectNode();
 		
-		assertNotNull(new ConfigSource("foobar", config));
+		assertNotNull(new FragmentSource("foobar", config));
 	}
 	
 	@Test
@@ -26,7 +26,7 @@ class ConfigSourceTest {
 		ObjectNode config = om.createObjectNode();
 		
 		Exception ex = assertThrows(NullPointerException.class, () -> {
-			new ConfigSource(null, config);
+			new FragmentSource(null, config);
 		});
 		
 		assertEquals("missing source name", ex.getMessage());
@@ -34,7 +34,7 @@ class ConfigSourceTest {
 	
 	@Test
 	void testSourceConfigMissingConfig() {
-		ConfigSource cs = new ConfigSource("foobar", null);
+		FragmentSource cs = new FragmentSource("foobar", null);
 		
 		assertTrue(cs.getConfig().isObject());
 		assertTrue(cs.getConfig().isEmpty());
@@ -45,7 +45,7 @@ class ConfigSourceTest {
 		ObjectMapper om = new ObjectMapper();
 		ObjectNode config = om.createObjectNode();
 		
-		assertEquals("foobar", new ConfigSource("foobar", config).getName());
+		assertEquals("foobar", new FragmentSource("foobar", config).getName());
 	}
 
 	@Test
@@ -53,6 +53,6 @@ class ConfigSourceTest {
 		ObjectMapper om = new ObjectMapper();
 		ObjectNode config = om.createObjectNode();
 		
-		assertTrue(new ConfigSource("foobar", config).getConfig().isObject());
+		assertTrue(new FragmentSource("foobar", config).getConfig().isObject());
 	}
 }

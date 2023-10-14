@@ -10,6 +10,7 @@ import java.security.KeyStore;
 import java.security.cert.Certificate;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import com.axway.yamles.utils.plugins.CertificateProviderException;
 import com.axway.yamles.utils.plugins.CertificateReplacement;
 import com.axway.yamles.utils.plugins.ConfigParameter;
 import com.axway.yamles.utils.plugins.ConfigParameter.Type;
+import com.axway.yamles.utils.plugins.ExecutionMode;
 
 public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 
@@ -76,17 +78,28 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 					"invalid type '" + type + "'; must be " + TYPE_JKS + " or " + TYPE_P12);
 		}
 
-		String path = getConfig(CFG_PATH, config, "");
-		String data = getConfig(CFG_DATA, config, "");
+		String path = getConfig(CFG_PATH, config, null);
+		String data = getConfig(CFG_DATA, config, null);
+		if (path != null && data != null) {
+			throw new CertificateProviderException("'" + CFG_PATH.getName() + "' and '" + CFG_DATA.getName()
+					+ "' configuration are mutually exclusive");
+		} else if (path == null && data == null) {
+			throw new CertificateProviderException(
+					"'" + CFG_PATH.getName() + "' or '" + CFG_DATA.getName() + "' configuration is required");
+		}
+
+		String passphrase = getConfig(CFG_PASSPHRASE, config, null);
+		String aliasExpr = getConfig(CFG_ALIAS, config, aliasName);
+		boolean addChain = getConfig(CFG_CHAIN, config, "false").equals("true");
+		boolean nokey = getConfig(CFG_NOKEY, config, "false").equals("true");
+
+		if (getMode() == ExecutionMode.SYNTAX_CHECK) {
+			return Collections.emptyList();
+		}
+
 		String source = "data";
-
 		InputStream dataStream = null;
-		if (!path.isEmpty()) {
-			if (!data.isEmpty()) {
-				throw new CertificateProviderException("'" + CFG_PATH.getName() + "' and '" + CFG_DATA.getName()
-						+ "' configuration are mutually exclusive");
-			}
-
+		if (path != null) {
 			File keystoreFile = buildFile(configSource, path);
 			try {
 				dataStream = new FileInputStream(keystoreFile);
@@ -94,27 +107,20 @@ public class KeystoreCertificateProvider extends AbstractCertificateProvider {
 			} catch (FileNotFoundException e) {
 				throw new CertificateProviderException("keystore file not found: " + keystoreFile.getAbsolutePath());
 			}
-		} else {
-			if (data.isEmpty()) {
-				throw new CertificateProviderException(
-						"'" + CFG_PATH.getName() + "' or '" + CFG_DATA.getName() + "' configuration is required");
-			}
+		} else if (data != null) {
 			try {
 				dataStream = new ByteArrayInputStream(Base64.getDecoder().decode(data));
 			} catch (IllegalArgumentException e) {
 				throw new CertificateProviderException("data is not a valid Base64 scheme");
 			}
+		} else {
+			throw new IllegalStateException("illegal state on handling 'path' and 'data' configuration parameter");
 		}
 
-		String passphrase = getConfig(CFG_PASSPHRASE, config, null);
 		char[] password = null;
 		if (passphrase != null) {
 			password = passphrase.toCharArray();
 		}
-
-		String aliasExpr = getConfig(CFG_ALIAS, config, aliasName);
-		boolean addChain = getConfig(CFG_CHAIN, config, "false").equals("true");
-		boolean nokey = getConfig(CFG_NOKEY, config, "false").equals("true");		
 
 		log.debug("searching for certificates '{}' in keystore '{}' of type '{}'", aliasExpr, path, type);
 

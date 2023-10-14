@@ -1,14 +1,15 @@
 package com.axway.yamles.utils.plugins;
 
 import java.util.List;
+import java.util.Optional;
 
-public abstract class AbstractLookupProvider implements LookupProvider {
+public abstract class AbstractLookupProvider extends AbstractProvider implements LookupProvider {
 	public static final ConfigParameter[] EMPTY_CONFIG_PARAMS = new ConfigParameter[0];
 	public static final FunctionArgument[] EMPTY_FUNC_ARGS = new FunctionArgument[0];
 
 	private final ParameterSet<FunctionArgument> funcArgs = new ParameterSet<>();
 	private final ParameterSet<ConfigParameter> configParams = new ParameterSet<>();
-
+	
 	protected AbstractLookupProvider() {
 	}
 
@@ -28,5 +29,13 @@ public abstract class AbstractLookupProvider implements LookupProvider {
 	@Override
 	public List<ConfigParameter> getConfigParameters() {
 		return this.configParams.getParams();
+	}
+	
+	
+	protected Optional<LookupFunction> checkOnlyLookupFunction(LookupSource source) {
+		if (getMode() == ExecutionMode.SYNTAX_CHECK) {
+			return Optional.of(new EmptyValueLookupFunction(source.getAlias(), this, source.getConfigSource()));
+		}
+		return Optional.empty();
 	}
 }

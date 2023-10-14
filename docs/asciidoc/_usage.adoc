@@ -25,9 +25,11 @@ YAML Entity Store Utilities
   -v, --verbose      Increase logging verbosity.
   -V, --version      Print version information and exit.
 Commands:
-  help   Display help information about the specified command.
-  merge  Merge configuration from various sources.
-  lint   Lint YAML entity store.
+  help    Display help information about the specified command.
+  merge   Merge configuration from various sources.
+  lint    Lint YAML entity store.
+  config  Configure YAML-ES. Combines the 'lint', 'merge config' and 'merge
+            certs' commands.
 ----
 
 There are some global options, which are available for all commands.

@@ -99,6 +99,10 @@ public class FileContentLookupProvider extends AbstractLookupProvider {
 	@Override
 	public LookupFunction buildFunction(LookupSource source) throws LookupProviderException {
 		File baseDir = source.getBaseDirFromConfig(CFG_PARAM_BASE_DIR).get();
+		
+		Optional<LookupFunction> clf = checkOnlyLookupFunction(source);
+		if (clf.isPresent())
+			return clf.get();
 
 		return new LF(source.getAlias(), this, source.getConfigSource(), baseDir);
 	}

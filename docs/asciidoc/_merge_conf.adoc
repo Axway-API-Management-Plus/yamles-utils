@@ -43,33 +43,33 @@ See <<Templates>> for more details about the evaluation of Mustache templates an
 To merge configuration fragments, use the `merge config` command of _YAML-ES Utilities_.
 
 ----
-yamlesutils.sh merge config --help
-Usage: yamlesutils merge config [-hV] [-c=FILE]... [-d=DIR]...
-                                [--lookup-functions=FILE]... (-o=FILE |
-                                [--project=DIR | --ignore-missing-values])
-Merge configuration fragments for YAML entity store.
-  -c, --config=FILE   Configuration fragment.
-  -d, --dir=DIR       Directory to scan for YAML configuration fragments.
-  -h, --help          Show this help message and exit.
-      --ignore-missing-values
-                      Ignore missing configuration of values (only for
-                        projects).
-      --lookup-functions=FILE
-                      configure lookup functions.
-  -o, --output=FILE   File to write generated YAML configuration.
-      --project=DIR   Path to the YAML entity store project.
-  -V, --version       Print version information and exit.----
+yamlesutils merge [-m MODE] config
+    [-f=FILE]... [-d=DIR]...
+    [--lookup-functions=FILE]...
+    (-o=FILE | [--project=DIR | --ignore-missing-values])
 ----
 
 .Options for Merge Configuration
-[cols="2,6a", options="header"]
+[cols="3,6a", options="header"]
 |===
 |Option
 |Description
 
-|`-c FILE` +
+|`-m MODE` +
+`--mode=MODE`
+|Execution mode
+
+* `CONFIG`: Build and write configuration (default).
+* `DRY_RUN`: Build configuration, but don't write to disk.
+* `SYNTAX_CHECK`: Check syntax of configuration files only.
+Lookups are evaluated to empty strings; no connections to external systems (e.g. AWS Secrets Manager) are established.
+
+|`-f FILE` +
+`--fragment=FILE` +
+`-c FILE` +
 `--config=FILE`
-|Configuration fragment to be merged. The fragments are files, containing a single YAML document.
+|Configuration fragment to be merged to the `values.yaml` file.
+The fragments are files, containing a single YAML document.
 
 The parameter can be specified multiple times to merge multiple fragments.
 
@@ -100,7 +100,8 @@ On missing fields, the merge command stop with an error message.
 With this option, missing fields are ignored and the merge command continue processing.
 Missing or unused fields are just reported.
 
-|`--lookup-functions=FILE`
+|`-l FILE` +
+`--lookup-functions=FILE`
 |YAML file to configure lookup functions.
 
 Multiple parameters can be specified to use multiple lookup configurations.
@@ -131,8 +132,8 @@ To merge the fragments use the following command:
 [source, shell]
 ----
 yamlesutils.sh merge config \ #<1>
-  --config=fragments/global.yaml \ #<2>
-  --config=fragment/local.yaml \ #<3>
+  --fragment=fragments/global.yaml \ #<2>
+  --fragment=fragment/local.yaml \ #<3>
   -o - #<4>
 ----
 <1> Command to merge configuration fragments
@@ -199,7 +200,7 @@ To merge these fragments, an additional parameter `--lookup-functions` must be s
 ----
 yamlesutils.sh merge config \ #<1>
   --lookup-functions=lookup-func.yaml \ #<2>
-  -c fragments/global.yaml -c fragments/local.yaml -c fragments/users.yaml \ #<3>
+  -f fragments/global.yaml -f fragments/local.yaml -f fragments/users.yaml \ #<3>
   -o - #<4>
 ----
 <1> Command to merge configuration fragments.

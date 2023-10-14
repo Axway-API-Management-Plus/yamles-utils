@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import java.util.Objects;
 
 import com.axway.yamles.utils.es.YamlEs;
+import com.axway.yamles.utils.helper.Audit;
 import com.axway.yamles.utils.helper.ListMap;
 import com.axway.yamles.utils.helper.Yaml;
 import com.axway.yamles.utils.lint.rules.FilePattern;
@@ -16,7 +17,7 @@ import com.axway.yamles.utils.lint.rules.Rules;
 import com.axway.yamles.utils.lint.rules.RulesManager;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-class Linter {
+public class Linter {
 	
 	private final YamlEs project;
 	private final ListMap<FilePattern, Rule> fileRules = new ListMap<>();
@@ -28,6 +29,7 @@ class Linter {
 	}
 
 	public Results apply() {
+		Audit.AUDIT_LOG.info(Audit.HEADER_PREFIX + "Lint project");		
 		Results results = new Results();
 		applyDir(results, this.project.getProjectDir());
 		return results;

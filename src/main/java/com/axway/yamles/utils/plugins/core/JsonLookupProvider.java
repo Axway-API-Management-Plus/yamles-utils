@@ -1,6 +1,7 @@
 package com.axway.yamles.utils.plugins.core;
 
 import java.io.File;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -43,6 +44,10 @@ public class JsonLookupProvider extends AbstractLookupDocLookupProvider {
 	@Override
 	public LookupFunction buildFunction(LookupSource source) throws LookupProviderException {
 		File file = source.getFileFromConfig(CFG_PARAM_FILE).get();
+
+		Optional<LookupFunction> clf = checkOnlyLookupFunction(source);
+		if (clf.isPresent())
+			return clf.get();
 
 		try {
 			LookupDoc doc = LookupDoc.fromJsonFile(file);

@@ -6,17 +6,17 @@ import com.axway.yamles.utils.helper.Yaml;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-class ConfigSource {
+class FragmentSource {
 	private final String name;
 	private final ObjectNode config;
 
-	public ConfigSource(String name, JsonNode node) {
+	public FragmentSource(String name, JsonNode node) {
 		this.name = Objects.requireNonNull(name, "missing source name");
 		if (node == null || node.isNull()) {
 			node = Yaml.createObjectNode();
 		}
 		if (!node.isObject()) {
-			throw new ConfigSourceException(name, "config source is not an object");
+			throw new FragmentSourceException(name, "fragment source is not an object");
 		}
 		this.config = (ObjectNode) node;
 	}

@@ -4,13 +4,7 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
-public interface CertificateProvider {
-
-	public String getName();
-
-	public String getSummary();
-
-	public String getDescription();
+public interface CertificateProvider extends Provider {
 
 	public List<ConfigParameter> getConfigParameters();
 

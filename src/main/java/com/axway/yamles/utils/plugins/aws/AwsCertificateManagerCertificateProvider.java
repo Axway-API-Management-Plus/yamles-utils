@@ -6,6 +6,7 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,6 +19,7 @@ import com.axway.yamles.utils.plugins.CertificateProviderException;
 import com.axway.yamles.utils.plugins.CertificateReplacement;
 import com.axway.yamles.utils.plugins.ConfigParameter;
 import com.axway.yamles.utils.plugins.ConfigParameter.Type;
+import com.axway.yamles.utils.plugins.ExecutionMode;
 
 import software.amazon.awssdk.services.acm.AcmClient;
 import software.amazon.awssdk.services.acm.AcmClientBuilder;
@@ -73,6 +75,10 @@ public class AwsCertificateManagerCertificateProvider extends AbstractCertificat
 
 		String arn = getConfig(CFG_ARN, config, "");
 		boolean addChain = getConfig(CFG_CHAIN, config, "false").equals("true");
+		
+		if (getMode() == ExecutionMode.SYNTAX_CHECK) {
+			return Collections.emptyList();
+		}
 
 		GetCertificateResponse result = null;
 		try {

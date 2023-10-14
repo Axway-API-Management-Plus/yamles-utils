@@ -225,6 +225,7 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 
 	@Override
 	public LookupFunction buildFunction(LookupSource source) throws LookupProviderException {
+		// get configuration parameters
 		String kvBase = source.getConfig(CFG_PARAM_KV_BASE, "");
 		Optional<String> tokenStr = Optional.ofNullable(source.getConfig(CFG_PARAM_TOKEN, null));
 		Optional<String> addr = Optional.ofNullable(source.getConfig(CFG_PARAM_ADDR, null));
@@ -241,8 +242,12 @@ public class VaultLookupProvider extends AbstractLookupProvider {
 			token = new VaultToken(tokenFile.get());
 		}
 
+		Optional<LookupFunction> clf = checkOnlyLookupFunction(source);
+		if (clf.isPresent())
+			return clf.get();
+
 		VaultClient client = new VaultClient(source.getAlias(), token, kvBase, addr, skipVerify);
-		
+
 		return new LF(source.getAlias(), this, source.getConfigSource(), client);
 	}
 }

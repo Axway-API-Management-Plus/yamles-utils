@@ -12,8 +12,17 @@ ifndef::imagesdir[:imagesdir: ./images]
 
 The `config` command combines the features of the `lint`, `merge certs` and `merge config` commands into one single command.
 
+----
+yamlesutils config [-m MODE] --project=DIR
+  [-r RULE]...
+  [-f FILE]...
+  [--lookup-functions=FILE]...
+    (-o=FILE | [--project=DIR | --ignore-missing-values])
+----
+
+
 .Options for Configure Command
-[cols="2,6a", options="header"]
+[cols="3,6a", options="header"]
 |===
 |Option
 |Description
@@ -21,24 +30,38 @@ The `config` command combines the features of the `lint`, `merge certs` and `mer
 |`--project=DIR`
 |Path to the directory containing the YAML-ES project.
 
-|`--lookup-functions=FILE`
+|`-m MODE` +
+`--mode=MODE`
+|Execution mode
+
+* `CONFIG`: Build and write configuration (default).
+* `DRY_RUN`: Build configuration, but don't write to disk.
+* `SYNTAX_CHECK`: Check syntax of configuration files only.
+Lookups are evaluated to empty strings; no connections to external systems (e.g. AWS Secrets Manager) are established.
+
+|`-l FILE` +
+`--lookup-functions=FILE`
 |YAML file to configure lookup functions.
 
 Multiple parameters can be specified to use multiple lookup configurations.
 
-|`--rules=FILE`
+|`-r FILE` +
+`--rules=FILE`
 | Path to file containing linting rules.
 
 Multiple files are allowed.
 If missing, the linting feature is not executed.
 
-|`--config=FILE`
-|Configuration fragment to be merged. The fragments are files, containing a single YAML document.
+|`-f FILE` +
+`--fragment=FILE` +
+`--config=FILE`
+|Configuration fragment to be merged to the `values.yaml` file.
+The fragments are files, containing a single YAML document.
 
 The parameter can be specified multiple times to merge multiple fragments.
 
 The fragments are processed in the order as specified on the command line.
-If a configuration parameter is configured by in multiple files, the last one wins.
+If a configuration parameter is configured in multiple files, the last one wins.
 
 If the parameter is missing, the `values.yaml` file will not be configured.
 
@@ -69,12 +92,12 @@ To avoid any commits of confidential certificates into the repository, projects 
 |`--expiration-warning=DAYS`
 |If the certificate expires within the defined number of days, a warning message will be logged into the audit log.
 
-Set to `0` to disable warnings.
+Set to `-1` to disable warnings.
 
 |`--expiration-error=DAYS`
 |If the certificate expires within the defined number of days, an error message will be logged into the audit log.
 
-Set to `0` to disable errors.
+Set to `-1` to disable errors.
 
 |`--expiration-fail=DAYS`
 |If the certificate expires within the defined number of days, the command fails.

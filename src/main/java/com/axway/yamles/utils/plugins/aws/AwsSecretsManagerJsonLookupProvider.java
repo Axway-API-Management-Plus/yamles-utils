@@ -1,15 +1,17 @@
 package com.axway.yamles.utils.plugins.aws;
 
+import java.util.Optional;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.plugins.AbstractLookupDocLookupProvider;
 import com.axway.yamles.utils.plugins.ConfigParameter;
+import com.axway.yamles.utils.plugins.ConfigParameter.Type;
 import com.axway.yamles.utils.plugins.LookupDoc;
 import com.axway.yamles.utils.plugins.LookupFunction;
 import com.axway.yamles.utils.plugins.LookupProviderException;
 import com.axway.yamles.utils.plugins.LookupSource;
-import com.axway.yamles.utils.plugins.ConfigParameter.Type;
 
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
@@ -47,8 +49,13 @@ public class AwsSecretsManagerJsonLookupProvider extends AbstractLookupDocLookup
 
 	@Override
 	public LookupFunction buildFunction(LookupSource source) throws LookupProviderException {
+		// get configuration parameters
 		String secretName = source.getConfig(CFG_PARAM_SECRET, "");
 		String region = source.getConfig(CFG_PARAM_REGION, "");
+		
+		Optional<LookupFunction> clf = checkOnlyLookupFunction(source);
+		if (clf.isPresent())
+			return clf.get();
 
 		SecretsManagerClientBuilder builder = SecretsManagerClient.builder();
 		if (!region.isEmpty()) {
