@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Objects;
 
-import com.axway.yamles.utils.helper.NodeLocation;
+import com.axway.yamles.utils.es.NodeLocation;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 

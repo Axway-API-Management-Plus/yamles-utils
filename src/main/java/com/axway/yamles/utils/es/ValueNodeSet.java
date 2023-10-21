@@ -1,4 +1,4 @@
-package com.axway.yamles.utils.helper;
+package com.axway.yamles.utils.es;
 
 import java.util.ArrayList;
 import java.util.Collections;
