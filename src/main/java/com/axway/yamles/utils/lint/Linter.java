@@ -7,8 +7,8 @@ import java.util.Objects;
 
 import com.axway.yamles.utils.audit.Audit;
 import com.axway.yamles.utils.es.YamlEs;
-import com.axway.yamles.utils.helper.ListMap;
 import com.axway.yamles.utils.helper.Yaml;
+import com.axway.yamles.utils.lint.helper.ListMap;
 import com.axway.yamles.utils.lint.rules.FilePattern;
 import com.axway.yamles.utils.lint.rules.Results;
 import com.axway.yamles.utils.lint.rules.Results.Finding;
@@ -44,7 +44,7 @@ public class Linter {
 	private void buildFileRules(Rules rules) {
 		rules.getRules().forEach((id, rule) -> {
 			rule.getFilePatterns().forEach(fp -> {
-				this.fileRules.put(fp, rule);
+				this.fileRules.add(fp, rule);
 			});
 		});
 	}
