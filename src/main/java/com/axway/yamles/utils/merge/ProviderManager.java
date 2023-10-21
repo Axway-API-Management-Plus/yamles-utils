@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 import org.pf4j.DefaultPluginManager;
 import org.pf4j.PluginManager;
 
-import com.axway.yamles.utils.helper.Audit;
+import com.axway.yamles.utils.audit.Audit;
 import com.axway.yamles.utils.plugins.CertificateProvider;
 import com.axway.yamles.utils.plugins.ExecutionMode;
 import com.axway.yamles.utils.plugins.LookupFunction;

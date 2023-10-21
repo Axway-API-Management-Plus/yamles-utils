@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Objects;
 
+import com.axway.yamles.utils.audit.Audit;
 import com.axway.yamles.utils.es.YamlEs;
-import com.axway.yamles.utils.helper.Audit;
 import com.axway.yamles.utils.helper.ListMap;
 import com.axway.yamles.utils.helper.Yaml;
 import com.axway.yamles.utils.lint.rules.FilePattern;
