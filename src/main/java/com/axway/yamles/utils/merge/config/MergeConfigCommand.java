@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.axway.yamles.utils.audit.Audit;
 import com.axway.yamles.utils.es.YamlEs;
-import com.axway.yamles.utils.helper.Audit;
 import com.axway.yamles.utils.merge.AbstractLookupEnabledCommand;
 import com.axway.yamles.utils.merge.MergeCommand;
 import com.axway.yamles.utils.merge.ProviderManager;

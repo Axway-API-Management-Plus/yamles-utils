@@ -1,6 +1,6 @@
 package com.axway.yamles.utils.merge;
 
-import com.axway.yamles.utils.helper.Audit;
+import com.axway.yamles.utils.audit.Audit;
 import com.axway.yamles.utils.plugins.ExecutionMode;
 
 import picocli.CommandLine.Command;

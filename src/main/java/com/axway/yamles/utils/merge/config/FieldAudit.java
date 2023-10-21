@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import com.axway.yamles.utils.helper.Audit;
+import com.axway.yamles.utils.audit.Audit;
 import com.axway.yamles.utils.helper.NodeLocation;
 
 public class FieldAudit {

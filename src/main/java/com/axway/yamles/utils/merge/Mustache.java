@@ -14,7 +14,7 @@ import java.util.TreeMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.axway.yamles.utils.helper.Audit;
+import com.axway.yamles.utils.audit.Audit;
 import com.axway.yamles.utils.plugins.Evaluator;
 import com.axway.yamles.utils.plugins.FunctionArgument;
 import com.axway.yamles.utils.plugins.LookupFunction;

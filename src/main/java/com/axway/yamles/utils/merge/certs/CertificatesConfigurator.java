@@ -17,8 +17,8 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.axway.yamles.utils.audit.Audit;
 import com.axway.yamles.utils.es.YamlEs;
-import com.axway.yamles.utils.helper.Audit;
 import com.axway.yamles.utils.merge.ProviderManager;
 import com.axway.yamles.utils.plugins.CertificateProvider;
 import com.axway.yamles.utils.plugins.CertificateReplacement;

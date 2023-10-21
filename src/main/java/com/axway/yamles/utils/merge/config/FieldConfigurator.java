@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.axway.yamles.utils.audit.Audit;
 import com.axway.yamles.utils.es.YamlEs;
-import com.axway.yamles.utils.helper.Audit;
 import com.axway.yamles.utils.helper.Yaml;
 import com.axway.yamles.utils.plugins.ExecutionMode;
 

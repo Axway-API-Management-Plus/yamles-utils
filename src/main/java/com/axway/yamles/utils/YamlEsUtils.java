@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.config.Configurator;
 
-import com.axway.yamles.utils.helper.Audit;
+import com.axway.yamles.utils.audit.Audit;
 import com.axway.yamles.utils.lint.LintCommand;
 import com.axway.yamles.utils.merge.MergeCommand;
 

@@ -7,7 +7,7 @@ import java.util.Objects;
 
 import org.apache.logging.log4j.Level;
 
-import com.axway.yamles.utils.helper.Audit;
+import com.axway.yamles.utils.audit.Audit;
 import com.axway.yamles.utils.helper.ListMap;
 
 public class Results {

@@ -11,7 +11,7 @@ import java.util.Optional;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.axway.yamles.utils.helper.Audit;
+import com.axway.yamles.utils.audit.Audit;
 import com.axway.yamles.utils.helper.NodeLocation;
 import com.axway.yamles.utils.helper.ValueNodeSet;
 import com.axway.yamles.utils.helper.Yaml;
