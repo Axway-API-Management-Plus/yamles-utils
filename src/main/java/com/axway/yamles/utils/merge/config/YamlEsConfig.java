@@ -12,8 +12,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.axway.yamles.utils.audit.Audit;
-import com.axway.yamles.utils.helper.NodeLocation;
-import com.axway.yamles.utils.helper.ValueNodeSet;
+import com.axway.yamles.utils.es.NodeLocation;
+import com.axway.yamles.utils.es.ValueNodeSet;
 import com.axway.yamles.utils.helper.Yaml;
 import com.axway.yamles.utils.plugins.Evaluator;
 import com.fasterxml.jackson.databind.JsonNode;

@@ -1,4 +1,4 @@
-package com.axway.yamles.utils.helper;
+package com.axway.yamles.utils.es;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
+import com.axway.yamles.utils.helper.Json;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public class ValueNodeSetTest {

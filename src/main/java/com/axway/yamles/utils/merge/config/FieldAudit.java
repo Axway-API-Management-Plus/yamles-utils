@@ -5,7 +5,7 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import com.axway.yamles.utils.audit.Audit;
-import com.axway.yamles.utils.helper.NodeLocation;
+import com.axway.yamles.utils.es.NodeLocation;
 
 public class FieldAudit {
 	private static final Field[] EMPTY = new Field[0];

@@ -1,4 +1,4 @@
-package com.axway.yamles.utils.helper;
+package com.axway.yamles.utils.es;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
