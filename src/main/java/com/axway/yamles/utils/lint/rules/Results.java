@@ -8,7 +8,7 @@ import java.util.Objects;
 import org.apache.logging.log4j.Level;
 
 import com.axway.yamles.utils.audit.Audit;
-import com.axway.yamles.utils.helper.ListMap;
+import com.axway.yamles.utils.lint.helper.ListMap;
 
 public class Results {
 
@@ -36,11 +36,11 @@ public class Results {
 	}
 
 	public void add(File file, Finding finding) {
-		this.fileFindings.put(file.getAbsolutePath(), finding);
+		this.fileFindings.add(file.getAbsolutePath(), finding);
 	}
 
 	public void add(File file, List<Finding> finding) {
-		this.fileFindings.put(file.getAbsolutePath(), finding);
+		this.fileFindings.add(file.getAbsolutePath(), finding);
 	}
 
 	public boolean hasFindings() {

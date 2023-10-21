@@ -1,4 +1,4 @@
-package com.axway.yamles.utils.helper;
+package com.axway.yamles.utils.lint.helper;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,11 +14,11 @@ public class ListMap<K, V> {
 
 	}
 
-	public void put(K k, List<V> v) {
+	public void add(K k, List<V> v) {
 		getList(k).addAll(v);
 	}
 
-	public void put(K k, V v) {
+	public void add(K k, V v) {
 		getList(k).add(v);
 	}
 
