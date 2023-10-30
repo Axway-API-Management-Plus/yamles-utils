@@ -1,0 +1,52 @@
+= Hashicorp Vault
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+ifndef::imagesdir[:imagesdir: ./images]
+
+== Lookup Providers
+
+=== Key/Value Store
+
+[cols="2,6a"]
+|===
+|*Name*
+|`vault`
+
+|*Built-In*
+|no
+
+|*Synopsis*
+|Retrieves values from a Hashicorp Vault key/value store.
+
+2+|*Configuration Parameters*
+|`token`
+|Token to authorize access to Vault.
+It is required if the `token_file` parameter is not specified.
+
+This parameter supports a _Mustache_ template, using built-in lookup functions.
+|`token_file`
+|Path to token file.
+It is required if the `token` parameter is not specified.
+|`addr`
+|Address of the Vault server.
+If not specified, the default `https://localhost:8200` is used.
+|`kv_base`
+|Path to the KV secret engine (within Vault).
+
+2+|*Lookup Function Arguments*
+|`key`
+|Path to KV (within the secret engine).
+|`field`
+|Field within the KV data.
+|===
+
+== Certificate Providers
+
+Currently this plugin doesn't provide any certificate providers.

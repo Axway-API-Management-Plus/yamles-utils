@@ -47,12 +47,16 @@ include::_intro.adoc[leveloffset=+1]
 
 include::_usage.adoc[leveloffset=+1]
 
-include::_reference.adoc[leveloffset=+1]
+include::_templates.adoc[leveloffset=+1]
+
+include::_plugins.adoc[leveloffset=+1]
 
 include::_faq.adoc[leveloffset=+1]
 
 [appendix]
 == Appendix
+
+include::_plugins_development.adoc[leveloffset=+2]
 
 include::../../examples/README.adoc[leveloffset=+2]
 

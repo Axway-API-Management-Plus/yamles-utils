@@ -17,12 +17,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.github.axway-api-management-plus</groupId>
 	<artifactId>yamles-utils</artifactId>
-	<version>0.6.0-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 	<name>YAML Entity Store Utilities</name>
 	<description>Utilities for YAML Entity Store based API Gateway projects.</description>
+
 	<url>https://github.com/Axway-API-Management-Plus/yamles-utils</url>
 	<licenses>
 		<license>
@@ -38,28 +37,6 @@
 			<organizationUrl>http://www.axway.com</organizationUrl>
 		</developer>
 	</developers>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.version>3.10.1</maven.compiler.version>
-		<project.scm.id>github</project.scm.id>
-
-		<!-- Library versions -->
-		<jackson.version>2.15.2</jackson.version>
-		<jsonpath.version>2.8.0</jsonpath.version>
-		<pf4j.version>3.10.0</pf4j.version>
-		<apache-commons-io>2.13.0</apache-commons-io>
-		<log4j.version>2.20.0</log4j.version>
-		<picoli.version>4.7.5</picoli.version>
-		<httpclient.version>5.2.1</httpclient.version>
-		<keepass.version>2.2.1</keepass.version>
-		<pebble.version>3.2.1</pebble.version>
-		<awssdk.version>2.20.153</awssdk.version>
-
-		<junit.jupiter.version>5.10.0</junit.jupiter.version>
-		<junit.platform.version>1.10.0</junit.platform.version>
-	</properties>
 	<scm>
 		<connection>
 			scm:git:https://github.com/Axway-API-Management-Plus/yamles-utils.git</connection>
@@ -67,136 +44,31 @@
 			scm:git:https://github.com/Axway-API-Management-Plus/yamles-utils.git</developerConnection>
 		<url>https://github.com/Axway-API-Management-Plus/yamles-utils</url>
 	</scm>
-	<distributionManagement>
-		<repository>
-			<id>github</id>
-			<name>GitHub Packages</name>
-			<url>
-				https://maven.pkg.github.com/Axway-API-Management-Plus/yamles-utils</url>
-		</repository>
-	</distributionManagement>
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>software.amazon.awssdk</groupId>
-				<artifactId>bom</artifactId>
-				<version>${awssdk.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
-	<dependencies>
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${apache-commons-io}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.pebbletemplates</groupId>
-			<artifactId>pebble</artifactId>
-			<version>${pebble.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.pf4j</groupId>
-			<artifactId>pf4j</artifactId>
-			<version>${pf4j.version}</version>
-		</dependency>		
-		<dependency>
-			<groupId>org.linguafranca.pwdb</groupId>
-			<artifactId>KeePassJava2-simple</artifactId>
-			<version>${keepass.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.httpcomponents.client5</groupId>
-			<artifactId>httpclient5</artifactId>
-			<version>${httpclient.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-yaml</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.jayway.jsonpath</groupId>
-			<artifactId>json-path</artifactId>
-			<version>${jsonpath.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-slf4j-impl</artifactId>
-			<version>${log4j.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>info.picocli</groupId>
-			<artifactId>picocli</artifactId>
-			<version>${picoli.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<version>${junit.jupiter.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-api</artifactId>
-			<version>${junit.jupiter.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-params</artifactId>
-			<version>${junit.jupiter.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.junit.platform</groupId>
-			<artifactId>junit-platform-suite</artifactId>
-			<version>${junit.platform.version}</version>
-			<scope>test</scope>
-		</dependency>
 
-		<!-- AWS services -->
-		<dependency>
-			<groupId>software.amazon.awssdk</groupId>
-			<artifactId>acm</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>software.amazon.awssdk</groupId>
-			<artifactId>secretsmanager</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>software.amazon.awssdk</groupId>
-			<artifactId>sts</artifactId>
-		</dependency>
-	</dependencies>
-	<build>
-		<resources>
-			<resource>
-				<directory>${project.basedir}/src/main/resources</directory>
-				<filtering>false</filtering>
-			</resource>
-			<resource>
-				<directory>${project.basedir}/src/main/resources-filtered</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-		<plugins>
+	<parent>
+		<groupId>com.github.axway-api-management-plus</groupId>
+		<artifactId>yamles-utils-parent</artifactId>
+		<version>${revision}</version>
+		<relativePath>parent</relativePath>
+	</parent>
+
+
+    <modules>
+        <module>parent</module>
+        <module>cmd</module>
+        <module>api</module>
+		<module>pdk</module>
+		<module>plugins/core</module>
+        <module>plugins/aws</module>
+        <module>plugins/keepass</module>
+		<module>plugins/vault</module>
+    </modules>
+
+    <build>
+        <plugins>
 			<plugin>
 				<groupId>org.asciidoctor</groupId>
 				<artifactId>asciidoctor-maven-plugin</artifactId>
-				<version>2.2.4</version>
 				<executions>
 					<execution>
 						<id>generate-html</id>
@@ -219,18 +91,9 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.2</version>
-				<configuration>
-					<failIfNoTests>true</failIfNoTests>
-					<workingDirectory>./target</workingDirectory>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.3.0</version>
 				<configuration>
+					<appendAssemblyId>false</appendAssemblyId>
 					<descriptors>
 						<descriptor>src/main/assembly/assembly.xml</descriptor>
 					</descriptors>
@@ -245,6 +108,12 @@
 					</execution>
 				</executions>
 			</plugin>
-		</plugins>
-	</build>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

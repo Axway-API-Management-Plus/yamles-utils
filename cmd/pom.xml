@@ -1,0 +1,144 @@
+<!--
+~ Copyright 2006-2022 the original author or authors.
+~
+~ Licensed under the Apache License, Version 2.0 (the "License");
+~ you may not use this file except in compliance with the License.
+~ You may obtain a copy of the License at
+~
+~     http://www.apache.org/licenses/LICENSE-2.0
+~
+~ Unless required by applicable law or agreed to in writing, software
+~ distributed under the License is distributed on an "AS IS" BASIS,
+~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+~ See the License for the specific language governing permissions and
+~ limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>yamles-utils-cmd</artifactId>
+	<packaging>jar</packaging>
+	<name>Command</name>
+	<description>Command line tools for YAML Entity Store Utilities.</description>
+	<url>https://github.com/Axway-API-Management-Plus/yamles-utils</url>
+	<licenses>
+		<license>
+			<name>The Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<name>Martin Look</name>
+			<email>mlook@axway.com</email>
+			<organization>Axway</organization>
+			<organizationUrl>http://www.axway.com</organizationUrl>
+		</developer>
+	</developers>
+
+	<parent>
+		<groupId>com.github.axway-api-management-plus</groupId>		
+		<artifactId>yamles-utils-parent</artifactId>
+		<version>${revision}</version>
+		<relativePath>../parent</relativePath>
+	</parent>
+
+	<properties>
+		<!-- Library versions -->
+		<apache-commons-io>2.13.0</apache-commons-io>
+		<picoli.version>4.7.5</picoli.version>
+		<pebble.version>3.2.1</pebble.version>
+		<jsonpath.version>2.8.0</jsonpath.version>		
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.github.axway-api-management-plus</groupId>
+			<artifactId>yamles-utils-plugins-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.pf4j</groupId>
+			<artifactId>pf4j</artifactId>
+		</dependency>		
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-slf4j-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-suite</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- Project specific dependencies -->
+		<dependency>
+			<groupId>io.pebbletemplates</groupId>
+			<artifactId>pebble</artifactId>
+			<version>${pebble.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${apache-commons-io}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+			<version>${jsonpath.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>info.picocli</groupId>
+			<artifactId>picocli</artifactId>
+			<version>${picoli.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>${project.basedir}/src/main/resources-filtered</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<failIfNoTests>true</failIfNoTests>
+					<workingDirectory>./target</workingDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

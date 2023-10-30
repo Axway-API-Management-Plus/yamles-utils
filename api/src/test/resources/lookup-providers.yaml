@@ -1,0 +1,13 @@
+# Example configuration for lookup providers (dummy providers)
+lookups:
+  # First lookup provider (without parameters)
+  alias1:
+    provider: provider1
+  
+  # Second lookup provider
+  alias2:
+    provider: provider2
+    
+    config:
+      # Parameters by value    
+      param1: value

@@ -9,6 +9,7 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
+.flattened-pom.xml
 
 # Draw.io backup files
 .$*
@@ -30,3 +31,4 @@ examples/apim/Environment Configuration/Certificate Store/example-*
 
 # Don't include internal examples
 examples/internal/**
+

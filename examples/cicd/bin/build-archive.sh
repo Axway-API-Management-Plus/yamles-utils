@@ -134,7 +134,7 @@ echo "============================================================"
 # Unzip package
 if [ -d "${TARGET_DIR}" ]
 then
-  YAMLES_UTILS_ZIP=$(find "${TARGET_DIR}" -maxdepth 1 -type f -name "yamles-utils-*-bin.zip")
+  YAMLES_UTILS_ZIP=$(find "${TARGET_DIR}" -maxdepth 1 -type f -name "yamles-utils-*.zip")
 fi
 if [ -z "${YAMLES_UTILS_ZIP:-}" ]
 then
