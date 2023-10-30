@@ -1,0 +1,99 @@
+= KeePass Database
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+ifndef::imagesdir[:imagesdir: ./images]
+
+== Lookup Providers
+
+=== KeePass DB
+
+https://keepass.info/index.html[KeePass] is a popular password manager using a single encrypted file as a database.
+It can be used to securely store credentials, configurations and files.
+
+[cols="2,6a"]
+|===
+|*Name*
+|`keepass`
+
+|*Built-In*
+|no
+
+|*Synopsis*
+|Retrieves values from a KeePass database.
+
+2+|*Configuration Parameters*
+|`kdb`
+|Path to the KeePass DB file.
+|`passphrase`
+|Passphrase for KeePass DB.
+
+This parameter supports a _Mustache_ template, using built-in lookup functions.
+|`key`
+|Optional path to the master key file.
+
+2+|*Lookup Function Arguments*
+|`key`
+|Path to the entry within the DB.
+|`what`
+|Field to be retreived form the entry.
+Following values are allowed:
+
+* `user`: user name assigned to the entry
+* `password`: password assigned to the entry
+* `url`: URL assigned to the entry
+* `prop`: string field (property) assigned to the entry (use `pname` argument to specify the name of the property).
+* `binUTF8`: attachment encoded as UTF-8 (use `pname` argument to specify the name of the attachment).
+* `binISO8859`: attachment encoded as ISO 8859 (use `pname` argument to specify the name of the attachment).
+* `binB64`: attachment encoded as Base64 (use `pname` argument to specify the name of the attachment).
+|`pname`
+|Optional name of property (for fields supporting properties).
+|===
+
+*Example*
+
+image:keepass-entry.png[Keepass Entry]
+
+To use the Keepass DB, an according lookup function has to be defined.
+
+.Lookup Function Defintion `lookup-func.yaml`
+[source, yaml]
+----
+lookups:
+  kdb:
+    provider: keepass
+    config:
+      kdb: keepass.kdbx #<1>
+      passphrase: "{{ _env('PASSPHRASE') }}" #<2>
+----
+<1> Keepass DB file is located relative to the `lookup-func.yaml` file.
+<2> The `passphrase` parameter supports built-in lookup functions.
+
+Use the lookup function `_kdb` to retrieve the values from the entry.
+
+.Configuration Fragment
+[source, yaml]
+----
+config:
+  user: "{{ _kdb('/General/generic-user-general', 'user') }}" #<1>
+  pwd: "{{ _kdb('/General/generic-user-general', 'password') }}"
+  url: "{{ _kdb('/General/generic-user-general', 'url') }}"
+  user: "{{ _kdb('/General/generic-user-general', 'user') }}"
+  field: "{{ _kdb('/General/generic-user-general', 'prop', 'field') }}"
+  content: "{{ _kdb('/General/generic-user-general', 'binB64', 'text.txt') }}" #<2>
+----
+<1> Retrieves the user name from the entry `generic-user-general` within the _General_ group.
+<2> Retrieves the content of the `text.txt` attachment as an Base64 encoded string.
+
+
+== Certificate Providers
+
+Currently this plugin doesn't provide any certificate providers.
+
+Certificates stored in a KeePass database can be retrieved by one of the certificate provides of the <<Core>> plugin and the lookup functions provided by this KeePass plugin.

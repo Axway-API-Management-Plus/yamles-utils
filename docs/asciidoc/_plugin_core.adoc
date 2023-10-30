@@ -1,0 +1,566 @@
+= Core
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+ifndef::imagesdir[:imagesdir: ./images]
+
+== Lookup Providers
+Lookup values are provided by, so called, _Lookup Providers_.
+An instance of a _Lookup Provider_ is configured for specific sources to provide a _lookup function_.
+
+[NOTE]
+====
+To get a list of all available _Lookup Providers_ and their documentation, use the following describe command:
+
+[source, shell]
+----
+$ yamlesutils merge describe lookup-providers --full
+----
+====
+
+Some lookup provider configurations require a path to a file.
+If the path represents a relative path, it is relative to the location of the lookup function definition file.
+
+=== Environment Variables (built-in)
+[cols="2,6a"]
+|===
+|*Name*
+|`env`
+
+|*Built-In*
+|yes
+
+|*Synopsis*
+|Retrieves value from an environment variable.
+
+2+|*Configuration Parameters*
+2+|not required
+
+2+|*Lookup Function Arguments*
+|`key`
+|Name of environment variable.
+|===
+
+
+This built-in lookup provider retrieves values from environment variables.
+It is used by the built-in lookup function `_env`.
+Configuration of this lookup provider is not required.
+
+The lookup function requires a single key parameter which represents the name of the environment variable containing the value.
+
+.Example
+[source]
+----
+{{ _env("MY_SECRET") }} #<1>
+----
+<1> Retrieves the value from the environment variable `MY_SECRET`.
+
+=== System Properties (built-in)
+[cols="2,6a"]
+|===
+|*Name*
+|`sys`
+
+|*Built-In*
+|yes
+
+|*Synopsis*
+|Retrieves value from a system property.
+
+2+|*Configuration Parameters*
+2+|not required
+
+2+|*Lookup Function Arguments*
+|`key`
+|Name of system property.
+|===
+
+This built-in lookup provider retrieves values from system properties passed to the _YAML-ES Utilities_.
+It is used by the built-in lookup function `_sys`.
+Configuration of this lookup provider is not required.
+
+The lookup function requires a single key parameter which represents the name of the system property containing the value.
+
+.Example
+[source]
+----
+{{ _sys("my.secret") }} #<1>
+----
+<1> Retrieves the value from the system property `my.secret`.
+
+=== JSON from Environment Variables
+
+[cols="2,6a"]
+|===
+|*Name*
+|`envjson`
+
+|*Built-In*
+|no
+
+|*Synopsis*
+|Retrieves values from a JSON document, stored in an environment variable.
+
+2+|*Configuration Parameters*
+
+|`env`
+|Name of the environment variable storing the JSON document.
+
+2+|*Lookup Function Arguments*
+
+|`key`
+|JSON Pointer to key node (see https://datatracker.ietf.org/doc/html/rfc6901[RFC 6901]).
+|===
+
+Retrieves values from a JSON document, which is stored within an environment variable.
+The name of the environment variable containing the JSON document is configured by the alias in the lookup functions configuration.
+
+The according lookup function requires a key parameter which points to the value node within the JSON document.
+
+This feature can be used to pass the JSON output of a tool as a lookup source to the _YAML-ES Utilities_.
+
+*Example*
+
+This example uses a script to generate lookup values, and use them within a configuration template.
+
+.Generate Lookup Values `gen-values.sh`
+[source, shell]
+----
+#!/bin/sh
+cat <<EOF
+{
+  "accounts": {
+    "db": {
+      "user": "admin",
+      "password": "changeme"
+    }
+  }
+}
+EOF
+----
+
+.Lookup Function Definition `lookup-func.yaml`
+[source, yaml]
+----
+lookups:
+  accounts: #<1>
+    provider: envjson #<2>
+    config:
+      env: ACCOUNTS #<3>
+----
+<1> Define alias for the configured lookup functions.
+The name of the functions will be `_accounts` (alias prefixed with underscore).
+<2> Use this lookup provider.
+<3> Retrieve the JSON document from the environment variable `ACCOUNTS`.
+
+
+.Configuration Fragment `config.yaml`
+[source, yaml]
+----
+db:
+  user: "{{ _accounts('/accounts/db/user') }}" #<1>
+  pwd: "{{ _accounts('/accounts/db/password') }}" #<2>
+----
+<1> Lookup user name from JSON document by JSON Pointer.
+<2> Lookup password from JSON document by JSON Pointer.
+
+.Create configuration
+[source, shell]
+----
+ACCOUNTS=$(./gen-values.sh) #<1>
+yamlesutils.sh merge config \ #<2>
+  --lookup-functions=lookup-func.yaml \ #<3>
+  --config=config.yaml \ #<4>
+  --output=- #<5>
+----
+<1> Generate JSON document with lookup values and store it in the environment variable `ACCOUNTS`.
+<2> Create a configuration.
+<3> Lookup function definitions.
+<4> Configuration fragment.
+<5> Print result to `stdout`.
+
+.Result
+[source, yaml]
+----
+db:
+  user: admin
+  password: changeme
+----
+
+=== YAML/JSON Files
+
+[cols="2,6a"]
+|===
+|*Name*
+|`json` or `yaml`
+
+|*Built-In*
+|no
+
+|*Synopsis*
+|Retrieves values from a JSON/YAML file.
+
+2+|*Configuration Parameters*
+
+|`file`
+|Path to the JSON/YAML file containing lookup values.
+
+2+|*Lookup Function Arguments*
+
+|`key`
+|JSON Pointer to key node (see https://datatracker.ietf.org/doc/html/rfc6901[RFC 6901]).
+|===
+
+*Example*
+
+In this example there is a JSON and a YAML file containing lookup values.
+
+.JSON Lookup Values `accounts.json`
+[source, json]
+----
+{
+  "accounts": {
+    "db": {
+      "user": "admin",
+      "password": "changeme"
+    }
+  }
+}
+----
+
+.YAML Lookup Values `accounts.yaml`
+[source, yaml]
+----
+accounts:
+  smtp:
+    email: "info@axway.com"
+    password: "changeme"
+----
+
+Lookup functions are configured to retrieve values from these files. 
+
+.Lookup Function Definitions `lookup-func.yaml`
+[source, yaml]
+----
+lookups:
+  accounts_json:
+    provider: json
+    config:
+      file: accounts.json
+  accounts_yaml:
+    provider: yaml
+    config:
+      file: accounts.yaml
+----
+
+A configuration fragment uses the lookup functions to retrieve the configuration values from the according files.
+
+.Configuration Fragment `config.yaml`
+[source, yaml]
+----
+db:
+  user: "{{ _accounts_json('/accounts/db/user') }}"
+  pwd: "{{ _accounts_json('/accounts/db/password') }}"
+mail:
+  user: "{{ _accounts_yaml('/accounts/smtpd/user') }}"
+  pwd: "{{ _accounts_yaml('/accounts/smtpd/password') }}"
+----
+
+_YAML-ES Utilities_ is used to create a final configuration.
+
+.Create configuration
+[source, shell]
+----
+yamlesutils.sh merge config \
+  --lookup-functions=lookup-func.yaml \
+  --config=config.yaml \
+  --output=-
+----
+
+.Result
+[source, yaml]
+----
+db:
+  user: admin
+  pwd: changeme
+mail:
+  user: info@axway.com
+  pwd: changeme
+----
+
+=== File Content
+
+[cols="2,6a"]
+|===
+|*Name*
+|`file`
+
+|*Built-In*
+|no
+
+|*Synopsis*
+|Retrieves the content of a file as a string.
+
+For binary content (`encoding: binary`), the content is returned as a Base64 encoded string.
+
+2+|*Configuration Parameters*
+
+|`base`
+|Base directory for relative files.
+If missing, the directory containing the lookup definition file is used.
+
+2+|*Lookup Function Arguments*
+
+|`key`
+|File path. 
+
+|`encoding`
+|Character encoding of the content.
+If missing, `UTF-8` is assumed.
+
+For binary content, use `binary`.
+|===
+
+*Example*
+
+In this example there is a file containing a greeting message.
+
+.`/opt/text/greeting.txt`
+[source, text]
+----
+Hello World!
+----
+
+Lookup function is configured to retrieve values from file content.
+
+.Lookup Function Definitions `lookup-func.yaml`
+[source, yaml]
+----
+lookups:
+  contents:
+    provider: file
+    config:
+      base: "/opt/text"
+----
+
+A configuration fragment uses the lookup function to retrieve the content of the `greeting.txt` file.
+
+.Configuration Fragment `config.yaml`
+[source, yaml]
+----
+greeting: "{{ _contents('greeting.txt') }}" #<1>
+----
+<1> As the file path is not absolute, the path is relative to the specified base path.
+So the final path is `/opt/text/greeting.txt`.
+
+== Certificate Providers
+
+The purpose of a certificate provider is to retrieve certificates or private keys from external sources.
+Various providers exists to support various certificate sources.
+
+[NOTE]
+====
+To get a list of all available _Certificate Providers_ and their documentation, use the following describe command:
+
+[source, shell]
+----
+$ yamlesutils merge describe cert-providers --full
+----
+====
+
+Some lookup provider configurations require a path to a file.
+If the path represents a relative path, it is relative to the location of the certificate configuration file.
+
+=== Simple
+
+[cols="2,6a"]
+|===
+|*Name*
+|`simple`
+
+|*Synopsis*
+|Provides certificates directly from configuration file.
+
+2+|*Configuration Parameters*
+|`cert`
+|PEM encoded certificate (single line).
+
+This parameter supports a _Mustache_ template, to lookup the certificates via lookup functions.
+|`key`
+|Optional PEM encoded private key (single line).
+
+This parameter supports a _Mustache_ template, to lookup the certificates via lookup functions.
+|===
+
+*Example*
+
+.Certificate Configuration
+[source, yaml]
+----
+certificates:
+  cassandra-ca:
+    provider: simple
+    config:
+      cert: "MIID...uB" #<1>
+
+  apim-server:
+    provider: simple
+      cert: "MIIDt...xdI=" #<2>
+      key: "MIIEv...CL+X"
+----
+<1> Public certificate
+<2> Server certificate including private key.
+
+In combination with a lookup function, the `simple` provider can also be used to retrieve certificates from a KeePass DB or AWS Secrets Manager.
+
+=== Certificate File
+
+[cols="2,6a"]
+|===
+|*Name*
+|`file`
+
+|*Synopsis*
+|Provides a certificate from a DER or PEM encoded certificate file.
+
+2+|*Configuration Parameters*
+|`path`
+|Path to certificate file.
+
+If a relative path is specified, the path is relative to the location of the _Certificate Configuration_ file.
+|===
+
+*Example*
+
+.Certificate Configuration
+[source, yaml]
+----
+certificates:
+  root-ca:
+    provider: file
+    config:
+      path: "certs/root-ca.crt"
+----
+
+=== Keystore
+
+[cols="2,6a"]
+|===
+|*Name*
+|`keystore`
+
+|*Synopsis*
+|Provides certificates from a keystore file (PKCS#12 or JKS).
+
+2+|*Configuration Parameters*
+|`path`
+|Path to the keystore file.
+
+If a relative path is specified, the path is relative to the location of the _Certificate Configuration_ file.
+|`data`
+|Base64 encoded keystore.
+
+This parameter supports a _Mustache_ template, to retrieve the encoded keystore data via lookup functions.
+
+NOTE: `path` and `data` parameter are mutually exclusive
+
+|`pass`
+|Optional passphrase to access the keystore.
+
+This parameter supports a _Mustache_ template, to lookup the certificates via lookup functions.
+
+|`alias`
+|Optional regular expression, to select certificates within the keystore by their alias.
+If not specified, the target alias of the entity store certificate is used.
+
+To select all certificates from the keystore, the regular expression `.*` can be used.
+
+|`nokey`
+|If `true`, the private key is not added to the project.
+For certificates having no private key, this parameter has no effect.
+
+|`type`
+|Type of the keystore.
+If not specified, `PKCS12`is assumed.
+
+* `JKS`: Java Key Store
+* `PKCS12`: PKCS#12
+
+|`chain`
+|Set to `true` to add the full certificate chain of the certificate to policy project.
+|===
+
+
+*Examples*
+
+.Certificate Configuration - Single Certificate
+[source, yaml]
+----
+certificates:
+  example-server:
+    provider: keystore
+    config:
+      path: keystore.p12 #<1>
+      pass: "{{ _kdb('/Test/Sever Certificate', 'password') }}" #<2>
+      alias: server #<3>
+      chain: true #<4>
+----
+<1> Path to the keystore.
+As the extension is `.p12` the keystore is assumed to be in the PKCS#12 format.
+<2> The passphrase for the keystore is retrieved from a lookup function.
+<3> Alias of the certificate within the keystore.
+<4> Add certificates of associated certificate authority.
+The alias for chain certificates is based on the target alias, attached by the postfix `\_chain_<index>` where `<index>` is an increasing number.
+The root certificate of the chain has the index 0 (e.g. `example-server_chain_0`). 
+
+.Certificate Configuration - All Certificates
+[source, yaml]
+----
+certificates:
+  trust: #<1>
+    provider: keystore
+    config:
+      path: keystore.p12
+      pass: "{{ _kdb('/Test/Sever Certificate', 'password') }}"
+      alias: ".*" #<2>
+      nokey: true #<3>
+----
+<1> Use `trust` prefix for alias in YAML-ES.
+Alias is generated by the postfix and an attached index (e.g. `trust_0`, `trust_1`, ...) 
+<2> Get all certificates from the keystore.
+<3> Don't get private keys, certificates only.
+
+=== Remover
+
+[cols="2,6a"]
+|===
+|*Name*
+|`remover`
+
+|*Synopsis*
+|Removes a certificates from the policy project.
+
+2+|*Configuration Parameters*
+2+|not required
+|===
+
+The is not really a certificate provider.
+Instead it removes certificates from the policy project.
+The certificates are specified by their alias.
+
+*Example*
+
+.Certificate Configuration
+[source, yaml]
+----
+certificates:
+  acme: #<1>
+    provider: remover
+----
+<1> Alias of the certificate within the policy project.

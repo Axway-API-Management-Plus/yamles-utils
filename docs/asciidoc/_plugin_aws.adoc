@@ -1,0 +1,189 @@
+= Amazon Web Services (AWS)
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+:imagesdir: ./images
+
+This plugin retrieves lookup values and certificates from AWS Secrets Manager and AWS Certificate Manager.
+
+It uses the AWS SDK to access the services.
+Therefore the https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials-chain.html[default credentials chain] used by the SDK are also used by the providers of this plugin.
+
+On systems directly running on EC2 instances, IAM roles can be used to authorize the service access, without specifying any credentials.
+For systems running on AWS EKS, a K8s service account can be bound to an IAM role to enable the access to the services without using additional credentials.
+
+Using environment variables (`AWS_SECRET_ACCESS_KEY`, `AWS_ACCESS_KEY_ID`), system properties (`aws.accessKeyId`, `aws.secretAccessKey`), or configuration file, are also supported.
+
+
+== Lookup Providers
+
+This lookup providers of this plugin, retrieve the values form the AWS Secrets Manager.
+
+The functions support structured secrets (e.g. key/values) or plain secrets (text/binary).
+
+=== JSON Document Secrets
+
+For secrets containing a JSON document, e.g. key/value pair, this lookup provider supports to read specific keys from the secret.
+
+[cols="2,6a"]
+|===
+|*Name*
+|`aws_sm_json`
+
+|*Built-In*
+|no
+
+|*Synopsis*
+|Retrieves values from JSON secrets on AWS Secrets Manager.
+
+2+|*Configuration Parameters*
+|`secret_name`
+|Name of the secret.
+|`region`
+|Optional region where the secret is located.
+If not specified, the default region is used.
+
+2+|*Lookup Function Arguments*
+|`key`
+|Secret key as JSON Pointer (e.g., `/user`).
+|===
+
+*Example*
+
+In this example the secret `sandbox/anm` is stored in AWS Secrets Manager. The secret is stored using key/value pairs.
+
+image:aws-sm-secrets.png[AWS Secrets]
+
+The secret has two secret keys (`user` and `password`).
+
+image:aws-sm-secrets-values.png[AWS Secrets]
+
+In plaintext the secret is represented as a JSON document, storing the values with the secret key as property name.
+
+image:aws-sm-secrets-values-json.png[AWS Secrets]
+
+.Lookup Function Configuration `lookup-func.yaml`
+[source, yaml]
+----
+lookups:
+  anm:
+    provider: aws_sm_json
+    config:
+      secret_name: sandbox/anm
+----
+
+.Configuration Fragment `config.yaml`
+[source, yaml]
+----
+anm:
+  user: "{{ _anm('/user') }}"
+  pwd: "{{ _anm('/password') }}"
+----
+
+NOTE: The secret is not limited to key/value pair. Any kind of JSON document is supported by this lookup provider.
+
+=== Plaintext/Binary Secrets
+
+[cols="2,6a"]
+|===
+|*Name*
+|`aws_sm_plain`
+
+|*Built-In*
+|no
+
+|*Synopsis*
+|Retrieves value from plain text or binary secret on AWS Secrets Manager.
+The values of binary secrets are represented as Bas64 encoded strings.
+
+2+|*Configuration Parameters*
+|`prefix`
+|Prefix to be be added before every secret name (see `key`).
+|`region`
+|Optional region where the secret is located.
+If not specified, the default region is used.
+
+2+|*Lookup Function Arguments*
+|`key`
+|Secret name.
+
+The resulting secret name is build by the concatenation of `prefix` and `key`.
+|===
+
+*Example*
+
+In this example the secret `sandbox/certs/root-ca` is stored in AWS Secrets Manager. The secret is supposed to contain a public root CA certificate in PEM format.
+
+image:aws-sm-secrets-root-ca.png[AWS Secrets]
+
+The PEM certificate is stored as plaintext.
+
+image:aws-sm-secrets-values-root-ca.png[AWS Secrets]
+
+A lookup function is defined to lookup certificates from secrets prefixed with `sandbox/certs`.
+
+.Lookup Function Configuration `lookup-func.yaml`
+[source, yaml]
+----
+lookups:
+  certs:
+    provider: aws_sm_plain
+    config:
+      region: "us-west-1"
+      prefix: "sandbox/certs"
+----
+
+The lookup function can be used in simple certificate providers.
+
+.Usage in certificate configuration
+[source, yaml]
+----
+certificates:
+  root-ca:
+    provider: simple
+    config:
+      cert: "{{ _certs('/root-ca') }}"
+----
+
+
+== Certificate Providers
+
+=== AWS Certificate Manager
+
+[cols="2,6a"]
+|===
+|*Name*
+|`aws_cm`
+
+|*Synopsis*
+|Provides certificates from the AWS Certificate Manager.
+
+2+|*Configuration Parameters*
+|`arn`
+|ARN of the certificate stored in the AWS Certificate Manager.
+|`chain`
+|Set to `true` to add the full certificate chain to policy project.
+|===
+
+*Example*
+
+In this example, the public certificate of CA, issued the Cassandra cluster certificate, is stored in the policy project under the alias `cassandra-ca`.
+For deployment, the certificate must be replaced by the public certificate stored in AWS Certificate Manager.
+The full certificate chain, has to be imported also. 
+
+.Certificate Configuration
+[source, yaml]
+----
+certificates:
+  cassandra-ca:
+    provider: aws_cm
+    config:
+      arn: "arn:aws:acm:us-west-1:000000000000:certificate/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+      chain: true
+----

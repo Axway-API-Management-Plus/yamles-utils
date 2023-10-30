@@ -1,6 +1,4 @@
-<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0" 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
   <id>bin</id>
   <formats>
     <format>zip</format>
@@ -17,7 +15,7 @@
       <directory>${project.basedir}/src/main/scripts</directory>
       <outputDirectory>/bin</outputDirectory>
       <includes>
-      	<include>*.sh</include>
+        <include>*.sh</include>
       </includes>
       <lineEnding>unix</lineEnding>
     </fileSet>
@@ -25,7 +23,7 @@
       <directory>${project.basedir}/src/main/scripts</directory>
       <outputDirectory>/bin</outputDirectory>
       <includes>
-      	<include>*.cmd</include>
+        <include>*.cmd</include>
       </includes>
       <lineEnding>windows</lineEnding>
     </fileSet>
@@ -33,16 +31,28 @@
       <directory>${project.build.directory}/docs</directory>
       <outputDirectory>/docs</outputDirectory>
     </fileSet>
-    <fileSet>
-      <directory>${basedir}/src/main/assembly/plugins</directory>
-      <outputDirectory>/plugins</outputDirectory>
-    </fileSet>
   </fileSets>
-  <dependencySets>
-    <dependencySet>
-      <outputDirectory>/lib</outputDirectory>
-      <useProjectArtifact>true</useProjectArtifact>
-      <scope>runtime</scope>
-    </dependencySet>
-  </dependencySets>
+  <moduleSets>
+    <moduleSet>
+      <includes>
+        <include>${project.groupId}:yamles-utils-cmd</include>
+      </includes>
+      <binaries>
+        <includeDependencies>true</includeDependencies>
+        <outputDirectory>/lib</outputDirectory>
+        <unpack>false</unpack>
+      </binaries>
+    </moduleSet>
+    <moduleSet>
+      <includes>
+        <include>${project.groupId}:yamles-utils-plugin-*</include>
+      </includes>
+      <binaries>
+        <includeDependencies>false</includeDependencies>
+        <attachmentClassifier>jar-with-dependencies</attachmentClassifier>
+        <outputDirectory>/plugins</outputDirectory>
+        <unpack>false</unpack>        
+      </binaries>
+    </moduleSet>
+  </moduleSets>
 </assembly>

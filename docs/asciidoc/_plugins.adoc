@@ -1,0 +1,35 @@
+= Plugins
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+ifndef::imagesdir[ ./images ]
+
+Plugins are used to extend the features of the _YAML-ES Utilities_ by providing _Lookup-_ or _Certificate Providers_.
+
+A plugin is a single JAR file containing the classes plugin implementation, and all of its dependencies.
+To prevent conflicts with different versions of dependent JARs, each plugin has its own class loader.
+
+Are located in the `plugins` folder and are automatically loaded on startup of the _YAML-ES Utilities_.
+
+[NOTE]
+====
+To save the disk space, unused plugins can be removed from the folder.
+
+Also, custom developed plugins can be copied to the folder and are loaded automatically.
+====
+
+The following sections document the available plugins and their provided _Lookup-_ and _Certificate Providers_.
+
+include::_plugin_core.adoc[leveloffset=+1]
+
+include::_plugin_keepass.adoc[leveloffset=+1]
+
+include::_plugin_aws.adoc[leveloffset=+1]
+
+include::_plugin_vault.adoc[leveloffset=+1]

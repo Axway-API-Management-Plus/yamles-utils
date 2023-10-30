@@ -6,9 +6,9 @@ SET DIR_LIB=%CMD_HOME%..\lib
 SET DIR_PLUGINS=%CMD_HOME%..\plugins
 
 SET CLASSMAIN=com.axway.yamles.utils.YamlEsUtils
-SET CLASSPATH=%DIR_LIB%\*;%DIR_PLUGINS%\*
+SET CLASSPATH=%DIR_LIB%\*
 
-java %JVM_OPTS% %CLASSMAIN% %*
+java %JVM_OPTS% -Dpf4j.pluginsDir=%DIR_PLUGINS% %CLASSMAIN% %*
 SET RC=%errorlevel%
 
 ENDLOCAL & SET RC=%RC%

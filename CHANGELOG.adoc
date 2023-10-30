@@ -13,6 +13,15 @@ endif::[]
 [cols="1,2,<10a", options="header"]
 |===
 |ID|Type|Description
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/13[#13]
+|Enhancement, Refactoring
+|Lookup- and certificate providers as external plugins.
+
+External plugins are dynamically loaded if exists in the `plugins` folder of the distribution.
+To disable a plugin, it can be just deleted from the folder.
+
+Each plugin includes all dependent classes and is loaded by a separate classloaders to avoid class version conflicts.
+
 |https://github.com/Axway-API-Management-Plus/yamles-utils/issues/17[#17]
 |Enhancement
 |Support dry run and syntax check.
