@@ -4,11 +4,15 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Objects;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.axway.yamles.utils.es.NodeLocation;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 class Merger {
+	private static final Logger log = LogManager.getLogger(Merger.class);
 
 	private final ObjectNode target;
 	private final FragmentSource source;
@@ -47,15 +51,19 @@ class Merger {
 
 	private void mergeField(NodeLocation targetPath, ObjectNode targetNode, Entry<String, JsonNode> field) {
 		NodeLocation currentPath = targetPath.child(field.getKey());
-
 		JsonNode fieldValue = field.getValue();
+
+		log.debug("merge field: location={}; type={}; source={}", currentPath, fieldValue.getNodeType(),
+				this.source.getName());
+
 		if (fieldValue.isObject()) {
 			throw new MergeException(this.source, "illegal state, field is of type 'object'");
 		}
 
 		JsonNode targetField = targetNode.get(field.getKey());
 		if (targetField != null && targetField.getNodeType() != fieldValue.getNodeType()) {
-			throw new MergeException(this.source, "incompatible node types: " + currentPath);
+			throw new MergeException(this.source, "incompatible node types (" + targetField.getNodeType() + " vs. "
+					+ fieldValue.getNodeType() + "): " + currentPath);
 		}
 
 		targetNode.set(field.getKey(), field.getValue());
