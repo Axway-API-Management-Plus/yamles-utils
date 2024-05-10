@@ -41,7 +41,7 @@
 		<relativePath>../../pdk</relativePath>
 	</parent>
 	<properties>
-		<httpclient.version>5.2.1</httpclient.version>
+		<httpclient.version>5.2.3</httpclient.version>
 	</properties>
 	<dependencies>
 		<dependency>
