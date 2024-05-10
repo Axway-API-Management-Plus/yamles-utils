@@ -10,6 +10,7 @@ import org.apache.logging.log4j.core.config.Configurator;
 
 import com.axway.yamles.utils.audit.Audit;
 import com.axway.yamles.utils.lint.LintCommand;
+import com.axway.yamles.utils.merge.EvalCommand;
 import com.axway.yamles.utils.merge.MergeCommand;
 
 import picocli.CommandLine;
@@ -21,7 +22,7 @@ import picocli.CommandLine.ParseResult;
 
 @Command(name = "yamlesutils", description = "YAML Entity Store Utilities", subcommands = { HelpCommand.class,
 		MergeCommand.class, LintCommand.class,
-		ConfigCommand.class }, mixinStandardHelpOptions = true, versionProvider = VersionProvider.class)
+		ConfigCommand.class, EvalCommand.class }, mixinStandardHelpOptions = true, versionProvider = VersionProvider.class)
 public class YamlEsUtils implements IExecutionExceptionHandler {
 
 	private static final Logger log = LogManager.getLogger(YamlEsUtils.class);

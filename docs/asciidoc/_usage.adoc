@@ -30,6 +30,7 @@ Commands:
   lint    Lint YAML entity store.
   config  Configure YAML-ES. Combines the 'lint', 'merge config' and 'merge
             certs' commands.
+  eval    Evalulates a template expression.
 ----
 
 There are some global options, which are available for all commands.
