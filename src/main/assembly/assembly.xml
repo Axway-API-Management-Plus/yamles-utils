@@ -18,6 +18,7 @@
         <include>*.sh</include>
       </includes>
       <lineEnding>unix</lineEnding>
+      <fileMode>755</fileMode>
     </fileSet>
     <fileSet>
       <directory>${project.basedir}/src/main/scripts</directory>
