@@ -1,0 +1,29 @@
+= Evaluate Expression
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+
+For testing purpose or to generate values from various sources, an expression can be evaluated and the result is printed to `stdout`.
+
+== Command
+
+The `eval` command of `yamlesutils` is used to evaluate an expression.
+
+[source]
+----
+yamlesutils eval [-l FILE]... <expression>
+----
+
+.Example
+[source,shell]
+----
+$ export NAME=World
+$ yamlesutils.sh eval "Hello {{ _env('NAME') }}!"
+Hello World!
+----
