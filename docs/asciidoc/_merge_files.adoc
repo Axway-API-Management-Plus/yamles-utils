@@ -1,0 +1,92 @@
+= Merge Files
+ifdef::env-github[]
+:outfilesuffix: .adoc
+:!toc-title:
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+ifndef::imagesdir[:imagesdir: ./images]
+
+The lookup functions enable _YAML-ES Utilities_ to retrieve values from various secret stores.
+With the merge files command this capability can be used to generate files for which the content is retrieved from the secret stores (e.g. for licence files).
+
+The file generator is configured by a configuration file specified by the `--files=FILE` parameter.
+With a preceeding optional `--files-base-dir=DIR` parameter, the base directory for target files with a relativ path is specified.
+
+The touple of `--files-base-dir` and `--files` parameter can be specified multiple times.
+
+----
+yamlesutils.sh merge files [-hV] [-l=FILE]... ([--files-base-dir=DIR] --files=FILE)...
+Generate files.
+      --files=FILE           Files generator configuration.
+      --files-base-dir=DIR   Base directory for generated files.
+  -h, --help                 Show this help message and exit.
+  -l, --lookup-functions=FILE
+                             Configure lookup functions.
+  -V, --version              Print version information and exit.
+----
+
+.Example
+[source,shell]
+----
+yamlesutils.sh merge files \
+  --files-base-dir=/opt/Axway/apigateway \
+  --files=anm-files.yaml
+----
+
+.File Generator Configuration (`anm-files.yaml`)
+[source,yaml]
+----
+files:
+  - path: system/conf/advisorybanner.json #<1>
+    encoding: UTF-8 #<2>
+    content: | #<3>
+      {
+        "bannerEnabled" : true,
+        "bannerText" : "{{ _env('STAGE') | escape(strategy='js') }}"
+      }
+
+  - path: /opt/Axway/README.txt #<4>
+    encoding: ISO-8859-1
+    content: Hello World #<5>
+
+  - path: /opt/Axway/test.bin
+    encoding: binary #<6>
+    content: "{{ 'Hello World' | base64encode }}" #<7>
+
+  - path: conf/adminUsers.json
+    encoding: UTF-8
+    template: /merge/config/adminUsers.json.tpl #<8>
+----
+<1> File to be generated.
+ Path is relative to the current directory or the base directory specified via the `--files-base-dir` parameter.
+<2> Encoding used to write the file content.
+<3> Inline template.
+<4> File to be generated.
+ Absolute file path.
+<5> Inline file content.
+<6> Binary file.
+<7> For binary files, content must be a Base64 encoded value.
+<8> File containing a template (Pebble Engine - see example below).
+Should be an absolute path. Otherwise path is relative to the current directory.
+
+
+.adminUsers.json.tpl
+[source,json]
+----
+{
+  ...
+
+  "adminUserCredentials" : {
+    "user-1" : {
+      "passwordHistory" : [ "{{ _gen_anm_pwd_hash(_env('ANM_ADMIN_PASSWORD')) }}" ],
+      "passwordTimestamp" : 1709227593453
+    }
+  },
+
+  ...
+}
+----

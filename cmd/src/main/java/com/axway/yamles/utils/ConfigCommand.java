@@ -9,8 +9,11 @@ import com.axway.yamles.utils.lint.rules.Results;
 import com.axway.yamles.utils.merge.AbstractLookupEnabledCommand;
 import com.axway.yamles.utils.merge.certs.CertificatesConfigurator;
 import com.axway.yamles.utils.merge.config.FieldConfigurator;
+import com.axway.yamles.utils.merge.files.FileGenerator;
+import com.axway.yamles.utils.merge.files.FilesCommand.FilesArg;
 import com.axway.yamles.utils.plugins.ExecutionMode;
 
+import picocli.CommandLine.ArgGroup;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
@@ -32,6 +35,9 @@ public class ConfigCommand extends AbstractLookupEnabledCommand {
 			"--certs" }, description = "Certificate configuration file.", paramLabel = "FILE", required = false)
 	private List<File> certConfigs;
 
+	@ArgGroup(exclusive = false, multiplicity = "1..*")
+	private List<FilesArg> fileGeneratorConfigs;
+
 	@Option(names = {
 			"--expiration-warning" }, description = "Audit warning in case of certificate expires within the next days.", paramLabel = "DAYS", required = false)
 	private int expirationWarningDays = CertificatesConfigurator.DEFAULT_EXP_WARNING_DAYS;
@@ -44,7 +50,8 @@ public class ConfigCommand extends AbstractLookupEnabledCommand {
 			"--expiration-fail" }, description = "Fail in case of certificate expires within the next days.", paramLabel = "DAYS", required = false)
 	private int expirationFailDays = CertificatesConfigurator.DEFAULT_EXP_FAIL_DAYS;
 
-	@Option(names = { "-f", "--fragment", "--config" }, description = "Configuration fragment for values.yaml file.", paramLabel = "FILE", required = false)
+	@Option(names = { "-f", "--fragment",
+			"--config" }, description = "Configuration fragment for values.yaml file.", paramLabel = "FILE", required = false)
 	private List<File> fragmentConfigs;
 
 	@Option(names = {
@@ -53,7 +60,7 @@ public class ConfigCommand extends AbstractLookupEnabledCommand {
 
 	@Override
 	public Integer call() throws Exception {
-		initializeProviderManager(this.mode);		
+		initializeProviderManager(this.mode);
 		Integer result = 0;
 
 		YamlEs es = new YamlEs(this.projectDir);
@@ -80,6 +87,12 @@ public class ConfigCommand extends AbstractLookupEnabledCommand {
 			cc.apply(es);
 		}
 
+		if (requiresFileGeneratoreConfig()) {
+			FileGenerator fg = new FileGenerator(this.mode);
+			fg.setFilesArgs(this.fileGeneratorConfigs);
+			fg.apply();
+		}
+
 		return result;
 	}
 
@@ -89,6 +102,9 @@ public class ConfigCommand extends AbstractLookupEnabledCommand {
 
 	private boolean requiresCertificateConfig() {
 		return this.certConfigs != null && !this.certConfigs.isEmpty();
+	}
 
+	private boolean requiresFileGeneratoreConfig() {
+		return this.fileGeneratorConfigs != null && !this.fileGeneratorConfigs.isEmpty();
 	}
 }
