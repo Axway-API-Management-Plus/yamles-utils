@@ -9,4 +9,4 @@ CLASSPATH="$DIR_LIB/*"
 
 export CLASSPATH
 
-java ${JVM_OPTS:-} -Dpf4j.pluginsDir="${DIR_PLUGINS}" "$CLASSMAIN" $*
+java ${JVM_OPTS:-} -Dpf4j.pluginsDir="${DIR_PLUGINS}" "$CLASSMAIN" "$@"
