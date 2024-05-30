@@ -94,6 +94,44 @@ The lookup function requires a single key parameter which represents the name of
 ----
 <1> Retrieves the value from the system property `my.secret`.
 
+=== Admin Node Manager Password Hash (built-in)
+
+[cols="2,6a"]
+|===
+|*Name*
+|`gen_anm_pwd_hash`
+
+|*Built-In*
+|yes
+
+|*Synopsis*
+|Generates a hashed password for the Admin Node Manager.
+
+2+|*Configuration Parameters*
+2+|not required
+
+2+|*Lookup Function Arguments*
+|`pwd`
+|Clear text password.
+|===
+
+This built-in lookup provider generates a hashed password, which can be used for the Admin Node Manager inside the `adminUsers.json` configuration file.
+
+This provider is used by the built-in lookup function `_gen_anm_pwd_hash`.
+Configuration of this lookup provider is not required.
+
+The lookup function requires a single key parameter which represents the clear text password to be hashed.
+The password can also be retrived by calling a nested lookup function.
+
+.Example
+[source]
+----
+{{ _gen_anm_pwd_hash("change") }} #<1>
+{{ _gen_anm_pwd_hash(_env("ADMIN_PASSWORD")) }} #<2>
+----
+<1> Generates a hased password from a clear text password.
+<2> Generates a hased password from the value of the `ADMIN_PASSWORD` environment variable.
+
 === JSON from Environment Variables
 
 [cols="2,6a"]
