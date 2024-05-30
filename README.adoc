@@ -12,20 +12,50 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :warning-caption: :warning:
 endif::[]
-:project-ver: 0.1.0
+ifndef::revnumber[:revnumber: 0.7.0]
 
 image:https://github.com/Axway-API-Management-Plus/yamles-utils/actions/workflows/maven-publish.yml/badge.svg[Workflow Status]
 image:https://img.shields.io/github/license/Axway-API-Management-Plus/yamles-utils?style=plastic[]
 image:https://img.shields.io/github/v/release/Axway-API-Management-Plus/yamles-utils?style=plastic[]
 
 
-IMPORTANT: The project is community supported and not supported by Axway Support. If you encounter any issues, please raise an GitHub issue on this project.
+IMPORTANT: The project is community supported and not supported by Axway Support. If you encounter any issues, please raise a GitHub issue on this project.
 
 [sidebar]
 .tl;dr
 --
 Utilities to verify coding rules of YAML Entity Store based projects and to configure projects for target environments using various configuration sources.
 --
+
+.Quick Start
+[%collapsible]
+====
+.Clone repository and create ZIP distribution
+[source,shell]
+----
+git clone https://github.com/Axway-API-Management-Plus/yamles-utils.git
+cd yamles-utils
+./mvnw clean package
+----
+
+.Unpack distribution
+[source,shell,subs="verbatim,attributes"]
+----
+unzip target/yamles-utils-{revnumber}.zip -d target
+----
+
+.Execute tool (Unix)
+[source,shell,subs="verbatim,attributes"]
+----
+target/yamles-utils-{revnumber}/bin/yamlesutils.sh
+----
+
+.Execute tool (Windows)
+[source,shell,subs="verbatim,attributes"]
+----
+target\yamles-utils-{revnumber}\bin\yamlesutils.cmd
+----
+====
 
 == Introduction
 
