@@ -9,6 +9,39 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+== Version 0.7.0
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/21[#21]
+|Enhancement
+|Generate Files.
+
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/22[#22]
+|Enhancement
+|Evaluate Expression.
+
+`eval` command to evaluate expression and print result to `stdout`.
+
+Example:
+[source, shell]
+----
+$ export NAME="World"
+$ yamlesutils.sh -q eval "Hello {{ _env('NAME') }}!"
+Hello World!
+----
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/24[#24]
+|Enhancement
+|Lookup function to generate hashed ANM password.
+
+Example:
+[source, shell]
+----
+$ yamlesutils.sh -q eval "{{ _gen_anm_pwd_hash('changeme') }}"
+$AAGQAAAAAQAC$oALW5N6CWi0PszIfVK3w5w==$uERZwFPmZ2bEknEfZiyrK7QfqcODTyjFJNrbpEQfEDI=
+----
+|===
+
 == Version 0.6.0
 [cols="1,2,<10a", options="header"]
 |===
