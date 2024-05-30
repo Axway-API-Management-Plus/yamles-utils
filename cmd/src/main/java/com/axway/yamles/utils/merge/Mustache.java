@@ -1,5 +1,6 @@
 package com.axway.yamles.utils.merge;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.Method;
@@ -131,8 +132,8 @@ public class Mustache extends AbstractExtension implements TemplateEngine {
 			if (instance == null) {
 				instance = new Mustache();
 				instance.refresh();
-				Evaluator.setTemplateEngine(instance);
 			}
+			Evaluator.setTemplateEngine(instance);			
 		}
 		return instance;
 	}
@@ -147,6 +148,19 @@ public class Mustache extends AbstractExtension implements TemplateEngine {
 			throw new IllegalStateException("Pebble engine not initialized");
 		}
 		PebbleTemplate pt = pe.getLiteralTemplate(template);
+		return evaluate(pt);
+	}
+	
+	@Override
+	public String evaluate(File template) throws TemplateEngineException {
+		if (pe == null) {
+			throw new IllegalStateException("Pebble engine not initialized");
+		}
+		PebbleTemplate pt = this.pe.getTemplate(template.getAbsolutePath());
+		return evaluate(pt);
+	}
+	
+	private String evaluate(PebbleTemplate pt) {
 		StringWriter result = new StringWriter();
 		try {
 			pt.evaluate(result);
@@ -154,7 +168,7 @@ public class Mustache extends AbstractExtension implements TemplateEngine {
 			throw new TemplateEngineException("error on evaluating template", e);
 		}
 
-		return result.toString();
+		return result.toString();		
 	}
 
 	@Override

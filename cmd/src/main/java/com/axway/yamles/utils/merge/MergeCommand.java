@@ -2,6 +2,7 @@ package com.axway.yamles.utils.merge;
 
 import com.axway.yamles.utils.merge.certs.MergeCertificatesCommand;
 import com.axway.yamles.utils.merge.config.MergeConfigCommand;
+import com.axway.yamles.utils.merge.files.FilesCommand;
 import com.axway.yamles.utils.plugins.ExecutionMode;
 
 import picocli.CommandLine.Command;
@@ -9,7 +10,7 @@ import picocli.CommandLine.HelpCommand;
 import picocli.CommandLine.Option;
 
 @Command(name = "merge", description = "Merge configuration from various sources.", subcommands = { HelpCommand.class,
-		MergeConfigCommand.class, MergeCertificatesCommand.class,
+		MergeConfigCommand.class, MergeCertificatesCommand.class, FilesCommand.class,
 		DescribeCommand.class }, mixinStandardHelpOptions = true)
 public class MergeCommand {
 

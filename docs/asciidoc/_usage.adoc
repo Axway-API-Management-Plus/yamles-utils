@@ -71,9 +71,13 @@ Specify multiple -v options to increase verbosity.
 
 include::_lint.adoc[leveloffset=+1]
 
+include::_eval.adoc[leveloffset=+1]
+
 include::_merge_conf.adoc[leveloffset=+1]
 
 include::_merge_cert.adoc[leveloffset=+1]
+
+include::_merge_files.adoc[leveloffset=+1]
 
 include::_config.adoc[leveloffset=+1]
 

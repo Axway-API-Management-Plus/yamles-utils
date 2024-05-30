@@ -1,5 +1,6 @@
 package com.axway.yamles.utils.plugins;
 
+import java.io.File;
 import java.util.Objects;
 
 public class Evaluator {
@@ -31,7 +32,16 @@ public class Evaluator {
 		return this.engine.evaluate(template);
 	}
 
+	public String evaluate(File template) throws TemplateEngineException {
+		return this.engine.evaluate(template);
+	}
+
 	public static String eval(String template) throws TemplateEngineException {
 		return evaluator.evaluate(template);
 	}
+
+	public static String eval(File template) throws TemplateEngineException {
+		return evaluator.evaluate(template);
+	}
+
 }
