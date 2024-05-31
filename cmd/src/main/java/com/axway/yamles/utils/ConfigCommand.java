@@ -35,7 +35,7 @@ public class ConfigCommand extends AbstractLookupEnabledCommand {
 			"--certs" }, description = "Certificate configuration file.", paramLabel = "FILE", required = false)
 	private List<File> certConfigs;
 
-	@ArgGroup(exclusive = false, multiplicity = "1..*")
+	@ArgGroup(exclusive = false, multiplicity = "0..*")
 	private List<FilesArg> fileGeneratorConfigs;
 
 	@Option(names = {
