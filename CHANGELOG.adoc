@@ -9,6 +9,16 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+== Version 0.7.2
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/28[#28]
+|Fix
+|Fix `config` command.
+|===
+
+
 == Version 0.7.1
 [cols="1,2,<10a", options="header"]
 |===
