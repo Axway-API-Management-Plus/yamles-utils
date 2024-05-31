@@ -46,10 +46,10 @@
 
 	<properties>
 		<!-- Library versions -->
-		<apache-commons-io>2.13.0</apache-commons-io>
-		<picoli.version>4.7.5</picoli.version>
+		<apache-commons-io>2.16.1</apache-commons-io>
+		<picoli.version>4.7.6</picoli.version>
 		<pebble.version>3.2.2</pebble.version>
-		<jsonpath.version>2.8.0</jsonpath.version>		
+		<jsonpath.version>2.9.0</jsonpath.version>		
 	</properties>
 	<dependencies>
 		<dependency>

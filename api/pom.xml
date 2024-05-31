@@ -46,7 +46,7 @@
 
 	<properties>
 		<!-- Library versions -->
-		<apache-commons-io>2.13.0</apache-commons-io>
+		<apache-commons-io>2.16.1</apache-commons-io>
 	</properties>
 	<dependencies>
 		<dependency>

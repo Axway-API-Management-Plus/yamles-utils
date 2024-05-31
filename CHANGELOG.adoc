@@ -9,6 +9,20 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+== Version 0.7.1
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/26[#26]
+|Fix
+|Fix build pipeline.
+
+|https://github.com/Axway-API-Management-Plus/yamles-utils/security/dependabot/4[#dependabot-4]
+|Fix
+|Fix json-path Out-of-bounds Write vulnerability.
+|===
+
+
 == Version 0.7.0
 [cols="1,2,<10a", options="header"]
 |===

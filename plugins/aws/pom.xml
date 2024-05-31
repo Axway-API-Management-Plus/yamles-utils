@@ -41,7 +41,7 @@
 		<relativePath>../../pdk</relativePath>
 	</parent>
 	<properties>
-		<awssdk.version>2.25.47</awssdk.version>
+		<awssdk.version>2.25.63</awssdk.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
