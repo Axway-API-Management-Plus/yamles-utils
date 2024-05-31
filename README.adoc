@@ -30,6 +30,20 @@ Utilities to verify coding rules of YAML Entity Store based projects and to conf
 .Quick Start
 [%collapsible]
 ====
+
+*Using Docker Image*
+
+[source,shell,subs="verbatim,attributes"]
+----
+docker run -ti --rm \
+  -e "NAME=World" \
+  ghcr.io/axway-api-management-plus/yamles-utils:{revnumber} \
+  -q eval "Hello {{ _env('NAME') }}!" \
+&& echo
+----
+
+*Build from repository*
+
 .Clone repository and create ZIP distribution
 [source,shell]
 ----
@@ -47,13 +61,13 @@ unzip target/yamles-utils-{revnumber}.zip -d target
 .Execute tool (Unix)
 [source,shell,subs="verbatim,attributes"]
 ----
-target/yamles-utils-{revnumber}/bin/yamlesutils.sh
+target/yamles-utils-{revnumber}/bin/yamlesutils.sh --help
 ----
 
 .Execute tool (Windows)
 [source,shell,subs="verbatim,attributes"]
 ----
-target\yamles-utils-{revnumber}\bin\yamlesutils.cmd
+target\yamles-utils-{revnumber}\bin\yamlesutils.cmd --help
 ----
 ====
 
