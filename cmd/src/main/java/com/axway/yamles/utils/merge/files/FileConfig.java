@@ -16,10 +16,11 @@ public class FileConfig {
 	private final Charset encoding;
 	private final String content;
 	private final File template;
+	private final boolean createDirs;
 
 	@JsonCreator
 	public FileConfig(@JsonProperty("path") String path, @JsonProperty("encoding") String encoding,
-			@JsonProperty("content") String content, @JsonProperty("template") String template) {
+			@JsonProperty("content") String content, @JsonProperty("template") String template, @JsonProperty("createDirs") Boolean createDirs) {
 		if (path == null || path.isEmpty())
 			throw new IllegalArgumentException("non-empty 'path' property required");
 		this.path = path;
@@ -32,6 +33,7 @@ public class FileConfig {
 			throw new IllegalArgumentException("'content' and 'template' property are mutual exclusive");
 		this.content = content;
 		this.template = (template != null) ? new File(template) : null;
+		this.createDirs = (createDirs != null && createDirs.booleanValue());
 	}
 
 	void setConfigSource(File source) {
@@ -60,5 +62,9 @@ public class FileConfig {
 	
 	public File getTemplate() {
 		return this.template;
+	}
+	
+	public boolean hasCreateDirs() {
+		return this.createDirs;
 	}
 }

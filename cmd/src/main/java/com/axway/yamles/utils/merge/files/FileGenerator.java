@@ -76,6 +76,15 @@ public class FileGenerator {
 			} else {
 				output = Base64.getDecoder().decode(content);
 			}
+			
+			File targetDir = targetFile.getParentFile();
+			if (!targetDir.isDirectory()) {
+				if (fc.hasCreateDirs()) {
+					targetDir.mkdirs();
+				} else {
+					throw new IllegalStateException("target directory doesn't exist and auto directory creation disabled: " + targetDir.getAbsolutePath());
+				}
+			}
 
 			try (OutputStream out = new FileOutputStream(targetFile)) {
 				out.write(output);

@@ -9,6 +9,16 @@ ifdef::env-github[]
 :warning-caption: :warning:
 endif::[]
 
+== Version 0.7.3
+[cols="1,2,<10a", options="header"]
+|===
+|ID|Type|Description
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/29[#29]
+|Enhancement
+|File Geneator - create non-existing target directories
+|===
+
+
 == Version 0.7.2
 [cols="1,2,<10a", options="header"]
 |===

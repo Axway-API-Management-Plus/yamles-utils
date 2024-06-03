@@ -12,7 +12,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :warning-caption: :warning:
 endif::[]
-ifndef::revnumber[:revnumber: 0.7.2]
+ifndef::revnumber[:revnumber: 0.7.3]
 
 image:https://github.com/Axway-API-Management-Plus/yamles-utils/actions/workflows/maven-publish.yml/badge.svg[Workflow Status]
 image:https://img.shields.io/github/license/Axway-API-Management-Plus/yamles-utils?style=plastic[]

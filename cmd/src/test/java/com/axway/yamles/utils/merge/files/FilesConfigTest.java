@@ -27,6 +27,7 @@ public class FilesConfigTest {
 				+ "  - path: test2.txt\n" //
 				+ "    encoding: ISO-8859-1\n" //
 				+ "    content: Hello World2\n" //
+				+ "    createDirs: true\n" //
 				+ "  - path: test.bin\n" //
 				+ "    encoding: binary\n" //
 				+ "    content: " + b64HelloWorld + "\n" //
@@ -48,12 +49,14 @@ public class FilesConfigTest {
 		assertEquals("UTF-8", fc.getEncoding().get().name());
 		assertEquals("Hello World1", fc.getContent());
 		assertNull(fc.getTemplate());
+		assertFalse(fc.hasCreateDirs());
 
 		fc = fsc.getFileConfigs().get(1);
 		assertEquals("test2.txt", fc.getPath());
 		assertEquals("ISO-8859-1", fc.getEncoding().get().name());
 		assertEquals("Hello World2", fc.getContent());
 		assertNull(fc.getTemplate());
+		assertTrue(fc.hasCreateDirs());
 
 		fc = fsc.getFileConfigs().get(2);
 		assertEquals("test.bin", fc.getPath());

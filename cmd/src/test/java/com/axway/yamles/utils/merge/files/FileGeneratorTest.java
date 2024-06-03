@@ -2,6 +2,7 @@ package com.axway.yamles.utils.merge.files;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -35,6 +36,7 @@ public class FileGeneratorTest {
 		File testTxt = new File(tempDir, testTxtName);
 		File testBin = new File(tempDir, "test.bin");
 		File testTpl = new File(tempDir, "test.tpl");
+		File testNewDirFile = new File(tempDir, "newdir/test.txt");
 		
 		File template = new File(tempDir, "template.tpl");
 		FileUtils.write(template, "", Charset.forName("UTF-8"));
@@ -57,6 +59,10 @@ public class FileGeneratorTest {
 				+ "  - path: " + testTpl.getAbsolutePath() + "\n" //
 				+ "    encoding: UTF-8\n" //
 				+ "    template: " + template.getAbsolutePath() + "\n" //
+				+ "  - path: " + testNewDirFile.getAbsolutePath() + "\n" //
+				+ "    encoding: UTF-8\n" //
+				+ "    content: " + text+ "\n" //
+				+ "    createDirs: true\n" //
 				+ "...";
 		
 		try (FileWriter out = new FileWriter(fileConfig)) {
@@ -90,5 +96,41 @@ public class FileGeneratorTest {
 			String writtenText = reader.readLine();
 			assertEquals(template.getAbsolutePath(),  writtenText);
 		}
+		try(BufferedReader reader = new BufferedReader(new FileReader(testNewDirFile))) {
+			String writtenText = reader.readLine();
+			assertEquals(text,  writtenText);
+		}
+	}
+	
+	@Test
+	void failOnNonExistingDirectory() throws Exception {
+		File testNoDirFile = new File(tempDir, "nodir/test.txt");		
+		
+		// generate file configuration
+		String text = "Hello World";
+
+		File fileConfig = new File(tempDir, "file-config.yaml");
+
+		String yaml = "---\n" //
+				+ "files:\n" //
+				+ "  - path: " + testNoDirFile.getAbsolutePath() + "\n" //
+				+ "    encoding: UTF-8\n" //
+				+ "    content: " + text+ "\n" //
+				+ "...";
+		
+		try (FileWriter out = new FileWriter(fileConfig)) {
+			out.write(yaml);
+		}
+		
+		List<FilesArg> fa = new ArrayList<>();
+		fa.add(new FilesArg(tempDir, fileConfig));
+		
+		// generate files
+		Evaluator.setDefaultTemplateEngine();
+
+		FileGenerator fg = new FileGenerator(ExecutionMode.CONFIG);
+		fg.setFilesArgs(fa);
+		
+		assertThrows(IllegalStateException.class, () -> fg.apply());
 	}
 }

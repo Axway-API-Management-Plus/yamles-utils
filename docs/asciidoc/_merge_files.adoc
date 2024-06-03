@@ -60,6 +60,11 @@ files:
   - path: conf/adminUsers.json
     encoding: UTF-8
     template: /merge/config/adminUsers.json.tpl #<8>
+
+  - path: /opt/Axway/apigateway/ext/custom/jvm.xml #<9>
+    encoding: UTF-8
+    content: /merge/config/jvm.xml.tpl
+    createDirs: true #<10>
 ----
 <1> File to be generated.
  Path is relative to the current directory or the base directory specified via the `--files-base-dir` parameter.
@@ -72,6 +77,8 @@ files:
 <7> For binary files, content must be a Base64 encoded value.
 <8> File containing a template (Pebble Engine - see example below).
 Should be an absolute path. Otherwise path is relative to the current directory.
+<9> Target file is located in a non-existing directory.
+<10> Automatically create non-existing directories.
 
 
 .adminUsers.json.tpl
