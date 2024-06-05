@@ -71,7 +71,7 @@ public class AnmPasswordHashLookupProvider extends AbstractBuiltinLookupProvider
 		}
 	}
 
-	protected static FunctionArgument ARG_PWD = new FunctionArgument("pwd", true, "Password");
+	protected static FunctionArgument ARG_PWD = new FunctionArgument("pwd", true, "Password", true);
 
 	public AnmPasswordHashLookupProvider() {
 		super();

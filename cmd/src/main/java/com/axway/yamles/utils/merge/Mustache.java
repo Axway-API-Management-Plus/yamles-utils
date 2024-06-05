@@ -72,10 +72,12 @@ public class Mustache extends AbstractExtension implements TemplateEngine {
 
 			if (args != null) {
 				args.forEach((key, value) -> {
+					Optional<FunctionArgument> fa = this.lf.getProvider().getFunctionArgumentByName(key);
 					if (str.length() > 0) {
 						str.append(", ");
 					}
-					str.append(key).append('=').append(value.toString());
+					boolean mask = (!fa.isPresent() || fa.get().isSecret());
+					str.append(key).append('=').append(mask ? "*****" : value.toString());
 				});
 			}
 			return str.toString();
@@ -133,7 +135,7 @@ public class Mustache extends AbstractExtension implements TemplateEngine {
 				instance = new Mustache();
 				instance.refresh();
 			}
-			Evaluator.setTemplateEngine(instance);			
+			Evaluator.setTemplateEngine(instance);
 		}
 		return instance;
 	}
@@ -150,7 +152,7 @@ public class Mustache extends AbstractExtension implements TemplateEngine {
 		PebbleTemplate pt = pe.getLiteralTemplate(template);
 		return evaluate(pt);
 	}
-	
+
 	@Override
 	public String evaluate(File template) throws TemplateEngineException {
 		if (pe == null) {
@@ -159,7 +161,7 @@ public class Mustache extends AbstractExtension implements TemplateEngine {
 		PebbleTemplate pt = this.pe.getTemplate(template.getAbsolutePath());
 		return evaluate(pt);
 	}
-	
+
 	private String evaluate(PebbleTemplate pt) {
 		StringWriter result = new StringWriter();
 		try {
@@ -168,7 +170,7 @@ public class Mustache extends AbstractExtension implements TemplateEngine {
 			throw new TemplateEngineException("error on evaluating template", e);
 		}
 
-		return result.toString();		
+		return result.toString();
 	}
 
 	@Override
@@ -186,7 +188,7 @@ public class Mustache extends AbstractExtension implements TemplateEngine {
 				lf.getProvider().getName(), lf.getDefintionSource());
 		refresh();
 	}
-	
+
 	public void clearFunctions() {
 		this.functions.clear();
 		log.debug("Pebble functions cleared");

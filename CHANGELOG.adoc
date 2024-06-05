@@ -21,6 +21,9 @@ endif::[]
 |Enhancement
 |File Geneator - support base directory for source (templates) files
 
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/32[#32]
+|Security Fix
+|Parameter of `_gen_anm_pwd_hash()` lookup function is now masked in logs.
 |===
 
 

@@ -9,7 +9,7 @@ public abstract class AbstractLookupProvider extends AbstractProvider implements
 
 	private final ParameterSet<FunctionArgument> funcArgs = new ParameterSet<>();
 	private final ParameterSet<ConfigParameter> configParams = new ParameterSet<>();
-	
+
 	protected AbstractLookupProvider() {
 	}
 
@@ -27,11 +27,16 @@ public abstract class AbstractLookupProvider extends AbstractProvider implements
 	}
 
 	@Override
+	public Optional<FunctionArgument> getFunctionArgumentByName(String name) {
+		FunctionArgument fa = this.funcArgs.get(name);
+		return Optional.ofNullable(fa);
+	}
+
+	@Override
 	public List<ConfigParameter> getConfigParameters() {
 		return this.configParams.getParams();
 	}
-	
-	
+
 	protected Optional<LookupFunction> checkOnlyLookupFunction(LookupSource source) {
 		if (getMode() == ExecutionMode.SYNTAX_CHECK) {
 			return Optional.of(new EmptyValueLookupFunction(source.getAlias(), this, source.getConfigSource()));
