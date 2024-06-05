@@ -15,18 +15,19 @@ With the merge files command this capability can be used to generate files for w
 
 The file generator is configured by a configuration file specified by the `--files=FILE` parameter.
 With a preceeding optional `--files-base-dir=DIR` parameter, the base directory for target files with a relativ path is specified.
+Also the base directory for template files can be specified by the `--files-base-dir-src` parameter.
 
-The touple of `--files-base-dir` and `--files` parameter can be specified multiple times.
+The tripple of `--files-base-dir`, `--files-base-dir-src` and `--files` parameter can be specified multiple times.
 
 ----
-yamlesutils.sh merge files [-hV] [-l=FILE]... ([--files-base-dir=DIR] --files=FILE)...
+yamlesutils.sh merge files [-hV] [-l=FILE]... ( [--files-base-dir=DIR][--files-base-dir-src=DIR] --files=FILE)...
 Generate files.
-      --files=FILE           Files generator configuration.
-      --files-base-dir=DIR   Base directory for generated files.
-  -h, --help                 Show this help message and exit.
-  -l, --lookup-functions=FILE
-                             Configure lookup functions.
-  -V, --version              Print version information and exit.
+      --files=FILE              Files generator configuration.
+      --files-base-dir=DIR      Base directory for generated files.
+      --files-base-dir-src=DIR  Base directory for source files.
+  -h, --help                    Show this help message and exit.
+  -l, --lookup-functions=FILE   Configure lookup functions.
+  -V, --version                 Print version information and exit.
 ----
 
 .Example
@@ -65,9 +66,13 @@ files:
     encoding: UTF-8
     content: /merge/config/jvm.xml.tpl
     createDirs: true #<10>
+
+  - path: conf/README.txt
+    encoding: UTF-8
+    template: templates/README.txt.tpl #<11>
 ----
 <1> File to be generated.
- Path is relative to the current directory or the base directory specified via the `--files-base-dir` parameter.
+Path is relative to the directory containing the files configuration file, or the directory specified by the `--files-base-dir` parameter.
 <2> Encoding used to write the file content.
 <3> Inline template.
 <4> File to be generated.
@@ -76,10 +81,10 @@ files:
 <6> Binary file.
 <7> For binary files, content must be a Base64 encoded value.
 <8> File containing a template (Pebble Engine - see example below).
-Should be an absolute path. Otherwise path is relative to the current directory.
 <9> Target file is located in a non-existing directory.
 <10> Automatically create non-existing directories.
-
+<11> File containing a template.
+Path is relative to the directory containing the files configuration file, or the directory specified by the `--files-base-dir-src` parameter.
 
 .adminUsers.json.tpl
 [source,json]

@@ -4,10 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.File;
 import java.nio.charset.Charset;
 import java.util.Base64;
 
@@ -41,21 +40,21 @@ public class FilesConfigTest {
 
 		FilesConfig fsc = FilesConfig.loadConfig(yaml);
 		assertEquals(5, fsc.getFileConfigs().size());
-		
+
 		FileConfig fc;
-		
+
 		fc = fsc.getFileConfigs().get(0);
 		assertEquals("test1.txt", fc.getPath());
 		assertEquals("UTF-8", fc.getEncoding().get().name());
 		assertEquals("Hello World1", fc.getContent());
-		assertNull(fc.getTemplate());
+		assertNull(fc.getTemplatePath());
 		assertFalse(fc.hasCreateDirs());
 
 		fc = fsc.getFileConfigs().get(1);
 		assertEquals("test2.txt", fc.getPath());
 		assertEquals("ISO-8859-1", fc.getEncoding().get().name());
 		assertEquals("Hello World2", fc.getContent());
-		assertNull(fc.getTemplate());
+		assertNull(fc.getTemplatePath());
 		assertTrue(fc.hasCreateDirs());
 
 		fc = fsc.getFileConfigs().get(2);
@@ -63,20 +62,20 @@ public class FilesConfigTest {
 		assertFalse(fc.getEncoding().isPresent());
 		assertEquals(FileConfig.ENCODING_BINARY, fc.getEncodingName());
 		assertEquals(b64HelloWorld, fc.getContent());
-		assertNull(fc.getTemplate());
-		
+		assertNull(fc.getTemplatePath());
+
 		fc = fsc.getFileConfigs().get(3);
 		assertEquals("empty.txt", fc.getPath());
 		assertEquals("UTF-8", fc.getEncoding().get().name());
 		assertTrue(fc.getContent().isEmpty());
-		assertNull(fc.getTemplate());
+		assertNull(fc.getTemplatePath());
 
 		fc = fsc.getFileConfigs().get(4);
 		assertEquals("empty.txt", fc.getPath());
 		assertEquals("UTF-8", fc.getEncoding().get().name());
 		assertNull(fc.getContent());
-		assertNotNull(fc.getTemplate());
-		assertEquals(File.separator + "template.tpl", fc.getTemplate().getPath());
+		assertNotNull(fc.getTemplatePath());
+		assertEquals("/template.tpl", fc.getTemplatePath());
 	}
 
 	@Test
@@ -100,7 +99,7 @@ public class FilesConfigTest {
 
 		assertThrows(FilesConfigException.class, () -> FilesConfig.loadConfig(yaml));
 	}
-	
+
 	@Test
 	void readInvalidConfig_Missing_content() throws Exception {
 		String yaml = "---\n" //
@@ -111,7 +110,7 @@ public class FilesConfigTest {
 
 		assertThrows(FilesConfigException.class, () -> FilesConfig.loadConfig(yaml));
 	}
-	
+
 	@Test
 	void readInvalidConfig_Content_and_Template() throws Exception {
 		String yaml = "---\n" //
@@ -121,6 +120,6 @@ public class FilesConfigTest {
 				+ "    template: /template.tpl" //
 				+ "...";
 
-		assertThrows(FilesConfigException.class, () -> FilesConfig.loadConfig(yaml));		
+		assertThrows(FilesConfigException.class, () -> FilesConfig.loadConfig(yaml));
 	}
 }

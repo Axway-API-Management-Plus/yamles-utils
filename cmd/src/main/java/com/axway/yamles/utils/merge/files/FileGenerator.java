@@ -35,33 +35,30 @@ public class FileGenerator {
 		for (FilesArg fa : this.filesArgs) {
 			FilesConfig fsc = FilesConfig.loadConfig(fa.files);
 			fsc.setConfigSource(fa.files);
-			apply(fa.baseDir, fsc);
+			apply(fa.baseDir, fa.baseDirSrc, fsc);
 		}
 	}
 
-	private void apply(File baseDir, FilesConfig fsc) throws Exception {
+	private void apply(File baseDir, File baseDirSrc, FilesConfig fsc) throws Exception {
 		for (FileConfig fc : fsc.getFileConfigs()) {
-			apply(baseDir, fc);
+			apply(baseDir, baseDirSrc, fc);
 		}
 	}
 
-	private void apply(File baseDir, FileConfig fc) throws Exception {
-		File targetFile = null;
-		String filePath = fc.getPath();
+	private void apply(File baseDir, File baseDirSrc, FileConfig fc) throws Exception {
+		baseDir = resolveBaseDir(fc, baseDir);
+		baseDirSrc = resolveBaseDir(fc, baseDirSrc);
 
-		if (baseDir != null) {
-			Path basePath = Paths.get(baseDir.toURI());
-			targetFile = basePath.resolve(filePath).toFile();
-		} else {
-			targetFile = new File(filePath);
-		}
+		String filePath = fc.getPath();
+		File targetFile = resolveFile(baseDir, filePath);
 
 		String content = "";
 
 		if (fc.getContent() != null) {
 			content = Evaluator.eval(fc.getContent());
-		} else if (fc.getTemplate() != null) {
-			content = Evaluator.eval(fc.getTemplate());
+		} else if (fc.getTemplatePath() != null) {
+			File template = resolveFile(baseDirSrc, fc.getTemplatePath());
+			content = Evaluator.eval(template);
 		} else {
 			throw new IllegalStateException("content and template are null");
 		}
@@ -76,13 +73,15 @@ public class FileGenerator {
 			} else {
 				output = Base64.getDecoder().decode(content);
 			}
-			
+
 			File targetDir = targetFile.getParentFile();
 			if (!targetDir.isDirectory()) {
 				if (fc.hasCreateDirs()) {
 					targetDir.mkdirs();
 				} else {
-					throw new IllegalStateException("target directory doesn't exist and auto directory creation disabled: " + targetDir.getAbsolutePath());
+					throw new IllegalStateException(
+							"target directory doesn't exist and auto directory creation disabled: "
+									+ targetDir.getAbsolutePath());
 				}
 			}
 
@@ -94,5 +93,26 @@ public class FileGenerator {
 			Audit.AUDIT_LOG.info("  file generation skipped (due to execution mode {}): {}", this.mode,
 					targetFile.getAbsolutePath());
 		}
+	}
+
+	private File resolveBaseDir(FileConfig fc, File baseDir) {
+		if (baseDir != null) {
+			return baseDir;
+		}
+		if (fc.getConfigSource() == null) {
+			return null;
+		}
+		return fc.getConfigSource().getParentFile();
+	}
+
+	private File resolveFile(File baseDir, String filePath) {
+		File resolvedFile = null;
+		if (baseDir != null) {
+			Path basePath = Paths.get(baseDir.toURI());
+			resolvedFile = basePath.resolve(filePath).toFile();
+		} else {
+			resolvedFile = new File(filePath);
+		}
+		return resolvedFile;
 	}
 }

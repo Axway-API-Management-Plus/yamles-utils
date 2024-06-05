@@ -15,7 +15,7 @@ public class FileConfig {
 	private final String path;
 	private final Charset encoding;
 	private final String content;
-	private final File template;
+	private final String templatePath;
 	private final boolean createDirs;
 
 	@JsonCreator
@@ -32,7 +32,7 @@ public class FileConfig {
 		if (content != null && template != null)
 			throw new IllegalArgumentException("'content' and 'template' property are mutual exclusive");
 		this.content = content;
-		this.template = (template != null) ? new File(template) : null;
+		this.templatePath = template;
 		this.createDirs = (createDirs != null && createDirs.booleanValue());
 	}
 
@@ -60,8 +60,8 @@ public class FileConfig {
 		return this.content;
 	}
 	
-	public File getTemplate() {
-		return this.template;
+	public String getTemplatePath() {
+		return this.templatePath;
 	}
 	
 	public boolean hasCreateDirs() {

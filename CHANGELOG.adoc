@@ -16,6 +16,11 @@ endif::[]
 |https://github.com/Axway-API-Management-Plus/yamles-utils/issues/29[#29]
 |Enhancement
 |File Geneator - create non-existing target directories
+
+|https://github.com/Axway-API-Management-Plus/yamles-utils/issues/31[#31]
+|Enhancement
+|File Geneator - support base directory for source (templates) files
+
 |===
 
 

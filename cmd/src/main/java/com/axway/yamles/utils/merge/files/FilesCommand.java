@@ -20,8 +20,9 @@ public class FilesCommand extends AbstractLookupEnabledCommand {
 		public FilesArg() {
 		}
 
-		public FilesArg(File baseDir, File files) {
+		public FilesArg(File baseDir, File baseDirSrc, File files) {
 			this.baseDir = baseDir;
+			this.baseDirSrc = baseDirSrc;
 			this.files = files;
 		}
 
@@ -30,16 +31,19 @@ public class FilesCommand extends AbstractLookupEnabledCommand {
 		public File baseDir;
 
 		@Option(names = {
+				"--files-base-dir-src" }, description = "Base directory for source files.", paramLabel = "DIR", required = false)
+		public File baseDirSrc;
+
+		@Option(names = {
 				"--files" }, description = "Files generator configuration.", paramLabel = "FILE", required = true)
 		public File files;
 	}
-	
+
 	@ArgGroup(exclusive = false, multiplicity = "1..*")
 	private List<FilesArg> args;
-	
+
 	@ParentCommand
 	private MergeCommand parentCommand;
-
 
 	public FilesCommand() {
 		super();
