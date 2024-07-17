@@ -42,12 +42,18 @@
 	</parent>
 	<properties>
 		<keepass.version>2.2.1</keepass.version>
+		<logback.version>1.3.14</logback.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.linguafranca.pwdb</groupId>
 			<artifactId>KeePassJava2-simple</artifactId>
 			<version>${keepass.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
 		</dependency>
 	</dependencies>
 </project>
